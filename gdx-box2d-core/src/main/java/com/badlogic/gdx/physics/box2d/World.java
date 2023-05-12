@@ -259,7 +259,7 @@ b2ContactFilter defaultFilter;
 	 * @see Pool
 	 * @warning This function is locked during callbacks. */
 	public Body createBody (BodyDef def) {
-		long bodyAddr = jniCreateBody(addr, def.type.getValue(), def.position.x, def.position.y, def.angle, def.linearVelocity.x,
+        long bodyAddr = jniCreateBody(addr, def.type.value, def.position.x, def.position.y, def.angle, def.linearVelocity.x,
 			def.linearVelocity.y, def.angularVelocity, def.linearDamping, def.angularDamping, def.allowSleep, def.awake,
 			def.fixedRotation, def.bullet, def.enabled, def.gravityScale);
 		Body body = freeBodies.obtain();

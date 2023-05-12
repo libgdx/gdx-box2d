@@ -29,8 +29,8 @@
 #include "box2d/b2_timer.h"
 #include "box2d/b2_world.h"
 
-#include "b2_island.h"
 #include "b2_contact_solver.h"
+#include "b2_island.h"
 
 /*
 Position Correction Notes
@@ -252,7 +252,7 @@ void b2Island::Solve(b2Profile* profile, const b2TimeStep& step, const b2Vec2& g
 	{
 		contactSolver.WarmStart();
 	}
-
+	
 	for (int32 i = 0; i < m_jointCount; ++i)
 	{
 		m_joints[i]->InitVelocityConstraints(solverData);
@@ -530,7 +530,7 @@ void b2Island::Report(const b2ContactVelocityConstraint* constraints)
 		b2Contact* c = m_contacts[i];
 
 		const b2ContactVelocityConstraint* vc = constraints + i;
-
+		
 		b2ContactImpulse impulse;
 		impulse.count = vc->pointCount;
 		for (int32 j = 0; j < vc->pointCount; ++j)

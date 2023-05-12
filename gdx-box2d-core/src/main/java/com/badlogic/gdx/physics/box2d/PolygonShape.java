@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,12 +18,14 @@ package com.badlogic.gdx.physics.box2d;
 
 import com.badlogic.gdx.math.Vector2;
 
+import static com.badlogic.gdx.physics.box2d.JniUtil.arrayOfVec2IntoFloat;
+
 public class PolygonShape extends Shape {
 	// @off
 	/*JNI
      #include <box2d/box2d.h>
 	 */
-	
+
 	/** Constructs a new polygon */
 	public PolygonShape () {
 		addr = newPolygonShape();
@@ -47,11 +49,7 @@ public class PolygonShape extends Shape {
 	/** Copy vertices. This assumes the vertices define a convex polygon. It is assumed that the exterior is the the right of each
 	 * edge. */
 	public void set (Vector2[] vertices) {
-		float[] verts = new float[vertices.length * 2];
-		for (int i = 0, j = 0; i < vertices.length * 2; i += 2, j++) {
-			verts[i] = vertices[j].x;
-			verts[i + 1] = vertices[j].y;
-		}
+		float[] verts = arrayOfVec2IntoFloat(vertices);
 		jniSet(addr, verts, 0, verts.length);
 	}
 
@@ -77,7 +75,7 @@ public class PolygonShape extends Shape {
 		poly->Set(verticesOut, numVertices);
 		delete[] verticesOut;
 	 */
-	
+
 	/** Build vertices to represent an axis-aligned box.
 	 * @param hx the half-width.
 	 * @param hy the half-height. */

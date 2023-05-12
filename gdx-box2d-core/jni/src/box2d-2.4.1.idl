@@ -1,4 +1,3 @@
-
 [NoDelete]
 interface b2Contact {
   b2Manifold GetManifold();

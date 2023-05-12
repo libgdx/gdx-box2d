@@ -243,7 +243,7 @@ void b2Rope::SetTuning(const b2RopeTuning& tuning)
 
 void b2Rope::Step(float dt, int32 iterations, const b2Vec2& position)
 {
-	if (dt == 0.0)
+	if (dt == 0.0f)
 	{
 		return;
 	}
@@ -806,4 +806,21 @@ void b2Rope::Draw(b2Draw* draw) const
 
 	const b2Color& pc = m_invMasses[m_count - 1] > 0.0f ? pd : pg;
 	draw->DrawPoint(m_ps[m_count - 1], 5.0f, pc);
+}
+
+int b2Rope::JavaGetCount() const {
+    return m_count;
+}
+
+void b2Rope::JavaGetPS(float* buf) const {
+    for (int i = 0; i < m_count; ++i) {
+        buf[i * 2] = m_ps[i].x;
+        buf[i * 2 + 1] = m_ps[i].y;
+    }
+}
+
+void b2Rope::JavaGetInvMasses(float* buf) const {
+    for (int i = 0; i < m_count; ++i) {
+        buf[i] = m_invMasses[i];
+    }
 }

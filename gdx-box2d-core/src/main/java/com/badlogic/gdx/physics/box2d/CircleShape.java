@@ -27,10 +27,10 @@ public class CircleShape extends Shape {
 	 */
 	
 	public CircleShape () {
-		addr = newCircleShape();
+		this(newCircleShape());
 	}
 
-	private native long newCircleShape (); /*
+	private static native long newCircleShape (); /*
 		return (jlong)(new b2CircleShape( ));
 	*/
 

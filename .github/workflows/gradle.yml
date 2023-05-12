@@ -28,7 +28,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build natives with Gradle
-        run: ./gradlew :gdx-box2d-core:jnigen :gdx-box2d-core:jnigenBuild
+        run: ./gradlew :gdx-box2d-core:jnigenBuild
       - name: Upload macOS/iOS natives
         uses: actions/upload-artifact@v2.1.4
         with:
@@ -37,7 +37,7 @@ jobs:
 
   linux:
     needs: macos
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-20.04
     env:
       ORG_GRADLE_PROJECT_GITHUB_USERNAME: ${{ github.actor }}
       ORG_GRADLE_PROJECT_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -66,7 +66,7 @@ jobs:
       - name: Install Windows compilers
         run: sudo apt-get -yq install g++-mingw-w64-i686 g++-mingw-w64-x86-64
       - name: Install Linux x86 compilers/libraries
-        run: sudo apt-get -yq install gcc-multilib g++-multilib linux-libc-dev:i386 libstdc++-5-dev:i386
+        run: sudo apt-get -yq install gcc-multilib g++-multilib linux-libc-dev:i386 libstdc++-10-dev:i386
       - name: Install Linux arm32 compilers/libraries
         run: sudo apt-get -yq install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf binutils-arm-linux-gnueabihf
       - name: Install Linux arm64 compilers/libraries
@@ -78,10 +78,8 @@ jobs:
           path: gdx-box2d-core/libs
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Build natives with Gradle
-        run: ./gradlew :gdx-box2d-core:jnigen :gdx-box2d-core:jnigenBuild
-      - name: Build Java with Gradle
-        run: ./gradlew :gdx-box2d-core:build
+      - name: Build natives and Java with Gradle
+        run: ./gradlew :gdx-box2d-core:assemble
       - name: Upload all output libs
         uses: actions/upload-artifact@v2.1.4
         with:

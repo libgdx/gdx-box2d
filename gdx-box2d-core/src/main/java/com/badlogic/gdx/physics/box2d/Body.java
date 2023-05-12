@@ -419,8 +419,7 @@ public class Body {
 
 	private native void jniGetMassData (long addr, float[] massData); /*
 		b2Body* body = (b2Body*)addr;
-		b2MassData m;
-		body->GetMassData(&m);
+		b2MassData m = body->GetMassData();
 		massData[0] = m.mass;
 		massData[1] = m.center.x;
 		massData[2] = m.center.y;
@@ -617,7 +616,7 @@ public class Body {
 
 	/** Set the type of this body. This may alter the mass and velocity. */
 	public void setType (BodyType type) {
-		jniSetType(addr, type.getValue());
+		jniSetType(addr, type.value);
 	}
 	
 	// @off

@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,7 @@ import com.badlogic.gdx.math.Vector2;
 
 /** A body definition holds all the data needed to construct a rigid body. You can safely re-use body definitions. Shapes are added
  * to a body after construction.
- * 
+ *
  * @author mzechner */
 public class BodyDef {
 	/** The body type. static: zero mass, zero velocity, may be manually moved kinematic: zero mass, non-zero velocity set by user,
@@ -28,14 +28,10 @@ public class BodyDef {
 	public enum BodyType {
 		StaticBody(0), KinematicBody(1), DynamicBody(2);
 
-		private int value;
+		public final int value;
 
-		private BodyType (int value) {
+		BodyType (int value) {
 			this.value = value;
-		}
-
-		public int getValue () {
-			return value;
 		}
 	};
 

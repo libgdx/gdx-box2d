@@ -61,12 +61,8 @@ public class ChainShape extends Shape {
 	/** Create a loop. This automatically adjusts connectivity.
 	 * @param vertices an array of vertices, these are copied */
 	public void createLoop (Vector2[] vertices) {
-		float[] verts = new float[vertices.length * 2];
-		for (int i = 0, j = 0; i < vertices.length * 2; i += 2, j++) {
-			verts[i] = vertices[j].x;
-			verts[i + 1] = vertices[j].y;
-		}
-		jniCreateLoop(addr, verts, 0, verts.length / 2);
+        float[] verts = JniUtil.arrayOfVec2IntoFloat(vertices);
+        jniCreateLoop(addr, verts, 0, verts.length / 2);
 		isLooped = true;
 	}
 
@@ -98,12 +94,8 @@ public class ChainShape extends Shape {
 	/** Create a chain with isolated end vertices.
 	 * @param vertices an array of vertices, these are copied */
 	public void createChain (Vector2[] vertices, Vector2 prevVert, Vector2 nextVert) {
-		float[] verts = new float[vertices.length * 2];
-		for (int i = 0, j = 0; i < vertices.length * 2; i += 2, j++) {
-			verts[i] = vertices[j].x;
-			verts[i + 1] = vertices[j].y;
-		}
-		jniCreateChain(addr, verts, 0, vertices.length, prevVert.x, prevVert.y, nextVert.x, nextVert.y);
+        float[] verts = JniUtil.arrayOfVec2IntoFloat(vertices);
+        jniCreateChain(addr, verts, 0, vertices.length, prevVert.x, prevVert.y, nextVert.x, nextVert.y);
 		isLooped = false;
 	}
 

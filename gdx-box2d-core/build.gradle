@@ -8,7 +8,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "com.badlogicgames.gdx:gdx-jnigen-gradle:2.0.0-SNAPSHOT"
+        classpath "com.badlogicgames.gdx:gdx-jnigen-gradle:2.3.1"
     }
 }
 
@@ -33,13 +33,13 @@ jnigen {
 
     all {
         headerDirs = [
-            "src/box2d-2.4.1/include"
+                "src/box2d-2.4.1/include"
         ]
 
-        cIncludes = [ "*.c", "src/box2d-2.4.1/src/**/*.c" ]
+        cIncludes = ["*.c", "src/box2d-2.4.1/src/**/*.c"]
         cFlags += " -fvisibility=hidden "
 
-        cppIncludes = ["*.cpp", "src/box2d-2.4.1/src/**/*.cpp" ]
+        cppIncludes = ["*.cpp", "src/box2d-2.4.1/src/**/*.cpp"]
         cppFlags += " -fvisibility=hidden -std=c++11 "
     }
 
@@ -71,3 +71,7 @@ clean.doFirst {
     delete "libs"
     delete "obj"
 }
+
+assemble.dependsOn jnigenBuild
+
+sourceSets.main.resources.srcDirs += ["libs"]
