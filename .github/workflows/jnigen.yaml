@@ -24,7 +24,7 @@ jobs:
           unzip android-ndk.zip
           echo "NDK_HOME=$HOME/android-ndk/android-ndk-r25c" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: 'recursive'
@@ -41,8 +41,8 @@ jobs:
       - name: Initialize jnigen
         run: ./gradlew jnigen
 
-      - name: Build natives 
-        run: ./gradlew jnigenBuildAllAndroid jnigenBuildAllLinux jnigenBuildAllWindows
+      - name: Build natives
+        run: ./gradlew jnigenBuildAllLinux jnigenBuildAllWindows jnigenBuildAllAndroid
 
 
       - name: Pack artifacts
@@ -67,7 +67,7 @@ jobs:
           sudo xcode-select -switch /Applications/Xcode.app
           /usr/bin/xcodebuild -version
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: 'recursive'
@@ -84,7 +84,7 @@ jobs:
       - name: Initialize jnigen
         run: ./gradlew jnigen
 
-      - name: Build natives 
+      - name: Build natives
         run: ./gradlew jnigenBuildAllIOS jnigenBuildAllMacOsX
 
       - name: Pack artifacts
@@ -99,11 +99,11 @@ jobs:
           path: natives-mac.zip
 
 
-  package:
+  publish:
     runs-on: ubuntu-latest
     needs: [build-linux, build-mac]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: 'recursive'
@@ -131,6 +131,23 @@ jobs:
       - name: Unzip artifacts
         run: unzip -o natives-mac.zip
 
-
       - name: Package All
         run: ./gradlew jnigenPackageAll
+
+      - name: Snapshot build deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository_owner == 'libgdx'
+        run: |
+          ./gradlew build publish
+
+      - name: Import GPG key
+        if: github.event_name == 'release' && github.repository_owner == 'libgdx'
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@1c6a9e9d3594f2d743f1b1dd7669ab0dfdffa922
+        with:
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Release build deploy
+        if: github.event_name == 'release' && github.repository_owner == 'libgdx'
+        run: ./gradlew build publish -PRELEASE -Psigning.gnupg.keyId=${{ secrets.GPG_KEYID }} -Psigning.gnupg.passphrase=${{ secrets.GPG_PASSPHRASE }} -Psigning.gnupg.keyName=${{ secrets.GPG_KEYID }}
+
