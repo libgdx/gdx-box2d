@@ -73,7 +73,10 @@ fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFla
 
 tasks.create("build_macos") {
     group = "box2d"
-    dependsOn(cmakeBuild(file("build/box2d/macosx_arm64"), "macosx_arm64", file("box2d_build/toolchain_macos_arm64.cmake"), arrayOf("-DCMAKE_OSX_ARCHITECTURES=arm64")))
+    dependsOn(cmakeBuild(file("build/box2d/macosx_arm64"), "macosx_arm64", file("box2d_build/toolchain_macos.cmake"),
+        arrayOf("-DCMAKE_OSX_ARCHITECTURES=arm64", "-DCMAKE_SYSTEM_PROCESSOR=aarch64")))
+    dependsOn(cmakeBuild(file("build/box2d/macosx_x86_64"), "macosx_x86_64", file("box2d_build/toolchain_macos.cmake"),
+        arrayOf("-DCMAKE_OSX_ARCHITECTURES=x86_64", "-DCMAKE_SYSTEM_PROCESSOR=x86_64")))
 }
 
 jnigen {
@@ -101,4 +104,5 @@ jnigen {
 
     addLinux(Architecture.Bitness._64, Architecture.x86)
     addMac(Architecture.Bitness._64, Architecture.ARM)
+    addMac(Architecture.Bitness._64, Architecture.x86)
 }
