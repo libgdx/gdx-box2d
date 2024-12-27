@@ -1,5 +1,6 @@
 import com.badlogic.gdx.jnigen.commons.Architecture
 import com.badlogic.gdx.jnigen.commons.Os
+import com.badlogic.gdx.jnigen.gradle.JnigenExtension.*
 import kotlin.io.path.createTempDirectory
 
 plugins {
@@ -88,6 +89,14 @@ tasks.create("build_android") {
     }
 }
 
+tasks.create("build_linux") {
+    group = "box2d"
+    dependsOn(cmakeBuild(file("build/box2d/linux_arm"), "linux_arm", file("box2d_build/toolchain_linux_arm32.cmake")))
+    dependsOn(cmakeBuild(file("build/box2d/linux_arm64"), "linux_arm64", file("box2d_build/toolchain_linux_arm64.cmake")))
+    dependsOn(cmakeBuild(file("build/box2d/linux_riscv64"), "linux_riscv64", file("box2d_build/toolchain_linux_riscv64.cmake")))
+    dependsOn(cmakeBuild(file("build/box2d/linux_x86_64"), "linux_x86_64", file("box2d_build/toolchain_linux_x86_64.cmake")))
+}
+
 tasks.create("build_ios") {
     group = "box2d"
     dependsOn(cmakeBuild(file("build/box2d/ios_iphoneos_arm64"), "ios_iphoneos_arm64", file("box2d_build/toolchain_ios.cmake"),
@@ -121,9 +130,13 @@ jnigen {
         libraries += file("build/box2d/${combined}/libs/libbox2d.a").absolutePath
     }
 
-    addLinux(Architecture.Bitness._64, Architecture.x86)
-    addMac(Architecture.Bitness._64, Architecture.ARM)
-    addMac(Architecture.Bitness._64, Architecture.x86)
+    addLinux(x32, ARM)
+    addLinux(x64, x86)
+    addLinux(x64, ARM)
+    addLinux(x64, RISCV)
+
+    addMac(x64, ARM)
+    addMac(x64, x86)
     addAndroid {
         libraries = ""
         androidApplicationMk += "APP_PLATFORM := android-21\nAPP_STRIP_MODE := none\nAPP_STL := c++_shared"
