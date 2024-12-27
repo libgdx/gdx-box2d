@@ -40,7 +40,8 @@ tasks.test {
     useJUnitPlatform()
 }
 
-fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFlags: Array<String> = emptyArray(), buildFlags: Array<String> = emptyArray(), installFlags: Array<String> = emptyArray()): Task {
+fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFlags: Array<String> = emptyArray(),
+               buildFlags: Array<String> = emptyArray(), installFlags: Array<String> = emptyArray(), otherCFlags: String = ""): Task {
     return tasks.create("build_box2d_${taskName}") {
         group = "box2d"
         doLast {
@@ -53,7 +54,7 @@ fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFla
                     "-DBOX2D_SAMPLES=OFF",
                     "-DBOX2D_VALIDATE=OFF",
                     "-DBOX2D_UNIT_TESTS=OFF",
-                    "-DCMAKE_C_FLAGS_INIT=-fexceptions",
+                    "-DCMAKE_C_FLAGS_INIT=-fexceptions $otherCFlags",
                     "-DCMAKE_STAGING_PREFIX=${installDir.absolutePath}",
                     "-DCMAKE_INSTALL_LIBDIR=${installDir.toPath().resolve("libs")}",
                     "-DCMAKE_TOOLCHAIN_FILE=${toolchainFile.absolutePath}",
@@ -91,7 +92,7 @@ tasks.create("build_android") {
 
 tasks.create("build_linux") {
     group = "box2d"
-    dependsOn(cmakeBuild(file("build/box2d/linux_arm"), "linux_arm", file("box2d_build/toolchain_linux_arm32.cmake")))
+    dependsOn(cmakeBuild(file("build/box2d/linux_arm"), "linux_arm", file("box2d_build/toolchain_linux_arm32.cmake"), otherCFlags = "-mfpu=neon"))
     dependsOn(cmakeBuild(file("build/box2d/linux_arm64"), "linux_arm64", file("box2d_build/toolchain_linux_arm64.cmake")))
     dependsOn(cmakeBuild(file("build/box2d/linux_riscv64"), "linux_riscv64", file("box2d_build/toolchain_linux_riscv64.cmake")))
     dependsOn(cmakeBuild(file("build/box2d/linux_x86_64"), "linux_x86_64", file("box2d_build/toolchain_linux_x86_64.cmake")))
