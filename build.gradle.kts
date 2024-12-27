@@ -39,7 +39,7 @@ tasks.test {
     useJUnitPlatform()
 }
 
-fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFlags: Array<String> = emptyArray<String>()): Task {
+fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFlags: Array<String> = emptyArray(), buildFlags: Array<String> = emptyArray(), installFlags: Array<String> = emptyArray()): Task {
     return tasks.create("build_box2d_${taskName}") {
         group = "box2d"
         doLast {
@@ -61,12 +61,12 @@ fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFla
 
             exec {
                 commandLine = listOf("cmake")
-                args = listOf("--build", tmpDir.absolutePath)
+                args = listOf("--build", tmpDir.absolutePath, "--config", "Release", *buildFlags)
             }
 
             exec {
                 commandLine = listOf("cmake")
-                args = listOf("--install", tmpDir.absolutePath)
+                args = listOf("--install", tmpDir.absolutePath, *installFlags)
             }
         }
     }
@@ -88,6 +88,16 @@ tasks.create("build_android") {
     }
 }
 
+tasks.create("build_ios") {
+    group = "box2d"
+    dependsOn(cmakeBuild(file("build/box2d/ios_iphoneos_arm64"), "ios_iphoneos_arm64", file("box2d_build/toolchain_ios.cmake"),
+        arrayOf("-GXcode", "-DCMAKE_OSX_SYSROOT=iphoneos"), arrayOf("--target", "box2d", "--", "-sdk", "iphoneos", "-arch", "arm64")))
+    dependsOn(cmakeBuild(file("build/box2d/ios_iphonesimulator_arm64"), "ios_iphonesimulator_arm64", file("box2d_build/toolchain_ios.cmake"),
+        arrayOf("-GXcode", "-DCMAKE_OSX_SYSROOT=iphonesimulator"), arrayOf("--target", "box2d", "--", "-sdk", "iphonesimulator", "-arch", "arm64")))
+    dependsOn(cmakeBuild(file("build/box2d/ios_iphonesimulator_x86_64"), "ios_iphonesimulator_x86_64", file("box2d_build/toolchain_ios.cmake"),
+        arrayOf("-GXcode", "-DCMAKE_OSX_SYSROOT=iphonesimulator"), arrayOf("--target", "box2d", "--", "-sdk", "iphonesimulator", "-arch", "x86_64")))
+}
+
 jnigen {
     javaClass.superclass.getDeclaredField("sharedLibName").apply { isAccessible = true }.set(this, "gdx-box2d")
     generator {
@@ -100,7 +110,7 @@ jnigen {
     all {
         var name = os.name.lowercase()
         if (os == Os.IOS)
-            name = targetType.platformName
+            name = "ios_" + targetType.platformName
 
         val arch = architecture.name.lowercase() + (if(architecture == Architecture.x86 && bitness != Architecture.Bitness._32) "_" else "") + bitness.toSuffix()
         val combined = name + "_" + arch
@@ -125,4 +135,5 @@ jnigen {
             "LOCAL_EXPORT_C_INCLUDES := \$(realpath ${file("build/box2d/android/\$(TARGET_ARCH_ABI)/include/").absoluteFile})",
             "include \$(PREBUILT_STATIC_LIBRARY)")
     }
+    addIOS()
 }
