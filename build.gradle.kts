@@ -108,6 +108,12 @@ tasks.create("build_ios") {
         arrayOf("-GXcode", "-DCMAKE_OSX_SYSROOT=iphonesimulator"), arrayOf("--target", "box2d", "--", "-sdk", "iphonesimulator", "-arch", "x86_64")))
 }
 
+tasks.create("build_windows") {
+    group = "box2d"
+    dependsOn(cmakeBuild(file("build/box2d/windows_x86"), "windows_x86", file("box2d_build/toolchain_windows_i686.cmake"), otherCFlags = "-msse2"))
+    dependsOn(cmakeBuild(file("build/box2d/windows_x86_64"), "windows_x86_64", file("box2d_build/toolchain_windows_x86_64.cmake")))
+}
+
 jnigen {
     javaClass.superclass.getDeclaredField("sharedLibName").apply { isAccessible = true }.set(this, "gdx-box2d")
     generator {
@@ -136,8 +142,12 @@ jnigen {
     addLinux(x64, ARM)
     addLinux(x64, RISCV)
 
+    addWindows(x32, x86)
+    addWindows(x64, x86)
+
     addMac(x64, ARM)
     addMac(x64, x86)
+
     addAndroid {
         libraries = ""
         androidApplicationMk += "APP_PLATFORM := android-21\nAPP_STRIP_MODE := none\nAPP_STL := c++_shared"
