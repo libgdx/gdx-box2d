@@ -10,9 +10,6 @@ plugins {
     id("signing")
 }
 
-group = property("group") as String
-version = property("version") as String
-
 val isReleaseBuild: Boolean
     get() = project.hasProperty("RELEASE")
 
@@ -28,6 +25,8 @@ val repositoryUsername: String
 val repositoryPassword: String
     get() = project.findProperty("MAVEN_PASSWORD")?.toString() ?: ""
 
+group = property("group") as String
+version = property("version") as String + if (isReleaseBuild) "" else "-SNAPSHOT"
 
 val jnigenVersion = property("jnigen.version") as String
 
