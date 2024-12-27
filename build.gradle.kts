@@ -6,10 +6,28 @@ import kotlin.io.path.createTempDirectory
 plugins {
     id("java")
     id("com.badlogicgames.jnigen.jnigen-gradle") version "3.0.0-SNAPSHOT"
+    id("maven-publish")
+    id("signing")
 }
 
 group = property("group") as String
 version = property("version") as String
+
+val isReleaseBuild: Boolean
+    get() = project.hasProperty("RELEASE")
+
+val releaseRepositoryUrl: String
+    get() = project.findProperty("RELEASE_REPOSITORY_URL")?.toString() ?: "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+
+val snapshotRepositoryUrl: String
+    get() = project.findProperty("SNAPSHOT_REPOSITORY_URL")?.toString() ?: "https://oss.sonatype.org/content/repositories/snapshots/"
+
+val repositoryUsername: String
+    get() = project.findProperty("MAVEN_USERNAME")?.toString() ?: ""
+
+val repositoryPassword: String
+    get() = project.findProperty("MAVEN_PASSWORD")?.toString() ?: ""
+
 
 val jnigenVersion = property("jnigen.version") as String
 
@@ -120,7 +138,7 @@ jnigen {
         outputPath = file("src/main/java")
         basePackage = "com.badlogic.box2d"
         fileToParse = "box2d/box2d.h"
-        options = arrayOf("-I" + file("box2d/include", ).absolutePath, "-DNDEBUG")
+        options = arrayOf("-I" + file("box2d/include").absolutePath, "-DNDEBUG")
     }
 
     all {
@@ -161,3 +179,72 @@ jnigen {
     }
     addIOS()
 }
+
+publishing {
+    publications {
+        register("mavenJava", MavenPublication::class) {
+            from(components["java"])
+
+            versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+                usage("java-runtime") {
+                    fromResolutionResult()
+                }
+            }
+
+            pom {
+                name = property("POM_NAME") as String
+                description = property("POM_DESCRIPTION") as String
+                url = property("POM_URL") as String
+                licenses {
+                    license {
+                        name = property("POM_LICENCE_NAME") as String
+                        url = property("POM_LICENCE_URL") as String
+                        distribution = property("POM_LICENCE_DIST") as String
+                    }
+                }
+                developers {
+                    developer {
+                        id = "Tomski"
+                        name = "Tom Wojciechowski"
+                        email = "tomwojciechowski@asidik.com"
+                    }
+                }
+                scm {
+                    connection = property("POM_SCM_CONNECTION") as String
+                    developerConnection = property("POM_SCM_DEV_CONNECTION") as String
+                    url = property("POM_SCM_URL") as String
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url = if(version.toString().endsWith("SNAPSHOT")) uri(snapshotRepositoryUrl) else uri(releaseRepositoryUrl)
+
+            if (repositoryUsername.isNotEmpty() || repositoryPassword.isNotEmpty())
+            {
+                credentials {
+                    username = repositoryUsername
+                    password = repositoryPassword
+                }
+            }
+        }
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign(publishing.publications)
+}
+
+//Simply using "required" in signing block doesn't work because taskGraph isn't ready yet.
+gradle.taskGraph.whenReady {
+    tasks.withType<Sign> {
+        onlyIf { isReleaseBuild }
+    }
+}
+
