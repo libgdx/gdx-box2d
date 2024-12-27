@@ -5,22 +5,22 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.box2d.FFITypes;
 
-public final class b2Rot extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2CosSin extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
 
     private final static int __size;
 
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(53).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(28).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
-    public b2Rot(long pointer, boolean freeOnGC) {
+    public b2CosSin(long pointer, boolean freeOnGC) {
         super(pointer, freeOnGC);
     }
 
-    public b2Rot() {
+    public b2CosSin() {
         super(__size);
     }
 
@@ -32,41 +32,41 @@ public final class b2Rot extends com.badlogic.gdx.jnigen.runtime.pointer.Struct 
         return __ffi_type;
     }
 
-    public b2Rot.b2RotPointer asPointer() {
-        return new b2Rot.b2RotPointer(getPointer(), getsGCFreed());
+    public b2CosSin.b2CosSinPointer asPointer() {
+        return new b2CosSin.b2CosSinPointer(getPointer(), getsGCFreed());
     }
 
-    public float c() {
+    public float cosine() {
         return (float) getValueFloat(0);
     }
 
-    public void c(float c) {
-        setValue(c, 0);
+    public void cosine(float cosine) {
+        setValue(cosine, 0);
     }
 
-    public float s() {
+    public float sine() {
         return (float) getValueFloat(1);
     }
 
-    public void s(float s) {
-        setValue(s, 1);
+    public void sine(float sine) {
+        setValue(sine, 1);
     }
 
-    public static final class b2RotPointer extends StackElementPointer<b2Rot> {
+    public static final class b2CosSinPointer extends StackElementPointer<b2CosSin> {
 
-        public b2RotPointer(long pointer, boolean freeOnGC) {
+        public b2CosSinPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);
         }
 
-        public b2RotPointer() {
+        public b2CosSinPointer() {
             this(1, true, true);
         }
 
-        public b2RotPointer(int count, boolean freeOnGC, boolean guard) {
+        public b2CosSinPointer(int count, boolean freeOnGC, boolean guard) {
             super(__size, count, freeOnGC, guard);
         }
 
-        public b2Rot.b2RotPointer guardCount(long count) {
+        public b2CosSin.b2CosSinPointer guardCount(long count) {
             super.guardCount(count);
             return this;
         }
@@ -75,8 +75,8 @@ public final class b2Rot extends com.badlogic.gdx.jnigen.runtime.pointer.Struct 
             return __size;
         }
 
-        protected b2Rot createStackElement(long ptr, boolean freeOnGC) {
-            return new b2Rot(ptr, freeOnGC);
+        protected b2CosSin createStackElement(long ptr, boolean freeOnGC) {
+            return new b2CosSin(ptr, freeOnGC);
         }
     }
 }

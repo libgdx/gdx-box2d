@@ -12,7 +12,7 @@ public final class b2Timer extends com.badlogic.gdx.jnigen.runtime.pointer.Struc
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(68).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(70).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -36,20 +36,12 @@ public final class b2Timer extends com.badlogic.gdx.jnigen.runtime.pointer.Struc
         return new b2Timer.b2TimerPointer(getPointer(), getsGCFreed());
     }
 
-    public long start_sec() {
+    public long start() {
         return (long) getValue(0);
     }
 
-    public void start_sec(long start_sec) {
-        setValue(start_sec, 0);
-    }
-
-    public long start_usec() {
-        return (long) getValue(1);
-    }
-
-    public void start_usec(long start_usec) {
-        setValue(start_usec, 1);
+    public void start(long start) {
+        setValue(start, 0);
     }
 
     public static final class b2TimerPointer extends StackElementPointer<b2Timer> {

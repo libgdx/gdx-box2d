@@ -13,7 +13,7 @@ public final class b2Simplex extends com.badlogic.gdx.jnigen.runtime.pointer.Str
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(62).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(64).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

@@ -54,6 +54,7 @@ fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFla
                     "-DBOX2D_UNIT_TESTS=OFF",
                     "-DCMAKE_C_FLAGS_INIT=-fexceptions",
                     "-DCMAKE_STAGING_PREFIX=${installDir.absolutePath}",
+                    "-DCMAKE_INSTALL_LIBDIR=${installDir.toPath().resolve("libs")}",
                     "-DCMAKE_TOOLCHAIN_FILE=${toolchainFile.absolutePath}",
                     *extraFlags)
             }
@@ -85,7 +86,7 @@ jnigen {
         outputPath = file("src/main/java")
         basePackage = "com.badlogic.box2d"
         fileToParse = "box2d/box2d.h"
-        options = arrayOf("-I" + file("box2d/include").absolutePath)
+        options = arrayOf("-I" + file("box2d/include", ).absolutePath, "-DNDEBUG")
     }
 
     all {
@@ -96,10 +97,10 @@ jnigen {
         val arch = architecture.name.lowercase() + (if(architecture == Architecture.x86 && bitness != Architecture.Bitness._32) "_" else "") + bitness.toSuffix()
         val combined = name + "_" + arch
 
-        headerDirs += arrayOf("box2d/include/")
+        headerDirs += arrayOf("build/box2d/${combined}/include/")
         cFlags += " -std=c11 -fexceptions "
         cppFlags += " -std=c++11 -fexceptions "
-        libraries += file("build/box2d/${combined}/lib/libbox2d.a").absolutePath
+        libraries += file("build/box2d/${combined}/libs/libbox2d.a").absolutePath
     }
 
     addLinux(Architecture.Bitness._64, Architecture.x86)

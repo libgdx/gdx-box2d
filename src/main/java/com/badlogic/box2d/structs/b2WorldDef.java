@@ -5,6 +5,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.box2d.FFITypes;
 import com.badlogic.box2d.structs.b2Vec2;
+import com.badlogic.box2d.enums.b2MixingRule;
 import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
 import com.badlogic.box2d.Box2d.b2EnqueueTaskCallback;
 import com.badlogic.box2d.Box2d.b2FinishTaskCallback;
@@ -17,7 +18,7 @@ public final class b2WorldDef extends com.badlogic.gdx.jnigen.runtime.pointer.St
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(75).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(78).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -57,12 +58,12 @@ public final class b2WorldDef extends com.badlogic.gdx.jnigen.runtime.pointer.St
         setValue(restitutionThreshold, 0);
     }
 
-    public float contactPushoutVelocity() {
+    public float contactPushSpeed() {
         return (float) getValueFloat(1);
     }
 
-    public void contactPushoutVelocity(float contactPushoutVelocity) {
-        setValue(contactPushoutVelocity, 1);
+    public void contactPushSpeed(float contactPushSpeed) {
+        setValue(contactPushSpeed, 1);
     }
 
     public float hitEventThreshold() {
@@ -105,68 +106,92 @@ public final class b2WorldDef extends com.badlogic.gdx.jnigen.runtime.pointer.St
         setValue(jointDampingRatio, 6);
     }
 
-    public float maximumLinearVelocity() {
+    public float maximumLinearSpeed() {
         return (float) getValueFloat(7);
     }
 
-    public void maximumLinearVelocity(float maximumLinearVelocity) {
-        setValue(maximumLinearVelocity, 7);
+    public void maximumLinearSpeed(float maximumLinearSpeed) {
+        setValue(maximumLinearSpeed, 7);
+    }
+
+    public b2MixingRule frictionMixingRule() {
+        return b2MixingRule.getByIndex((int) getValue(8));
+    }
+
+    public void frictionMixingRule(b2MixingRule frictionMixingRule) {
+        setValue(frictionMixingRule.getIndex(), 8);
+    }
+
+    public b2MixingRule restitutionMixingRule() {
+        return b2MixingRule.getByIndex((int) getValue(9));
+    }
+
+    public void restitutionMixingRule(b2MixingRule restitutionMixingRule) {
+        setValue(restitutionMixingRule.getIndex(), 9);
     }
 
     public boolean enableSleep() {
-        return getValue(8) != 0;
+        return getValue(10) != 0;
     }
 
     public void enableSleep(boolean enableSleep) {
-        setValue(enableSleep, 8);
+        setValue(enableSleep, 10);
     }
 
-    public boolean enableContinous() {
-        return getValue(9) != 0;
+    public boolean enableContinuous() {
+        return getValue(11) != 0;
     }
 
-    public void enableContinous(boolean enableContinous) {
-        setValue(enableContinous, 9);
+    public void enableContinuous(boolean enableContinuous) {
+        setValue(enableContinuous, 11);
     }
 
     public int workerCount() {
-        return (int) getValue(10);
+        return (int) getValue(12);
     }
 
     public void workerCount(int workerCount) {
-        setValue(workerCount, 10);
+        setValue(workerCount, 12);
     }
 
     public ClosureObject<b2EnqueueTaskCallback> enqueueTask() {
-        return CHandler.getClosureObject(getValue(11));
+        return CHandler.getClosureObject(getValue(13));
     }
 
     public void enqueueTask(ClosureObject<b2EnqueueTaskCallback> enqueueTask) {
-        setValue(enqueueTask.getFnPtr(), 11);
+        setValue(enqueueTask.getFnPtr(), 13);
     }
 
     public ClosureObject<b2FinishTaskCallback> finishTask() {
-        return CHandler.getClosureObject(getValue(12));
+        return CHandler.getClosureObject(getValue(14));
     }
 
     public void finishTask(ClosureObject<b2FinishTaskCallback> finishTask) {
-        setValue(finishTask.getFnPtr(), 12);
+        setValue(finishTask.getFnPtr(), 14);
     }
 
     public VoidPointer userTaskContext() {
-        return new VoidPointer(getValue(13), false);
+        return new VoidPointer(getValue(15), false);
     }
 
     public void userTaskContext(VoidPointer userTaskContext) {
-        setValue(userTaskContext.getPointer(), 13);
+        setValue(userTaskContext.getPointer(), 15);
+    }
+
+    public VoidPointer userData() {
+        return new VoidPointer(getValue(16), false);
+    }
+
+    public void userData(VoidPointer userData) {
+        setValue(userData.getPointer(), 16);
     }
 
     public int internalValue() {
-        return (int) getValue(14);
+        return (int) getValue(17);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 14);
+        setValue(internalValue, 17);
     }
 
     public static final class b2WorldDefPointer extends StackElementPointer<b2WorldDef> {

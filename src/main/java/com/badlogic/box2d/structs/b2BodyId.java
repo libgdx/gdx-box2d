@@ -12,7 +12,7 @@ public final class b2BodyId extends com.badlogic.gdx.jnigen.runtime.pointer.Stru
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(16).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(15).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.box2d.FFITypes;
 import com.badlogic.box2d.structs.b2ShapeId;
+import com.badlogic.box2d.structs.b2Manifold;
 
 public final class b2ContactBeginTouchEvent extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
 
@@ -52,6 +53,14 @@ public final class b2ContactBeginTouchEvent extends com.badlogic.gdx.jnigen.runt
     private static final int __shapeIdB_offset = CHandler.getOffsetForField(__ffi_type, 0);
 
     private final b2ShapeId __shapeIdB = new b2ShapeId(getPointer() + __shapeIdB_offset, false);
+
+    public b2Manifold manifold() {
+        return __manifold;
+    }
+
+    private static final int __manifold_offset = CHandler.getOffsetForField(__ffi_type, 0);
+
+    private final b2Manifold __manifold = new b2Manifold(getPointer() + __manifold_offset, false);
 
     public static final class b2ContactBeginTouchEventPointer extends StackElementPointer<b2ContactBeginTouchEvent> {
 

@@ -13,7 +13,7 @@ public final class b2BodyEvents extends com.badlogic.gdx.jnigen.runtime.pointer.
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(15).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(14).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

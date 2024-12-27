@@ -14,7 +14,7 @@ public final class b2RayResult extends com.badlogic.gdx.jnigen.runtime.pointer.S
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(50).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(51).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -70,12 +70,28 @@ public final class b2RayResult extends com.badlogic.gdx.jnigen.runtime.pointer.S
         setValue(fraction, 0);
     }
 
+    public int nodeVisits() {
+        return (int) getValue(1);
+    }
+
+    public void nodeVisits(int nodeVisits) {
+        setValue(nodeVisits, 1);
+    }
+
+    public int leafVisits() {
+        return (int) getValue(2);
+    }
+
+    public void leafVisits(int leafVisits) {
+        setValue(leafVisits, 2);
+    }
+
     public boolean hit() {
-        return getValue(1) != 0;
+        return getValue(3) != 0;
     }
 
     public void hit(boolean hit) {
-        setValue(hit, 1);
+        setValue(hit, 3);
     }
 
     public static final class b2RayResultPointer extends StackElementPointer<b2RayResult> {

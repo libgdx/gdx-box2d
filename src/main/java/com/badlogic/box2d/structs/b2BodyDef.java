@@ -16,7 +16,7 @@ public final class b2BodyDef extends com.badlogic.gdx.jnigen.runtime.pointer.Str
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(14).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(13).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -160,28 +160,20 @@ public final class b2BodyDef extends com.badlogic.gdx.jnigen.runtime.pointer.Str
         setValue(isEnabled, 11);
     }
 
-    public boolean automaticMass() {
+    public boolean allowFastRotation() {
         return getValue(12) != 0;
     }
 
-    public void automaticMass(boolean automaticMass) {
-        setValue(automaticMass, 12);
-    }
-
-    public boolean allowFastRotation() {
-        return getValue(13) != 0;
-    }
-
     public void allowFastRotation(boolean allowFastRotation) {
-        setValue(allowFastRotation, 13);
+        setValue(allowFastRotation, 12);
     }
 
     public int internalValue() {
-        return (int) getValue(14);
+        return (int) getValue(13);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 14);
+        setValue(internalValue, 13);
     }
 
     public static final class b2BodyDefPointer extends StackElementPointer<b2BodyDef> {

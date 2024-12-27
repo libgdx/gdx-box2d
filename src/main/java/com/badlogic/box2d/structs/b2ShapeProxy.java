@@ -6,22 +6,22 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.box2d.FFITypes;
 import com.badlogic.box2d.structs.b2Vec2;
 
-public final class b2ShapeCastInput extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2ShapeProxy extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
 
     private final static int __size;
 
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(59).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(63).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
-    public b2ShapeCastInput(long pointer, boolean freeOnGC) {
+    public b2ShapeProxy(long pointer, boolean freeOnGC) {
         super(pointer, freeOnGC);
     }
 
-    public b2ShapeCastInput() {
+    public b2ShapeProxy() {
         super(__size);
     }
 
@@ -33,8 +33,8 @@ public final class b2ShapeCastInput extends com.badlogic.gdx.jnigen.runtime.poin
         return __ffi_type;
     }
 
-    public b2ShapeCastInput.b2ShapeCastInputPointer asPointer() {
-        return new b2ShapeCastInput.b2ShapeCastInputPointer(getPointer(), getsGCFreed());
+    public b2ShapeProxy.b2ShapeProxyPointer asPointer() {
+        return new b2ShapeProxy.b2ShapeProxyPointer(getPointer(), getsGCFreed());
     }
 
     public b2Vec2.b2Vec2Pointer points() {
@@ -61,37 +61,21 @@ public final class b2ShapeCastInput extends com.badlogic.gdx.jnigen.runtime.poin
         setValue(radius, 9);
     }
 
-    public b2Vec2 translation() {
-        return __translation;
-    }
+    public static final class b2ShapeProxyPointer extends StackElementPointer<b2ShapeProxy> {
 
-    private static final int __translation_offset = CHandler.getOffsetForField(__ffi_type, 10);
-
-    private final b2Vec2 __translation = new b2Vec2(getPointer() + __translation_offset, false);
-
-    public float maxFraction() {
-        return (float) getValueFloat(10);
-    }
-
-    public void maxFraction(float maxFraction) {
-        setValue(maxFraction, 10);
-    }
-
-    public static final class b2ShapeCastInputPointer extends StackElementPointer<b2ShapeCastInput> {
-
-        public b2ShapeCastInputPointer(long pointer, boolean freeOnGC) {
+        public b2ShapeProxyPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);
         }
 
-        public b2ShapeCastInputPointer() {
+        public b2ShapeProxyPointer() {
             this(1, true, true);
         }
 
-        public b2ShapeCastInputPointer(int count, boolean freeOnGC, boolean guard) {
+        public b2ShapeProxyPointer(int count, boolean freeOnGC, boolean guard) {
             super(__size, count, freeOnGC, guard);
         }
 
-        public b2ShapeCastInput.b2ShapeCastInputPointer guardCount(long count) {
+        public b2ShapeProxy.b2ShapeProxyPointer guardCount(long count) {
             super.guardCount(count);
             return this;
         }
@@ -100,8 +84,8 @@ public final class b2ShapeCastInput extends com.badlogic.gdx.jnigen.runtime.poin
             return __size;
         }
 
-        protected b2ShapeCastInput createStackElement(long ptr, boolean freeOnGC) {
-            return new b2ShapeCastInput(ptr, freeOnGC);
+        protected b2ShapeProxy createStackElement(long ptr, boolean freeOnGC) {
+            return new b2ShapeProxy(ptr, freeOnGC);
         }
     }
 }

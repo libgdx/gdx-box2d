@@ -8,7 +8,7 @@ public enum b2ShapeType implements com.badlogic.gdx.jnigen.runtime.c.CEnum {
     b2_capsuleShape(1),
     b2_segmentShape(2),
     b2_polygonShape(3),
-    b2_smoothSegmentShape(4),
+    b2_chainSegmentShape(4),
     b2_shapeTypeCount(5);
 
     private final int index;
@@ -25,7 +25,7 @@ public enum b2ShapeType implements com.badlogic.gdx.jnigen.runtime.c.CEnum {
         return _values[index];
     }
 
-    private final static b2ShapeType[] _values = { b2_circleShape, b2_capsuleShape, b2_segmentShape, b2_polygonShape, b2_smoothSegmentShape, b2_shapeTypeCount };
+    private final static b2ShapeType[] _values = { b2_circleShape, b2_capsuleShape, b2_segmentShape, b2_polygonShape, b2_chainSegmentShape, b2_shapeTypeCount };
 
     public static final class b2ShapeTypePointer extends EnumPointer<b2ShapeType> {
 

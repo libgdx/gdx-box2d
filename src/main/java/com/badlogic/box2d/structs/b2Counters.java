@@ -13,7 +13,7 @@ public final class b2Counters extends com.badlogic.gdx.jnigen.runtime.pointer.St
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(28).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(29).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -37,99 +37,91 @@ public final class b2Counters extends com.badlogic.gdx.jnigen.runtime.pointer.St
         return new b2Counters.b2CountersPointer(getPointer(), getsGCFreed());
     }
 
-    public int staticBodyCount() {
+    public int bodyCount() {
         return (int) getValue(0);
     }
 
-    public void staticBodyCount(int staticBodyCount) {
-        setValue(staticBodyCount, 0);
-    }
-
-    public int bodyCount() {
-        return (int) getValue(1);
-    }
-
     public void bodyCount(int bodyCount) {
-        setValue(bodyCount, 1);
+        setValue(bodyCount, 0);
     }
 
     public int shapeCount() {
-        return (int) getValue(2);
+        return (int) getValue(1);
     }
 
     public void shapeCount(int shapeCount) {
-        setValue(shapeCount, 2);
+        setValue(shapeCount, 1);
     }
 
     public int contactCount() {
-        return (int) getValue(3);
+        return (int) getValue(2);
     }
 
     public void contactCount(int contactCount) {
-        setValue(contactCount, 3);
+        setValue(contactCount, 2);
     }
 
     public int jointCount() {
-        return (int) getValue(4);
+        return (int) getValue(3);
     }
 
     public void jointCount(int jointCount) {
-        setValue(jointCount, 4);
+        setValue(jointCount, 3);
     }
 
     public int islandCount() {
-        return (int) getValue(5);
+        return (int) getValue(4);
     }
 
     public void islandCount(int islandCount) {
-        setValue(islandCount, 5);
+        setValue(islandCount, 4);
     }
 
     public int stackUsed() {
-        return (int) getValue(6);
+        return (int) getValue(5);
     }
 
     public void stackUsed(int stackUsed) {
-        setValue(stackUsed, 6);
+        setValue(stackUsed, 5);
     }
 
     public int staticTreeHeight() {
-        return (int) getValue(7);
+        return (int) getValue(6);
     }
 
     public void staticTreeHeight(int staticTreeHeight) {
-        setValue(staticTreeHeight, 7);
+        setValue(staticTreeHeight, 6);
     }
 
     public int treeHeight() {
-        return (int) getValue(8);
+        return (int) getValue(7);
     }
 
     public void treeHeight(int treeHeight) {
-        setValue(treeHeight, 8);
+        setValue(treeHeight, 7);
     }
 
     public int byteCount() {
-        return (int) getValue(9);
+        return (int) getValue(8);
     }
 
     public void byteCount(int byteCount) {
-        setValue(byteCount, 9);
+        setValue(byteCount, 8);
     }
 
     public int taskCount() {
-        return (int) getValue(10);
+        return (int) getValue(9);
     }
 
     public void taskCount(int taskCount) {
-        setValue(taskCount, 10);
+        setValue(taskCount, 9);
     }
 
     public CSizedIntPointer colorCounts() {
         return __colorCounts;
     }
 
-    private static final int __colorCounts_offset = CHandler.getOffsetForField(__ffi_type, 11);
+    private static final int __colorCounts_offset = CHandler.getOffsetForField(__ffi_type, 10);
 
     private final CSizedIntPointer __colorCounts = new CSizedIntPointer(getPointer() + __colorCounts_offset, false, "int32_t").guardCount(12);
 

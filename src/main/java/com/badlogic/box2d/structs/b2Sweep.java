@@ -14,7 +14,7 @@ public final class b2Sweep extends com.badlogic.gdx.jnigen.runtime.pointer.Struc
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(65).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(67).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

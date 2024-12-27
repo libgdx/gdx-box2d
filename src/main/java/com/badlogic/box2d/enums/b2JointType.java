@@ -7,10 +7,11 @@ public enum b2JointType implements com.badlogic.gdx.jnigen.runtime.c.CEnum {
     b2_distanceJoint(0),
     b2_motorJoint(1),
     b2_mouseJoint(2),
-    b2_prismaticJoint(3),
-    b2_revoluteJoint(4),
-    b2_weldJoint(5),
-    b2_wheelJoint(6);
+    b2_nullJoint(3),
+    b2_prismaticJoint(4),
+    b2_revoluteJoint(5),
+    b2_weldJoint(6),
+    b2_wheelJoint(7);
 
     private final int index;
 
@@ -26,7 +27,7 @@ public enum b2JointType implements com.badlogic.gdx.jnigen.runtime.c.CEnum {
         return _values[index];
     }
 
-    private final static b2JointType[] _values = { b2_distanceJoint, b2_motorJoint, b2_mouseJoint, b2_prismaticJoint, b2_revoluteJoint, b2_weldJoint, b2_wheelJoint };
+    private final static b2JointType[] _values = { b2_distanceJoint, b2_motorJoint, b2_mouseJoint, b2_nullJoint, b2_prismaticJoint, b2_revoluteJoint, b2_weldJoint, b2_wheelJoint };
 
     public static final class b2JointTypePointer extends EnumPointer<b2JointType> {
 

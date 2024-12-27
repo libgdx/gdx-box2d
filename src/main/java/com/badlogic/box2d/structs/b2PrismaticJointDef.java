@@ -15,7 +15,7 @@ public final class b2PrismaticJointDef extends com.badlogic.gdx.jnigen.runtime.p
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(46).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(47).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

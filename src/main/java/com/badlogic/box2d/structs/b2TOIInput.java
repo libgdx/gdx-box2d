@@ -4,7 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.box2d.FFITypes;
-import com.badlogic.box2d.structs.b2DistanceProxy;
+import com.badlogic.box2d.structs.b2ShapeProxy;
 import com.badlogic.box2d.structs.b2Sweep;
 
 public final class b2TOIInput extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
@@ -14,7 +14,7 @@ public final class b2TOIInput extends com.badlogic.gdx.jnigen.runtime.pointer.St
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(66).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(68).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -38,21 +38,21 @@ public final class b2TOIInput extends com.badlogic.gdx.jnigen.runtime.pointer.St
         return new b2TOIInput.b2TOIInputPointer(getPointer(), getsGCFreed());
     }
 
-    public b2DistanceProxy proxyA() {
+    public b2ShapeProxy proxyA() {
         return __proxyA;
     }
 
     private static final int __proxyA_offset = CHandler.getOffsetForField(__ffi_type, 0);
 
-    private final b2DistanceProxy __proxyA = new b2DistanceProxy(getPointer() + __proxyA_offset, false);
+    private final b2ShapeProxy __proxyA = new b2ShapeProxy(getPointer() + __proxyA_offset, false);
 
-    public b2DistanceProxy proxyB() {
+    public b2ShapeProxy proxyB() {
         return __proxyB;
     }
 
     private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 0);
 
-    private final b2DistanceProxy __proxyB = new b2DistanceProxy(getPointer() + __proxyB_offset, false);
+    private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
     public b2Sweep sweepA() {
         return __sweepA;
@@ -70,12 +70,12 @@ public final class b2TOIInput extends com.badlogic.gdx.jnigen.runtime.pointer.St
 
     private final b2Sweep __sweepB = new b2Sweep(getPointer() + __sweepB_offset, false);
 
-    public float tMax() {
+    public float maxFraction() {
         return (float) getValueFloat(0);
     }
 
-    public void tMax(float tMax) {
-        setValue(tMax, 0);
+    public void maxFraction(float maxFraction) {
+        setValue(maxFraction, 0);
     }
 
     public static final class b2TOIInputPointer extends StackElementPointer<b2TOIInput> {

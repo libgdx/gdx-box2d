@@ -15,7 +15,7 @@ public final class b2RevoluteJointDef extends com.badlogic.gdx.jnigen.runtime.po
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(51).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(52).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

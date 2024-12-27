@@ -4,7 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.box2d.FFITypes;
-import com.badlogic.box2d.structs.b2DistanceProxy;
+import com.badlogic.box2d.structs.b2ShapeProxy;
 import com.badlogic.box2d.structs.b2Transform;
 
 public final class b2DistanceInput extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
@@ -38,21 +38,21 @@ public final class b2DistanceInput extends com.badlogic.gdx.jnigen.runtime.point
         return new b2DistanceInput.b2DistanceInputPointer(getPointer(), getsGCFreed());
     }
 
-    public b2DistanceProxy proxyA() {
+    public b2ShapeProxy proxyA() {
         return __proxyA;
     }
 
     private static final int __proxyA_offset = CHandler.getOffsetForField(__ffi_type, 0);
 
-    private final b2DistanceProxy __proxyA = new b2DistanceProxy(getPointer() + __proxyA_offset, false);
+    private final b2ShapeProxy __proxyA = new b2ShapeProxy(getPointer() + __proxyA_offset, false);
 
-    public b2DistanceProxy proxyB() {
+    public b2ShapeProxy proxyB() {
         return __proxyB;
     }
 
     private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 0);
 
-    private final b2DistanceProxy __proxyB = new b2DistanceProxy(getPointer() + __proxyB_offset, false);
+    private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
     public b2Transform transformA() {
         return __transformA;

@@ -15,7 +15,7 @@ public final class b2ChainDef extends com.badlogic.gdx.jnigen.runtime.pointer.St
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(20).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(19).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -87,20 +87,28 @@ public final class b2ChainDef extends com.badlogic.gdx.jnigen.runtime.pointer.St
 
     private final b2Filter __filter = new b2Filter(getPointer() + __filter_offset, false);
 
+    public long customColor() {
+        return (long) getValue(5);
+    }
+
+    public void customColor(long customColor) {
+        setValue(customColor, 5);
+    }
+
     public boolean isLoop() {
-        return getValue(5) != 0;
+        return getValue(6) != 0;
     }
 
     public void isLoop(boolean isLoop) {
-        setValue(isLoop, 5);
+        setValue(isLoop, 6);
     }
 
     public int internalValue() {
-        return (int) getValue(6);
+        return (int) getValue(7);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 6);
+        setValue(internalValue, 7);
     }
 
     public static final class b2ChainDefPointer extends StackElementPointer<b2ChainDef> {

@@ -15,7 +15,7 @@ public final class b2WheelJointDef extends com.badlogic.gdx.jnigen.runtime.point
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(74).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(77).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

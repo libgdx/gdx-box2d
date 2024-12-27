@@ -5,12 +5,14 @@ import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.box2d.structs.b2Version;
 import com.badlogic.box2d.structs.b2Timer;
+import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
+import com.badlogic.box2d.structs.b2CosSin;
 import com.badlogic.box2d.structs.b2Vec2;
+import com.badlogic.gdx.jnigen.runtime.pointer.FloatPointer;
 import com.badlogic.box2d.structs.b2Rot;
 import com.badlogic.box2d.structs.b2Transform;
 import com.badlogic.box2d.structs.b2Mat22;
 import com.badlogic.box2d.structs.b2AABB;
-import com.badlogic.gdx.jnigen.runtime.pointer.FloatPointer;
 import com.badlogic.box2d.structs.b2RayCastInput;
 import com.badlogic.box2d.structs.b2Polygon;
 import com.badlogic.box2d.structs.b2Hull;
@@ -22,18 +24,23 @@ import com.badlogic.box2d.structs.b2CastOutput;
 import com.badlogic.box2d.structs.b2ShapeCastInput;
 import com.badlogic.box2d.structs.b2SegmentDistanceResult;
 import com.badlogic.box2d.structs.b2DistanceOutput;
-import com.badlogic.box2d.structs.b2DistanceCache;
+import com.badlogic.box2d.structs.b2SimplexCache;
 import com.badlogic.box2d.structs.b2DistanceInput;
 import com.badlogic.box2d.structs.b2Simplex;
 import com.badlogic.box2d.structs.b2ShapeCastPairInput;
-import com.badlogic.box2d.structs.b2DistanceProxy;
+import com.badlogic.box2d.structs.b2ShapeProxy;
 import com.badlogic.box2d.structs.b2Sweep;
 import com.badlogic.box2d.structs.b2TOIOutput;
 import com.badlogic.box2d.structs.b2TOIInput;
 import com.badlogic.box2d.structs.b2Manifold;
-import com.badlogic.box2d.structs.b2SmoothSegment;
+import com.badlogic.box2d.structs.b2ChainSegment;
 import com.badlogic.box2d.structs.b2DynamicTree;
+import com.badlogic.box2d.structs.b2TreeStats;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
+import com.badlogic.box2d.structs.b2BodyId;
+import com.badlogic.box2d.structs.b2ShapeId;
+import com.badlogic.box2d.structs.b2ChainId;
+import com.badlogic.box2d.structs.b2JointId;
 import com.badlogic.box2d.structs.b2WorldDef;
 import com.badlogic.box2d.structs.b2BodyDef;
 import com.badlogic.box2d.structs.b2Filter;
@@ -43,30 +50,27 @@ import com.badlogic.box2d.structs.b2ChainDef;
 import com.badlogic.box2d.structs.b2DistanceJointDef;
 import com.badlogic.box2d.structs.b2MotorJointDef;
 import com.badlogic.box2d.structs.b2MouseJointDef;
+import com.badlogic.box2d.structs.b2NullJointDef;
 import com.badlogic.box2d.structs.b2PrismaticJointDef;
 import com.badlogic.box2d.structs.b2RevoluteJointDef;
 import com.badlogic.box2d.structs.b2WeldJointDef;
 import com.badlogic.box2d.structs.b2WheelJointDef;
-import com.badlogic.box2d.structs.b2WorldId;
+import com.badlogic.box2d.structs.b2ExplosionDef;
 import com.badlogic.box2d.structs.b2DebugDraw;
+import com.badlogic.box2d.structs.b2WorldId;
 import com.badlogic.box2d.structs.b2BodyEvents;
 import com.badlogic.box2d.structs.b2SensorEvents;
 import com.badlogic.box2d.structs.b2ContactEvents;
 import com.badlogic.box2d.structs.b2RayResult;
 import com.badlogic.box2d.structs.b2Profile;
 import com.badlogic.box2d.structs.b2Counters;
-import com.badlogic.box2d.structs.b2BodyId;
 import com.badlogic.box2d.enums.b2BodyType;
-import com.badlogic.box2d.structs.b2ShapeId;
-import com.badlogic.box2d.structs.b2JointId;
 import com.badlogic.box2d.structs.b2ContactData;
 import com.badlogic.box2d.enums.b2ShapeType;
-import com.badlogic.box2d.structs.b2ChainId;
 import com.badlogic.box2d.enums.b2JointType;
 import com.badlogic.gdx.jnigen.runtime.closure.Closure;
 import com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper;
 import com.badlogic.gdx.jnigen.runtime.c.CTypeInfo;
-import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 
 public final class Box2d {
 
@@ -191,46 +195,16 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
-    public static float b2MinFloat(float a, float b) {
-        return b2MinFloat_internal(a, b);
+    public static long b2Hash(long hash, CSizedIntPointer data, int count) {
+        data.assertHasCTypeBacking("const uint8_t");
+        return b2Hash_internal(hash, data.getPointer(), count);
     }
 
-    static private native float b2MinFloat_internal(float a, float b);/*
+    static private native long b2Hash_internal(long hash, long data, int count);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2MinFloat((float)a, (float)b);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    public static float b2MaxFloat(float a, float b) {
-        return b2MaxFloat_internal(a, b);
-    }
-
-    static private native float b2MaxFloat_internal(float a, float b);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2MaxFloat((float)a, (float)b);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    public static float b2AbsFloat(float a) {
-        return b2AbsFloat_internal(a);
-    }
-
-    static private native float b2AbsFloat_internal(float a);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2AbsFloat((float)a);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    public static float b2ClampFloat(float a, float lower, float upper) {
-        return b2ClampFloat_internal(a, lower, upper);
-    }
-
-    static private native float b2ClampFloat_internal(float a, float lower, float upper);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2ClampFloat((float)a, (float)lower, (float)upper);
+    	CHECK_AND_THROW_C_TYPE(env, int, count, 2, return 0);
+    	CHECK_AND_THROW_C_TYPE(env, uint32_t, hash, 0, return 0);
+    	return (jlong)b2Hash((uint32_t)hash, (const uint8_t *)data, (int)count);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -283,6 +257,74 @@ static jclass cxxExceptionClass = NULL;
     	CHECK_AND_THROW_C_TYPE(env, int, lower, 1, return 0);
     	CHECK_AND_THROW_C_TYPE(env, int, a, 0, return 0);
     	return (jint)b2ClampInt((int)a, (int)lower, (int)upper);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static float b2MinFloat(float a, float b) {
+        return b2MinFloat_internal(a, b);
+    }
+
+    static private native float b2MinFloat_internal(float a, float b);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2MinFloat((float)a, (float)b);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static float b2MaxFloat(float a, float b) {
+        return b2MaxFloat_internal(a, b);
+    }
+
+    static private native float b2MaxFloat_internal(float a, float b);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2MaxFloat((float)a, (float)b);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static float b2AbsFloat(float a) {
+        return b2AbsFloat_internal(a);
+    }
+
+    static private native float b2AbsFloat_internal(float a);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2AbsFloat((float)a);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static float b2ClampFloat(float a, float lower, float upper) {
+        return b2ClampFloat_internal(a, lower, upper);
+    }
+
+    static private native float b2ClampFloat_internal(float a, float lower, float upper);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2ClampFloat((float)a, (float)lower, (float)upper);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static float b2Atan2(float y, float x) {
+        return b2Atan2_internal(y, x);
+    }
+
+    static private native float b2Atan2_internal(float y, float x);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2Atan2((float)y, (float)x);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2CosSin b2ComputeCosSin(float radians) {
+        return new b2CosSin(b2ComputeCosSin_internal(radians), true);
+    }
+
+    static private native long b2ComputeCosSin_internal(float radians);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2CosSin* _ret = (b2CosSin*)malloc(sizeof(b2CosSin));
+    	*_ret = b2ComputeCosSin((float)radians);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -528,17 +570,6 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static float b2LengthSquared(b2Vec2 v) {
-        return b2LengthSquared_internal(v.getPointer());
-    }
-
-    static private native float b2LengthSquared_internal(long v);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2LengthSquared(*(b2Vec2*)v);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
     public static float b2Distance(b2Vec2 a, b2Vec2 b) {
         return b2Distance_internal(a.getPointer(), b.getPointer());
     }
@@ -546,6 +577,69 @@ static jclass cxxExceptionClass = NULL;
     static private native float b2Distance_internal(long a, long b);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	return (jfloat)b2Distance(*(b2Vec2*)a, *(b2Vec2*)b);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2Vec2 b2Normalize(b2Vec2 v) {
+        return new b2Vec2(b2Normalize_internal(v.getPointer()), true);
+    }
+
+    static private native long b2Normalize_internal(long v);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Vec2* _ret = (b2Vec2*)malloc(sizeof(b2Vec2));
+    	*_ret = b2Normalize(*(b2Vec2*)v);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2Vec2 b2GetLengthAndNormalize(FloatPointer length, b2Vec2 v) {
+        return new b2Vec2(b2GetLengthAndNormalize_internal(length.getPointer(), v.getPointer()), true);
+    }
+
+    static private native long b2GetLengthAndNormalize_internal(long length, long v);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Vec2* _ret = (b2Vec2*)malloc(sizeof(b2Vec2));
+    	*_ret = b2GetLengthAndNormalize((float *)length, *(b2Vec2*)v);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2Rot b2NormalizeRot(b2Rot q) {
+        return new b2Rot(b2NormalizeRot_internal(q.getPointer()), true);
+    }
+
+    static private native long b2NormalizeRot_internal(long q);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Rot* _ret = (b2Rot*)malloc(sizeof(b2Rot));
+    	*_ret = b2NormalizeRot(*(b2Rot*)q);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2Rot b2IntegrateRotation(b2Rot q1, float deltaAngle) {
+        return new b2Rot(b2IntegrateRotation_internal(q1.getPointer(), deltaAngle), true);
+    }
+
+    static private native long b2IntegrateRotation_internal(long q1, float deltaAngle);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Rot* _ret = (b2Rot*)malloc(sizeof(b2Rot));
+    	*_ret = b2IntegrateRotation(*(b2Rot*)q1, (float)deltaAngle);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static float b2LengthSquared(b2Vec2 v) {
+        return b2LengthSquared_internal(v.getPointer());
+    }
+
+    static private native float b2LengthSquared_internal(long v);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2LengthSquared(*(b2Vec2*)v);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -561,27 +655,27 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static b2Rot b2MakeRot(float angle) {
-        return new b2Rot(b2MakeRot_internal(angle), true);
+    public static b2Rot b2MakeRot(float radians) {
+        return new b2Rot(b2MakeRot_internal(radians), true);
     }
 
-    static private native long b2MakeRot_internal(float angle);/*
+    static private native long b2MakeRot_internal(float radians);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Rot* _ret = (b2Rot*)malloc(sizeof(b2Rot));
-    	*_ret = b2MakeRot((float)angle);
+    	*_ret = b2MakeRot((float)radians);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static b2Rot b2NormalizeRot(b2Rot q) {
-        return new b2Rot(b2NormalizeRot_internal(q.getPointer()), true);
+    public static b2Rot b2ComputeRotationBetweenUnitVectors(b2Vec2 v1, b2Vec2 v2) {
+        return new b2Rot(b2ComputeRotationBetweenUnitVectors_internal(v1.getPointer(), v2.getPointer()), true);
     }
 
-    static private native long b2NormalizeRot_internal(long q);/*
+    static private native long b2ComputeRotationBetweenUnitVectors_internal(long v1, long v2);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Rot* _ret = (b2Rot*)malloc(sizeof(b2Rot));
-    	*_ret = b2NormalizeRot(*(b2Rot*)q);
+    	*_ret = b2ComputeRotationBetweenUnitVectors(*(b2Vec2*)v1, *(b2Vec2*)v2);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -606,19 +700,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Rot* _ret = (b2Rot*)malloc(sizeof(b2Rot));
     	*_ret = b2NLerp(*(b2Rot*)q1, *(b2Rot*)q2, (float)t);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    public static b2Rot b2IntegrateRotation(b2Rot q1, float deltaAngle) {
-        return new b2Rot(b2IntegrateRotation_internal(q1.getPointer(), deltaAngle), true);
-    }
-
-    static private native long b2IntegrateRotation_internal(long q1, float deltaAngle);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2Rot* _ret = (b2Rot*)malloc(sizeof(b2Rot));
-    	*_ret = b2IntegrateRotation(*(b2Rot*)q1, (float)deltaAngle);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -709,13 +790,24 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static float b2UnwindAngle(float angle) {
-        return b2UnwindAngle_internal(angle);
+    public static float b2UnwindAngle(float radians) {
+        return b2UnwindAngle_internal(radians);
     }
 
-    static private native float b2UnwindAngle_internal(float angle);/*
+    static private native float b2UnwindAngle_internal(float radians);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2UnwindAngle((float)angle);
+    	return (jfloat)b2UnwindAngle((float)radians);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static float b2UnwindLargeAngle(float radians) {
+        return b2UnwindLargeAngle_internal(radians);
+    }
+
+    static private native float b2UnwindLargeAngle_internal(float radians);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2UnwindLargeAngle((float)radians);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -887,85 +979,46 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static boolean b2IsValid(float a) {
-        return b2IsValid_internal(a);
+    public static boolean b2IsValidFloat(float a) {
+        return b2IsValidFloat_internal(a);
     }
 
-    static private native boolean b2IsValid_internal(float a);/*
+    static private native boolean b2IsValidFloat_internal(float a);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2IsValid((float)a);
+    	return (jboolean)b2IsValidFloat((float)a);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static boolean b2Vec2_IsValid(b2Vec2 v) {
-        return b2Vec2_IsValid_internal(v.getPointer());
+    public static boolean b2IsValidVec2(b2Vec2 v) {
+        return b2IsValidVec2_internal(v.getPointer());
     }
 
-    static private native boolean b2Vec2_IsValid_internal(long v);/*
+    static private native boolean b2IsValidVec2_internal(long v);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2Vec2_IsValid(*(b2Vec2*)v);
+    	return (jboolean)b2IsValidVec2(*(b2Vec2*)v);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static boolean b2Rot_IsValid(b2Rot q) {
-        return b2Rot_IsValid_internal(q.getPointer());
+    public static boolean b2IsValidRotation(b2Rot q) {
+        return b2IsValidRotation_internal(q.getPointer());
     }
 
-    static private native boolean b2Rot_IsValid_internal(long q);/*
+    static private native boolean b2IsValidRotation_internal(long q);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2Rot_IsValid(*(b2Rot*)q);
+    	return (jboolean)b2IsValidRotation(*(b2Rot*)q);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static boolean b2AABB_IsValid(b2AABB aabb) {
-        return b2AABB_IsValid_internal(aabb.getPointer());
+    public static boolean b2IsValidAABB(b2AABB aabb) {
+        return b2IsValidAABB_internal(aabb.getPointer());
     }
 
-    static private native boolean b2AABB_IsValid_internal(long aabb);/*
+    static private native boolean b2IsValidAABB_internal(long aabb);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2AABB_IsValid(*(b2AABB*)aabb);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    public static b2Vec2 b2Normalize(b2Vec2 v) {
-        return new b2Vec2(b2Normalize_internal(v.getPointer()), true);
-    }
-
-    static private native long b2Normalize_internal(long v);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2Vec2* _ret = (b2Vec2*)malloc(sizeof(b2Vec2));
-    	*_ret = b2Normalize(*(b2Vec2*)v);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    public static b2Vec2 b2NormalizeChecked(b2Vec2 v) {
-        return new b2Vec2(b2NormalizeChecked_internal(v.getPointer()), true);
-    }
-
-    static private native long b2NormalizeChecked_internal(long v);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2Vec2* _ret = (b2Vec2*)malloc(sizeof(b2Vec2));
-    	*_ret = b2NormalizeChecked(*(b2Vec2*)v);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    public static b2Vec2 b2GetLengthAndNormalize(FloatPointer length, b2Vec2 v) {
-        return new b2Vec2(b2GetLengthAndNormalize_internal(length.getPointer(), v.getPointer()), true);
-    }
-
-    static private native long b2GetLengthAndNormalize_internal(long length, long v);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2Vec2* _ret = (b2Vec2*)malloc(sizeof(b2Vec2));
-    	*_ret = b2GetLengthAndNormalize((float *)length, *(b2Vec2*)v);
-    	return (jlong)_ret;
+    	return (jboolean)b2IsValidAABB(*(b2AABB*)aabb);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -1015,66 +1068,92 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static b2Polygon b2MakeOffsetPolygon(b2Hull.b2HullPointer hull, float radius, b2Transform transform) {
-        return new b2Polygon(b2MakeOffsetPolygon_internal(hull.getPointer(), radius, transform.getPointer()), true);
+    public static b2Polygon b2MakeOffsetPolygon(b2Hull.b2HullPointer hull, b2Vec2 position, b2Rot rotation) {
+        return new b2Polygon(b2MakeOffsetPolygon_internal(hull.getPointer(), position.getPointer(), rotation.getPointer()), true);
     }
 
-    static private native long b2MakeOffsetPolygon_internal(long hull, float radius, long transform);/*
+    static private native long b2MakeOffsetPolygon_internal(long hull, long position, long rotation);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Polygon* _ret = (b2Polygon*)malloc(sizeof(b2Polygon));
-    	*_ret = b2MakeOffsetPolygon((const b2Hull *)hull, (float)radius, *(b2Transform*)transform);
+    	*_ret = b2MakeOffsetPolygon((const b2Hull *)hull, *(b2Vec2*)position, *(b2Rot*)rotation);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static b2Polygon b2MakeSquare(float h) {
-        return new b2Polygon(b2MakeSquare_internal(h), true);
+    public static b2Polygon b2MakeOffsetRoundedPolygon(b2Hull.b2HullPointer hull, b2Vec2 position, b2Rot rotation, float radius) {
+        return new b2Polygon(b2MakeOffsetRoundedPolygon_internal(hull.getPointer(), position.getPointer(), rotation.getPointer(), radius), true);
     }
 
-    static private native long b2MakeSquare_internal(float h);/*
+    static private native long b2MakeOffsetRoundedPolygon_internal(long hull, long position, long rotation, float radius);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Polygon* _ret = (b2Polygon*)malloc(sizeof(b2Polygon));
-    	*_ret = b2MakeSquare((float)h);
+    	*_ret = b2MakeOffsetRoundedPolygon((const b2Hull *)hull, *(b2Vec2*)position, *(b2Rot*)rotation, (float)radius);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static b2Polygon b2MakeBox(float hx, float hy) {
-        return new b2Polygon(b2MakeBox_internal(hx, hy), true);
+    public static b2Polygon b2MakeSquare(float halfWidth) {
+        return new b2Polygon(b2MakeSquare_internal(halfWidth), true);
     }
 
-    static private native long b2MakeBox_internal(float hx, float hy);/*
+    static private native long b2MakeSquare_internal(float halfWidth);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Polygon* _ret = (b2Polygon*)malloc(sizeof(b2Polygon));
-    	*_ret = b2MakeBox((float)hx, (float)hy);
+    	*_ret = b2MakeSquare((float)halfWidth);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static b2Polygon b2MakeRoundedBox(float hx, float hy, float radius) {
-        return new b2Polygon(b2MakeRoundedBox_internal(hx, hy, radius), true);
+    public static b2Polygon b2MakeBox(float halfWidth, float halfHeight) {
+        return new b2Polygon(b2MakeBox_internal(halfWidth, halfHeight), true);
     }
 
-    static private native long b2MakeRoundedBox_internal(float hx, float hy, float radius);/*
+    static private native long b2MakeBox_internal(float halfWidth, float halfHeight);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Polygon* _ret = (b2Polygon*)malloc(sizeof(b2Polygon));
-    	*_ret = b2MakeRoundedBox((float)hx, (float)hy, (float)radius);
+    	*_ret = b2MakeBox((float)halfWidth, (float)halfHeight);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static b2Polygon b2MakeOffsetBox(float hx, float hy, b2Vec2 center, float angle) {
-        return new b2Polygon(b2MakeOffsetBox_internal(hx, hy, center.getPointer(), angle), true);
+    public static b2Polygon b2MakeRoundedBox(float halfWidth, float halfHeight, float radius) {
+        return new b2Polygon(b2MakeRoundedBox_internal(halfWidth, halfHeight, radius), true);
     }
 
-    static private native long b2MakeOffsetBox_internal(float hx, float hy, long center, float angle);/*
+    static private native long b2MakeRoundedBox_internal(float halfWidth, float halfHeight, float radius);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Polygon* _ret = (b2Polygon*)malloc(sizeof(b2Polygon));
-    	*_ret = b2MakeOffsetBox((float)hx, (float)hy, *(b2Vec2*)center, (float)angle);
+    	*_ret = b2MakeRoundedBox((float)halfWidth, (float)halfHeight, (float)radius);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2Polygon b2MakeOffsetBox(float halfWidth, float halfHeight, b2Vec2 center, b2Rot rotation) {
+        return new b2Polygon(b2MakeOffsetBox_internal(halfWidth, halfHeight, center.getPointer(), rotation.getPointer()), true);
+    }
+
+    static private native long b2MakeOffsetBox_internal(float halfWidth, float halfHeight, long center, long rotation);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Polygon* _ret = (b2Polygon*)malloc(sizeof(b2Polygon));
+    	*_ret = b2MakeOffsetBox((float)halfWidth, (float)halfHeight, *(b2Vec2*)center, *(b2Rot*)rotation);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2Polygon b2MakeOffsetRoundedBox(float halfWidth, float halfHeight, b2Vec2 center, b2Rot rotation, float radius) {
+        return new b2Polygon(b2MakeOffsetRoundedBox_internal(halfWidth, halfHeight, center.getPointer(), rotation.getPointer(), radius), true);
+    }
+
+    static private native long b2MakeOffsetRoundedBox_internal(float halfWidth, float halfHeight, long center, long rotation, float radius);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Polygon* _ret = (b2Polygon*)malloc(sizeof(b2Polygon));
+    	*_ret = b2MakeOffsetRoundedBox((float)halfWidth, (float)halfHeight, *(b2Vec2*)center, *(b2Rot*)rotation, (float)radius);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -1360,7 +1439,7 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static b2DistanceOutput b2ShapeDistance(b2DistanceCache.b2DistanceCachePointer cache, b2DistanceInput.b2DistanceInputPointer input, b2Simplex.b2SimplexPointer simplexes, int simplexCapacity) {
+    public static b2DistanceOutput b2ShapeDistance(b2SimplexCache.b2SimplexCachePointer cache, b2DistanceInput.b2DistanceInputPointer input, b2Simplex.b2SimplexPointer simplexes, int simplexCapacity) {
         return new b2DistanceOutput(b2ShapeDistance_internal(cache.getPointer(), input.getPointer(), simplexes.getPointer(), simplexCapacity), true);
     }
 
@@ -1368,7 +1447,7 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, int, simplexCapacity, 3, return 0);
     	b2DistanceOutput* _ret = (b2DistanceOutput*)malloc(sizeof(b2DistanceOutput));
-    	*_ret = b2ShapeDistance((b2DistanceCache *)cache, (const b2DistanceInput *)input, (b2Simplex *)simplexes, (int)simplexCapacity);
+    	*_ret = b2ShapeDistance((b2SimplexCache *)cache, (const b2DistanceInput *)input, (b2Simplex *)simplexes, (int)simplexCapacity);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -1387,14 +1466,14 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static b2DistanceProxy b2MakeProxy(b2Vec2.b2Vec2Pointer vertices, int count, float radius) {
-        return new b2DistanceProxy(b2MakeProxy_internal(vertices.getPointer(), count, radius), true);
+    public static b2ShapeProxy b2MakeProxy(b2Vec2.b2Vec2Pointer vertices, int count, float radius) {
+        return new b2ShapeProxy(b2MakeProxy_internal(vertices.getPointer(), count, radius), true);
     }
 
     static private native long b2MakeProxy_internal(long vertices, int count, float radius);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, int32_t, count, 1, return 0);
-    	b2DistanceProxy* _ret = (b2DistanceProxy*)malloc(sizeof(b2DistanceProxy));
+    	b2ShapeProxy* _ret = (b2ShapeProxy*)malloc(sizeof(b2ShapeProxy));
     	*_ret = b2MakeProxy((const b2Vec2 *)vertices, (int32_t)count, (float)radius);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
@@ -1544,40 +1623,40 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static b2Manifold b2CollideSmoothSegmentAndCircle(b2SmoothSegment.b2SmoothSegmentPointer smoothSegmentA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
-        return new b2Manifold(b2CollideSmoothSegmentAndCircle_internal(smoothSegmentA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer()), true);
+    public static b2Manifold b2CollideChainSegmentAndCircle(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
+        return new b2Manifold(b2CollideChainSegmentAndCircle_internal(segmentA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer()), true);
     }
 
-    static private native long b2CollideSmoothSegmentAndCircle_internal(long smoothSegmentA, long xfA, long circleB, long xfB);/*
+    static private native long b2CollideChainSegmentAndCircle_internal(long segmentA, long xfA, long circleB, long xfB);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Manifold* _ret = (b2Manifold*)malloc(sizeof(b2Manifold));
-    	*_ret = b2CollideSmoothSegmentAndCircle((const b2SmoothSegment *)smoothSegmentA, *(b2Transform*)xfA, (const b2Circle *)circleB, *(b2Transform*)xfB);
+    	*_ret = b2CollideChainSegmentAndCircle((const b2ChainSegment *)segmentA, *(b2Transform*)xfA, (const b2Circle *)circleB, *(b2Transform*)xfB);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static b2Manifold b2CollideSmoothSegmentAndCapsule(b2SmoothSegment.b2SmoothSegmentPointer smoothSegmentA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2DistanceCache.b2DistanceCachePointer cache) {
-        return new b2Manifold(b2CollideSmoothSegmentAndCapsule_internal(smoothSegmentA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), cache.getPointer()), true);
+    public static b2Manifold b2CollideChainSegmentAndCapsule(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2SimplexCache.b2SimplexCachePointer cache) {
+        return new b2Manifold(b2CollideChainSegmentAndCapsule_internal(segmentA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), cache.getPointer()), true);
     }
 
-    static private native long b2CollideSmoothSegmentAndCapsule_internal(long smoothSegmentA, long xfA, long capsuleB, long xfB, long cache);/*
+    static private native long b2CollideChainSegmentAndCapsule_internal(long segmentA, long xfA, long capsuleB, long xfB, long cache);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Manifold* _ret = (b2Manifold*)malloc(sizeof(b2Manifold));
-    	*_ret = b2CollideSmoothSegmentAndCapsule((const b2SmoothSegment *)smoothSegmentA, *(b2Transform*)xfA, (const b2Capsule *)capsuleB, *(b2Transform*)xfB, (b2DistanceCache *)cache);
+    	*_ret = b2CollideChainSegmentAndCapsule((const b2ChainSegment *)segmentA, *(b2Transform*)xfA, (const b2Capsule *)capsuleB, *(b2Transform*)xfB, (b2SimplexCache *)cache);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static b2Manifold b2CollideSmoothSegmentAndPolygon(b2SmoothSegment.b2SmoothSegmentPointer smoothSegmentA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB, b2DistanceCache.b2DistanceCachePointer cache) {
-        return new b2Manifold(b2CollideSmoothSegmentAndPolygon_internal(smoothSegmentA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), cache.getPointer()), true);
+    public static b2Manifold b2CollideChainSegmentAndPolygon(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB, b2SimplexCache.b2SimplexCachePointer cache) {
+        return new b2Manifold(b2CollideChainSegmentAndPolygon_internal(segmentA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), cache.getPointer()), true);
     }
 
-    static private native long b2CollideSmoothSegmentAndPolygon_internal(long smoothSegmentA, long xfA, long polygonB, long xfB, long cache);/*
+    static private native long b2CollideChainSegmentAndPolygon_internal(long segmentA, long xfA, long polygonB, long xfB, long cache);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Manifold* _ret = (b2Manifold*)malloc(sizeof(b2Manifold));
-    	*_ret = b2CollideSmoothSegmentAndPolygon((const b2SmoothSegment *)smoothSegmentA, *(b2Transform*)xfA, (const b2Polygon *)polygonB, *(b2Transform*)xfB, (b2DistanceCache *)cache);
+    	*_ret = b2CollideChainSegmentAndPolygon((const b2ChainSegment *)segmentA, *(b2Transform*)xfA, (const b2Polygon *)polygonB, *(b2Transform*)xfB, (b2SimplexCache *)cache);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -1613,8 +1692,8 @@ static jclass cxxExceptionClass = NULL;
     static private native int b2DynamicTree_CreateProxy_internal(long tree, long aabb, long categoryBits, int userData);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, int32_t, userData, 3, return 0);
-    	CHECK_AND_THROW_C_TYPE(env, uint32_t, categoryBits, 2, return 0);
-    	return (jint)b2DynamicTree_CreateProxy((b2DynamicTree *)tree, *(b2AABB*)aabb, (uint32_t)categoryBits, (int32_t)userData);
+    	CHECK_AND_THROW_C_TYPE(env, uint64_t, categoryBits, 2, return 0);
+    	return (jint)b2DynamicTree_CreateProxy((b2DynamicTree *)tree, *(b2AABB*)aabb, (uint64_t)categoryBits, (int32_t)userData);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -1652,37 +1731,46 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
-    public static void b2DynamicTree_Query(b2DynamicTree.b2DynamicTreePointer tree, b2AABB aabb, long maskBits, ClosureObject<b2TreeQueryCallbackFcn> callback, VoidPointer context) {
-        b2DynamicTree_Query_internal(tree.getPointer(), aabb.getPointer(), maskBits, callback.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2DynamicTree_Query(b2DynamicTree.b2DynamicTreePointer tree, b2AABB aabb, long maskBits, ClosureObject<b2TreeQueryCallbackFcn> callback, VoidPointer context) {
+        return new b2TreeStats(b2DynamicTree_Query_internal(tree.getPointer(), aabb.getPointer(), maskBits, callback.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2DynamicTree_Query_internal(long tree, long aabb, long maskBits, long callback, long context);/*
+    static private native long b2DynamicTree_Query_internal(long tree, long aabb, long maskBits, long callback, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, uint32_t, maskBits, 2, return);
-    	b2DynamicTree_Query((const b2DynamicTree *)tree, *(b2AABB*)aabb, (uint32_t)maskBits, (b2TreeQueryCallbackFcn *)callback, (void *)context);
+    	CHECK_AND_THROW_C_TYPE(env, uint64_t, maskBits, 2, return 0);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2DynamicTree_Query((const b2DynamicTree *)tree, *(b2AABB*)aabb, (uint64_t)maskBits, (b2TreeQueryCallbackFcn *)callback, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
-    public static void b2DynamicTree_RayCast(b2DynamicTree.b2DynamicTreePointer tree, b2RayCastInput.b2RayCastInputPointer input, long maskBits, ClosureObject<b2TreeRayCastCallbackFcn> callback, VoidPointer context) {
-        b2DynamicTree_RayCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2DynamicTree_RayCast(b2DynamicTree.b2DynamicTreePointer tree, b2RayCastInput.b2RayCastInputPointer input, long maskBits, ClosureObject<b2TreeRayCastCallbackFcn> callback, VoidPointer context) {
+        return new b2TreeStats(b2DynamicTree_RayCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2DynamicTree_RayCast_internal(long tree, long input, long maskBits, long callback, long context);/*
+    static private native long b2DynamicTree_RayCast_internal(long tree, long input, long maskBits, long callback, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, uint32_t, maskBits, 2, return);
-    	b2DynamicTree_RayCast((const b2DynamicTree *)tree, (const b2RayCastInput *)input, (uint32_t)maskBits, (b2TreeRayCastCallbackFcn *)callback, (void *)context);
+    	CHECK_AND_THROW_C_TYPE(env, uint64_t, maskBits, 2, return 0);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2DynamicTree_RayCast((const b2DynamicTree *)tree, (const b2RayCastInput *)input, (uint64_t)maskBits, (b2TreeRayCastCallbackFcn *)callback, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
-    public static void b2DynamicTree_ShapeCast(b2DynamicTree.b2DynamicTreePointer tree, b2ShapeCastInput.b2ShapeCastInputPointer input, long maskBits, ClosureObject<b2TreeShapeCastCallbackFcn> callback, VoidPointer context) {
-        b2DynamicTree_ShapeCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2DynamicTree_ShapeCast(b2DynamicTree.b2DynamicTreePointer tree, b2ShapeCastInput.b2ShapeCastInputPointer input, long maskBits, ClosureObject<b2TreeShapeCastCallbackFcn> callback, VoidPointer context) {
+        return new b2TreeStats(b2DynamicTree_ShapeCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2DynamicTree_ShapeCast_internal(long tree, long input, long maskBits, long callback, long context);/*
+    static private native long b2DynamicTree_ShapeCast_internal(long tree, long input, long maskBits, long callback, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, uint32_t, maskBits, 2, return);
-    	b2DynamicTree_ShapeCast((const b2DynamicTree *)tree, (const b2ShapeCastInput *)input, (uint32_t)maskBits, (b2TreeShapeCastCallbackFcn *)callback, (void *)context);
+    	CHECK_AND_THROW_C_TYPE(env, uint64_t, maskBits, 2, return 0);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2DynamicTree_ShapeCast((const b2DynamicTree *)tree, (const b2ShapeCastInput *)input, (uint64_t)maskBits, (b2TreeShapeCastCallbackFcn *)callback, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static void b2DynamicTree_Validate(b2DynamicTree.b2DynamicTreePointer tree) {
@@ -1706,17 +1794,6 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static int b2DynamicTree_GetMaxBalance(b2DynamicTree.b2DynamicTreePointer tree) {
-        return b2DynamicTree_GetMaxBalance_internal(tree.getPointer());
-    }
-
-    static private native int b2DynamicTree_GetMaxBalance_internal(long tree);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jint)b2DynamicTree_GetMaxBalance((const b2DynamicTree *)tree);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
     public static float b2DynamicTree_GetAreaRatio(b2DynamicTree.b2DynamicTreePointer tree) {
         return b2DynamicTree_GetAreaRatio_internal(tree.getPointer());
     }
@@ -1726,16 +1803,6 @@ static jclass cxxExceptionClass = NULL;
     	return (jfloat)b2DynamicTree_GetAreaRatio((const b2DynamicTree *)tree);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
-    */
-
-    public static void b2DynamicTree_RebuildBottomUp(b2DynamicTree.b2DynamicTreePointer tree) {
-        b2DynamicTree_RebuildBottomUp_internal(tree.getPointer());
-    }
-
-    static private native void b2DynamicTree_RebuildBottomUp_internal(long tree);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2DynamicTree_RebuildBottomUp((b2DynamicTree *)tree);
-    	HANDLE_JAVA_EXCEPTION_END()
     */
 
     public static int b2DynamicTree_GetProxyCount(b2DynamicTree.b2DynamicTreePointer tree) {
@@ -1759,16 +1826,6 @@ static jclass cxxExceptionClass = NULL;
     	return (jint)b2DynamicTree_Rebuild((b2DynamicTree *)tree, (bool)fullBuild);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
-    */
-
-    public static void b2DynamicTree_ShiftOrigin(b2DynamicTree.b2DynamicTreePointer tree, b2Vec2 newOrigin) {
-        b2DynamicTree_ShiftOrigin_internal(tree.getPointer(), newOrigin.getPointer());
-    }
-
-    static private native void b2DynamicTree_ShiftOrigin_internal(long tree, long newOrigin);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2DynamicTree_ShiftOrigin((b2DynamicTree *)tree, *(b2Vec2*)newOrigin);
-    	HANDLE_JAVA_EXCEPTION_END()
     */
 
     public static int b2DynamicTree_GetByteCount(b2DynamicTree.b2DynamicTreePointer tree) {
@@ -1803,6 +1860,106 @@ static jclass cxxExceptionClass = NULL;
     	CHECK_AND_THROW_C_TYPE(env, int32_t, proxyId, 1, return 0);
     	b2AABB* _ret = (b2AABB*)malloc(sizeof(b2AABB));
     	*_ret = b2DynamicTree_GetAABB((const b2DynamicTree *)tree, (int32_t)proxyId);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static long b2StoreBodyId(b2BodyId id) {
+        return b2StoreBodyId_internal(id.getPointer());
+    }
+
+    static private native long b2StoreBodyId_internal(long id);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jlong)b2StoreBodyId(*(b2BodyId*)id);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2BodyId b2LoadBodyId(long x) {
+        return new b2BodyId(b2LoadBodyId_internal(x), true);
+    }
+
+    static private native long b2LoadBodyId_internal(long x);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, uint64_t, x, 0, return 0);
+    	b2BodyId* _ret = (b2BodyId*)malloc(sizeof(b2BodyId));
+    	*_ret = b2LoadBodyId((uint64_t)x);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static long b2StoreShapeId(b2ShapeId id) {
+        return b2StoreShapeId_internal(id.getPointer());
+    }
+
+    static private native long b2StoreShapeId_internal(long id);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jlong)b2StoreShapeId(*(b2ShapeId*)id);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2ShapeId b2LoadShapeId(long x) {
+        return new b2ShapeId(b2LoadShapeId_internal(x), true);
+    }
+
+    static private native long b2LoadShapeId_internal(long x);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, uint64_t, x, 0, return 0);
+    	b2ShapeId* _ret = (b2ShapeId*)malloc(sizeof(b2ShapeId));
+    	*_ret = b2LoadShapeId((uint64_t)x);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static long b2StoreChainId(b2ChainId id) {
+        return b2StoreChainId_internal(id.getPointer());
+    }
+
+    static private native long b2StoreChainId_internal(long id);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jlong)b2StoreChainId(*(b2ChainId*)id);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2ChainId b2LoadChainId(long x) {
+        return new b2ChainId(b2LoadChainId_internal(x), true);
+    }
+
+    static private native long b2LoadChainId_internal(long x);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, uint64_t, x, 0, return 0);
+    	b2ChainId* _ret = (b2ChainId*)malloc(sizeof(b2ChainId));
+    	*_ret = b2LoadChainId((uint64_t)x);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static long b2StoreJointId(b2JointId id) {
+        return b2StoreJointId_internal(id.getPointer());
+    }
+
+    static private native long b2StoreJointId_internal(long id);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jlong)b2StoreJointId(*(b2JointId*)id);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2JointId b2LoadJointId(long x) {
+        return new b2JointId(b2LoadJointId_internal(x), true);
+    }
+
+    static private native long b2LoadJointId_internal(long x);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, uint64_t, x, 0, return 0);
+    	b2JointId* _ret = (b2JointId*)malloc(sizeof(b2JointId));
+    	*_ret = b2LoadJointId((uint64_t)x);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -1925,6 +2082,19 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
+    public static b2NullJointDef b2DefaultNullJointDef() {
+        return new b2NullJointDef(b2DefaultNullJointDef_internal(), true);
+    }
+
+    static private native long b2DefaultNullJointDef_internal();/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2NullJointDef* _ret = (b2NullJointDef*)malloc(sizeof(b2NullJointDef));
+    	*_ret = b2DefaultNullJointDef();
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     public static b2PrismaticJointDef b2DefaultPrismaticJointDef() {
         return new b2PrismaticJointDef(b2DefaultPrismaticJointDef_internal(), true);
     }
@@ -1972,6 +2142,32 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	b2WheelJointDef* _ret = (b2WheelJointDef*)malloc(sizeof(b2WheelJointDef));
     	*_ret = b2DefaultWheelJointDef();
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2ExplosionDef b2DefaultExplosionDef() {
+        return new b2ExplosionDef(b2DefaultExplosionDef_internal(), true);
+    }
+
+    static private native long b2DefaultExplosionDef_internal();/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2ExplosionDef* _ret = (b2ExplosionDef*)malloc(sizeof(b2ExplosionDef));
+    	*_ret = b2DefaultExplosionDef();
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2DebugDraw b2DefaultDebugDraw() {
+        return new b2DebugDraw(b2DefaultDebugDraw_internal(), true);
+    }
+
+    static private native long b2DefaultDebugDraw_internal();/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2DebugDraw* _ret = (b2DebugDraw*)malloc(sizeof(b2DebugDraw));
+    	*_ret = b2DefaultDebugDraw();
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -2071,54 +2267,82 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static void b2World_OverlapAABB(b2WorldId worldId, b2AABB aabb, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        b2World_OverlapAABB_internal(worldId.getPointer(), aabb.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2World_OverlapAABB(b2WorldId worldId, b2AABB aabb, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_OverlapAABB_internal(worldId.getPointer(), aabb.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2World_OverlapAABB_internal(long worldId, long aabb, long filter, long fcn, long context);/*
+    static private native long b2World_OverlapAABB_internal(long worldId, long aabb, long filter, long fcn, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_OverlapAABB(*(b2WorldId*)worldId, *(b2AABB*)aabb, *(b2QueryFilter*)filter, (b2OverlapResultFcn *)fcn, (void *)context);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2World_OverlapAABB(*(b2WorldId*)worldId, *(b2AABB*)aabb, *(b2QueryFilter*)filter, (b2OverlapResultFcn *)fcn, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
-    public static void b2World_OverlapCircle(b2WorldId worldId, b2Circle.b2CirclePointer circle, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        b2World_OverlapCircle_internal(worldId.getPointer(), circle.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2World_OverlapPoint(b2WorldId worldId, b2Vec2 point, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_OverlapPoint_internal(worldId.getPointer(), point.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2World_OverlapCircle_internal(long worldId, long circle, long transform, long filter, long fcn, long context);/*
+    static private native long b2World_OverlapPoint_internal(long worldId, long point, long transform, long filter, long fcn, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_OverlapCircle(*(b2WorldId*)worldId, (const b2Circle *)circle, *(b2Transform*)transform, *(b2QueryFilter*)filter, (b2OverlapResultFcn *)fcn, (void *)context);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2World_OverlapPoint(*(b2WorldId*)worldId, *(b2Vec2*)point, *(b2Transform*)transform, *(b2QueryFilter*)filter, (b2OverlapResultFcn *)fcn, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
-    public static void b2World_OverlapCapsule(b2WorldId worldId, b2Capsule.b2CapsulePointer capsule, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        b2World_OverlapCapsule_internal(worldId.getPointer(), capsule.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2World_OverlapCircle(b2WorldId worldId, b2Circle.b2CirclePointer circle, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_OverlapCircle_internal(worldId.getPointer(), circle.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2World_OverlapCapsule_internal(long worldId, long capsule, long transform, long filter, long fcn, long context);/*
+    static private native long b2World_OverlapCircle_internal(long worldId, long circle, long transform, long filter, long fcn, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_OverlapCapsule(*(b2WorldId*)worldId, (const b2Capsule *)capsule, *(b2Transform*)transform, *(b2QueryFilter*)filter, (b2OverlapResultFcn *)fcn, (void *)context);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2World_OverlapCircle(*(b2WorldId*)worldId, (const b2Circle *)circle, *(b2Transform*)transform, *(b2QueryFilter*)filter, (b2OverlapResultFcn *)fcn, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
-    public static void b2World_OverlapPolygon(b2WorldId worldId, b2Polygon.b2PolygonPointer polygon, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        b2World_OverlapPolygon_internal(worldId.getPointer(), polygon.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2World_OverlapCapsule(b2WorldId worldId, b2Capsule.b2CapsulePointer capsule, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_OverlapCapsule_internal(worldId.getPointer(), capsule.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2World_OverlapPolygon_internal(long worldId, long polygon, long transform, long filter, long fcn, long context);/*
+    static private native long b2World_OverlapCapsule_internal(long worldId, long capsule, long transform, long filter, long fcn, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_OverlapPolygon(*(b2WorldId*)worldId, (const b2Polygon *)polygon, *(b2Transform*)transform, *(b2QueryFilter*)filter, (b2OverlapResultFcn *)fcn, (void *)context);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2World_OverlapCapsule(*(b2WorldId*)worldId, (const b2Capsule *)capsule, *(b2Transform*)transform, *(b2QueryFilter*)filter, (b2OverlapResultFcn *)fcn, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
-    public static void b2World_CastRay(b2WorldId worldId, b2Vec2 origin, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
-        b2World_CastRay_internal(worldId.getPointer(), origin.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2World_OverlapPolygon(b2WorldId worldId, b2Polygon.b2PolygonPointer polygon, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_OverlapPolygon_internal(worldId.getPointer(), polygon.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2World_CastRay_internal(long worldId, long origin, long translation, long filter, long fcn, long context);/*
+    static private native long b2World_OverlapPolygon_internal(long worldId, long polygon, long transform, long filter, long fcn, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_CastRay(*(b2WorldId*)worldId, *(b2Vec2*)origin, *(b2Vec2*)translation, *(b2QueryFilter*)filter, (b2CastResultFcn *)fcn, (void *)context);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2World_OverlapPolygon(*(b2WorldId*)worldId, (const b2Polygon *)polygon, *(b2Transform*)transform, *(b2QueryFilter*)filter, (b2OverlapResultFcn *)fcn, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2TreeStats b2World_CastRay(b2WorldId worldId, b2Vec2 origin, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_CastRay_internal(worldId.getPointer(), origin.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
+    }
+
+    static private native long b2World_CastRay_internal(long worldId, long origin, long translation, long filter, long fcn, long context);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2World_CastRay(*(b2WorldId*)worldId, *(b2Vec2*)origin, *(b2Vec2*)translation, *(b2QueryFilter*)filter, (b2CastResultFcn *)fcn, (void *)context);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static b2RayResult b2World_CastRayClosest(b2WorldId worldId, b2Vec2 origin, b2Vec2 translation, b2QueryFilter filter) {
@@ -2134,34 +2358,43 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static void b2World_CastCircle(b2WorldId worldId, b2Circle.b2CirclePointer circle, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
-        b2World_CastCircle_internal(worldId.getPointer(), circle.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2World_CastCircle(b2WorldId worldId, b2Circle.b2CirclePointer circle, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_CastCircle_internal(worldId.getPointer(), circle.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2World_CastCircle_internal(long worldId, long circle, long originTransform, long translation, long filter, long fcn, long context);/*
+    static private native long b2World_CastCircle_internal(long worldId, long circle, long originTransform, long translation, long filter, long fcn, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_CastCircle(*(b2WorldId*)worldId, (const b2Circle *)circle, *(b2Transform*)originTransform, *(b2Vec2*)translation, *(b2QueryFilter*)filter, (b2CastResultFcn *)fcn, (void *)context);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2World_CastCircle(*(b2WorldId*)worldId, (const b2Circle *)circle, *(b2Transform*)originTransform, *(b2Vec2*)translation, *(b2QueryFilter*)filter, (b2CastResultFcn *)fcn, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
-    public static void b2World_CastCapsule(b2WorldId worldId, b2Capsule.b2CapsulePointer capsule, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
-        b2World_CastCapsule_internal(worldId.getPointer(), capsule.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2World_CastCapsule(b2WorldId worldId, b2Capsule.b2CapsulePointer capsule, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_CastCapsule_internal(worldId.getPointer(), capsule.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2World_CastCapsule_internal(long worldId, long capsule, long originTransform, long translation, long filter, long fcn, long context);/*
+    static private native long b2World_CastCapsule_internal(long worldId, long capsule, long originTransform, long translation, long filter, long fcn, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_CastCapsule(*(b2WorldId*)worldId, (const b2Capsule *)capsule, *(b2Transform*)originTransform, *(b2Vec2*)translation, *(b2QueryFilter*)filter, (b2CastResultFcn *)fcn, (void *)context);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2World_CastCapsule(*(b2WorldId*)worldId, (const b2Capsule *)capsule, *(b2Transform*)originTransform, *(b2Vec2*)translation, *(b2QueryFilter*)filter, (b2CastResultFcn *)fcn, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
-    public static void b2World_CastPolygon(b2WorldId worldId, b2Polygon.b2PolygonPointer polygon, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
-        b2World_CastPolygon_internal(worldId.getPointer(), polygon.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer());
+    public static b2TreeStats b2World_CastPolygon(b2WorldId worldId, b2Polygon.b2PolygonPointer polygon, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_CastPolygon_internal(worldId.getPointer(), polygon.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
     }
 
-    static private native void b2World_CastPolygon_internal(long worldId, long polygon, long originTransform, long translation, long filter, long fcn, long context);/*
+    static private native long b2World_CastPolygon_internal(long worldId, long polygon, long originTransform, long translation, long filter, long fcn, long context);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_CastPolygon(*(b2WorldId*)worldId, (const b2Polygon *)polygon, *(b2Transform*)originTransform, *(b2Vec2*)translation, *(b2QueryFilter*)filter, (b2CastResultFcn *)fcn, (void *)context);
+    	b2TreeStats* _ret = (b2TreeStats*)malloc(sizeof(b2TreeStats));
+    	*_ret = b2World_CastPolygon(*(b2WorldId*)worldId, (const b2Polygon *)polygon, *(b2Transform*)originTransform, *(b2Vec2*)translation, *(b2QueryFilter*)filter, (b2CastResultFcn *)fcn, (void *)context);
+    	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static void b2World_EnableSleeping(b2WorldId worldId, boolean flag) {
@@ -2175,6 +2408,17 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
+    public static boolean b2World_IsSleepingEnabled(b2WorldId worldId) {
+        return b2World_IsSleepingEnabled_internal(worldId.getPointer());
+    }
+
+    static private native boolean b2World_IsSleepingEnabled_internal(long worldId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jboolean)b2World_IsSleepingEnabled(*(b2WorldId*)worldId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     public static void b2World_EnableContinuous(b2WorldId worldId, boolean flag) {
         b2World_EnableContinuous_internal(worldId.getPointer(), flag);
     }
@@ -2184,6 +2428,17 @@ static jclass cxxExceptionClass = NULL;
     	CHECK_AND_THROW_C_TYPE(env, bool, flag, 1, return);
     	b2World_EnableContinuous(*(b2WorldId*)worldId, (bool)flag);
     	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static boolean b2World_IsContinuousEnabled(b2WorldId worldId) {
+        return b2World_IsContinuousEnabled_internal(worldId.getPointer());
+    }
+
+    static private native boolean b2World_IsContinuousEnabled_internal(long worldId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jboolean)b2World_IsContinuousEnabled(*(b2WorldId*)worldId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static void b2World_SetRestitutionThreshold(b2WorldId worldId, float value) {
@@ -2196,6 +2451,17 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
+    public static float b2World_GetRestitutionThreshold(b2WorldId worldId) {
+        return b2World_GetRestitutionThreshold_internal(worldId.getPointer());
+    }
+
+    static private native float b2World_GetRestitutionThreshold_internal(long worldId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2World_GetRestitutionThreshold(*(b2WorldId*)worldId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     public static void b2World_SetHitEventThreshold(b2WorldId worldId, float value) {
         b2World_SetHitEventThreshold_internal(worldId.getPointer(), value);
     }
@@ -2204,6 +2470,17 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	b2World_SetHitEventThreshold(*(b2WorldId*)worldId, (float)value);
     	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static float b2World_GetHitEventThreshold(b2WorldId worldId) {
+        return b2World_GetHitEventThreshold_internal(worldId.getPointer());
+    }
+
+    static private native float b2World_GetHitEventThreshold_internal(long worldId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2World_GetHitEventThreshold(*(b2WorldId*)worldId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static void b2World_SetCustomFilterCallback(b2WorldId worldId, ClosureObject<b2CustomFilterFcn> fcn, VoidPointer context) {
@@ -2249,24 +2526,55 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static void b2World_Explode(b2WorldId worldId, b2Vec2 position, float radius, float impulse) {
-        b2World_Explode_internal(worldId.getPointer(), position.getPointer(), radius, impulse);
+    public static void b2World_Explode(b2WorldId worldId, b2ExplosionDef.b2ExplosionDefPointer explosionDef) {
+        b2World_Explode_internal(worldId.getPointer(), explosionDef.getPointer());
     }
 
-    static private native void b2World_Explode_internal(long worldId, long position, float radius, float impulse);/*
+    static private native void b2World_Explode_internal(long worldId, long explosionDef);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_Explode(*(b2WorldId*)worldId, *(b2Vec2*)position, (float)radius, (float)impulse);
+    	b2World_Explode(*(b2WorldId*)worldId, (const b2ExplosionDef *)explosionDef);
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
-    public static void b2World_SetContactTuning(b2WorldId worldId, float hertz, float dampingRatio, float pushVelocity) {
-        b2World_SetContactTuning_internal(worldId.getPointer(), hertz, dampingRatio, pushVelocity);
+    public static void b2World_SetContactTuning(b2WorldId worldId, float hertz, float dampingRatio, float pushSpeed) {
+        b2World_SetContactTuning_internal(worldId.getPointer(), hertz, dampingRatio, pushSpeed);
     }
 
-    static private native void b2World_SetContactTuning_internal(long worldId, float hertz, float dampingRatio, float pushVelocity);/*
+    static private native void b2World_SetContactTuning_internal(long worldId, float hertz, float dampingRatio, float pushSpeed);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_SetContactTuning(*(b2WorldId*)worldId, (float)hertz, (float)dampingRatio, (float)pushVelocity);
+    	b2World_SetContactTuning(*(b2WorldId*)worldId, (float)hertz, (float)dampingRatio, (float)pushSpeed);
     	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static void b2World_SetJointTuning(b2WorldId worldId, float hertz, float dampingRatio) {
+        b2World_SetJointTuning_internal(worldId.getPointer(), hertz, dampingRatio);
+    }
+
+    static private native void b2World_SetJointTuning_internal(long worldId, float hertz, float dampingRatio);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2World_SetJointTuning(*(b2WorldId*)worldId, (float)hertz, (float)dampingRatio);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static void b2World_SetMaximumLinearSpeed(b2WorldId worldId, float maximumLinearSpeed) {
+        b2World_SetMaximumLinearSpeed_internal(worldId.getPointer(), maximumLinearSpeed);
+    }
+
+    static private native void b2World_SetMaximumLinearSpeed_internal(long worldId, float maximumLinearSpeed);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2World_SetMaximumLinearSpeed(*(b2WorldId*)worldId, (float)maximumLinearSpeed);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static float b2World_GetMaximumLinearSpeed(b2WorldId worldId) {
+        return b2World_GetMaximumLinearSpeed_internal(worldId.getPointer());
+    }
+
+    static private native float b2World_GetMaximumLinearSpeed_internal(long worldId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2World_GetMaximumLinearSpeed(*(b2WorldId*)worldId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static void b2World_EnableWarmStarting(b2WorldId worldId, boolean flag) {
@@ -2278,6 +2586,28 @@ static jclass cxxExceptionClass = NULL;
     	CHECK_AND_THROW_C_TYPE(env, bool, flag, 1, return);
     	b2World_EnableWarmStarting(*(b2WorldId*)worldId, (bool)flag);
     	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static boolean b2World_IsWarmStartingEnabled(b2WorldId worldId) {
+        return b2World_IsWarmStartingEnabled_internal(worldId.getPointer());
+    }
+
+    static private native boolean b2World_IsWarmStartingEnabled_internal(long worldId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jboolean)b2World_IsWarmStartingEnabled(*(b2WorldId*)worldId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static int b2World_GetAwakeBodyCount(b2WorldId worldId) {
+        return b2World_GetAwakeBodyCount_internal(worldId.getPointer());
+    }
+
+    static private native int b2World_GetAwakeBodyCount_internal(long worldId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jint)b2World_GetAwakeBodyCount(*(b2WorldId*)worldId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static b2Profile b2World_GetProfile(b2WorldId worldId) {
@@ -2306,6 +2636,27 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
+    public static void b2World_SetUserData(b2WorldId worldId, VoidPointer userData) {
+        b2World_SetUserData_internal(worldId.getPointer(), userData.getPointer());
+    }
+
+    static private native void b2World_SetUserData_internal(long worldId, long userData);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2World_SetUserData(*(b2WorldId*)worldId, (void *)userData);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static VoidPointer b2World_GetUserData(b2WorldId worldId) {
+        return new VoidPointer(b2World_GetUserData_internal(worldId.getPointer()), false);
+    }
+
+    static private native long b2World_GetUserData_internal(long worldId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jlong)b2World_GetUserData(*(b2WorldId*)worldId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     public static void b2World_DumpMemoryStats(b2WorldId worldId) {
         b2World_DumpMemoryStats_internal(worldId.getPointer());
     }
@@ -2313,6 +2664,27 @@ static jclass cxxExceptionClass = NULL;
     static private native void b2World_DumpMemoryStats_internal(long worldId);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2World_DumpMemoryStats(*(b2WorldId*)worldId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static void b2World_RebuildStaticTree(b2WorldId worldId) {
+        b2World_RebuildStaticTree_internal(worldId.getPointer());
+    }
+
+    static private native void b2World_RebuildStaticTree_internal(long worldId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2World_RebuildStaticTree(*(b2WorldId*)worldId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static void b2World_EnableSpeculative(b2WorldId worldId, boolean flag) {
+        b2World_EnableSpeculative_internal(worldId.getPointer(), flag);
+    }
+
+    static private native void b2World_EnableSpeculative_internal(long worldId, boolean flag);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, bool, flag, 1, return);
+    	b2World_EnableSpeculative(*(b2WorldId*)worldId, (bool)flag);
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
@@ -2614,13 +2986,13 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static float b2Body_GetInertiaTensor(b2BodyId bodyId) {
-        return b2Body_GetInertiaTensor_internal(bodyId.getPointer());
+    public static float b2Body_GetRotationalInertia(b2BodyId bodyId) {
+        return b2Body_GetRotationalInertia_internal(bodyId.getPointer());
     }
 
-    static private native float b2Body_GetInertiaTensor_internal(long bodyId);/*
+    static private native float b2Body_GetRotationalInertia_internal(long bodyId);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2Body_GetInertiaTensor(*(b2BodyId*)bodyId);
+    	return (jfloat)b2Body_GetRotationalInertia(*(b2BodyId*)bodyId);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -2682,28 +3054,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Body_ApplyMassFromShapes(*(b2BodyId*)bodyId);
     	HANDLE_JAVA_EXCEPTION_END()
-    */
-
-    public static void b2Body_SetAutomaticMass(b2BodyId bodyId, boolean automaticMass) {
-        b2Body_SetAutomaticMass_internal(bodyId.getPointer(), automaticMass);
-    }
-
-    static private native void b2Body_SetAutomaticMass_internal(long bodyId, boolean automaticMass);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, bool, automaticMass, 1, return);
-    	b2Body_SetAutomaticMass(*(b2BodyId*)bodyId, (bool)automaticMass);
-    	HANDLE_JAVA_EXCEPTION_END()
-    */
-
-    public static boolean b2Body_GetAutomaticMass(b2BodyId bodyId) {
-        return b2Body_GetAutomaticMass_internal(bodyId.getPointer());
-    }
-
-    static private native boolean b2Body_GetAutomaticMass_internal(long bodyId);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2Body_GetAutomaticMass(*(b2BodyId*)bodyId);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
     */
 
     public static void b2Body_SetLinearDamping(b2BodyId bodyId, float linearDamping) {
@@ -2813,13 +3163,13 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static void b2Body_SetSleepThreshold(b2BodyId bodyId, float sleepVelocity) {
-        b2Body_SetSleepThreshold_internal(bodyId.getPointer(), sleepVelocity);
+    public static void b2Body_SetSleepThreshold(b2BodyId bodyId, float sleepThreshold) {
+        b2Body_SetSleepThreshold_internal(bodyId.getPointer(), sleepThreshold);
     }
 
-    static private native void b2Body_SetSleepThreshold_internal(long bodyId, float sleepVelocity);/*
+    static private native void b2Body_SetSleepThreshold_internal(long bodyId, float sleepThreshold);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2Body_SetSleepThreshold(*(b2BodyId*)bodyId, (float)sleepVelocity);
+    	b2Body_SetSleepThreshold(*(b2BodyId*)bodyId, (float)sleepThreshold);
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
@@ -2909,15 +3259,50 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static void b2Body_EnableHitEvents(b2BodyId bodyId, boolean enableHitEvents) {
-        b2Body_EnableHitEvents_internal(bodyId.getPointer(), enableHitEvents);
+    public static void b2Body_EnableSensorEvents(b2BodyId bodyId, boolean flag) {
+        b2Body_EnableSensorEvents_internal(bodyId.getPointer(), flag);
     }
 
-    static private native void b2Body_EnableHitEvents_internal(long bodyId, boolean enableHitEvents);/*
+    static private native void b2Body_EnableSensorEvents_internal(long bodyId, boolean flag);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, bool, enableHitEvents, 1, return);
-    	b2Body_EnableHitEvents(*(b2BodyId*)bodyId, (bool)enableHitEvents);
+    	CHECK_AND_THROW_C_TYPE(env, bool, flag, 1, return);
+    	b2Body_EnableSensorEvents(*(b2BodyId*)bodyId, (bool)flag);
     	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static void b2Body_EnableContactEvents(b2BodyId bodyId, boolean flag) {
+        b2Body_EnableContactEvents_internal(bodyId.getPointer(), flag);
+    }
+
+    static private native void b2Body_EnableContactEvents_internal(long bodyId, boolean flag);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, bool, flag, 1, return);
+    	b2Body_EnableContactEvents(*(b2BodyId*)bodyId, (bool)flag);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static void b2Body_EnableHitEvents(b2BodyId bodyId, boolean flag) {
+        b2Body_EnableHitEvents_internal(bodyId.getPointer(), flag);
+    }
+
+    static private native void b2Body_EnableHitEvents_internal(long bodyId, boolean flag);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, bool, flag, 1, return);
+    	b2Body_EnableHitEvents(*(b2BodyId*)bodyId, (bool)flag);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static b2WorldId b2Body_GetWorld(b2BodyId bodyId) {
+        return new b2WorldId(b2Body_GetWorld_internal(bodyId.getPointer()), true);
+    }
+
+    static private native long b2Body_GetWorld_internal(long bodyId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2WorldId* _ret = (b2WorldId*)malloc(sizeof(b2WorldId));
+    	*_ret = b2Body_GetWorld(*(b2BodyId*)bodyId);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static int b2Body_GetShapeCount(b2BodyId bodyId) {
@@ -3054,13 +3439,14 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static void b2DestroyShape(b2ShapeId shapeId) {
-        b2DestroyShape_internal(shapeId.getPointer());
+    public static void b2DestroyShape(b2ShapeId shapeId, boolean updateBodyMass) {
+        b2DestroyShape_internal(shapeId.getPointer(), updateBodyMass);
     }
 
-    static private native void b2DestroyShape_internal(long shapeId);/*
+    static private native void b2DestroyShape_internal(long shapeId, boolean updateBodyMass);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2DestroyShape(*(b2ShapeId*)shapeId);
+    	CHECK_AND_THROW_C_TYPE(env, bool, updateBodyMass, 1, return);
+    	b2DestroyShape(*(b2ShapeId*)shapeId, (bool)updateBodyMass);
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
@@ -3099,6 +3485,19 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
+    public static b2WorldId b2Shape_GetWorld(b2ShapeId shapeId) {
+        return new b2WorldId(b2Shape_GetWorld_internal(shapeId.getPointer()), true);
+    }
+
+    static private native long b2Shape_GetWorld_internal(long shapeId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2WorldId* _ret = (b2WorldId*)malloc(sizeof(b2WorldId));
+    	*_ret = b2Shape_GetWorld(*(b2ShapeId*)shapeId);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     public static boolean b2Shape_IsSensor(b2ShapeId shapeId) {
         return b2Shape_IsSensor_internal(shapeId.getPointer());
     }
@@ -3131,13 +3530,14 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static void b2Shape_SetDensity(b2ShapeId shapeId, float density) {
-        b2Shape_SetDensity_internal(shapeId.getPointer(), density);
+    public static void b2Shape_SetDensity(b2ShapeId shapeId, float density, boolean updateBodyMass) {
+        b2Shape_SetDensity_internal(shapeId.getPointer(), density, updateBodyMass);
     }
 
-    static private native void b2Shape_SetDensity_internal(long shapeId, float density);/*
+    static private native void b2Shape_SetDensity_internal(long shapeId, float density, boolean updateBodyMass);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2Shape_SetDensity(*(b2ShapeId*)shapeId, (float)density);
+    	CHECK_AND_THROW_C_TYPE(env, bool, updateBodyMass, 2, return);
+    	b2Shape_SetDensity(*(b2ShapeId*)shapeId, (float)density, (bool)updateBodyMass);
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
@@ -3316,14 +3716,14 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static b2CastOutput b2Shape_RayCast(b2ShapeId shapeId, b2Vec2 origin, b2Vec2 translation) {
-        return new b2CastOutput(b2Shape_RayCast_internal(shapeId.getPointer(), origin.getPointer(), translation.getPointer()), true);
+    public static b2CastOutput b2Shape_RayCast(b2ShapeId shapeId, b2RayCastInput.b2RayCastInputPointer input) {
+        return new b2CastOutput(b2Shape_RayCast_internal(shapeId.getPointer(), input.getPointer()), true);
     }
 
-    static private native long b2Shape_RayCast_internal(long shapeId, long origin, long translation);/*
+    static private native long b2Shape_RayCast_internal(long shapeId, long input);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2CastOutput* _ret = (b2CastOutput*)malloc(sizeof(b2CastOutput));
-    	*_ret = b2Shape_RayCast(*(b2ShapeId*)shapeId, *(b2Vec2*)origin, *(b2Vec2*)translation);
+    	*_ret = b2Shape_RayCast(*(b2ShapeId*)shapeId, (const b2RayCastInput *)input);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -3355,14 +3755,14 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static b2SmoothSegment b2Shape_GetSmoothSegment(b2ShapeId shapeId) {
-        return new b2SmoothSegment(b2Shape_GetSmoothSegment_internal(shapeId.getPointer()), true);
+    public static b2ChainSegment b2Shape_GetChainSegment(b2ShapeId shapeId) {
+        return new b2ChainSegment(b2Shape_GetChainSegment_internal(shapeId.getPointer()), true);
     }
 
-    static private native long b2Shape_GetSmoothSegment_internal(long shapeId);/*
+    static private native long b2Shape_GetChainSegment_internal(long shapeId);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2SmoothSegment* _ret = (b2SmoothSegment*)malloc(sizeof(b2SmoothSegment));
-    	*_ret = b2Shape_GetSmoothSegment(*(b2ShapeId*)shapeId);
+    	b2ChainSegment* _ret = (b2ChainSegment*)malloc(sizeof(b2ChainSegment));
+    	*_ret = b2Shape_GetChainSegment(*(b2ShapeId*)shapeId);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -3470,6 +3870,29 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
+    public static int b2Shape_GetSensorCapacity(b2ShapeId shapeId) {
+        return b2Shape_GetSensorCapacity_internal(shapeId.getPointer());
+    }
+
+    static private native int b2Shape_GetSensorCapacity_internal(long shapeId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jint)b2Shape_GetSensorCapacity(*(b2ShapeId*)shapeId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static int b2Shape_GetSensorOverlaps(b2ShapeId shapeId, b2ShapeId.b2ShapeIdPointer overlappedShapes, int capacity) {
+        return b2Shape_GetSensorOverlaps_internal(shapeId.getPointer(), overlappedShapes.getPointer(), capacity);
+    }
+
+    static private native int b2Shape_GetSensorOverlaps_internal(long shapeId, long overlappedShapes, int capacity);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, int, capacity, 2, return 0);
+    	return (jint)b2Shape_GetSensorOverlaps(*(b2ShapeId*)shapeId, (b2ShapeId *)overlappedShapes, (int)capacity);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     public static b2AABB b2Shape_GetAABB(b2ShapeId shapeId) {
         return new b2AABB(b2Shape_GetAABB_internal(shapeId.getPointer()), true);
     }
@@ -3519,6 +3942,42 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
+    public static b2WorldId b2Chain_GetWorld(b2ChainId chainId) {
+        return new b2WorldId(b2Chain_GetWorld_internal(chainId.getPointer()), true);
+    }
+
+    static private native long b2Chain_GetWorld_internal(long chainId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2WorldId* _ret = (b2WorldId*)malloc(sizeof(b2WorldId));
+    	*_ret = b2Chain_GetWorld(*(b2ChainId*)chainId);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static int b2Chain_GetSegmentCount(b2ChainId chainId) {
+        return b2Chain_GetSegmentCount_internal(chainId.getPointer());
+    }
+
+    static private native int b2Chain_GetSegmentCount_internal(long chainId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jint)b2Chain_GetSegmentCount(*(b2ChainId*)chainId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static int b2Chain_GetSegments(b2ChainId chainId, b2ShapeId.b2ShapeIdPointer segmentArray, int capacity) {
+        return b2Chain_GetSegments_internal(chainId.getPointer(), segmentArray.getPointer(), capacity);
+    }
+
+    static private native int b2Chain_GetSegments_internal(long chainId, long segmentArray, int capacity);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, int, capacity, 2, return 0);
+    	return (jint)b2Chain_GetSegments(*(b2ChainId*)chainId, (b2ShapeId *)segmentArray, (int)capacity);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     public static void b2Chain_SetFriction(b2ChainId chainId, float friction) {
         b2Chain_SetFriction_internal(chainId.getPointer(), friction);
     }
@@ -3529,6 +3988,17 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
+    public static float b2Chain_GetFriction(b2ChainId chainId) {
+        return b2Chain_GetFriction_internal(chainId.getPointer());
+    }
+
+    static private native float b2Chain_GetFriction_internal(long chainId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2Chain_GetFriction(*(b2ChainId*)chainId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     public static void b2Chain_SetRestitution(b2ChainId chainId, float restitution) {
         b2Chain_SetRestitution_internal(chainId.getPointer(), restitution);
     }
@@ -3537,6 +4007,17 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Chain_SetRestitution(*(b2ChainId*)chainId, (float)restitution);
     	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static float b2Chain_GetRestitution(b2ChainId chainId) {
+        return b2Chain_GetRestitution_internal(chainId.getPointer());
+    }
+
+    static private native float b2Chain_GetRestitution_internal(long chainId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2Chain_GetRestitution(*(b2ChainId*)chainId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static boolean b2Chain_IsValid(b2ChainId id) {
@@ -3603,6 +4084,19 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	b2BodyId* _ret = (b2BodyId*)malloc(sizeof(b2BodyId));
     	*_ret = b2Joint_GetBodyB(*(b2JointId*)jointId);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static b2WorldId b2Joint_GetWorld(b2JointId jointId) {
+        return new b2WorldId(b2Joint_GetWorld_internal(jointId.getPointer()), true);
+    }
+
+    static private native long b2Joint_GetWorld_internal(long jointId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2WorldId* _ret = (b2WorldId*)malloc(sizeof(b2WorldId));
+    	*_ret = b2Joint_GetWorld(*(b2JointId*)jointId);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -3787,24 +4281,24 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
-    public static float b2DistanceJoint_GetHertz(b2JointId jointId) {
-        return b2DistanceJoint_GetHertz_internal(jointId.getPointer());
+    public static float b2DistanceJoint_GetSpringHertz(b2JointId jointId) {
+        return b2DistanceJoint_GetSpringHertz_internal(jointId.getPointer());
     }
 
-    static private native float b2DistanceJoint_GetHertz_internal(long jointId);/*
+    static private native float b2DistanceJoint_GetSpringHertz_internal(long jointId);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2DistanceJoint_GetHertz(*(b2JointId*)jointId);
+    	return (jfloat)b2DistanceJoint_GetSpringHertz(*(b2JointId*)jointId);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static float b2DistanceJoint_GetDampingRatio(b2JointId jointId) {
-        return b2DistanceJoint_GetDampingRatio_internal(jointId.getPointer());
+    public static float b2DistanceJoint_GetSpringDampingRatio(b2JointId jointId) {
+        return b2DistanceJoint_GetSpringDampingRatio_internal(jointId.getPointer());
     }
 
-    static private native float b2DistanceJoint_GetDampingRatio_internal(long jointId);/*
+    static private native float b2DistanceJoint_GetSpringDampingRatio_internal(long jointId);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2DistanceJoint_GetDampingRatio(*(b2JointId*)jointId);
+    	return (jfloat)b2DistanceJoint_GetSpringDampingRatio(*(b2JointId*)jointId);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -4168,6 +4662,19 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
+    public static b2JointId b2CreateNullJoint(b2WorldId worldId, b2NullJointDef.b2NullJointDefPointer def) {
+        return new b2JointId(b2CreateNullJoint_internal(worldId.getPointer(), def.getPointer()), true);
+    }
+
+    static private native long b2CreateNullJoint_internal(long worldId, long def);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2JointId* _ret = (b2JointId*)malloc(sizeof(b2JointId));
+    	*_ret = b2CreateNullJoint(*(b2WorldId*)worldId, (const b2NullJointDef *)def);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     public static b2JointId b2CreatePrismaticJoint(b2WorldId worldId, b2PrismaticJointDef.b2PrismaticJointDefPointer def) {
         return new b2JointId(b2CreatePrismaticJoint_internal(worldId.getPointer(), def.getPointer()), true);
     }
@@ -4374,6 +4881,28 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
+    public static float b2PrismaticJoint_GetTranslation(b2JointId jointId) {
+        return b2PrismaticJoint_GetTranslation_internal(jointId.getPointer());
+    }
+
+    static private native float b2PrismaticJoint_GetTranslation_internal(long jointId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2PrismaticJoint_GetTranslation(*(b2JointId*)jointId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static float b2PrismaticJoint_GetSpeed(b2JointId jointId) {
+        return b2PrismaticJoint_GetSpeed_internal(jointId.getPointer());
+    }
+
+    static private native float b2PrismaticJoint_GetSpeed_internal(long jointId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2PrismaticJoint_GetSpeed(*(b2JointId*)jointId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     public static b2JointId b2CreateRevoluteJoint(b2WorldId worldId, b2RevoluteJointDef.b2RevoluteJointDefPointer def) {
         return new b2JointId(b2CreateRevoluteJoint_internal(worldId.getPointer(), def.getPointer()), true);
     }
@@ -4396,6 +4925,17 @@ static jclass cxxExceptionClass = NULL;
     	CHECK_AND_THROW_C_TYPE(env, bool, enableSpring, 1, return);
     	b2RevoluteJoint_EnableSpring(*(b2JointId*)jointId, (bool)enableSpring);
     	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static boolean b2RevoluteJoint_IsSpringEnabled(b2JointId jointId) {
+        return b2RevoluteJoint_IsSpringEnabled_internal(jointId.getPointer());
+    }
+
+    static private native boolean b2RevoluteJoint_IsSpringEnabled_internal(long jointId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jboolean)b2RevoluteJoint_IsSpringEnabled(*(b2JointId*)jointId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static void b2RevoluteJoint_SetSpringHertz(b2JointId jointId, float hertz) {
@@ -4591,6 +5131,27 @@ static jclass cxxExceptionClass = NULL;
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
+    */
+
+    public static float b2WeldJoint_GetReferenceAngle(b2JointId jointId) {
+        return b2WeldJoint_GetReferenceAngle_internal(jointId.getPointer());
+    }
+
+    static private native float b2WeldJoint_GetReferenceAngle_internal(long jointId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2WeldJoint_GetReferenceAngle(*(b2JointId*)jointId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    public static void b2WeldJoint_SetReferenceAngle(b2JointId jointId, float angleInRadians) {
+        b2WeldJoint_SetReferenceAngle_internal(jointId.getPointer(), angleInRadians);
+    }
+
+    static private native void b2WeldJoint_SetReferenceAngle_internal(long jointId, float angleInRadians);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2WeldJoint_SetReferenceAngle(*(b2JointId*)jointId, (float)angleInRadians);
+    	HANDLE_JAVA_EXCEPTION_END()
     */
 
     public static void b2WeldJoint_SetLinearHertz(b2JointId jointId, float hertz) {
@@ -4885,7 +5446,7 @@ static jclass cxxExceptionClass = NULL;
 
     public interface b2OverlapResultFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1) };
 
         boolean b2OverlapResultFcn_call(b2ShapeId arg0, VoidPointer arg1);
 
@@ -4900,7 +5461,7 @@ static jclass cxxExceptionClass = NULL;
 
     public interface b2TreeQueryCallbackFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(6), FFITypes.getCTypeInfo(6), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
 
         boolean b2TreeQueryCallbackFcn_call(int arg0, int arg1, VoidPointer arg2);
 
@@ -4915,7 +5476,7 @@ static jclass cxxExceptionClass = NULL;
 
     public interface b2TaskCallback extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(6), FFITypes.getCTypeInfo(6), FFITypes.getCTypeInfo(9), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(8), FFITypes.getCTypeInfo(-1) };
 
         void b2TaskCallback_call(int arg0, int arg1, long arg2, VoidPointer arg3);
 
@@ -4930,7 +5491,7 @@ static jclass cxxExceptionClass = NULL;
 
     public interface b2EnqueueTaskCallback extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(6), FFITypes.getCTypeInfo(6), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
         VoidPointer b2EnqueueTaskCallback_call(ClosureObject<b2TaskCallback> arg0, int arg1, int arg2, VoidPointer arg3, VoidPointer arg4);
 
@@ -4945,7 +5506,7 @@ static jclass cxxExceptionClass = NULL;
 
     public interface b2CastResultFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1) };
 
         float b2CastResultFcn_call(b2ShapeId arg0, b2Vec2 arg1, b2Vec2 arg2, float arg3, VoidPointer arg4);
 
@@ -4960,7 +5521,7 @@ static jclass cxxExceptionClass = NULL;
 
     public interface b2TreeShapeCastCallbackFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(6), FFITypes.getCTypeInfo(6), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
 
         float b2TreeShapeCastCallbackFcn_call(b2ShapeCastInput.b2ShapeCastInputPointer arg0, int arg1, int arg2, VoidPointer arg3);
 
@@ -4975,7 +5536,7 @@ static jclass cxxExceptionClass = NULL;
 
     public interface b2PreSolveFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
         boolean b2PreSolveFcn_call(b2ShapeId arg0, b2ShapeId arg1, b2Manifold.b2ManifoldPointer arg2, VoidPointer arg3);
 
@@ -5020,7 +5581,7 @@ static jclass cxxExceptionClass = NULL;
 
     public interface b2CustomFilterFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1) };
 
         boolean b2CustomFilterFcn_call(b2ShapeId arg0, b2ShapeId arg1, VoidPointer arg2);
 
@@ -5035,7 +5596,7 @@ static jclass cxxExceptionClass = NULL;
 
     public interface b2TreeRayCastCallbackFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(6), FFITypes.getCTypeInfo(6), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
 
         float b2TreeRayCastCallbackFcn_call(b2RayCastInput.b2RayCastInputPointer arg0, int arg1, int arg2, VoidPointer arg3);
 

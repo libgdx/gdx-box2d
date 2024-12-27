@@ -12,7 +12,7 @@ public final class b2ShapeId extends com.badlogic.gdx.jnigen.runtime.pointer.Str
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(61).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(62).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

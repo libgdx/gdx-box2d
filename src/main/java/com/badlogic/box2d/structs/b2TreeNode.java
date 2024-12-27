@@ -5,7 +5,6 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.box2d.FFITypes;
 import com.badlogic.box2d.structs.b2AABB;
-import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 
 public final class b2TreeNode extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
 
@@ -14,7 +13,7 @@ public final class b2TreeNode extends com.badlogic.gdx.jnigen.runtime.pointer.St
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(70).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(72).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -94,29 +93,21 @@ public final class b2TreeNode extends com.badlogic.gdx.jnigen.runtime.pointer.St
         setValue(userData, 5);
     }
 
-    public short height() {
-        return (short) getValue(6);
+    public char height() {
+        return (char) getValue(6);
     }
 
-    public void height(short height) {
+    public void height(char height) {
         setValue(height, 6);
     }
 
-    public boolean enlarged() {
-        return getValue(7) != 0;
+    public char flags() {
+        return (char) getValue(7);
     }
 
-    public void enlarged(boolean enlarged) {
-        setValue(enlarged, 7);
+    public void flags(char flags) {
+        setValue(flags, 7);
     }
-
-    public CSizedIntPointer pad() {
-        return __pad;
-    }
-
-    private static final int __pad_offset = CHandler.getOffsetForField(__ffi_type, 8);
-
-    private final CSizedIntPointer __pad = new CSizedIntPointer(getPointer() + __pad_offset, false, "char").guardCount(9);
 
     public static final class b2TreeNodePointer extends StackElementPointer<b2TreeNode> {
 

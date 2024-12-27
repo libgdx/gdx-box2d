@@ -22,7 +22,7 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(29).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(30).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -78,156 +78,148 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
         setValue(DrawSolidCircle.getFnPtr(), 3);
     }
 
-    public ClosureObject<DrawCapsule> DrawCapsule() {
+    public ClosureObject<DrawSolidCapsule> DrawSolidCapsule() {
         return CHandler.getClosureObject(getValue(4));
     }
 
-    public void DrawCapsule(ClosureObject<DrawCapsule> DrawCapsule) {
-        setValue(DrawCapsule.getFnPtr(), 4);
-    }
-
-    public ClosureObject<DrawSolidCapsule> DrawSolidCapsule() {
-        return CHandler.getClosureObject(getValue(5));
-    }
-
     public void DrawSolidCapsule(ClosureObject<DrawSolidCapsule> DrawSolidCapsule) {
-        setValue(DrawSolidCapsule.getFnPtr(), 5);
+        setValue(DrawSolidCapsule.getFnPtr(), 4);
     }
 
     public ClosureObject<DrawSegment> DrawSegment() {
-        return CHandler.getClosureObject(getValue(6));
+        return CHandler.getClosureObject(getValue(5));
     }
 
     public void DrawSegment(ClosureObject<DrawSegment> DrawSegment) {
-        setValue(DrawSegment.getFnPtr(), 6);
+        setValue(DrawSegment.getFnPtr(), 5);
     }
 
     public ClosureObject<DrawTransform> DrawTransform() {
-        return CHandler.getClosureObject(getValue(7));
+        return CHandler.getClosureObject(getValue(6));
     }
 
     public void DrawTransform(ClosureObject<DrawTransform> DrawTransform) {
-        setValue(DrawTransform.getFnPtr(), 7);
+        setValue(DrawTransform.getFnPtr(), 6);
     }
 
     public ClosureObject<DrawPoint> DrawPoint() {
-        return CHandler.getClosureObject(getValue(8));
+        return CHandler.getClosureObject(getValue(7));
     }
 
     public void DrawPoint(ClosureObject<DrawPoint> DrawPoint) {
-        setValue(DrawPoint.getFnPtr(), 8);
+        setValue(DrawPoint.getFnPtr(), 7);
     }
 
     public ClosureObject<DrawString> DrawString() {
-        return CHandler.getClosureObject(getValue(9));
+        return CHandler.getClosureObject(getValue(8));
     }
 
     public void DrawString(ClosureObject<DrawString> DrawString) {
-        setValue(DrawString.getFnPtr(), 9);
+        setValue(DrawString.getFnPtr(), 8);
     }
 
     public b2AABB drawingBounds() {
         return __drawingBounds;
     }
 
-    private static final int __drawingBounds_offset = CHandler.getOffsetForField(__ffi_type, 10);
+    private static final int __drawingBounds_offset = CHandler.getOffsetForField(__ffi_type, 9);
 
     private final b2AABB __drawingBounds = new b2AABB(getPointer() + __drawingBounds_offset, false);
 
     public boolean useDrawingBounds() {
-        return getValue(10) != 0;
+        return getValue(9) != 0;
     }
 
     public void useDrawingBounds(boolean useDrawingBounds) {
-        setValue(useDrawingBounds, 10);
+        setValue(useDrawingBounds, 9);
     }
 
     public boolean drawShapes() {
-        return getValue(11) != 0;
+        return getValue(10) != 0;
     }
 
     public void drawShapes(boolean drawShapes) {
-        setValue(drawShapes, 11);
+        setValue(drawShapes, 10);
     }
 
     public boolean drawJoints() {
-        return getValue(12) != 0;
+        return getValue(11) != 0;
     }
 
     public void drawJoints(boolean drawJoints) {
-        setValue(drawJoints, 12);
+        setValue(drawJoints, 11);
     }
 
     public boolean drawJointExtras() {
-        return getValue(13) != 0;
+        return getValue(12) != 0;
     }
 
     public void drawJointExtras(boolean drawJointExtras) {
-        setValue(drawJointExtras, 13);
+        setValue(drawJointExtras, 12);
     }
 
     public boolean drawAABBs() {
-        return getValue(14) != 0;
+        return getValue(13) != 0;
     }
 
     public void drawAABBs(boolean drawAABBs) {
-        setValue(drawAABBs, 14);
+        setValue(drawAABBs, 13);
     }
 
     public boolean drawMass() {
-        return getValue(15) != 0;
+        return getValue(14) != 0;
     }
 
     public void drawMass(boolean drawMass) {
-        setValue(drawMass, 15);
+        setValue(drawMass, 14);
     }
 
     public boolean drawContacts() {
-        return getValue(16) != 0;
+        return getValue(15) != 0;
     }
 
     public void drawContacts(boolean drawContacts) {
-        setValue(drawContacts, 16);
+        setValue(drawContacts, 15);
     }
 
     public boolean drawGraphColors() {
-        return getValue(17) != 0;
+        return getValue(16) != 0;
     }
 
     public void drawGraphColors(boolean drawGraphColors) {
-        setValue(drawGraphColors, 17);
+        setValue(drawGraphColors, 16);
     }
 
     public boolean drawContactNormals() {
-        return getValue(18) != 0;
+        return getValue(17) != 0;
     }
 
     public void drawContactNormals(boolean drawContactNormals) {
-        setValue(drawContactNormals, 18);
+        setValue(drawContactNormals, 17);
     }
 
     public boolean drawContactImpulses() {
-        return getValue(19) != 0;
+        return getValue(18) != 0;
     }
 
     public void drawContactImpulses(boolean drawContactImpulses) {
-        setValue(drawContactImpulses, 19);
+        setValue(drawContactImpulses, 18);
     }
 
     public boolean drawFrictionImpulses() {
-        return getValue(20) != 0;
+        return getValue(19) != 0;
     }
 
     public void drawFrictionImpulses(boolean drawFrictionImpulses) {
-        setValue(drawFrictionImpulses, 20);
+        setValue(drawFrictionImpulses, 19);
     }
 
     public VoidPointer context() {
-        return new VoidPointer(getValue(21), false);
+        return new VoidPointer(getValue(20), false);
     }
 
     public void context(VoidPointer context) {
-        setValue(context.getPointer(), 21);
+        setValue(context.getPointer(), 20);
     }
 
     public static final class b2DebugDrawPointer extends StackElementPointer<b2DebugDraw> {
@@ -275,7 +267,7 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
 
     public interface DrawSolidPolygon extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(69), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawSolidPolygon_call(b2Transform arg0, b2Vec2.b2Vec2Pointer arg1, int arg2, float arg3, b2HexColor arg4, VoidPointer arg5);
 
@@ -290,7 +282,7 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
 
     public interface DrawCircle extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawCircle_call(b2Vec2 arg0, float arg1, b2HexColor arg2, VoidPointer arg3);
 
@@ -305,7 +297,7 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
 
     public interface DrawSolidCircle extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(69), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawSolidCircle_call(b2Transform arg0, float arg1, b2HexColor arg2, VoidPointer arg3);
 
@@ -318,24 +310,9 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
         }
     }
 
-    public interface DrawCapsule extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
-
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
-
-        void DrawCapsule_call(b2Vec2 arg0, b2Vec2 arg1, float arg2, b2HexColor arg3, VoidPointer arg4);
-
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
-            return __ffi_cache;
-        }
-
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
-            DrawCapsule_call(new b2Vec2(parameters[0].asLong(), true), new b2Vec2(parameters[1].asLong(), true), (float) parameters[2].asFloat(), b2HexColor.getByIndex((int) parameters[3].asLong()), new VoidPointer(parameters[4].asLong(), false));
-        }
-    }
-
     public interface DrawSolidCapsule extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawSolidCapsule_call(b2Vec2 arg0, b2Vec2 arg1, float arg2, b2HexColor arg3, VoidPointer arg4);
 
@@ -350,7 +327,7 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
 
     public interface DrawSegment extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawSegment_call(b2Vec2 arg0, b2Vec2 arg1, b2HexColor arg2, VoidPointer arg3);
 
@@ -365,7 +342,7 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
 
     public interface DrawTransform extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(69), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1) };
 
         void DrawTransform_call(b2Transform arg0, VoidPointer arg1);
 
@@ -380,7 +357,7 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
 
     public interface DrawPoint extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawPoint_call(b2Vec2 arg0, float arg1, b2HexColor arg2, VoidPointer arg3);
 
@@ -395,7 +372,7 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
 
     public interface DrawString extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
+        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
         void DrawString_call(b2Vec2 arg0, CSizedIntPointer arg1, VoidPointer arg2);
 

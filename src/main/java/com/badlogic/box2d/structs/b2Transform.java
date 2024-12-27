@@ -14,7 +14,7 @@ public final class b2Transform extends com.badlogic.gdx.jnigen.runtime.pointer.S
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(69).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(71).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
