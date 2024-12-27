@@ -148,17 +148,6 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static long b2GetTicks(b2Timer.b2TimerPointer timer) {
-        return b2GetTicks_internal(timer.getPointer());
-    }
-
-    static private native long b2GetTicks_internal(long timer);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jlong)b2GetTicks((b2Timer *)timer);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
     public static float b2GetMilliseconds(b2Timer.b2TimerPointer timer) {
         return b2GetMilliseconds_internal(timer.getPointer());
     }
