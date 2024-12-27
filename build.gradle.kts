@@ -80,6 +80,14 @@ tasks.create("build_macos") {
         arrayOf("-DCMAKE_OSX_ARCHITECTURES=x86_64", "-DCMAKE_SYSTEM_PROCESSOR=x86_64")))
 }
 
+tasks.create("build_android") {
+    group = "box2d"
+    for (abi in  arrayOf("x86", "x86_64", "armeabi-v7a", "arm64-v8a")) {
+        dependsOn(cmakeBuild(file("build/box2d/android/${abi}"), "android_${abi}", file("${System.getenv("NDK_HOME")}/build/cmake/android.toolchain.cmake"),
+            arrayOf("-DANDROID_ABI=${abi}", "-DANDROID_PLATFORM=android-21", "-DANDROID_STL=c++_shared")))
+    }
+}
+
 jnigen {
     javaClass.superclass.getDeclaredField("sharedLibName").apply { isAccessible = true }.set(this, "gdx-box2d")
     generator {
@@ -106,4 +114,15 @@ jnigen {
     addLinux(Architecture.Bitness._64, Architecture.x86)
     addMac(Architecture.Bitness._64, Architecture.ARM)
     addMac(Architecture.Bitness._64, Architecture.x86)
+    addAndroid {
+        libraries = ""
+        androidApplicationMk += "APP_PLATFORM := android-21\nAPP_STRIP_MODE := none\nAPP_STL := c++_shared"
+        linkerFlags += " -stdlib=libc++\nLOCAL_WHOLE_STATIC_LIBRARIES := static_box2d"
+        androidAndroidMk += arrayOf(
+            "include \$(CLEAR_VARS)",
+            "LOCAL_MODULE := static_box2d",
+            "LOCAL_SRC_FILES := \$(realpath ${file("build/box2d/android").absoluteFile}/\$(TARGET_ARCH_ABI)/libs/libbox2d.a)",
+            "LOCAL_EXPORT_C_INCLUDES := \$(realpath ${file("build/box2d/android/\$(TARGET_ARCH_ABI)/include/").absoluteFile})",
+            "include \$(PREBUILT_STATIC_LIBRARY)")
+    }
 }
