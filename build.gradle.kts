@@ -4,7 +4,7 @@ import com.badlogic.gdx.jnigen.gradle.JnigenExtension.*
 import kotlin.io.path.createTempDirectory
 
 plugins {
-    id("java")
+    id("java-library")
     id("com.badlogicgames.jnigen.jnigen-gradle") version "3.0.0-SNAPSHOT"
     id("maven-publish")
     id("signing")
@@ -44,8 +44,8 @@ repositories {
 }
 
 dependencies {
-    implementation("com.badlogicgames.jnigen:jnigen-loader:${jnigenVersion}")
-    implementation("com.badlogicgames.jnigen:jnigen-runtime:${jnigenVersion}")
+    api("com.badlogicgames.jnigen:jnigen-loader:${jnigenVersion}")
+    api("com.badlogicgames.jnigen:jnigen-runtime:${jnigenVersion}")
     implementation("com.badlogicgames.jnigen:jnigen-runtime-platform:${jnigenVersion}:natives-desktop")
     implementation("com.badlogicgames.jnigen:jnigen-runtime-platform:${jnigenVersion}:natives-ios")
     implementation("com.badlogicgames.jnigen:jnigen-runtime-platform:${jnigenVersion}:natives-arm64-v8a")
