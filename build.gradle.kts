@@ -135,7 +135,7 @@ jnigen {
     javaClass.superclass.getDeclaredField("sharedLibName").apply { isAccessible = true }.set(this, "gdx-box2d")
     generator {
         outputPath = file("src/main/java")
-        basePackage = "com.badlogic.box2d"
+        basePackage = "com.badlogic.gdx.box2d"
         fileToParse = "box2d/box2d.h"
         options = arrayOf("-I" + file("box2d/include").absolutePath, "-DNDEBUG")
     }
