@@ -76,7 +76,7 @@ import com.badlogic.gdx.jnigen.runtime.c.CTypeInfo;
 public final class Box2d {
 
     static {
-        new SharedLibraryLoader().load("box2d");
+        new SharedLibraryLoader().load("gdx-box2d");
         CHandler.init();
         FFITypes.init();
         init(IllegalArgumentException.class, CXXException.class);
