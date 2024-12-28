@@ -224,8 +224,7 @@ publishing {
         maven {
             url = if(version.toString().endsWith("SNAPSHOT")) uri(snapshotRepositoryUrl) else uri(releaseRepositoryUrl)
 
-            if (repositoryUsername.isNotEmpty() || repositoryPassword.isNotEmpty())
-            {
+            if (repositoryUsername.isNotEmpty() || repositoryPassword.isNotEmpty()) {
                 credentials {
                     username = repositoryUsername
                     password = repositoryPassword
