@@ -10,6 +10,9 @@ plugins {
     id("signing")
 }
 
+java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.targetCompatibility = JavaVersion.VERSION_1_8
+
 val isReleaseBuild: Boolean
     get() = project.hasProperty("RELEASE")
 
