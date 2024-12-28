@@ -54,9 +54,11 @@ dependencies {
     implementation("com.badlogicgames.jnigen:jnigen-runtime-platform:${jnigenVersion}:natives-x86_64")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly(files("build/jnigen/libs/gdx-box2d-natives-desktop.jar"))
 }
 
 tasks.test {
+    dependsOn("jnigenBuildHost", "jnigenPackageAllDesktop")
     useJUnitPlatform()
 }
 
