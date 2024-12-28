@@ -1,5 +1,6 @@
 package com.badlogic.box2d;
 
+import com.badlogic.gdx.jnigen.loader.SharedLibraryLoader;
 import com.badlogic.gdx.jnigen.runtime.c.CXXException;
 import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
@@ -75,6 +76,7 @@ import com.badlogic.gdx.jnigen.runtime.c.CTypeInfo;
 public final class Box2d {
 
     static {
+        new SharedLibraryLoader().load("box2d");
         CHandler.init();
         FFITypes.init();
         init(IllegalArgumentException.class, CXXException.class);
