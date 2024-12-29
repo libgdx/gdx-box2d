@@ -58,12 +58,6 @@ public class Box2dMultithreadTest {
                 int baseItemsPerTask = itemCount / numTasks;
                 int remainingItems = itemCount % numTasks;
 
-                if (numTasks == 1)
-                {
-                    box2dTask.getClosure().b2TaskCallback_call(0, itemCount, 0, box2dContext);
-                    return VoidPointer.NULL;
-                }
-
                 List<Future<Void>> tasks = new ArrayList<>(numTasks);
 
                 for (int i = 0; i < numTasks; i++) {
