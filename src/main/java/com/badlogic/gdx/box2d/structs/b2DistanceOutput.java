@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2DistanceOutput extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2DistanceOutput extends Struct {
 
     private final static int __size;
 
@@ -49,32 +49,32 @@ public final class b2DistanceOutput extends com.badlogic.gdx.jnigen.runtime.poin
         return __pointB;
     }
 
-    private static final int __pointB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __pointB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __pointB = new b2Vec2(getPointer() + __pointB_offset, false);
 
     public float distance() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(2);
     }
 
     public void distance(float distance) {
-        setValue(distance, 0);
+        setValue(distance, 2);
     }
 
     public int iterations() {
-        return (int) getValue(1);
+        return (int) getValue(3);
     }
 
     public void iterations(int iterations) {
-        setValue(iterations, 1);
+        setValue(iterations, 3);
     }
 
     public int simplexCount() {
-        return (int) getValue(2);
+        return (int) getValue(4);
     }
 
     public void simplexCount(int simplexCount) {
-        setValue(simplexCount, 2);
+        setValue(simplexCount, 4);
     }
 
     public static final class b2DistanceOutputPointer extends StackElementPointer<b2DistanceOutput> {

@@ -7,7 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 import com.badlogic.gdx.box2d.structs.b2Manifold;
 
-public final class b2ContactData extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2ContactData extends Struct {
 
     private final static int __size;
 
@@ -50,7 +50,7 @@ public final class b2ContactData extends com.badlogic.gdx.jnigen.runtime.pointer
         return __shapeIdB;
     }
 
-    private static final int __shapeIdB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __shapeIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2ShapeId __shapeIdB = new b2ShapeId(getPointer() + __shapeIdB_offset, false);
 
@@ -58,7 +58,7 @@ public final class b2ContactData extends com.badlogic.gdx.jnigen.runtime.pointer
         return __manifold;
     }
 
-    private static final int __manifold_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __manifold_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Manifold __manifold = new b2Manifold(getPointer() + __manifold_offset, false);
 

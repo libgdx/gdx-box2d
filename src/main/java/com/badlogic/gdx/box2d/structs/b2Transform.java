@@ -7,7 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Rot;
 
-public final class b2Transform extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2Transform extends Struct {
 
     private final static int __size;
 
@@ -50,7 +50,7 @@ public final class b2Transform extends com.badlogic.gdx.jnigen.runtime.pointer.S
         return __q;
     }
 
-    private static final int __q_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __q_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Rot __q = new b2Rot(getPointer() + __q_offset, false);
 

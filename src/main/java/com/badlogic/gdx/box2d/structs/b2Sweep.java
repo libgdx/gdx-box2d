@@ -7,7 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Rot;
 
-public final class b2Sweep extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2Sweep extends Struct {
 
     private final static int __size;
 
@@ -50,7 +50,7 @@ public final class b2Sweep extends com.badlogic.gdx.jnigen.runtime.pointer.Struc
         return __c1;
     }
 
-    private static final int __c1_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __c1_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __c1 = new b2Vec2(getPointer() + __c1_offset, false);
 
@@ -58,7 +58,7 @@ public final class b2Sweep extends com.badlogic.gdx.jnigen.runtime.pointer.Struc
         return __c2;
     }
 
-    private static final int __c2_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __c2_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __c2 = new b2Vec2(getPointer() + __c2_offset, false);
 
@@ -66,7 +66,7 @@ public final class b2Sweep extends com.badlogic.gdx.jnigen.runtime.pointer.Struc
         return __q1;
     }
 
-    private static final int __q1_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __q1_offset = CHandler.getOffsetForField(__ffi_type, 3);
 
     private final b2Rot __q1 = new b2Rot(getPointer() + __q1_offset, false);
 
@@ -74,7 +74,7 @@ public final class b2Sweep extends com.badlogic.gdx.jnigen.runtime.pointer.Struc
         return __q2;
     }
 
-    private static final int __q2_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __q2_offset = CHandler.getOffsetForField(__ffi_type, 4);
 
     private final b2Rot __q2 = new b2Rot(getPointer() + __q2_offset, false);
 

@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2SimplexVertex extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2SimplexVertex extends Struct {
 
     private final static int __size;
 
@@ -49,7 +49,7 @@ public final class b2SimplexVertex extends com.badlogic.gdx.jnigen.runtime.point
         return __wB;
     }
 
-    private static final int __wB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __wB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __wB = new b2Vec2(getPointer() + __wB_offset, false);
 
@@ -57,32 +57,32 @@ public final class b2SimplexVertex extends com.badlogic.gdx.jnigen.runtime.point
         return __w;
     }
 
-    private static final int __w_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __w_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __w = new b2Vec2(getPointer() + __w_offset, false);
 
     public float a() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(3);
     }
 
     public void a(float a) {
-        setValue(a, 0);
+        setValue(a, 3);
     }
 
     public int indexA() {
-        return (int) getValue(1);
+        return (int) getValue(4);
     }
 
     public void indexA(int indexA) {
-        setValue(indexA, 1);
+        setValue(indexA, 4);
     }
 
     public int indexB() {
-        return (int) getValue(2);
+        return (int) getValue(5);
     }
 
     public void indexB(int indexB) {
-        setValue(indexB, 2);
+        setValue(indexB, 5);
     }
 
     public static final class b2SimplexVertexPointer extends StackElementPointer<b2SimplexVertex> {

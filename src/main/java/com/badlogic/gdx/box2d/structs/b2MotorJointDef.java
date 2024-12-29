@@ -8,7 +8,7 @@ import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
-public final class b2MotorJointDef extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2MotorJointDef extends Struct {
 
     private final static int __size;
 
@@ -51,7 +51,7 @@ public final class b2MotorJointDef extends com.badlogic.gdx.jnigen.runtime.point
         return __bodyIdB;
     }
 
-    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2BodyId __bodyIdB = new b2BodyId(getPointer() + __bodyIdB_offset, false);
 
@@ -59,64 +59,64 @@ public final class b2MotorJointDef extends com.badlogic.gdx.jnigen.runtime.point
         return __linearOffset;
     }
 
-    private static final int __linearOffset_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __linearOffset_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __linearOffset = new b2Vec2(getPointer() + __linearOffset_offset, false);
 
     public float angularOffset() {
-        return (float) getValueFloat(0);
-    }
-
-    public void angularOffset(float angularOffset) {
-        setValue(angularOffset, 0);
-    }
-
-    public float maxForce() {
-        return (float) getValueFloat(1);
-    }
-
-    public void maxForce(float maxForce) {
-        setValue(maxForce, 1);
-    }
-
-    public float maxTorque() {
-        return (float) getValueFloat(2);
-    }
-
-    public void maxTorque(float maxTorque) {
-        setValue(maxTorque, 2);
-    }
-
-    public float correctionFactor() {
         return (float) getValueFloat(3);
     }
 
+    public void angularOffset(float angularOffset) {
+        setValue(angularOffset, 3);
+    }
+
+    public float maxForce() {
+        return (float) getValueFloat(4);
+    }
+
+    public void maxForce(float maxForce) {
+        setValue(maxForce, 4);
+    }
+
+    public float maxTorque() {
+        return (float) getValueFloat(5);
+    }
+
+    public void maxTorque(float maxTorque) {
+        setValue(maxTorque, 5);
+    }
+
+    public float correctionFactor() {
+        return (float) getValueFloat(6);
+    }
+
     public void correctionFactor(float correctionFactor) {
-        setValue(correctionFactor, 3);
+        setValue(correctionFactor, 6);
     }
 
     public boolean collideConnected() {
-        return getValue(4) != 0;
+        return getValue(7) != 0;
     }
 
     public void collideConnected(boolean collideConnected) {
-        setValue(collideConnected, 4);
+        setValue(collideConnected, 7);
     }
 
     public VoidPointer userData() {
-        return new VoidPointer(getValue(5), false);
+        return new VoidPointer(getValue(8), false);
     }
 
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 5);
+        setValue(userData.getPointer(), 8);
     }
 
     public int internalValue() {
-        return (int) getValue(6);
+        return (int) getValue(9);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 6);
+        setValue(internalValue, 9);
     }
 
     public static final class b2MotorJointDefPointer extends StackElementPointer<b2MotorJointDef> {

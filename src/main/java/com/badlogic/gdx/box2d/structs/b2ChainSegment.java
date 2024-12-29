@@ -7,7 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Segment;
 
-public final class b2ChainSegment extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2ChainSegment extends Struct {
 
     private final static int __size;
 
@@ -50,7 +50,7 @@ public final class b2ChainSegment extends com.badlogic.gdx.jnigen.runtime.pointe
         return __segment;
     }
 
-    private static final int __segment_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __segment_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Segment __segment = new b2Segment(getPointer() + __segment_offset, false);
 
@@ -58,16 +58,16 @@ public final class b2ChainSegment extends com.badlogic.gdx.jnigen.runtime.pointe
         return __ghost2;
     }
 
-    private static final int __ghost2_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __ghost2_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __ghost2 = new b2Vec2(getPointer() + __ghost2_offset, false);
 
     public int chainId() {
-        return (int) getValue(0);
+        return (int) getValue(3);
     }
 
     public void chainId(int chainId) {
-        setValue(chainId, 0);
+        setValue(chainId, 3);
     }
 
     public static final class b2ChainSegmentPointer extends StackElementPointer<b2ChainSegment> {

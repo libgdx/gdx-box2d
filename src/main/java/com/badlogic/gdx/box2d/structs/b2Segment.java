@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2Segment extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2Segment extends Struct {
 
     private final static int __size;
 
@@ -49,7 +49,7 @@ public final class b2Segment extends com.badlogic.gdx.jnigen.runtime.pointer.Str
         return __point2;
     }
 
-    private static final int __point2_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __point2_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __point2 = new b2Vec2(getPointer() + __point2_offset, false);
 

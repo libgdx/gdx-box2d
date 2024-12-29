@@ -8,7 +8,7 @@ import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
-public final class b2WheelJointDef extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2WheelJointDef extends Struct {
 
     private final static int __size;
 
@@ -51,7 +51,7 @@ public final class b2WheelJointDef extends com.badlogic.gdx.jnigen.runtime.point
         return __bodyIdB;
     }
 
-    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2BodyId __bodyIdB = new b2BodyId(getPointer() + __bodyIdB_offset, false);
 
@@ -59,7 +59,7 @@ public final class b2WheelJointDef extends com.badlogic.gdx.jnigen.runtime.point
         return __localAnchorA;
     }
 
-    private static final int __localAnchorA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __localAnchorA_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __localAnchorA = new b2Vec2(getPointer() + __localAnchorA_offset, false);
 
@@ -67,7 +67,7 @@ public final class b2WheelJointDef extends com.badlogic.gdx.jnigen.runtime.point
         return __localAnchorB;
     }
 
-    private static final int __localAnchorB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __localAnchorB_offset = CHandler.getOffsetForField(__ffi_type, 3);
 
     private final b2Vec2 __localAnchorB = new b2Vec2(getPointer() + __localAnchorB_offset, false);
 
@@ -75,104 +75,104 @@ public final class b2WheelJointDef extends com.badlogic.gdx.jnigen.runtime.point
         return __localAxisA;
     }
 
-    private static final int __localAxisA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __localAxisA_offset = CHandler.getOffsetForField(__ffi_type, 4);
 
     private final b2Vec2 __localAxisA = new b2Vec2(getPointer() + __localAxisA_offset, false);
 
     public boolean enableSpring() {
-        return getValue(0) != 0;
+        return getValue(5) != 0;
     }
 
     public void enableSpring(boolean enableSpring) {
-        setValue(enableSpring, 0);
+        setValue(enableSpring, 5);
     }
 
     public float hertz() {
-        return (float) getValueFloat(1);
+        return (float) getValueFloat(6);
     }
 
     public void hertz(float hertz) {
-        setValue(hertz, 1);
+        setValue(hertz, 6);
     }
 
     public float dampingRatio() {
-        return (float) getValueFloat(2);
-    }
-
-    public void dampingRatio(float dampingRatio) {
-        setValue(dampingRatio, 2);
-    }
-
-    public boolean enableLimit() {
-        return getValue(3) != 0;
-    }
-
-    public void enableLimit(boolean enableLimit) {
-        setValue(enableLimit, 3);
-    }
-
-    public float lowerTranslation() {
-        return (float) getValueFloat(4);
-    }
-
-    public void lowerTranslation(float lowerTranslation) {
-        setValue(lowerTranslation, 4);
-    }
-
-    public float upperTranslation() {
-        return (float) getValueFloat(5);
-    }
-
-    public void upperTranslation(float upperTranslation) {
-        setValue(upperTranslation, 5);
-    }
-
-    public boolean enableMotor() {
-        return getValue(6) != 0;
-    }
-
-    public void enableMotor(boolean enableMotor) {
-        setValue(enableMotor, 6);
-    }
-
-    public float maxMotorTorque() {
         return (float) getValueFloat(7);
     }
 
+    public void dampingRatio(float dampingRatio) {
+        setValue(dampingRatio, 7);
+    }
+
+    public boolean enableLimit() {
+        return getValue(8) != 0;
+    }
+
+    public void enableLimit(boolean enableLimit) {
+        setValue(enableLimit, 8);
+    }
+
+    public float lowerTranslation() {
+        return (float) getValueFloat(9);
+    }
+
+    public void lowerTranslation(float lowerTranslation) {
+        setValue(lowerTranslation, 9);
+    }
+
+    public float upperTranslation() {
+        return (float) getValueFloat(10);
+    }
+
+    public void upperTranslation(float upperTranslation) {
+        setValue(upperTranslation, 10);
+    }
+
+    public boolean enableMotor() {
+        return getValue(11) != 0;
+    }
+
+    public void enableMotor(boolean enableMotor) {
+        setValue(enableMotor, 11);
+    }
+
+    public float maxMotorTorque() {
+        return (float) getValueFloat(12);
+    }
+
     public void maxMotorTorque(float maxMotorTorque) {
-        setValue(maxMotorTorque, 7);
+        setValue(maxMotorTorque, 12);
     }
 
     public float motorSpeed() {
-        return (float) getValueFloat(8);
+        return (float) getValueFloat(13);
     }
 
     public void motorSpeed(float motorSpeed) {
-        setValue(motorSpeed, 8);
+        setValue(motorSpeed, 13);
     }
 
     public boolean collideConnected() {
-        return getValue(9) != 0;
+        return getValue(14) != 0;
     }
 
     public void collideConnected(boolean collideConnected) {
-        setValue(collideConnected, 9);
+        setValue(collideConnected, 14);
     }
 
     public VoidPointer userData() {
-        return new VoidPointer(getValue(10), false);
+        return new VoidPointer(getValue(15), false);
     }
 
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 10);
+        setValue(userData.getPointer(), 15);
     }
 
     public int internalValue() {
-        return (int) getValue(11);
+        return (int) getValue(16);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 11);
+        setValue(internalValue, 16);
     }
 
     public static final class b2WheelJointDefPointer extends StackElementPointer<b2WheelJointDef> {

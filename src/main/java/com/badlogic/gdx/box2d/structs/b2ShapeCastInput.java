@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2ShapeCastInput extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2ShapeCastInput extends Struct {
 
     private final static int __size;
 
@@ -70,11 +70,11 @@ public final class b2ShapeCastInput extends com.badlogic.gdx.jnigen.runtime.poin
     private final b2Vec2 __translation = new b2Vec2(getPointer() + __translation_offset, false);
 
     public float maxFraction() {
-        return (float) getValueFloat(10);
+        return (float) getValueFloat(11);
     }
 
     public void maxFraction(float maxFraction) {
-        setValue(maxFraction, 10);
+        setValue(maxFraction, 11);
     }
 
     public static final class b2ShapeCastInputPointer extends StackElementPointer<b2ShapeCastInput> {

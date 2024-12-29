@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2Capsule extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2Capsule extends Struct {
 
     private final static int __size;
 
@@ -49,16 +49,16 @@ public final class b2Capsule extends com.badlogic.gdx.jnigen.runtime.pointer.Str
         return __center2;
     }
 
-    private static final int __center2_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __center2_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __center2 = new b2Vec2(getPointer() + __center2_offset, false);
 
     public float radius() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(2);
     }
 
     public void radius(float radius) {
-        setValue(radius, 0);
+        setValue(radius, 2);
     }
 
     public static final class b2CapsulePointer extends StackElementPointer<b2Capsule> {

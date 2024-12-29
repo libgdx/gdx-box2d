@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 
-public final class b2SensorEndTouchEvent extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2SensorEndTouchEvent extends Struct {
 
     private final static int __size;
 
@@ -49,7 +49,7 @@ public final class b2SensorEndTouchEvent extends com.badlogic.gdx.jnigen.runtime
         return __visitorShapeId;
     }
 
-    private static final int __visitorShapeId_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __visitorShapeId_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2ShapeId __visitorShapeId = new b2ShapeId(getPointer() + __visitorShapeId_offset, false);
 

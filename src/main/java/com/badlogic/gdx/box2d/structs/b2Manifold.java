@@ -7,7 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ManifoldPoint;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2Manifold extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2Manifold extends Struct {
 
     private final static int __size;
 
@@ -55,11 +55,11 @@ public final class b2Manifold extends com.badlogic.gdx.jnigen.runtime.pointer.St
     private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
 
     public int pointCount() {
-        return (int) getValue(2);
+        return (int) getValue(3);
     }
 
     public void pointCount(int pointCount) {
-        setValue(pointCount, 2);
+        setValue(pointCount, 3);
     }
 
     public static final class b2ManifoldPointer extends StackElementPointer<b2Manifold> {

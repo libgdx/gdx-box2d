@@ -8,7 +8,7 @@ import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
-public final class b2MouseJointDef extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2MouseJointDef extends Struct {
 
     private final static int __size;
 
@@ -51,7 +51,7 @@ public final class b2MouseJointDef extends com.badlogic.gdx.jnigen.runtime.point
         return __bodyIdB;
     }
 
-    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2BodyId __bodyIdB = new b2BodyId(getPointer() + __bodyIdB_offset, false);
 
@@ -59,56 +59,56 @@ public final class b2MouseJointDef extends com.badlogic.gdx.jnigen.runtime.point
         return __target;
     }
 
-    private static final int __target_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __target_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __target = new b2Vec2(getPointer() + __target_offset, false);
 
     public float hertz() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(3);
     }
 
     public void hertz(float hertz) {
-        setValue(hertz, 0);
+        setValue(hertz, 3);
     }
 
     public float dampingRatio() {
-        return (float) getValueFloat(1);
+        return (float) getValueFloat(4);
     }
 
     public void dampingRatio(float dampingRatio) {
-        setValue(dampingRatio, 1);
+        setValue(dampingRatio, 4);
     }
 
     public float maxForce() {
-        return (float) getValueFloat(2);
+        return (float) getValueFloat(5);
     }
 
     public void maxForce(float maxForce) {
-        setValue(maxForce, 2);
+        setValue(maxForce, 5);
     }
 
     public boolean collideConnected() {
-        return getValue(3) != 0;
+        return getValue(6) != 0;
     }
 
     public void collideConnected(boolean collideConnected) {
-        setValue(collideConnected, 3);
+        setValue(collideConnected, 6);
     }
 
     public VoidPointer userData() {
-        return new VoidPointer(getValue(4), false);
+        return new VoidPointer(getValue(7), false);
     }
 
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 4);
+        setValue(userData.getPointer(), 7);
     }
 
     public int internalValue() {
-        return (int) getValue(5);
+        return (int) getValue(8);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 5);
+        setValue(internalValue, 8);
     }
 
     public static final class b2MouseJointDefPointer extends StackElementPointer<b2MouseJointDef> {

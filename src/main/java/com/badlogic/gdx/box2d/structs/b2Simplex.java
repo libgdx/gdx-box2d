@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2SimplexVertex;
 
-public final class b2Simplex extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2Simplex extends Struct {
 
     private final static int __size;
 
@@ -49,7 +49,7 @@ public final class b2Simplex extends com.badlogic.gdx.jnigen.runtime.pointer.Str
         return __v2;
     }
 
-    private static final int __v2_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __v2_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2SimplexVertex __v2 = new b2SimplexVertex(getPointer() + __v2_offset, false);
 
@@ -57,16 +57,16 @@ public final class b2Simplex extends com.badlogic.gdx.jnigen.runtime.pointer.Str
         return __v3;
     }
 
-    private static final int __v3_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __v3_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2SimplexVertex __v3 = new b2SimplexVertex(getPointer() + __v3_offset, false);
 
     public int count() {
-        return (int) getValue(0);
+        return (int) getValue(3);
     }
 
     public void count(int count) {
-        setValue(count, 0);
+        setValue(count, 3);
     }
 
     public static final class b2SimplexPointer extends StackElementPointer<b2Simplex> {

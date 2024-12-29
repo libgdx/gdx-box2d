@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2Mat22 extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2Mat22 extends Struct {
 
     private final static int __size;
 
@@ -49,7 +49,7 @@ public final class b2Mat22 extends com.badlogic.gdx.jnigen.runtime.pointer.Struc
         return __cy;
     }
 
-    private static final int __cy_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __cy_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __cy = new b2Vec2(getPointer() + __cy_offset, false);
 

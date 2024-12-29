@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2Polygon extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2Polygon extends Struct {
 
     private final static int __size;
 
@@ -62,19 +62,19 @@ public final class b2Polygon extends com.badlogic.gdx.jnigen.runtime.pointer.Str
     private final b2Vec2 __centroid = new b2Vec2(getPointer() + __centroid_offset, false);
 
     public float radius() {
-        return (float) getValueFloat(16);
+        return (float) getValueFloat(17);
     }
 
     public void radius(float radius) {
-        setValue(radius, 16);
+        setValue(radius, 17);
     }
 
     public int count() {
-        return (int) getValue(17);
+        return (int) getValue(18);
     }
 
     public void count(int count) {
-        setValue(count, 17);
+        setValue(count, 18);
     }
 
     public static final class b2PolygonPointer extends StackElementPointer<b2Polygon> {

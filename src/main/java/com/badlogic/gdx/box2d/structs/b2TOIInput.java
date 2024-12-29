@@ -7,7 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Sweep;
 
-public final class b2TOIInput extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2TOIInput extends Struct {
 
     private final static int __size;
 
@@ -50,7 +50,7 @@ public final class b2TOIInput extends com.badlogic.gdx.jnigen.runtime.pointer.St
         return __proxyB;
     }
 
-    private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
@@ -58,7 +58,7 @@ public final class b2TOIInput extends com.badlogic.gdx.jnigen.runtime.pointer.St
         return __sweepA;
     }
 
-    private static final int __sweepA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __sweepA_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Sweep __sweepA = new b2Sweep(getPointer() + __sweepA_offset, false);
 
@@ -66,16 +66,16 @@ public final class b2TOIInput extends com.badlogic.gdx.jnigen.runtime.pointer.St
         return __sweepB;
     }
 
-    private static final int __sweepB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __sweepB_offset = CHandler.getOffsetForField(__ffi_type, 3);
 
     private final b2Sweep __sweepB = new b2Sweep(getPointer() + __sweepB_offset, false);
 
     public float maxFraction() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(4);
     }
 
     public void maxFraction(float maxFraction) {
-        setValue(maxFraction, 0);
+        setValue(maxFraction, 4);
     }
 
     public static final class b2TOIInputPointer extends StackElementPointer<b2TOIInput> {

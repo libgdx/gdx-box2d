@@ -72,6 +72,7 @@ import com.badlogic.gdx.box2d.enums.b2JointType;
 import com.badlogic.gdx.jnigen.runtime.closure.Closure;
 import com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper;
 import com.badlogic.gdx.jnigen.runtime.c.CTypeInfo;
+import com.badlogic.gdx.jnigen.runtime.ffi.ClosureEncoder;
 
 public final class Box2d {
 
@@ -98,7 +99,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static void b2SetAllocator(ClosureObject<b2AllocFcn> allocFcn, ClosureObject<b2FreeFcn> freeFcn) {
-        b2SetAllocator_internal(allocFcn.getFnPtr(), freeFcn.getFnPtr());
+        b2SetAllocator_internal(allocFcn.getPointer(), freeFcn.getPointer());
     }
 
     static private native void b2SetAllocator_internal(long allocFcn, long freeFcn);/*
@@ -119,7 +120,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static void b2SetAssertFcn(ClosureObject<b2AssertFcn> assertFcn) {
-        b2SetAssertFcn_internal(assertFcn.getFnPtr());
+        b2SetAssertFcn_internal(assertFcn.getPointer());
     }
 
     static private native void b2SetAssertFcn_internal(long assertFcn);/*
@@ -1734,7 +1735,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2DynamicTree_Query(b2DynamicTree.b2DynamicTreePointer tree, b2AABB aabb, long maskBits, ClosureObject<b2TreeQueryCallbackFcn> callback, VoidPointer context) {
-        return new b2TreeStats(b2DynamicTree_Query_internal(tree.getPointer(), aabb.getPointer(), maskBits, callback.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2DynamicTree_Query_internal(tree.getPointer(), aabb.getPointer(), maskBits, callback.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2DynamicTree_Query_internal(long tree, long aabb, long maskBits, long callback, long context);/*
@@ -1748,7 +1749,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2DynamicTree_RayCast(b2DynamicTree.b2DynamicTreePointer tree, b2RayCastInput.b2RayCastInputPointer input, long maskBits, ClosureObject<b2TreeRayCastCallbackFcn> callback, VoidPointer context) {
-        return new b2TreeStats(b2DynamicTree_RayCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2DynamicTree_RayCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2DynamicTree_RayCast_internal(long tree, long input, long maskBits, long callback, long context);/*
@@ -1762,7 +1763,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2DynamicTree_ShapeCast(b2DynamicTree.b2DynamicTreePointer tree, b2ShapeCastInput.b2ShapeCastInputPointer input, long maskBits, ClosureObject<b2TreeShapeCastCallbackFcn> callback, VoidPointer context) {
-        return new b2TreeStats(b2DynamicTree_ShapeCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2DynamicTree_ShapeCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2DynamicTree_ShapeCast_internal(long tree, long input, long maskBits, long callback, long context);/*
@@ -2270,7 +2271,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2World_OverlapAABB(b2WorldId worldId, b2AABB aabb, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_OverlapAABB_internal(worldId.getPointer(), aabb.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2World_OverlapAABB_internal(worldId.getPointer(), aabb.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2World_OverlapAABB_internal(long worldId, long aabb, long filter, long fcn, long context);/*
@@ -2283,7 +2284,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2World_OverlapPoint(b2WorldId worldId, b2Vec2 point, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_OverlapPoint_internal(worldId.getPointer(), point.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2World_OverlapPoint_internal(worldId.getPointer(), point.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2World_OverlapPoint_internal(long worldId, long point, long transform, long filter, long fcn, long context);/*
@@ -2296,7 +2297,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2World_OverlapCircle(b2WorldId worldId, b2Circle.b2CirclePointer circle, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_OverlapCircle_internal(worldId.getPointer(), circle.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2World_OverlapCircle_internal(worldId.getPointer(), circle.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2World_OverlapCircle_internal(long worldId, long circle, long transform, long filter, long fcn, long context);/*
@@ -2309,7 +2310,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2World_OverlapCapsule(b2WorldId worldId, b2Capsule.b2CapsulePointer capsule, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_OverlapCapsule_internal(worldId.getPointer(), capsule.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2World_OverlapCapsule_internal(worldId.getPointer(), capsule.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2World_OverlapCapsule_internal(long worldId, long capsule, long transform, long filter, long fcn, long context);/*
@@ -2322,7 +2323,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2World_OverlapPolygon(b2WorldId worldId, b2Polygon.b2PolygonPointer polygon, b2Transform transform, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_OverlapPolygon_internal(worldId.getPointer(), polygon.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2World_OverlapPolygon_internal(worldId.getPointer(), polygon.getPointer(), transform.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2World_OverlapPolygon_internal(long worldId, long polygon, long transform, long filter, long fcn, long context);/*
@@ -2335,7 +2336,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2World_CastRay(b2WorldId worldId, b2Vec2 origin, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_CastRay_internal(worldId.getPointer(), origin.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2World_CastRay_internal(worldId.getPointer(), origin.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2World_CastRay_internal(long worldId, long origin, long translation, long filter, long fcn, long context);/*
@@ -2361,7 +2362,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2World_CastCircle(b2WorldId worldId, b2Circle.b2CirclePointer circle, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_CastCircle_internal(worldId.getPointer(), circle.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2World_CastCircle_internal(worldId.getPointer(), circle.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2World_CastCircle_internal(long worldId, long circle, long originTransform, long translation, long filter, long fcn, long context);/*
@@ -2374,7 +2375,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2World_CastCapsule(b2WorldId worldId, b2Capsule.b2CapsulePointer capsule, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_CastCapsule_internal(worldId.getPointer(), capsule.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2World_CastCapsule_internal(worldId.getPointer(), capsule.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2World_CastCapsule_internal(long worldId, long capsule, long originTransform, long translation, long filter, long fcn, long context);/*
@@ -2387,7 +2388,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static b2TreeStats b2World_CastPolygon(b2WorldId worldId, b2Polygon.b2PolygonPointer polygon, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_CastPolygon_internal(worldId.getPointer(), polygon.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getFnPtr(), context.getPointer()), true);
+        return new b2TreeStats(b2World_CastPolygon_internal(worldId.getPointer(), polygon.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
     }
 
     static private native long b2World_CastPolygon_internal(long worldId, long polygon, long originTransform, long translation, long filter, long fcn, long context);/*
@@ -2486,7 +2487,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static void b2World_SetCustomFilterCallback(b2WorldId worldId, ClosureObject<b2CustomFilterFcn> fcn, VoidPointer context) {
-        b2World_SetCustomFilterCallback_internal(worldId.getPointer(), fcn.getFnPtr(), context.getPointer());
+        b2World_SetCustomFilterCallback_internal(worldId.getPointer(), fcn.getPointer(), context.getPointer());
     }
 
     static private native void b2World_SetCustomFilterCallback_internal(long worldId, long fcn, long context);/*
@@ -2496,7 +2497,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     public static void b2World_SetPreSolveCallback(b2WorldId worldId, ClosureObject<b2PreSolveFcn> fcn, VoidPointer context) {
-        b2World_SetPreSolveCallback_internal(worldId.getPointer(), fcn.getFnPtr(), context.getPointer());
+        b2World_SetPreSolveCallback_internal(worldId.getPointer(), fcn.getPointer(), context.getPointer());
     }
 
     static private native void b2World_SetPreSolveCallback_internal(long worldId, long fcn, long context);/*
@@ -5446,198 +5447,396 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public interface b2OverlapResultFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2OverlapResultFcn extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1) };
 
         boolean b2OverlapResultFcn_call(b2ShapeId arg0, VoidPointer arg1);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             returnType.setValue(b2OverlapResultFcn_call(new b2ShapeId(parameters[0].asLong(), true), new VoidPointer(parameters[1].asLong(), false)));
+        }
+
+        public static b2OverlapResultFcn b2OverlapResultFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2OverlapResultFcn.__ffi_cache);
+            return (arg0, arg1) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2OverlapResultFcn.__ffi_cache[b2OverlapResultFcn.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return returnConvert.asLong() != 0;
+            };
         }
     }
 
-    public interface b2TreeQueryCallbackFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2TreeQueryCallbackFcn extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
 
         boolean b2TreeQueryCallbackFcn_call(int arg0, int arg1, VoidPointer arg2);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             returnType.setValue(b2TreeQueryCallbackFcn_call((int) parameters[0].asLong(), (int) parameters[1].asLong(), new VoidPointer(parameters[2].asLong(), false)));
+        }
+
+        public static b2TreeQueryCallbackFcn b2TreeQueryCallbackFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeQueryCallbackFcn.__ffi_cache);
+            return (arg0, arg1, arg2) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeQueryCallbackFcn.__ffi_cache[b2TreeQueryCallbackFcn.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return returnConvert.asLong() != 0;
+            };
         }
     }
 
-    public interface b2TaskCallback extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2TaskCallback extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(8), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(8), FFITypes.getCTypeInfo(-1) };
 
         void b2TaskCallback_call(int arg0, int arg1, long arg2, VoidPointer arg3);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             b2TaskCallback_call((int) parameters[0].asLong(), (int) parameters[1].asLong(), (long) parameters[2].asLong(), new VoidPointer(parameters[3].asLong(), false));
+        }
+
+        public static b2TaskCallback b2TaskCallback_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TaskCallback.__ffi_cache);
+            return (arg0, arg1, arg2, arg3) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TaskCallback.__ffi_cache[b2TaskCallback.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 
-    public interface b2EnqueueTaskCallback extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2EnqueueTaskCallback extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
         VoidPointer b2EnqueueTaskCallback_call(ClosureObject<b2TaskCallback> arg0, int arg1, int arg2, VoidPointer arg3, VoidPointer arg4);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
-            returnType.setValue(b2EnqueueTaskCallback_call(CHandler.getClosureObject(parameters[0].asLong()), (int) parameters[1].asLong(), (int) parameters[2].asLong(), new VoidPointer(parameters[3].asLong(), false), new VoidPointer(parameters[4].asLong(), false)));
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
+            returnType.setValue(b2EnqueueTaskCallback_call(CHandler.getClosureObject(parameters[0].asLong(), b2TaskCallback::b2TaskCallback_downcall), (int) parameters[1].asLong(), (int) parameters[2].asLong(), new VoidPointer(parameters[3].asLong(), false), new VoidPointer(parameters[4].asLong(), false)));
+        }
+
+        public static b2EnqueueTaskCallback b2EnqueueTaskCallback_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2EnqueueTaskCallback.__ffi_cache);
+            return (arg0, arg1, arg2, arg3, arg4) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                    useEncoder.setValue(4, arg4);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2EnqueueTaskCallback.__ffi_cache[b2EnqueueTaskCallback.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return new VoidPointer(returnConvert.asLong(), false);
+            };
         }
     }
 
-    public interface b2CastResultFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2CastResultFcn extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1) };
 
         float b2CastResultFcn_call(b2ShapeId arg0, b2Vec2 arg1, b2Vec2 arg2, float arg3, VoidPointer arg4);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             returnType.setValue(b2CastResultFcn_call(new b2ShapeId(parameters[0].asLong(), true), new b2Vec2(parameters[1].asLong(), true), new b2Vec2(parameters[2].asLong(), true), (float) parameters[3].asFloat(), new VoidPointer(parameters[4].asLong(), false)));
+        }
+
+        public static b2CastResultFcn b2CastResultFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2CastResultFcn.__ffi_cache);
+            return (arg0, arg1, arg2, arg3, arg4) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                    useEncoder.setValue(4, arg4);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2CastResultFcn.__ffi_cache[b2CastResultFcn.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return (float) returnConvert.asFloat();
+            };
         }
     }
 
-    public interface b2TreeShapeCastCallbackFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2TreeShapeCastCallbackFcn extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
 
         float b2TreeShapeCastCallbackFcn_call(b2ShapeCastInput.b2ShapeCastInputPointer arg0, int arg1, int arg2, VoidPointer arg3);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             returnType.setValue(b2TreeShapeCastCallbackFcn_call(new b2ShapeCastInput.b2ShapeCastInputPointer(parameters[0].asLong(), false), (int) parameters[1].asLong(), (int) parameters[2].asLong(), new VoidPointer(parameters[3].asLong(), false)));
+        }
+
+        public static b2TreeShapeCastCallbackFcn b2TreeShapeCastCallbackFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeShapeCastCallbackFcn.__ffi_cache);
+            return (arg0, arg1, arg2, arg3) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeShapeCastCallbackFcn.__ffi_cache[b2TreeShapeCastCallbackFcn.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return (float) returnConvert.asFloat();
+            };
         }
     }
 
-    public interface b2PreSolveFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2PreSolveFcn extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
         boolean b2PreSolveFcn_call(b2ShapeId arg0, b2ShapeId arg1, b2Manifold.b2ManifoldPointer arg2, VoidPointer arg3);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             returnType.setValue(b2PreSolveFcn_call(new b2ShapeId(parameters[0].asLong(), true), new b2ShapeId(parameters[1].asLong(), true), new b2Manifold.b2ManifoldPointer(parameters[2].asLong(), false), new VoidPointer(parameters[3].asLong(), false)));
+        }
+
+        public static b2PreSolveFcn b2PreSolveFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2PreSolveFcn.__ffi_cache);
+            return (arg0, arg1, arg2, arg3) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2PreSolveFcn.__ffi_cache[b2PreSolveFcn.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return returnConvert.asLong() != 0;
+            };
         }
     }
 
-    public interface b2AllocFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2AllocFcn extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(11), FFITypes.getCTypeInfo(4) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(11), FFITypes.getCTypeInfo(4) };
 
         VoidPointer b2AllocFcn_call(long arg0, int arg1);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             returnType.setValue(b2AllocFcn_call((long) parameters[0].asLong(), (int) parameters[1].asLong()));
+        }
+
+        public static b2AllocFcn b2AllocFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2AllocFcn.__ffi_cache);
+            return (arg0, arg1) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2AllocFcn.__ffi_cache[b2AllocFcn.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return new VoidPointer(returnConvert.asLong(), false);
+            };
         }
     }
 
-    public interface b2AssertFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2AssertFcn extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4) };
 
         int b2AssertFcn_call(CSizedIntPointer arg0, CSizedIntPointer arg1, int arg2);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             returnType.setValue(b2AssertFcn_call(new CSizedIntPointer(parameters[0].asLong(), false, "const char"), new CSizedIntPointer(parameters[1].asLong(), false, "const char"), (int) parameters[2].asLong()));
+        }
+
+        public static b2AssertFcn b2AssertFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2AssertFcn.__ffi_cache);
+            return (arg0, arg1, arg2) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2AssertFcn.__ffi_cache[b2AssertFcn.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return (int) returnConvert.asLong();
+            };
         }
     }
 
-    public interface b2CustomFilterFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2CustomFilterFcn extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1) };
 
         boolean b2CustomFilterFcn_call(b2ShapeId arg0, b2ShapeId arg1, VoidPointer arg2);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             returnType.setValue(b2CustomFilterFcn_call(new b2ShapeId(parameters[0].asLong(), true), new b2ShapeId(parameters[1].asLong(), true), new VoidPointer(parameters[2].asLong(), false)));
+        }
+
+        public static b2CustomFilterFcn b2CustomFilterFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2CustomFilterFcn.__ffi_cache);
+            return (arg0, arg1, arg2) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2CustomFilterFcn.__ffi_cache[b2CustomFilterFcn.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return returnConvert.asLong() != 0;
+            };
         }
     }
 
-    public interface b2TreeRayCastCallbackFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2TreeRayCastCallbackFcn extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
 
         float b2TreeRayCastCallbackFcn_call(b2RayCastInput.b2RayCastInputPointer arg0, int arg1, int arg2, VoidPointer arg3);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             returnType.setValue(b2TreeRayCastCallbackFcn_call(new b2RayCastInput.b2RayCastInputPointer(parameters[0].asLong(), false), (int) parameters[1].asLong(), (int) parameters[2].asLong(), new VoidPointer(parameters[3].asLong(), false)));
+        }
+
+        public static b2TreeRayCastCallbackFcn b2TreeRayCastCallbackFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeRayCastCallbackFcn.__ffi_cache);
+            return (arg0, arg1, arg2, arg3) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeRayCastCallbackFcn.__ffi_cache[b2TreeRayCastCallbackFcn.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return (float) returnConvert.asFloat();
+            };
         }
     }
 
-    public interface b2FreeFcn extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2FreeFcn extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1) };
 
         void b2FreeFcn_call(VoidPointer arg0);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             b2FreeFcn_call(new VoidPointer(parameters[0].asLong(), false));
+        }
+
+        public static b2FreeFcn b2FreeFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2FreeFcn.__ffi_cache);
+            return (arg0) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2FreeFcn.__ffi_cache[b2FreeFcn.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 
-    public interface b2FinishTaskCallback extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface b2FinishTaskCallback extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
         void b2FinishTaskCallback_call(VoidPointer arg0, VoidPointer arg1);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             b2FinishTaskCallback_call(new VoidPointer(parameters[0].asLong(), false), new VoidPointer(parameters[1].asLong(), false));
+        }
+
+        public static b2FinishTaskCallback b2FinishTaskCallback_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2FinishTaskCallback.__ffi_cache);
+            return (arg0, arg1) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2FinishTaskCallback.__ffi_cache[b2FinishTaskCallback.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 }

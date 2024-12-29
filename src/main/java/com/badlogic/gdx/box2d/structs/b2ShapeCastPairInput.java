@@ -8,7 +8,7 @@ import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Transform;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2ShapeCastPairInput extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2ShapeCastPairInput extends Struct {
 
     private final static int __size;
 
@@ -51,7 +51,7 @@ public final class b2ShapeCastPairInput extends com.badlogic.gdx.jnigen.runtime.
         return __proxyB;
     }
 
-    private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
@@ -59,7 +59,7 @@ public final class b2ShapeCastPairInput extends com.badlogic.gdx.jnigen.runtime.
         return __transformA;
     }
 
-    private static final int __transformA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __transformA_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Transform __transformA = new b2Transform(getPointer() + __transformA_offset, false);
 
@@ -67,7 +67,7 @@ public final class b2ShapeCastPairInput extends com.badlogic.gdx.jnigen.runtime.
         return __transformB;
     }
 
-    private static final int __transformB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __transformB_offset = CHandler.getOffsetForField(__ffi_type, 3);
 
     private final b2Transform __transformB = new b2Transform(getPointer() + __transformB_offset, false);
 
@@ -75,16 +75,16 @@ public final class b2ShapeCastPairInput extends com.badlogic.gdx.jnigen.runtime.
         return __translationB;
     }
 
-    private static final int __translationB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __translationB_offset = CHandler.getOffsetForField(__ffi_type, 4);
 
     private final b2Vec2 __translationB = new b2Vec2(getPointer() + __translationB_offset, false);
 
     public float maxFraction() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(5);
     }
 
     public void maxFraction(float maxFraction) {
-        setValue(maxFraction, 0);
+        setValue(maxFraction, 5);
     }
 
     public static final class b2ShapeCastPairInputPointer extends StackElementPointer<b2ShapeCastPairInput> {

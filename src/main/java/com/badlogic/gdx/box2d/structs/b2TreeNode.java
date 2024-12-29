@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2AABB;
 
-public final class b2TreeNode extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2TreeNode extends Struct {
 
     private final static int __size;
 
@@ -46,67 +46,67 @@ public final class b2TreeNode extends com.badlogic.gdx.jnigen.runtime.pointer.St
     private final b2AABB __aabb = new b2AABB(getPointer() + __aabb_offset, false);
 
     public long categoryBits() {
-        return (long) getValue(0);
+        return (long) getValue(1);
     }
 
     public void categoryBits(long categoryBits) {
-        setValue(categoryBits, 0);
+        setValue(categoryBits, 1);
     }
 
     public int parent() {
-        return (int) getValue(1);
-    }
-
-    public void parent(int parent) {
-        setValue(parent, 1);
-    }
-
-    public int next() {
         return (int) getValue(2);
     }
 
-    public void next(int next) {
-        setValue(next, 2);
+    public void parent(int parent) {
+        setValue(parent, 2);
     }
 
-    public int child1() {
+    public int next() {
         return (int) getValue(3);
     }
 
-    public void child1(int child1) {
-        setValue(child1, 3);
+    public void next(int next) {
+        setValue(next, 3);
     }
 
-    public int child2() {
+    public int child1() {
         return (int) getValue(4);
     }
 
-    public void child2(int child2) {
-        setValue(child2, 4);
+    public void child1(int child1) {
+        setValue(child1, 4);
     }
 
-    public int userData() {
+    public int child2() {
         return (int) getValue(5);
     }
 
+    public void child2(int child2) {
+        setValue(child2, 5);
+    }
+
+    public int userData() {
+        return (int) getValue(6);
+    }
+
     public void userData(int userData) {
-        setValue(userData, 5);
+        setValue(userData, 6);
     }
 
     public char height() {
-        return (char) getValue(6);
-    }
-
-    public void height(char height) {
-        setValue(height, 6);
-    }
-
-    public char flags() {
         return (char) getValue(7);
     }
 
+    public void height(char height) {
+        setValue(height, 7);
+    }
+
+    public char flags() {
+        return (char) getValue(8);
+    }
+
     public void flags(char flags) {
-        setValue(flags, 7);
+        setValue(flags, 8);
     }
 
     public static final class b2TreeNodePointer extends StackElementPointer<b2TreeNode> {

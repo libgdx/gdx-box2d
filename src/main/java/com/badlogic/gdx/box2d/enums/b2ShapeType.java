@@ -1,8 +1,9 @@
 package com.badlogic.gdx.box2d.enums;
 
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
+import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 
-public enum b2ShapeType implements com.badlogic.gdx.jnigen.runtime.c.CEnum {
+public enum b2ShapeType implements CEnum {
 
     b2_circleShape(0),
     b2_capsuleShape(1),

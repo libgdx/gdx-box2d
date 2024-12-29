@@ -1,9 +1,10 @@
 package com.badlogic.gdx.box2d.enums;
 
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
+import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 import java.util.HashMap;
 
-public enum b2HexColor implements com.badlogic.gdx.jnigen.runtime.c.CEnum {
+public enum b2HexColor implements CEnum {
 
     b2_colorBlack(0),
     b2_colorNavy(128),

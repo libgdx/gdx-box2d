@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyMoveEvent;
 
-public final class b2BodyEvents extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2BodyEvents extends Struct {
 
     private final static int __size;
 

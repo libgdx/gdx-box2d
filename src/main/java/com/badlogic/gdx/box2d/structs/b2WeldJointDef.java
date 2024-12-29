@@ -8,7 +8,7 @@ import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
-public final class b2WeldJointDef extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2WeldJointDef extends Struct {
 
     private final static int __size;
 
@@ -51,7 +51,7 @@ public final class b2WeldJointDef extends com.badlogic.gdx.jnigen.runtime.pointe
         return __bodyIdB;
     }
 
-    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2BodyId __bodyIdB = new b2BodyId(getPointer() + __bodyIdB_offset, false);
 
@@ -59,7 +59,7 @@ public final class b2WeldJointDef extends com.badlogic.gdx.jnigen.runtime.pointe
         return __localAnchorA;
     }
 
-    private static final int __localAnchorA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __localAnchorA_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __localAnchorA = new b2Vec2(getPointer() + __localAnchorA_offset, false);
 
@@ -67,72 +67,72 @@ public final class b2WeldJointDef extends com.badlogic.gdx.jnigen.runtime.pointe
         return __localAnchorB;
     }
 
-    private static final int __localAnchorB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __localAnchorB_offset = CHandler.getOffsetForField(__ffi_type, 3);
 
     private final b2Vec2 __localAnchorB = new b2Vec2(getPointer() + __localAnchorB_offset, false);
 
     public float referenceAngle() {
-        return (float) getValueFloat(0);
-    }
-
-    public void referenceAngle(float referenceAngle) {
-        setValue(referenceAngle, 0);
-    }
-
-    public float linearHertz() {
-        return (float) getValueFloat(1);
-    }
-
-    public void linearHertz(float linearHertz) {
-        setValue(linearHertz, 1);
-    }
-
-    public float angularHertz() {
-        return (float) getValueFloat(2);
-    }
-
-    public void angularHertz(float angularHertz) {
-        setValue(angularHertz, 2);
-    }
-
-    public float linearDampingRatio() {
-        return (float) getValueFloat(3);
-    }
-
-    public void linearDampingRatio(float linearDampingRatio) {
-        setValue(linearDampingRatio, 3);
-    }
-
-    public float angularDampingRatio() {
         return (float) getValueFloat(4);
     }
 
+    public void referenceAngle(float referenceAngle) {
+        setValue(referenceAngle, 4);
+    }
+
+    public float linearHertz() {
+        return (float) getValueFloat(5);
+    }
+
+    public void linearHertz(float linearHertz) {
+        setValue(linearHertz, 5);
+    }
+
+    public float angularHertz() {
+        return (float) getValueFloat(6);
+    }
+
+    public void angularHertz(float angularHertz) {
+        setValue(angularHertz, 6);
+    }
+
+    public float linearDampingRatio() {
+        return (float) getValueFloat(7);
+    }
+
+    public void linearDampingRatio(float linearDampingRatio) {
+        setValue(linearDampingRatio, 7);
+    }
+
+    public float angularDampingRatio() {
+        return (float) getValueFloat(8);
+    }
+
     public void angularDampingRatio(float angularDampingRatio) {
-        setValue(angularDampingRatio, 4);
+        setValue(angularDampingRatio, 8);
     }
 
     public boolean collideConnected() {
-        return getValue(5) != 0;
+        return getValue(9) != 0;
     }
 
     public void collideConnected(boolean collideConnected) {
-        setValue(collideConnected, 5);
+        setValue(collideConnected, 9);
     }
 
     public VoidPointer userData() {
-        return new VoidPointer(getValue(6), false);
+        return new VoidPointer(getValue(10), false);
     }
 
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 6);
+        setValue(userData.getPointer(), 10);
     }
 
     public int internalValue() {
-        return (int) getValue(7);
+        return (int) getValue(11);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 7);
+        setValue(internalValue, 11);
     }
 
     public static final class b2WeldJointDefPointer extends StackElementPointer<b2WeldJointDef> {

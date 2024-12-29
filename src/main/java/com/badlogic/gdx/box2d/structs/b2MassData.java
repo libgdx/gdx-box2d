@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2MassData extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2MassData extends Struct {
 
     private final static int __size;
 
@@ -54,11 +54,11 @@ public final class b2MassData extends com.badlogic.gdx.jnigen.runtime.pointer.St
     private final b2Vec2 __center = new b2Vec2(getPointer() + __center_offset, false);
 
     public float rotationalInertia() {
-        return (float) getValueFloat(1);
+        return (float) getValueFloat(2);
     }
 
     public void rotationalInertia(float rotationalInertia) {
-        setValue(rotationalInertia, 1);
+        setValue(rotationalInertia, 2);
     }
 
     public static final class b2MassDataPointer extends StackElementPointer<b2MassData> {

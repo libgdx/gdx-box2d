@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2RayCastInput extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2RayCastInput extends Struct {
 
     private final static int __size;
 
@@ -49,16 +49,16 @@ public final class b2RayCastInput extends com.badlogic.gdx.jnigen.runtime.pointe
         return __translation;
     }
 
-    private static final int __translation_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __translation_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __translation = new b2Vec2(getPointer() + __translation_offset, false);
 
     public float maxFraction() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(2);
     }
 
     public void maxFraction(float maxFraction) {
-        setValue(maxFraction, 0);
+        setValue(maxFraction, 2);
     }
 
     public static final class b2RayCastInputPointer extends StackElementPointer<b2RayCastInput> {

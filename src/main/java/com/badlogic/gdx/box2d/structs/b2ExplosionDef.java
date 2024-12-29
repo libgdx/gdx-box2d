@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2ExplosionDef extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2ExplosionDef extends Struct {
 
     private final static int __size;
 
@@ -54,27 +54,27 @@ public final class b2ExplosionDef extends com.badlogic.gdx.jnigen.runtime.pointe
     private final b2Vec2 __position = new b2Vec2(getPointer() + __position_offset, false);
 
     public float radius() {
-        return (float) getValueFloat(1);
-    }
-
-    public void radius(float radius) {
-        setValue(radius, 1);
-    }
-
-    public float falloff() {
         return (float) getValueFloat(2);
     }
 
-    public void falloff(float falloff) {
-        setValue(falloff, 2);
+    public void radius(float radius) {
+        setValue(radius, 2);
     }
 
-    public float impulsePerLength() {
+    public float falloff() {
         return (float) getValueFloat(3);
     }
 
+    public void falloff(float falloff) {
+        setValue(falloff, 3);
+    }
+
+    public float impulsePerLength() {
+        return (float) getValueFloat(4);
+    }
+
     public void impulsePerLength(float impulsePerLength) {
-        setValue(impulsePerLength, 3);
+        setValue(impulsePerLength, 4);
     }
 
     public static final class b2ExplosionDefPointer extends StackElementPointer<b2ExplosionDef> {

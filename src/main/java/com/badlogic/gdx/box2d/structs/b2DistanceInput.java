@@ -7,7 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Transform;
 
-public final class b2DistanceInput extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2DistanceInput extends Struct {
 
     private final static int __size;
 
@@ -50,7 +50,7 @@ public final class b2DistanceInput extends com.badlogic.gdx.jnigen.runtime.point
         return __proxyB;
     }
 
-    private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
@@ -58,7 +58,7 @@ public final class b2DistanceInput extends com.badlogic.gdx.jnigen.runtime.point
         return __transformA;
     }
 
-    private static final int __transformA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __transformA_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Transform __transformA = new b2Transform(getPointer() + __transformA_offset, false);
 
@@ -66,16 +66,16 @@ public final class b2DistanceInput extends com.badlogic.gdx.jnigen.runtime.point
         return __transformB;
     }
 
-    private static final int __transformB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __transformB_offset = CHandler.getOffsetForField(__ffi_type, 3);
 
     private final b2Transform __transformB = new b2Transform(getPointer() + __transformB_offset, false);
 
     public boolean useRadii() {
-        return getValue(0) != 0;
+        return getValue(4) != 0;
     }
 
     public void useRadii(boolean useRadii) {
-        setValue(useRadii, 0);
+        setValue(useRadii, 4);
     }
 
     public static final class b2DistanceInputPointer extends StackElementPointer<b2DistanceInput> {

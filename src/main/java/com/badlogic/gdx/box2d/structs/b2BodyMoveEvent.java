@@ -8,7 +8,7 @@ import com.badlogic.gdx.box2d.structs.b2Transform;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
-public final class b2BodyMoveEvent extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2BodyMoveEvent extends Struct {
 
     private final static int __size;
 
@@ -51,24 +51,24 @@ public final class b2BodyMoveEvent extends com.badlogic.gdx.jnigen.runtime.point
         return __bodyId;
     }
 
-    private static final int __bodyId_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __bodyId_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2BodyId __bodyId = new b2BodyId(getPointer() + __bodyId_offset, false);
 
     public VoidPointer userData() {
-        return new VoidPointer(getValue(0), false);
+        return new VoidPointer(getValue(2), false);
     }
 
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 0);
+        setValue(userData.getPointer(), 2);
     }
 
     public boolean fellAsleep() {
-        return getValue(1) != 0;
+        return getValue(3) != 0;
     }
 
     public void fellAsleep(boolean fellAsleep) {
-        setValue(fellAsleep, 1);
+        setValue(fellAsleep, 3);
     }
 
     public static final class b2BodyMoveEventPointer extends StackElementPointer<b2BodyMoveEvent> {

@@ -9,7 +9,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 import com.badlogic.gdx.box2d.structs.b2AABB;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2DynamicTree extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2DynamicTree extends Struct {
 
     private final static int __size;
 

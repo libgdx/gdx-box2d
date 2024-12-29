@@ -8,7 +8,7 @@ import com.badlogic.gdx.box2d.structs.b2ContactBeginTouchEvent;
 import com.badlogic.gdx.box2d.structs.b2ContactEndTouchEvent;
 import com.badlogic.gdx.box2d.structs.b2ContactHitEvent;
 
-public final class b2ContactEvents extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2ContactEvents extends Struct {
 
     private final static int __size;
 

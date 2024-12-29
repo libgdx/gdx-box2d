@@ -1,8 +1,9 @@
 package com.badlogic.gdx.box2d.enums;
 
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
+import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 
-public enum b2MixingRule implements com.badlogic.gdx.jnigen.runtime.c.CEnum {
+public enum b2MixingRule implements CEnum {
 
     b2_mixAverage(0), b2_mixGeometricMean(1), b2_mixMultiply(2), b2_mixMinimum(3), b2_mixMaximum(4);
 

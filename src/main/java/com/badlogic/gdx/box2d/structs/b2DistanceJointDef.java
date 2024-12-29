@@ -8,7 +8,7 @@ import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
-public final class b2DistanceJointDef extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2DistanceJointDef extends Struct {
 
     private final static int __size;
 
@@ -51,7 +51,7 @@ public final class b2DistanceJointDef extends com.badlogic.gdx.jnigen.runtime.po
         return __bodyIdB;
     }
 
-    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2BodyId __bodyIdB = new b2BodyId(getPointer() + __bodyIdB_offset, false);
 
@@ -59,7 +59,7 @@ public final class b2DistanceJointDef extends com.badlogic.gdx.jnigen.runtime.po
         return __localAnchorA;
     }
 
-    private static final int __localAnchorA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __localAnchorA_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __localAnchorA = new b2Vec2(getPointer() + __localAnchorA_offset, false);
 
@@ -67,112 +67,112 @@ public final class b2DistanceJointDef extends com.badlogic.gdx.jnigen.runtime.po
         return __localAnchorB;
     }
 
-    private static final int __localAnchorB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __localAnchorB_offset = CHandler.getOffsetForField(__ffi_type, 3);
 
     private final b2Vec2 __localAnchorB = new b2Vec2(getPointer() + __localAnchorB_offset, false);
 
     public float length() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(4);
     }
 
     public void length(float length) {
-        setValue(length, 0);
+        setValue(length, 4);
     }
 
     public boolean enableSpring() {
-        return getValue(1) != 0;
+        return getValue(5) != 0;
     }
 
     public void enableSpring(boolean enableSpring) {
-        setValue(enableSpring, 1);
+        setValue(enableSpring, 5);
     }
 
     public float hertz() {
-        return (float) getValueFloat(2);
-    }
-
-    public void hertz(float hertz) {
-        setValue(hertz, 2);
-    }
-
-    public float dampingRatio() {
-        return (float) getValueFloat(3);
-    }
-
-    public void dampingRatio(float dampingRatio) {
-        setValue(dampingRatio, 3);
-    }
-
-    public boolean enableLimit() {
-        return getValue(4) != 0;
-    }
-
-    public void enableLimit(boolean enableLimit) {
-        setValue(enableLimit, 4);
-    }
-
-    public float minLength() {
-        return (float) getValueFloat(5);
-    }
-
-    public void minLength(float minLength) {
-        setValue(minLength, 5);
-    }
-
-    public float maxLength() {
         return (float) getValueFloat(6);
     }
 
-    public void maxLength(float maxLength) {
-        setValue(maxLength, 6);
+    public void hertz(float hertz) {
+        setValue(hertz, 6);
     }
 
-    public boolean enableMotor() {
-        return getValue(7) != 0;
+    public float dampingRatio() {
+        return (float) getValueFloat(7);
     }
 
-    public void enableMotor(boolean enableMotor) {
-        setValue(enableMotor, 7);
+    public void dampingRatio(float dampingRatio) {
+        setValue(dampingRatio, 7);
     }
 
-    public float maxMotorForce() {
-        return (float) getValueFloat(8);
+    public boolean enableLimit() {
+        return getValue(8) != 0;
     }
 
-    public void maxMotorForce(float maxMotorForce) {
-        setValue(maxMotorForce, 8);
+    public void enableLimit(boolean enableLimit) {
+        setValue(enableLimit, 8);
     }
 
-    public float motorSpeed() {
+    public float minLength() {
         return (float) getValueFloat(9);
     }
 
+    public void minLength(float minLength) {
+        setValue(minLength, 9);
+    }
+
+    public float maxLength() {
+        return (float) getValueFloat(10);
+    }
+
+    public void maxLength(float maxLength) {
+        setValue(maxLength, 10);
+    }
+
+    public boolean enableMotor() {
+        return getValue(11) != 0;
+    }
+
+    public void enableMotor(boolean enableMotor) {
+        setValue(enableMotor, 11);
+    }
+
+    public float maxMotorForce() {
+        return (float) getValueFloat(12);
+    }
+
+    public void maxMotorForce(float maxMotorForce) {
+        setValue(maxMotorForce, 12);
+    }
+
+    public float motorSpeed() {
+        return (float) getValueFloat(13);
+    }
+
     public void motorSpeed(float motorSpeed) {
-        setValue(motorSpeed, 9);
+        setValue(motorSpeed, 13);
     }
 
     public boolean collideConnected() {
-        return getValue(10) != 0;
+        return getValue(14) != 0;
     }
 
     public void collideConnected(boolean collideConnected) {
-        setValue(collideConnected, 10);
+        setValue(collideConnected, 14);
     }
 
     public VoidPointer userData() {
-        return new VoidPointer(getValue(11), false);
+        return new VoidPointer(getValue(15), false);
     }
 
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 11);
+        setValue(userData.getPointer(), 15);
     }
 
     public int internalValue() {
-        return (int) getValue(12);
+        return (int) getValue(16);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 12);
+        setValue(internalValue, 16);
     }
 
     public static final class b2DistanceJointDefPointer extends StackElementPointer<b2DistanceJointDef> {

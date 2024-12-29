@@ -8,7 +8,7 @@ import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
-public final class b2RevoluteJointDef extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2RevoluteJointDef extends Struct {
 
     private final static int __size;
 
@@ -51,7 +51,7 @@ public final class b2RevoluteJointDef extends com.badlogic.gdx.jnigen.runtime.po
         return __bodyIdB;
     }
 
-    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2BodyId __bodyIdB = new b2BodyId(getPointer() + __bodyIdB_offset, false);
 
@@ -59,7 +59,7 @@ public final class b2RevoluteJointDef extends com.badlogic.gdx.jnigen.runtime.po
         return __localAnchorA;
     }
 
-    private static final int __localAnchorA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __localAnchorA_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __localAnchorA = new b2Vec2(getPointer() + __localAnchorA_offset, false);
 
@@ -67,120 +67,120 @@ public final class b2RevoluteJointDef extends com.badlogic.gdx.jnigen.runtime.po
         return __localAnchorB;
     }
 
-    private static final int __localAnchorB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __localAnchorB_offset = CHandler.getOffsetForField(__ffi_type, 3);
 
     private final b2Vec2 __localAnchorB = new b2Vec2(getPointer() + __localAnchorB_offset, false);
 
     public float referenceAngle() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(4);
     }
 
     public void referenceAngle(float referenceAngle) {
-        setValue(referenceAngle, 0);
+        setValue(referenceAngle, 4);
     }
 
     public boolean enableSpring() {
-        return getValue(1) != 0;
+        return getValue(5) != 0;
     }
 
     public void enableSpring(boolean enableSpring) {
-        setValue(enableSpring, 1);
+        setValue(enableSpring, 5);
     }
 
     public float hertz() {
-        return (float) getValueFloat(2);
-    }
-
-    public void hertz(float hertz) {
-        setValue(hertz, 2);
-    }
-
-    public float dampingRatio() {
-        return (float) getValueFloat(3);
-    }
-
-    public void dampingRatio(float dampingRatio) {
-        setValue(dampingRatio, 3);
-    }
-
-    public boolean enableLimit() {
-        return getValue(4) != 0;
-    }
-
-    public void enableLimit(boolean enableLimit) {
-        setValue(enableLimit, 4);
-    }
-
-    public float lowerAngle() {
-        return (float) getValueFloat(5);
-    }
-
-    public void lowerAngle(float lowerAngle) {
-        setValue(lowerAngle, 5);
-    }
-
-    public float upperAngle() {
         return (float) getValueFloat(6);
     }
 
-    public void upperAngle(float upperAngle) {
-        setValue(upperAngle, 6);
+    public void hertz(float hertz) {
+        setValue(hertz, 6);
     }
 
-    public boolean enableMotor() {
-        return getValue(7) != 0;
+    public float dampingRatio() {
+        return (float) getValueFloat(7);
     }
 
-    public void enableMotor(boolean enableMotor) {
-        setValue(enableMotor, 7);
+    public void dampingRatio(float dampingRatio) {
+        setValue(dampingRatio, 7);
     }
 
-    public float maxMotorTorque() {
-        return (float) getValueFloat(8);
+    public boolean enableLimit() {
+        return getValue(8) != 0;
     }
 
-    public void maxMotorTorque(float maxMotorTorque) {
-        setValue(maxMotorTorque, 8);
+    public void enableLimit(boolean enableLimit) {
+        setValue(enableLimit, 8);
     }
 
-    public float motorSpeed() {
+    public float lowerAngle() {
         return (float) getValueFloat(9);
     }
 
-    public void motorSpeed(float motorSpeed) {
-        setValue(motorSpeed, 9);
+    public void lowerAngle(float lowerAngle) {
+        setValue(lowerAngle, 9);
     }
 
-    public float drawSize() {
+    public float upperAngle() {
         return (float) getValueFloat(10);
     }
 
-    public void drawSize(float drawSize) {
-        setValue(drawSize, 10);
+    public void upperAngle(float upperAngle) {
+        setValue(upperAngle, 10);
     }
 
-    public boolean collideConnected() {
+    public boolean enableMotor() {
         return getValue(11) != 0;
     }
 
+    public void enableMotor(boolean enableMotor) {
+        setValue(enableMotor, 11);
+    }
+
+    public float maxMotorTorque() {
+        return (float) getValueFloat(12);
+    }
+
+    public void maxMotorTorque(float maxMotorTorque) {
+        setValue(maxMotorTorque, 12);
+    }
+
+    public float motorSpeed() {
+        return (float) getValueFloat(13);
+    }
+
+    public void motorSpeed(float motorSpeed) {
+        setValue(motorSpeed, 13);
+    }
+
+    public float drawSize() {
+        return (float) getValueFloat(14);
+    }
+
+    public void drawSize(float drawSize) {
+        setValue(drawSize, 14);
+    }
+
+    public boolean collideConnected() {
+        return getValue(15) != 0;
+    }
+
     public void collideConnected(boolean collideConnected) {
-        setValue(collideConnected, 11);
+        setValue(collideConnected, 15);
     }
 
     public VoidPointer userData() {
-        return new VoidPointer(getValue(12), false);
+        return new VoidPointer(getValue(16), false);
     }
 
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 12);
+        setValue(userData.getPointer(), 16);
     }
 
     public int internalValue() {
-        return (int) getValue(13);
+        return (int) getValue(17);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 13);
+        setValue(internalValue, 17);
     }
 
     public static final class b2RevoluteJointDefPointer extends StackElementPointer<b2RevoluteJointDef> {

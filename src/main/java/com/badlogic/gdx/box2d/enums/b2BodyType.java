@@ -1,8 +1,9 @@
 package com.badlogic.gdx.box2d.enums;
 
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
+import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 
-public enum b2BodyType implements com.badlogic.gdx.jnigen.runtime.c.CEnum {
+public enum b2BodyType implements CEnum {
 
     b2_staticBody(0), b2_kinematicBody(1), b2_dynamicBody(2), b2_bodyTypeCount(3);
 

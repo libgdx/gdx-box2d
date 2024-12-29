@@ -7,7 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.structs.b2Filter;
 
-public final class b2ShapeDef extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2ShapeDef extends Struct {
 
     private final static int __size;
 
@@ -87,75 +87,75 @@ public final class b2ShapeDef extends com.badlogic.gdx.jnigen.runtime.pointer.St
     private final b2Filter __filter = new b2Filter(getPointer() + __filter_offset, false);
 
     public long customColor() {
-        return (long) getValue(5);
+        return (long) getValue(6);
     }
 
     public void customColor(long customColor) {
-        setValue(customColor, 5);
+        setValue(customColor, 6);
     }
 
     public boolean isSensor() {
-        return getValue(6) != 0;
-    }
-
-    public void isSensor(boolean isSensor) {
-        setValue(isSensor, 6);
-    }
-
-    public boolean enableSensorEvents() {
         return getValue(7) != 0;
     }
 
-    public void enableSensorEvents(boolean enableSensorEvents) {
-        setValue(enableSensorEvents, 7);
+    public void isSensor(boolean isSensor) {
+        setValue(isSensor, 7);
     }
 
-    public boolean enableContactEvents() {
+    public boolean enableSensorEvents() {
         return getValue(8) != 0;
     }
 
-    public void enableContactEvents(boolean enableContactEvents) {
-        setValue(enableContactEvents, 8);
+    public void enableSensorEvents(boolean enableSensorEvents) {
+        setValue(enableSensorEvents, 8);
     }
 
-    public boolean enableHitEvents() {
+    public boolean enableContactEvents() {
         return getValue(9) != 0;
     }
 
-    public void enableHitEvents(boolean enableHitEvents) {
-        setValue(enableHitEvents, 9);
+    public void enableContactEvents(boolean enableContactEvents) {
+        setValue(enableContactEvents, 9);
     }
 
-    public boolean enablePreSolveEvents() {
+    public boolean enableHitEvents() {
         return getValue(10) != 0;
     }
 
-    public void enablePreSolveEvents(boolean enablePreSolveEvents) {
-        setValue(enablePreSolveEvents, 10);
+    public void enableHitEvents(boolean enableHitEvents) {
+        setValue(enableHitEvents, 10);
     }
 
-    public boolean invokeContactCreation() {
+    public boolean enablePreSolveEvents() {
         return getValue(11) != 0;
     }
 
-    public void invokeContactCreation(boolean invokeContactCreation) {
-        setValue(invokeContactCreation, 11);
+    public void enablePreSolveEvents(boolean enablePreSolveEvents) {
+        setValue(enablePreSolveEvents, 11);
     }
 
-    public boolean updateBodyMass() {
+    public boolean invokeContactCreation() {
         return getValue(12) != 0;
     }
 
+    public void invokeContactCreation(boolean invokeContactCreation) {
+        setValue(invokeContactCreation, 12);
+    }
+
+    public boolean updateBodyMass() {
+        return getValue(13) != 0;
+    }
+
     public void updateBodyMass(boolean updateBodyMass) {
-        setValue(updateBodyMass, 12);
+        setValue(updateBodyMass, 13);
     }
 
     public int internalValue() {
-        return (int) getValue(13);
+        return (int) getValue(14);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 13);
+        setValue(internalValue, 14);
     }
 
     public static final class b2ShapeDefPointer extends StackElementPointer<b2ShapeDef> {

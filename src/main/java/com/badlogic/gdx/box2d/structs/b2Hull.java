@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2Hull extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2Hull extends Struct {
 
     private final static int __size;
 

@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2ManifoldPoint extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2ManifoldPoint extends Struct {
 
     private final static int __size;
 
@@ -49,7 +49,7 @@ public final class b2ManifoldPoint extends com.badlogic.gdx.jnigen.runtime.point
         return __anchorA;
     }
 
-    private static final int __anchorA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __anchorA_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __anchorA = new b2Vec2(getPointer() + __anchorA_offset, false);
 
@@ -57,64 +57,64 @@ public final class b2ManifoldPoint extends com.badlogic.gdx.jnigen.runtime.point
         return __anchorB;
     }
 
-    private static final int __anchorB_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __anchorB_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __anchorB = new b2Vec2(getPointer() + __anchorB_offset, false);
 
     public float separation() {
-        return (float) getValueFloat(0);
-    }
-
-    public void separation(float separation) {
-        setValue(separation, 0);
-    }
-
-    public float normalImpulse() {
-        return (float) getValueFloat(1);
-    }
-
-    public void normalImpulse(float normalImpulse) {
-        setValue(normalImpulse, 1);
-    }
-
-    public float tangentImpulse() {
-        return (float) getValueFloat(2);
-    }
-
-    public void tangentImpulse(float tangentImpulse) {
-        setValue(tangentImpulse, 2);
-    }
-
-    public float maxNormalImpulse() {
         return (float) getValueFloat(3);
     }
 
-    public void maxNormalImpulse(float maxNormalImpulse) {
-        setValue(maxNormalImpulse, 3);
+    public void separation(float separation) {
+        setValue(separation, 3);
     }
 
-    public float normalVelocity() {
+    public float normalImpulse() {
         return (float) getValueFloat(4);
     }
 
+    public void normalImpulse(float normalImpulse) {
+        setValue(normalImpulse, 4);
+    }
+
+    public float tangentImpulse() {
+        return (float) getValueFloat(5);
+    }
+
+    public void tangentImpulse(float tangentImpulse) {
+        setValue(tangentImpulse, 5);
+    }
+
+    public float maxNormalImpulse() {
+        return (float) getValueFloat(6);
+    }
+
+    public void maxNormalImpulse(float maxNormalImpulse) {
+        setValue(maxNormalImpulse, 6);
+    }
+
+    public float normalVelocity() {
+        return (float) getValueFloat(7);
+    }
+
     public void normalVelocity(float normalVelocity) {
-        setValue(normalVelocity, 4);
+        setValue(normalVelocity, 7);
     }
 
     public char id() {
-        return (char) getValue(5);
+        return (char) getValue(8);
     }
 
     public void id(char id) {
-        setValue(id, 5);
+        setValue(id, 8);
     }
 
     public boolean persisted() {
-        return getValue(6) != 0;
+        return getValue(9) != 0;
     }
 
     public void persisted(boolean persisted) {
-        setValue(persisted, 6);
+        setValue(persisted, 9);
     }
 
     public static final class b2ManifoldPointPointer extends StackElementPointer<b2ManifoldPoint> {

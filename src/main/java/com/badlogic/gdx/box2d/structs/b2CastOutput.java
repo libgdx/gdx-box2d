@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2CastOutput extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2CastOutput extends Struct {
 
     private final static int __size;
 
@@ -49,32 +49,32 @@ public final class b2CastOutput extends com.badlogic.gdx.jnigen.runtime.pointer.
         return __point;
     }
 
-    private static final int __point_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __point_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
 
     public float fraction() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(2);
     }
 
     public void fraction(float fraction) {
-        setValue(fraction, 0);
+        setValue(fraction, 2);
     }
 
     public int iterations() {
-        return (int) getValue(1);
+        return (int) getValue(3);
     }
 
     public void iterations(int iterations) {
-        setValue(iterations, 1);
+        setValue(iterations, 3);
     }
 
     public boolean hit() {
-        return getValue(2) != 0;
+        return getValue(4) != 0;
     }
 
     public void hit(boolean hit) {
-        setValue(hit, 2);
+        setValue(hit, 4);
     }
 
     public static final class b2CastOutputPointer extends StackElementPointer<b2CastOutput> {

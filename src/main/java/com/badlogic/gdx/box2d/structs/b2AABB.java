@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2AABB extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2AABB extends Struct {
 
     private final static int __size;
 
@@ -49,7 +49,7 @@ public final class b2AABB extends com.badlogic.gdx.jnigen.runtime.pointer.Struct
         return __upperBound;
     }
 
-    private static final int __upperBound_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __upperBound_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __upperBound = new b2Vec2(getPointer() + __upperBound_offset, false);
 

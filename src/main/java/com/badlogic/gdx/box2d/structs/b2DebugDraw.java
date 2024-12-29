@@ -12,10 +12,11 @@ import com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper;
 import com.badlogic.gdx.jnigen.runtime.c.CTypeInfo;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.enums.b2HexColor;
+import com.badlogic.gdx.jnigen.runtime.ffi.ClosureEncoder;
 import com.badlogic.gdx.box2d.structs.b2Transform;
 import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 
-public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2DebugDraw extends Struct {
 
     private final static int __size;
 
@@ -47,75 +48,75 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
     }
 
     public ClosureObject<DrawPolygon> DrawPolygon() {
-        return CHandler.getClosureObject(getValue(0));
+        return CHandler.getClosureObject(getValue(0), DrawPolygon::DrawPolygon_downcall);
     }
 
     public void DrawPolygon(ClosureObject<DrawPolygon> DrawPolygon) {
-        setValue(DrawPolygon.getFnPtr(), 0);
+        setValue(DrawPolygon.getPointer(), 0);
     }
 
     public ClosureObject<DrawSolidPolygon> DrawSolidPolygon() {
-        return CHandler.getClosureObject(getValue(1));
+        return CHandler.getClosureObject(getValue(1), DrawSolidPolygon::DrawSolidPolygon_downcall);
     }
 
     public void DrawSolidPolygon(ClosureObject<DrawSolidPolygon> DrawSolidPolygon) {
-        setValue(DrawSolidPolygon.getFnPtr(), 1);
+        setValue(DrawSolidPolygon.getPointer(), 1);
     }
 
     public ClosureObject<DrawCircle> DrawCircle() {
-        return CHandler.getClosureObject(getValue(2));
+        return CHandler.getClosureObject(getValue(2), DrawCircle::DrawCircle_downcall);
     }
 
     public void DrawCircle(ClosureObject<DrawCircle> DrawCircle) {
-        setValue(DrawCircle.getFnPtr(), 2);
+        setValue(DrawCircle.getPointer(), 2);
     }
 
     public ClosureObject<DrawSolidCircle> DrawSolidCircle() {
-        return CHandler.getClosureObject(getValue(3));
+        return CHandler.getClosureObject(getValue(3), DrawSolidCircle::DrawSolidCircle_downcall);
     }
 
     public void DrawSolidCircle(ClosureObject<DrawSolidCircle> DrawSolidCircle) {
-        setValue(DrawSolidCircle.getFnPtr(), 3);
+        setValue(DrawSolidCircle.getPointer(), 3);
     }
 
     public ClosureObject<DrawSolidCapsule> DrawSolidCapsule() {
-        return CHandler.getClosureObject(getValue(4));
+        return CHandler.getClosureObject(getValue(4), DrawSolidCapsule::DrawSolidCapsule_downcall);
     }
 
     public void DrawSolidCapsule(ClosureObject<DrawSolidCapsule> DrawSolidCapsule) {
-        setValue(DrawSolidCapsule.getFnPtr(), 4);
+        setValue(DrawSolidCapsule.getPointer(), 4);
     }
 
     public ClosureObject<DrawSegment> DrawSegment() {
-        return CHandler.getClosureObject(getValue(5));
+        return CHandler.getClosureObject(getValue(5), DrawSegment::DrawSegment_downcall);
     }
 
     public void DrawSegment(ClosureObject<DrawSegment> DrawSegment) {
-        setValue(DrawSegment.getFnPtr(), 5);
+        setValue(DrawSegment.getPointer(), 5);
     }
 
     public ClosureObject<DrawTransform> DrawTransform() {
-        return CHandler.getClosureObject(getValue(6));
+        return CHandler.getClosureObject(getValue(6), DrawTransform::DrawTransform_downcall);
     }
 
     public void DrawTransform(ClosureObject<DrawTransform> DrawTransform) {
-        setValue(DrawTransform.getFnPtr(), 6);
+        setValue(DrawTransform.getPointer(), 6);
     }
 
     public ClosureObject<DrawPoint> DrawPoint() {
-        return CHandler.getClosureObject(getValue(7));
+        return CHandler.getClosureObject(getValue(7), DrawPoint::DrawPoint_downcall);
     }
 
     public void DrawPoint(ClosureObject<DrawPoint> DrawPoint) {
-        setValue(DrawPoint.getFnPtr(), 7);
+        setValue(DrawPoint.getPointer(), 7);
     }
 
     public ClosureObject<DrawString> DrawString() {
-        return CHandler.getClosureObject(getValue(8));
+        return CHandler.getClosureObject(getValue(8), DrawString::DrawString_downcall);
     }
 
     public void DrawString(ClosureObject<DrawString> DrawString) {
-        setValue(DrawString.getFnPtr(), 8);
+        setValue(DrawString.getPointer(), 8);
     }
 
     public b2AABB drawingBounds() {
@@ -127,99 +128,99 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
     private final b2AABB __drawingBounds = new b2AABB(getPointer() + __drawingBounds_offset, false);
 
     public boolean useDrawingBounds() {
-        return getValue(9) != 0;
-    }
-
-    public void useDrawingBounds(boolean useDrawingBounds) {
-        setValue(useDrawingBounds, 9);
-    }
-
-    public boolean drawShapes() {
         return getValue(10) != 0;
     }
 
-    public void drawShapes(boolean drawShapes) {
-        setValue(drawShapes, 10);
+    public void useDrawingBounds(boolean useDrawingBounds) {
+        setValue(useDrawingBounds, 10);
     }
 
-    public boolean drawJoints() {
+    public boolean drawShapes() {
         return getValue(11) != 0;
     }
 
-    public void drawJoints(boolean drawJoints) {
-        setValue(drawJoints, 11);
+    public void drawShapes(boolean drawShapes) {
+        setValue(drawShapes, 11);
     }
 
-    public boolean drawJointExtras() {
+    public boolean drawJoints() {
         return getValue(12) != 0;
     }
 
-    public void drawJointExtras(boolean drawJointExtras) {
-        setValue(drawJointExtras, 12);
+    public void drawJoints(boolean drawJoints) {
+        setValue(drawJoints, 12);
     }
 
-    public boolean drawAABBs() {
+    public boolean drawJointExtras() {
         return getValue(13) != 0;
     }
 
-    public void drawAABBs(boolean drawAABBs) {
-        setValue(drawAABBs, 13);
+    public void drawJointExtras(boolean drawJointExtras) {
+        setValue(drawJointExtras, 13);
     }
 
-    public boolean drawMass() {
+    public boolean drawAABBs() {
         return getValue(14) != 0;
     }
 
-    public void drawMass(boolean drawMass) {
-        setValue(drawMass, 14);
+    public void drawAABBs(boolean drawAABBs) {
+        setValue(drawAABBs, 14);
     }
 
-    public boolean drawContacts() {
+    public boolean drawMass() {
         return getValue(15) != 0;
     }
 
-    public void drawContacts(boolean drawContacts) {
-        setValue(drawContacts, 15);
+    public void drawMass(boolean drawMass) {
+        setValue(drawMass, 15);
     }
 
-    public boolean drawGraphColors() {
+    public boolean drawContacts() {
         return getValue(16) != 0;
     }
 
-    public void drawGraphColors(boolean drawGraphColors) {
-        setValue(drawGraphColors, 16);
+    public void drawContacts(boolean drawContacts) {
+        setValue(drawContacts, 16);
     }
 
-    public boolean drawContactNormals() {
+    public boolean drawGraphColors() {
         return getValue(17) != 0;
     }
 
-    public void drawContactNormals(boolean drawContactNormals) {
-        setValue(drawContactNormals, 17);
+    public void drawGraphColors(boolean drawGraphColors) {
+        setValue(drawGraphColors, 17);
     }
 
-    public boolean drawContactImpulses() {
+    public boolean drawContactNormals() {
         return getValue(18) != 0;
     }
 
-    public void drawContactImpulses(boolean drawContactImpulses) {
-        setValue(drawContactImpulses, 18);
+    public void drawContactNormals(boolean drawContactNormals) {
+        setValue(drawContactNormals, 18);
     }
 
-    public boolean drawFrictionImpulses() {
+    public boolean drawContactImpulses() {
         return getValue(19) != 0;
     }
 
+    public void drawContactImpulses(boolean drawContactImpulses) {
+        setValue(drawContactImpulses, 19);
+    }
+
+    public boolean drawFrictionImpulses() {
+        return getValue(20) != 0;
+    }
+
     public void drawFrictionImpulses(boolean drawFrictionImpulses) {
-        setValue(drawFrictionImpulses, 19);
+        setValue(drawFrictionImpulses, 20);
     }
 
     public VoidPointer context() {
-        return new VoidPointer(getValue(20), false);
+        return new VoidPointer(getValue(21), false);
     }
 
     public void context(VoidPointer context) {
-        setValue(context.getPointer(), 20);
+        setValue(context.getPointer(), 21);
     }
 
     public static final class b2DebugDrawPointer extends StackElementPointer<b2DebugDraw> {
@@ -250,138 +251,282 @@ public final class b2DebugDraw extends com.badlogic.gdx.jnigen.runtime.pointer.S
         }
     }
 
-    public interface DrawPolygon extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface DrawPolygon extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawPolygon_call(b2Vec2.b2Vec2Pointer arg0, int arg1, b2HexColor arg2, VoidPointer arg3);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             DrawPolygon_call(new b2Vec2.b2Vec2Pointer(parameters[0].asLong(), false), (int) parameters[1].asLong(), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+        }
+
+        public static DrawPolygon DrawPolygon_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawPolygon.__ffi_cache);
+            return (arg0, arg1, arg2, arg3) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawPolygon.__ffi_cache[DrawPolygon.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 
-    public interface DrawSolidPolygon extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface DrawSolidPolygon extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawSolidPolygon_call(b2Transform arg0, b2Vec2.b2Vec2Pointer arg1, int arg2, float arg3, b2HexColor arg4, VoidPointer arg5);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             DrawSolidPolygon_call(new b2Transform(parameters[0].asLong(), true), new b2Vec2.b2Vec2Pointer(parameters[1].asLong(), false), (int) parameters[2].asLong(), (float) parameters[3].asFloat(), b2HexColor.getByIndex((int) parameters[4].asLong()), new VoidPointer(parameters[5].asLong(), false));
+        }
+
+        public static DrawSolidPolygon DrawSolidPolygon_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidPolygon.__ffi_cache);
+            return (arg0, arg1, arg2, arg3, arg4, arg5) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                    useEncoder.setValue(4, arg4);
+                    useEncoder.setValue(5, arg5);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawSolidPolygon.__ffi_cache[DrawSolidPolygon.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 
-    public interface DrawCircle extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface DrawCircle extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawCircle_call(b2Vec2 arg0, float arg1, b2HexColor arg2, VoidPointer arg3);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             DrawCircle_call(new b2Vec2(parameters[0].asLong(), true), (float) parameters[1].asFloat(), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+        }
+
+        public static DrawCircle DrawCircle_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawCircle.__ffi_cache);
+            return (arg0, arg1, arg2, arg3) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawCircle.__ffi_cache[DrawCircle.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 
-    public interface DrawSolidCircle extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface DrawSolidCircle extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawSolidCircle_call(b2Transform arg0, float arg1, b2HexColor arg2, VoidPointer arg3);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             DrawSolidCircle_call(new b2Transform(parameters[0].asLong(), true), (float) parameters[1].asFloat(), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+        }
+
+        public static DrawSolidCircle DrawSolidCircle_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidCircle.__ffi_cache);
+            return (arg0, arg1, arg2, arg3) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawSolidCircle.__ffi_cache[DrawSolidCircle.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 
-    public interface DrawSolidCapsule extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface DrawSolidCapsule extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawSolidCapsule_call(b2Vec2 arg0, b2Vec2 arg1, float arg2, b2HexColor arg3, VoidPointer arg4);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             DrawSolidCapsule_call(new b2Vec2(parameters[0].asLong(), true), new b2Vec2(parameters[1].asLong(), true), (float) parameters[2].asFloat(), b2HexColor.getByIndex((int) parameters[3].asLong()), new VoidPointer(parameters[4].asLong(), false));
+        }
+
+        public static DrawSolidCapsule DrawSolidCapsule_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidCapsule.__ffi_cache);
+            return (arg0, arg1, arg2, arg3, arg4) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                    useEncoder.setValue(4, arg4);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawSolidCapsule.__ffi_cache[DrawSolidCapsule.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 
-    public interface DrawSegment extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface DrawSegment extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawSegment_call(b2Vec2 arg0, b2Vec2 arg1, b2HexColor arg2, VoidPointer arg3);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             DrawSegment_call(new b2Vec2(parameters[0].asLong(), true), new b2Vec2(parameters[1].asLong(), true), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+        }
+
+        public static DrawSegment DrawSegment_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSegment.__ffi_cache);
+            return (arg0, arg1, arg2, arg3) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawSegment.__ffi_cache[DrawSegment.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 
-    public interface DrawTransform extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface DrawTransform extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1) };
 
         void DrawTransform_call(b2Transform arg0, VoidPointer arg1);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             DrawTransform_call(new b2Transform(parameters[0].asLong(), true), new VoidPointer(parameters[1].asLong(), false));
+        }
+
+        public static DrawTransform DrawTransform_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawTransform.__ffi_cache);
+            return (arg0, arg1) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawTransform.__ffi_cache[DrawTransform.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 
-    public interface DrawPoint extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface DrawPoint extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         void DrawPoint_call(b2Vec2 arg0, float arg1, b2HexColor arg2, VoidPointer arg3);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             DrawPoint_call(new b2Vec2(parameters[0].asLong(), true), (float) parameters[1].asFloat(), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+        }
+
+        public static DrawPoint DrawPoint_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawPoint.__ffi_cache);
+            return (arg0, arg1, arg2, arg3) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                    useEncoder.setValue(3, arg3);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawPoint.__ffi_cache[DrawPoint.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 
-    public interface DrawString extends com.badlogic.gdx.jnigen.runtime.closure.Closure {
+    public interface DrawString extends Closure {
 
-        com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] __ffi_cache = new com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
         void DrawString_call(b2Vec2 arg0, CSizedIntPointer arg1, VoidPointer arg2);
 
-        default com.badlogic.gdx.jnigen.runtime.c.CTypeInfo[] functionSignature() {
+        default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper[] parameters, com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper returnType) {
+        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
             DrawString_call(new b2Vec2(parameters[0].asLong(), true), new CSizedIntPointer(parameters[1].asLong(), false, "const char"), new VoidPointer(parameters[2].asLong(), false));
+        }
+
+        public static DrawString DrawString_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawString.__ffi_cache);
+            return (arg0, arg1, arg2) -> {
+                ClosureEncoder useEncoder = encoder.lockOrDuplicate();
+                {
+                    useEncoder.setValue(0, arg0);
+                    useEncoder.setValue(1, arg1);
+                    useEncoder.setValue(2, arg2);
+                }
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawString.__ffi_cache[DrawString.__ffi_cache.length - 1]);
+                returnConvert.setValue(useEncoder.invoke());
+                return;
+            };
         }
     }
 }

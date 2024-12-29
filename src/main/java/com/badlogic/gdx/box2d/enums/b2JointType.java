@@ -1,8 +1,9 @@
 package com.badlogic.gdx.box2d.enums;
 
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
+import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 
-public enum b2JointType implements com.badlogic.gdx.jnigen.runtime.c.CEnum {
+public enum b2JointType implements CEnum {
 
     b2_distanceJoint(0),
     b2_motorJoint(1),

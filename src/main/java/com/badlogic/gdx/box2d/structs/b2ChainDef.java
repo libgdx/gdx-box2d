@@ -8,7 +8,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Filter;
 
-public final class b2ChainDef extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2ChainDef extends Struct {
 
     private final static int __size;
 
@@ -88,27 +88,27 @@ public final class b2ChainDef extends com.badlogic.gdx.jnigen.runtime.pointer.St
     private final b2Filter __filter = new b2Filter(getPointer() + __filter_offset, false);
 
     public long customColor() {
-        return (long) getValue(5);
+        return (long) getValue(6);
     }
 
     public void customColor(long customColor) {
-        setValue(customColor, 5);
+        setValue(customColor, 6);
     }
 
     public boolean isLoop() {
-        return getValue(6) != 0;
+        return getValue(7) != 0;
     }
 
     public void isLoop(boolean isLoop) {
-        setValue(isLoop, 6);
+        setValue(isLoop, 7);
     }
 
     public int internalValue() {
-        return (int) getValue(7);
+        return (int) getValue(8);
     }
 
     public void internalValue(int internalValue) {
-        setValue(internalValue, 7);
+        setValue(internalValue, 8);
     }
 
     public static final class b2ChainDefPointer extends StackElementPointer<b2ChainDef> {

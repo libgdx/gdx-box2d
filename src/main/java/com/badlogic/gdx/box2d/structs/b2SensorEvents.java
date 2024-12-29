@@ -7,7 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2SensorBeginTouchEvent;
 import com.badlogic.gdx.box2d.structs.b2SensorEndTouchEvent;
 
-public final class b2SensorEvents extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2SensorEvents extends Struct {
 
     private final static int __size;
 

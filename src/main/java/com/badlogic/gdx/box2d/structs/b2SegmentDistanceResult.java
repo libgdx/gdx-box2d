@@ -6,7 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2SegmentDistanceResult extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2SegmentDistanceResult extends Struct {
 
     private final static int __size;
 
@@ -49,32 +49,32 @@ public final class b2SegmentDistanceResult extends com.badlogic.gdx.jnigen.runti
         return __closest2;
     }
 
-    private static final int __closest2_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __closest2_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __closest2 = new b2Vec2(getPointer() + __closest2_offset, false);
 
     public float fraction1() {
-        return (float) getValueFloat(0);
-    }
-
-    public void fraction1(float fraction1) {
-        setValue(fraction1, 0);
-    }
-
-    public float fraction2() {
-        return (float) getValueFloat(1);
-    }
-
-    public void fraction2(float fraction2) {
-        setValue(fraction2, 1);
-    }
-
-    public float distanceSquared() {
         return (float) getValueFloat(2);
     }
 
+    public void fraction1(float fraction1) {
+        setValue(fraction1, 2);
+    }
+
+    public float fraction2() {
+        return (float) getValueFloat(3);
+    }
+
+    public void fraction2(float fraction2) {
+        setValue(fraction2, 3);
+    }
+
+    public float distanceSquared() {
+        return (float) getValueFloat(4);
+    }
+
     public void distanceSquared(float distanceSquared) {
-        setValue(distanceSquared, 2);
+        setValue(distanceSquared, 4);
     }
 
     public static final class b2SegmentDistanceResultPointer extends StackElementPointer<b2SegmentDistanceResult> {

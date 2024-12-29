@@ -7,7 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
-public final class b2RayResult extends com.badlogic.gdx.jnigen.runtime.pointer.Struct {
+public final class b2RayResult extends Struct {
 
     private final static int __size;
 
@@ -50,7 +50,7 @@ public final class b2RayResult extends com.badlogic.gdx.jnigen.runtime.pointer.S
         return __point;
     }
 
-    private static final int __point_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __point_offset = CHandler.getOffsetForField(__ffi_type, 1);
 
     private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
 
@@ -58,40 +58,40 @@ public final class b2RayResult extends com.badlogic.gdx.jnigen.runtime.pointer.S
         return __normal;
     }
 
-    private static final int __normal_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __normal_offset = CHandler.getOffsetForField(__ffi_type, 2);
 
     private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
 
     public float fraction() {
-        return (float) getValueFloat(0);
+        return (float) getValueFloat(3);
     }
 
     public void fraction(float fraction) {
-        setValue(fraction, 0);
+        setValue(fraction, 3);
     }
 
     public int nodeVisits() {
-        return (int) getValue(1);
+        return (int) getValue(4);
     }
 
     public void nodeVisits(int nodeVisits) {
-        setValue(nodeVisits, 1);
+        setValue(nodeVisits, 4);
     }
 
     public int leafVisits() {
-        return (int) getValue(2);
+        return (int) getValue(5);
     }
 
     public void leafVisits(int leafVisits) {
-        setValue(leafVisits, 2);
+        setValue(leafVisits, 5);
     }
 
     public boolean hit() {
-        return getValue(3) != 0;
+        return getValue(6) != 0;
     }
 
     public void hit(boolean hit) {
-        setValue(hit, 3);
+        setValue(hit, 6);
     }
 
     public static final class b2RayResultPointer extends StackElementPointer<b2RayResult> {
