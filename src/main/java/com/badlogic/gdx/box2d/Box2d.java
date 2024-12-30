@@ -84,7 +84,7 @@ public final class Box2d {
 
         // Yes, this technically leaks, but this is expected to live for the entire program lifetime
         b2SetAssertFcn(ClosureObject.fromClosure((condition, fileName, lineNumber) -> {
-            throw new Box2DAssertionError("BOX2D ASSERTION: " + condition.getString() + ", " + fileName.getString() + ", line " + lineNumber);
+            throw new Box2dAssertionError("BOX2D ASSERTION: " + condition.getString() + ", " + fileName.getString() + ", line " + lineNumber);
         }));
     }
 

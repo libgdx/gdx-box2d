@@ -1,6 +1,6 @@
 package com.badlogic.gdx.box2d.test;
 
-import com.badlogic.gdx.box2d.Box2DAssertionError;
+import com.badlogic.gdx.box2d.Box2dAssertionError;
 import com.badlogic.gdx.box2d.Box2d;
 import com.badlogic.gdx.box2d.structs.b2WorldDef;
 import com.badlogic.gdx.box2d.structs.b2WorldId;
@@ -22,7 +22,7 @@ public class Box2dAssertionsTest {
         // We set an invalid index which will throw an assertion error when stepping
         worldId.index1((char)0);
 
-        assertThrows(Box2DAssertionError.class, () -> b2World_Step(worldId, 1/60f, 4));
+        assertThrows(Box2dAssertionError.class, () -> b2World_Step(worldId, 1/60f, 4));
 
         // Reset and clean up
         worldId.index1(worldIndex);
