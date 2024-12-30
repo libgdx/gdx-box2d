@@ -5451,7 +5451,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1) };
 
-        boolean b2OverlapResultFcn_call(b2ShapeId arg0, VoidPointer arg1);
+        boolean b2OverlapResultFcn_call(b2ShapeId shapeId, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5463,13 +5463,11 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2OverlapResultFcn b2OverlapResultFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2OverlapResultFcn.__ffi_cache);
-            return (arg0, arg1) -> {
+            return (shapeId, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2OverlapResultFcn.__ffi_cache[b2OverlapResultFcn.__ffi_cache.length - 1]);
+                useEncoder.setValue(0, shapeId);
+                useEncoder.setValue(1, context);
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2OverlapResultFcn.__ffi_cache[0]);
                 returnConvert.setValue(useEncoder.invoke());
                 return returnConvert.asLong() != 0;
             };
@@ -5480,7 +5478,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
 
-        boolean b2TreeQueryCallbackFcn_call(int arg0, int arg1, VoidPointer arg2);
+        boolean b2TreeQueryCallbackFcn_call(int proxyId, int userData, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5492,14 +5490,12 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2TreeQueryCallbackFcn b2TreeQueryCallbackFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeQueryCallbackFcn.__ffi_cache);
-            return (arg0, arg1, arg2) -> {
+            return (proxyId, userData, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeQueryCallbackFcn.__ffi_cache[b2TreeQueryCallbackFcn.__ffi_cache.length - 1]);
+                useEncoder.setValue(0, proxyId);
+                useEncoder.setValue(1, userData);
+                useEncoder.setValue(2, context);
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeQueryCallbackFcn.__ffi_cache[0]);
                 returnConvert.setValue(useEncoder.invoke());
                 return returnConvert.asLong() != 0;
             };
@@ -5510,7 +5506,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(8), FFITypes.getCTypeInfo(-1) };
 
-        void b2TaskCallback_call(int arg0, int arg1, long arg2, VoidPointer arg3);
+        void b2TaskCallback_call(int startIndex, int endIndex, long workerIndex, VoidPointer taskContext);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5522,17 +5518,13 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2TaskCallback b2TaskCallback_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TaskCallback.__ffi_cache);
-            return (arg0, arg1, arg2, arg3) -> {
+            return (startIndex, endIndex, workerIndex, taskContext) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TaskCallback.__ffi_cache[b2TaskCallback.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, startIndex);
+                useEncoder.setValue(1, endIndex);
+                useEncoder.setValue(2, workerIndex);
+                useEncoder.setValue(3, taskContext);
+                useEncoder.invoke();
             };
         }
     }
@@ -5541,7 +5533,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
-        VoidPointer b2EnqueueTaskCallback_call(ClosureObject<b2TaskCallback> arg0, int arg1, int arg2, VoidPointer arg3, VoidPointer arg4);
+        VoidPointer b2EnqueueTaskCallback_call(ClosureObject<b2TaskCallback> task, int itemCount, int minRange, VoidPointer taskContext, VoidPointer userContext);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5553,16 +5545,14 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2EnqueueTaskCallback b2EnqueueTaskCallback_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2EnqueueTaskCallback.__ffi_cache);
-            return (arg0, arg1, arg2, arg3, arg4) -> {
+            return (task, itemCount, minRange, taskContext, userContext) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                    useEncoder.setValue(4, arg4);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2EnqueueTaskCallback.__ffi_cache[b2EnqueueTaskCallback.__ffi_cache.length - 1]);
+                useEncoder.setValue(0, task);
+                useEncoder.setValue(1, itemCount);
+                useEncoder.setValue(2, minRange);
+                useEncoder.setValue(3, taskContext);
+                useEncoder.setValue(4, userContext);
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2EnqueueTaskCallback.__ffi_cache[0]);
                 returnConvert.setValue(useEncoder.invoke());
                 return new VoidPointer(returnConvert.asLong(), false);
             };
@@ -5573,7 +5563,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1) };
 
-        float b2CastResultFcn_call(b2ShapeId arg0, b2Vec2 arg1, b2Vec2 arg2, float arg3, VoidPointer arg4);
+        float b2CastResultFcn_call(b2ShapeId shapeId, b2Vec2 point, b2Vec2 normal, float fraction, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5585,16 +5575,14 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2CastResultFcn b2CastResultFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2CastResultFcn.__ffi_cache);
-            return (arg0, arg1, arg2, arg3, arg4) -> {
+            return (shapeId, point, normal, fraction, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                    useEncoder.setValue(4, arg4);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2CastResultFcn.__ffi_cache[b2CastResultFcn.__ffi_cache.length - 1]);
+                useEncoder.setValue(0, shapeId);
+                useEncoder.setValue(1, point);
+                useEncoder.setValue(2, normal);
+                useEncoder.setValue(3, fraction);
+                useEncoder.setValue(4, context);
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2CastResultFcn.__ffi_cache[0]);
                 returnConvert.setValue(useEncoder.invoke());
                 return (float) returnConvert.asFloat();
             };
@@ -5605,7 +5593,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
 
-        float b2TreeShapeCastCallbackFcn_call(b2ShapeCastInput.b2ShapeCastInputPointer arg0, int arg1, int arg2, VoidPointer arg3);
+        float b2TreeShapeCastCallbackFcn_call(b2ShapeCastInput.b2ShapeCastInputPointer input, int proxyId, int userData, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5617,15 +5605,13 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2TreeShapeCastCallbackFcn b2TreeShapeCastCallbackFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeShapeCastCallbackFcn.__ffi_cache);
-            return (arg0, arg1, arg2, arg3) -> {
+            return (input, proxyId, userData, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeShapeCastCallbackFcn.__ffi_cache[b2TreeShapeCastCallbackFcn.__ffi_cache.length - 1]);
+                useEncoder.setValue(0, input);
+                useEncoder.setValue(1, proxyId);
+                useEncoder.setValue(2, userData);
+                useEncoder.setValue(3, context);
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeShapeCastCallbackFcn.__ffi_cache[0]);
                 returnConvert.setValue(useEncoder.invoke());
                 return (float) returnConvert.asFloat();
             };
@@ -5636,7 +5622,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
-        boolean b2PreSolveFcn_call(b2ShapeId arg0, b2ShapeId arg1, b2Manifold.b2ManifoldPointer arg2, VoidPointer arg3);
+        boolean b2PreSolveFcn_call(b2ShapeId shapeIdA, b2ShapeId shapeIdB, b2Manifold.b2ManifoldPointer manifold, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5648,15 +5634,13 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2PreSolveFcn b2PreSolveFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2PreSolveFcn.__ffi_cache);
-            return (arg0, arg1, arg2, arg3) -> {
+            return (shapeIdA, shapeIdB, manifold, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2PreSolveFcn.__ffi_cache[b2PreSolveFcn.__ffi_cache.length - 1]);
+                useEncoder.setValue(0, shapeIdA);
+                useEncoder.setValue(1, shapeIdB);
+                useEncoder.setValue(2, manifold);
+                useEncoder.setValue(3, context);
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2PreSolveFcn.__ffi_cache[0]);
                 returnConvert.setValue(useEncoder.invoke());
                 return returnConvert.asLong() != 0;
             };
@@ -5667,7 +5651,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(11), FFITypes.getCTypeInfo(4) };
 
-        VoidPointer b2AllocFcn_call(long arg0, int arg1);
+        VoidPointer b2AllocFcn_call(long size, int alignment);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5679,13 +5663,11 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2AllocFcn b2AllocFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2AllocFcn.__ffi_cache);
-            return (arg0, arg1) -> {
+            return (size, alignment) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2AllocFcn.__ffi_cache[b2AllocFcn.__ffi_cache.length - 1]);
+                useEncoder.setValue(0, size);
+                useEncoder.setValue(1, alignment);
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2AllocFcn.__ffi_cache[0]);
                 returnConvert.setValue(useEncoder.invoke());
                 return new VoidPointer(returnConvert.asLong(), false);
             };
@@ -5696,7 +5678,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4) };
 
-        int b2AssertFcn_call(CSizedIntPointer arg0, CSizedIntPointer arg1, int arg2);
+        int b2AssertFcn_call(CSizedIntPointer condition, CSizedIntPointer fileName, int lineNumber);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5708,14 +5690,12 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2AssertFcn b2AssertFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2AssertFcn.__ffi_cache);
-            return (arg0, arg1, arg2) -> {
+            return (condition, fileName, lineNumber) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2AssertFcn.__ffi_cache[b2AssertFcn.__ffi_cache.length - 1]);
+                useEncoder.setValue(0, condition);
+                useEncoder.setValue(1, fileName);
+                useEncoder.setValue(2, lineNumber);
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2AssertFcn.__ffi_cache[0]);
                 returnConvert.setValue(useEncoder.invoke());
                 return (int) returnConvert.asLong();
             };
@@ -5726,7 +5706,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1) };
 
-        boolean b2CustomFilterFcn_call(b2ShapeId arg0, b2ShapeId arg1, VoidPointer arg2);
+        boolean b2CustomFilterFcn_call(b2ShapeId shapeIdA, b2ShapeId shapeIdB, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5738,14 +5718,12 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2CustomFilterFcn b2CustomFilterFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2CustomFilterFcn.__ffi_cache);
-            return (arg0, arg1, arg2) -> {
+            return (shapeIdA, shapeIdB, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2CustomFilterFcn.__ffi_cache[b2CustomFilterFcn.__ffi_cache.length - 1]);
+                useEncoder.setValue(0, shapeIdA);
+                useEncoder.setValue(1, shapeIdB);
+                useEncoder.setValue(2, context);
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2CustomFilterFcn.__ffi_cache[0]);
                 returnConvert.setValue(useEncoder.invoke());
                 return returnConvert.asLong() != 0;
             };
@@ -5756,7 +5734,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
 
-        float b2TreeRayCastCallbackFcn_call(b2RayCastInput.b2RayCastInputPointer arg0, int arg1, int arg2, VoidPointer arg3);
+        float b2TreeRayCastCallbackFcn_call(b2RayCastInput.b2RayCastInputPointer input, int proxyId, int userData, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5768,15 +5746,13 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2TreeRayCastCallbackFcn b2TreeRayCastCallbackFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeRayCastCallbackFcn.__ffi_cache);
-            return (arg0, arg1, arg2, arg3) -> {
+            return (input, proxyId, userData, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeRayCastCallbackFcn.__ffi_cache[b2TreeRayCastCallbackFcn.__ffi_cache.length - 1]);
+                useEncoder.setValue(0, input);
+                useEncoder.setValue(1, proxyId);
+                useEncoder.setValue(2, userData);
+                useEncoder.setValue(3, context);
+                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeRayCastCallbackFcn.__ffi_cache[0]);
                 returnConvert.setValue(useEncoder.invoke());
                 return (float) returnConvert.asFloat();
             };
@@ -5787,7 +5763,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1) };
 
-        void b2FreeFcn_call(VoidPointer arg0);
+        void b2FreeFcn_call(VoidPointer mem);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5799,14 +5775,10 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2FreeFcn b2FreeFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2FreeFcn.__ffi_cache);
-            return (arg0) -> {
+            return (mem) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2FreeFcn.__ffi_cache[b2FreeFcn.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, mem);
+                useEncoder.invoke();
             };
         }
     }
@@ -5815,7 +5787,7 @@ static jclass cxxExceptionClass = NULL;
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
-        void b2FinishTaskCallback_call(VoidPointer arg0, VoidPointer arg1);
+        void b2FinishTaskCallback_call(VoidPointer userTask, VoidPointer userContext);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -5827,15 +5799,11 @@ static jclass cxxExceptionClass = NULL;
 
         public static b2FinishTaskCallback b2FinishTaskCallback_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2FinishTaskCallback.__ffi_cache);
-            return (arg0, arg1) -> {
+            return (userTask, userContext) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2FinishTaskCallback.__ffi_cache[b2FinishTaskCallback.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, userTask);
+                useEncoder.setValue(1, userContext);
+                useEncoder.invoke();
             };
         }
     }

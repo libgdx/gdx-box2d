@@ -255,7 +255,7 @@ public final class b2DebugDraw extends Struct {
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
-        void DrawPolygon_call(b2Vec2.b2Vec2Pointer arg0, int arg1, b2HexColor arg2, VoidPointer arg3);
+        void DrawPolygon_call(b2Vec2.b2Vec2Pointer vertices, int vertexCount, b2HexColor color, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -267,17 +267,13 @@ public final class b2DebugDraw extends Struct {
 
         public static DrawPolygon DrawPolygon_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawPolygon.__ffi_cache);
-            return (arg0, arg1, arg2, arg3) -> {
+            return (vertices, vertexCount, color, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawPolygon.__ffi_cache[DrawPolygon.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, vertices);
+                useEncoder.setValue(1, vertexCount);
+                useEncoder.setValue(2, color);
+                useEncoder.setValue(3, context);
+                useEncoder.invoke();
             };
         }
     }
@@ -286,7 +282,7 @@ public final class b2DebugDraw extends Struct {
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
-        void DrawSolidPolygon_call(b2Transform arg0, b2Vec2.b2Vec2Pointer arg1, int arg2, float arg3, b2HexColor arg4, VoidPointer arg5);
+        void DrawSolidPolygon_call(b2Transform transform, b2Vec2.b2Vec2Pointer vertices, int vertexCount, float radius, b2HexColor color, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -298,19 +294,15 @@ public final class b2DebugDraw extends Struct {
 
         public static DrawSolidPolygon DrawSolidPolygon_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidPolygon.__ffi_cache);
-            return (arg0, arg1, arg2, arg3, arg4, arg5) -> {
+            return (transform, vertices, vertexCount, radius, color, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                    useEncoder.setValue(4, arg4);
-                    useEncoder.setValue(5, arg5);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawSolidPolygon.__ffi_cache[DrawSolidPolygon.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, transform);
+                useEncoder.setValue(1, vertices);
+                useEncoder.setValue(2, vertexCount);
+                useEncoder.setValue(3, radius);
+                useEncoder.setValue(4, color);
+                useEncoder.setValue(5, context);
+                useEncoder.invoke();
             };
         }
     }
@@ -319,7 +311,7 @@ public final class b2DebugDraw extends Struct {
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
-        void DrawCircle_call(b2Vec2 arg0, float arg1, b2HexColor arg2, VoidPointer arg3);
+        void DrawCircle_call(b2Vec2 center, float radius, b2HexColor color, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -331,17 +323,13 @@ public final class b2DebugDraw extends Struct {
 
         public static DrawCircle DrawCircle_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawCircle.__ffi_cache);
-            return (arg0, arg1, arg2, arg3) -> {
+            return (center, radius, color, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawCircle.__ffi_cache[DrawCircle.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, center);
+                useEncoder.setValue(1, radius);
+                useEncoder.setValue(2, color);
+                useEncoder.setValue(3, context);
+                useEncoder.invoke();
             };
         }
     }
@@ -350,7 +338,7 @@ public final class b2DebugDraw extends Struct {
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
-        void DrawSolidCircle_call(b2Transform arg0, float arg1, b2HexColor arg2, VoidPointer arg3);
+        void DrawSolidCircle_call(b2Transform transform, float radius, b2HexColor color, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -362,17 +350,13 @@ public final class b2DebugDraw extends Struct {
 
         public static DrawSolidCircle DrawSolidCircle_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidCircle.__ffi_cache);
-            return (arg0, arg1, arg2, arg3) -> {
+            return (transform, radius, color, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawSolidCircle.__ffi_cache[DrawSolidCircle.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, transform);
+                useEncoder.setValue(1, radius);
+                useEncoder.setValue(2, color);
+                useEncoder.setValue(3, context);
+                useEncoder.invoke();
             };
         }
     }
@@ -381,7 +365,7 @@ public final class b2DebugDraw extends Struct {
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
-        void DrawSolidCapsule_call(b2Vec2 arg0, b2Vec2 arg1, float arg2, b2HexColor arg3, VoidPointer arg4);
+        void DrawSolidCapsule_call(b2Vec2 p1, b2Vec2 p2, float radius, b2HexColor color, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -393,18 +377,14 @@ public final class b2DebugDraw extends Struct {
 
         public static DrawSolidCapsule DrawSolidCapsule_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidCapsule.__ffi_cache);
-            return (arg0, arg1, arg2, arg3, arg4) -> {
+            return (p1, p2, radius, color, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                    useEncoder.setValue(4, arg4);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawSolidCapsule.__ffi_cache[DrawSolidCapsule.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, p1);
+                useEncoder.setValue(1, p2);
+                useEncoder.setValue(2, radius);
+                useEncoder.setValue(3, color);
+                useEncoder.setValue(4, context);
+                useEncoder.invoke();
             };
         }
     }
@@ -413,7 +393,7 @@ public final class b2DebugDraw extends Struct {
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
-        void DrawSegment_call(b2Vec2 arg0, b2Vec2 arg1, b2HexColor arg2, VoidPointer arg3);
+        void DrawSegment_call(b2Vec2 p1, b2Vec2 p2, b2HexColor color, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -425,17 +405,13 @@ public final class b2DebugDraw extends Struct {
 
         public static DrawSegment DrawSegment_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSegment.__ffi_cache);
-            return (arg0, arg1, arg2, arg3) -> {
+            return (p1, p2, color, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawSegment.__ffi_cache[DrawSegment.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, p1);
+                useEncoder.setValue(1, p2);
+                useEncoder.setValue(2, color);
+                useEncoder.setValue(3, context);
+                useEncoder.invoke();
             };
         }
     }
@@ -444,7 +420,7 @@ public final class b2DebugDraw extends Struct {
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1) };
 
-        void DrawTransform_call(b2Transform arg0, VoidPointer arg1);
+        void DrawTransform_call(b2Transform transform, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -456,15 +432,11 @@ public final class b2DebugDraw extends Struct {
 
         public static DrawTransform DrawTransform_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawTransform.__ffi_cache);
-            return (arg0, arg1) -> {
+            return (transform, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawTransform.__ffi_cache[DrawTransform.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, transform);
+                useEncoder.setValue(1, context);
+                useEncoder.invoke();
             };
         }
     }
@@ -473,7 +445,7 @@ public final class b2DebugDraw extends Struct {
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
-        void DrawPoint_call(b2Vec2 arg0, float arg1, b2HexColor arg2, VoidPointer arg3);
+        void DrawPoint_call(b2Vec2 p, float size, b2HexColor color, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -485,17 +457,13 @@ public final class b2DebugDraw extends Struct {
 
         public static DrawPoint DrawPoint_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawPoint.__ffi_cache);
-            return (arg0, arg1, arg2, arg3) -> {
+            return (p, size, color, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                    useEncoder.setValue(3, arg3);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawPoint.__ffi_cache[DrawPoint.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, p);
+                useEncoder.setValue(1, size);
+                useEncoder.setValue(2, color);
+                useEncoder.setValue(3, context);
+                useEncoder.invoke();
             };
         }
     }
@@ -504,7 +472,7 @@ public final class b2DebugDraw extends Struct {
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
-        void DrawString_call(b2Vec2 arg0, CSizedIntPointer arg1, VoidPointer arg2);
+        void DrawString_call(b2Vec2 p, CSizedIntPointer s, VoidPointer context);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
@@ -516,16 +484,12 @@ public final class b2DebugDraw extends Struct {
 
         public static DrawString DrawString_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawString.__ffi_cache);
-            return (arg0, arg1, arg2) -> {
+            return (p, s, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                {
-                    useEncoder.setValue(0, arg0);
-                    useEncoder.setValue(1, arg1);
-                    useEncoder.setValue(2, arg2);
-                }
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(DrawString.__ffi_cache[DrawString.__ffi_cache.length - 1]);
-                returnConvert.setValue(useEncoder.invoke());
-                return;
+                useEncoder.setValue(0, p);
+                useEncoder.setValue(1, s);
+                useEncoder.setValue(2, context);
+                useEncoder.invoke();
             };
         }
     }
