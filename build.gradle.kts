@@ -75,6 +75,7 @@ fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFla
                 args = listOf("-B", tmpDir.absolutePath, "-S", file("box2d").absolutePath,
                     "-DBOX2D_SAMPLES=OFF",
                     "-DBOX2D_VALIDATE=OFF",
+                    "-DBOX2D_SANITIZE=OFF",
                     "-DBOX2D_UNIT_TESTS=OFF",
                     "-DCMAKE_C_FLAGS_INIT=-fexceptions $otherCFlags",
                     "-DCMAKE_STAGING_PREFIX=${installDir.absolutePath}",
