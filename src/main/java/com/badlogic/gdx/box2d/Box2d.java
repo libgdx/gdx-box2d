@@ -81,6 +81,11 @@ public final class Box2d {
         CHandler.init();
         FFITypes.init();
         init(IllegalArgumentException.class, CXXException.class);
+
+        // Yes, this technically leaks, but this is expected to live for the entire program lifetime
+        b2SetAssertFcn(ClosureObject.fromClosure((condition, fileName, lineNumber) -> {
+            throw new Box2DAssertionError("BOX2D ASSERTION: " + condition.getString() + ", " + fileName.getString() + ", line " + lineNumber);
+        }));
     }
 
     public static void initialize() {

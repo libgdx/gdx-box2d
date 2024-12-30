@@ -33,6 +33,12 @@ If a box2d method returns a pointer, it will not be registered for GC.
 ## Java 8
 The project needs java 8 language features to build. However, it doesn't use any java 8 APIs and is therefor still safe to use with mobiVM.
 
+## Deviation from box2d
+The following changes have been applied that are more than sole bindings:
+- On initialization a custom routine for assertion handling gets installed. This will throw the assertion as an `Box2DAssertionError`.  
+    The behaviour can be overwritten with `b2SetAssertFcn`, see the box2d docs for more infos.
+
+
 ## Supported OS
 
 Windows:
