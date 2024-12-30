@@ -58,6 +58,7 @@ dependencies {
 }
 
 tasks.test {
+    outputs.upToDateWhen { false }
     dependsOn("jnigenBuildHost", "jnigenPackageAllDesktop")
     useJUnitPlatform()
 }
@@ -77,10 +78,11 @@ fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFla
                     "-DBOX2D_VALIDATE=OFF",
                     "-DBOX2D_SANITIZE=OFF",
                     "-DBOX2D_UNIT_TESTS=OFF",
-                    "-DCMAKE_C_FLAGS_INIT=-fexceptions $otherCFlags",
+                    "-DCMAKE_C_FLAGS_INIT=-fexceptions $otherCFlags -DB2_ENABLE_ASSERT ",
                     "-DCMAKE_STAGING_PREFIX=${installDir.absolutePath}",
                     "-DCMAKE_INSTALL_LIBDIR=${installDir.toPath().resolve("libs")}",
                     "-DCMAKE_TOOLCHAIN_FILE=${toolchainFile.absolutePath}",
+                    "-DCMAKE_BUILD_TYPE=Release",
                     *extraFlags)
             }
 
@@ -143,7 +145,7 @@ jnigen {
         outputPath = file("src/main/java")
         basePackage = "com.badlogic.gdx.box2d"
         fileToParse = "box2d/box2d.h"
-        options = arrayOf("-I" + file("box2d/include").absolutePath, "-DNDEBUG")
+        options = arrayOf("-I" + file("box2d/include").absolutePath, "-DNDEBUG", "-DB2_ENABLE_ASSERT")
     }
 
     all {

@@ -4,9 +4,9 @@ import com.badlogic.gdx.jnigen.loader.SharedLibraryLoader;
 import com.badlogic.gdx.jnigen.runtime.c.CXXException;
 import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
+import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 import com.badlogic.gdx.box2d.structs.b2Version;
 import com.badlogic.gdx.box2d.structs.b2Timer;
-import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 import com.badlogic.gdx.box2d.structs.b2CosSin;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.jnigen.runtime.pointer.FloatPointer;
@@ -127,6 +127,20 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	b2SetAssertFcn((b2AssertFcn *)assertFcn);
     	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    public static int b2InternalAssertFcn(CSizedIntPointer condition, CSizedIntPointer fileName, int lineNumber) {
+        condition.assertHasCTypeBacking("const char");
+        fileName.assertHasCTypeBacking("const char");
+        return b2InternalAssertFcn_internal(condition.getPointer(), fileName.getPointer(), lineNumber);
+    }
+
+    static private native int b2InternalAssertFcn_internal(long condition, long fileName, int lineNumber);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, int, lineNumber, 2, return 0);
+    	return (jint)b2InternalAssertFcn((const char *)condition, (const char *)fileName, (int)lineNumber);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
     */
 
     public static b2Version b2GetVersion() {
