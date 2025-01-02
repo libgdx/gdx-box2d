@@ -5,6 +5,10 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
+/**
+ * 2D vector
+ * This can be used to represent a point or free vector
+ */
 public final class b2Vec2 extends Struct {
 
     private final static int __size;
@@ -36,18 +40,30 @@ public final class b2Vec2 extends Struct {
         return new b2Vec2.b2Vec2Pointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * coordinates
+     */
     public float x() {
         return (float) getValueFloat(0);
     }
 
+    /**
+     * coordinates
+     */
     public void x(float x) {
         setValue(x, 0);
     }
 
+    /**
+     * coordinates
+     */
     public float y() {
         return (float) getValueFloat(1);
     }
 
+    /**
+     * coordinates
+     */
     public void y(float y) {
         setValue(y, 1);
     }

@@ -7,6 +7,9 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Sweep;
 
+/**
+ * Input parameters for b2TimeOfImpact
+ */
 public final class b2TOIInput extends Struct {
 
     private final static int __size;
@@ -38,6 +41,9 @@ public final class b2TOIInput extends Struct {
         return new b2TOIInput.b2TOIInputPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The proxy for shape A
+     */
     public b2ShapeProxy proxyA() {
         return __proxyA;
     }
@@ -46,6 +52,9 @@ public final class b2TOIInput extends Struct {
 
     private final b2ShapeProxy __proxyA = new b2ShapeProxy(getPointer() + __proxyA_offset, false);
 
+    /**
+     * The proxy for shape B
+     */
     public b2ShapeProxy proxyB() {
         return __proxyB;
     }
@@ -54,6 +63,9 @@ public final class b2TOIInput extends Struct {
 
     private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
+    /**
+     * The movement of shape A
+     */
     public b2Sweep sweepA() {
         return __sweepA;
     }
@@ -62,6 +74,9 @@ public final class b2TOIInput extends Struct {
 
     private final b2Sweep __sweepA = new b2Sweep(getPointer() + __sweepA_offset, false);
 
+    /**
+     * The movement of shape B
+     */
     public b2Sweep sweepB() {
         return __sweepB;
     }
@@ -70,10 +85,16 @@ public final class b2TOIInput extends Struct {
 
     private final b2Sweep __sweepB = new b2Sweep(getPointer() + __sweepB_offset, false);
 
+    /**
+     * Defines the sweep interval [0, maxFraction]
+     */
     public float maxFraction() {
         return (float) getValueFloat(4);
     }
 
+    /**
+     * Defines the sweep interval [0, maxFraction]
+     */
     public void maxFraction(float maxFraction) {
         setValue(maxFraction, 4);
     }

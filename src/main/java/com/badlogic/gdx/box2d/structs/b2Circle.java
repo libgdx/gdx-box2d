@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * A solid circle
+ */
 public final class b2Circle extends Struct {
 
     private final static int __size;
@@ -37,6 +40,9 @@ public final class b2Circle extends Struct {
         return new b2Circle.b2CirclePointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The local center
+     */
     public b2Vec2 center() {
         return __center;
     }
@@ -45,10 +51,16 @@ public final class b2Circle extends Struct {
 
     private final b2Vec2 __center = new b2Vec2(getPointer() + __center_offset, false);
 
+    /**
+     * The radius
+     */
     public float radius() {
         return (float) getValueFloat(1);
     }
 
+    /**
+     * The radius
+     */
     public void radius(float radius) {
         setValue(radius, 1);
     }

@@ -7,6 +7,10 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ManifoldPoint;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * A contact manifold describes the contact points between colliding shapes.
+ * @note Box2D uses speculative collision so some contact points may be separated.
+ */
 public final class b2Manifold extends Struct {
 
     private final static int __size;
@@ -38,6 +42,9 @@ public final class b2Manifold extends Struct {
         return new b2Manifold.b2ManifoldPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The manifold points, up to two are possible in 2D
+     */
     public b2ManifoldPoint.b2ManifoldPointPointer points() {
         return __points;
     }
@@ -46,6 +53,9 @@ public final class b2Manifold extends Struct {
 
     private final b2ManifoldPoint.b2ManifoldPointPointer __points = new b2ManifoldPoint.b2ManifoldPointPointer(getPointer() + __points_offset, false).guardCount(2);
 
+    /**
+     * The unit normal vector in world space, points from shape A to bodyB
+     */
     public b2Vec2 normal() {
         return __normal;
     }
@@ -54,10 +64,16 @@ public final class b2Manifold extends Struct {
 
     private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
 
+    /**
+     * The number of contacts points, will be 0, 1, or 2
+     */
     public int pointCount() {
         return (int) getValue(3);
     }
 
+    /**
+     * The number of contacts points, will be 0, 1, or 2
+     */
     public void pointCount(int pointCount) {
         setValue(pointCount, 3);
     }

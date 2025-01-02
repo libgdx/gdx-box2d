@@ -7,6 +7,9 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Transform;
 
+/**
+ * Input for b2ShapeDistance
+ */
 public final class b2DistanceInput extends Struct {
 
     private final static int __size;
@@ -38,6 +41,9 @@ public final class b2DistanceInput extends Struct {
         return new b2DistanceInput.b2DistanceInputPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The proxy for shape A
+     */
     public b2ShapeProxy proxyA() {
         return __proxyA;
     }
@@ -46,6 +52,9 @@ public final class b2DistanceInput extends Struct {
 
     private final b2ShapeProxy __proxyA = new b2ShapeProxy(getPointer() + __proxyA_offset, false);
 
+    /**
+     * The proxy for shape B
+     */
     public b2ShapeProxy proxyB() {
         return __proxyB;
     }
@@ -54,6 +63,9 @@ public final class b2DistanceInput extends Struct {
 
     private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
+    /**
+     * The world transform for shape A
+     */
     public b2Transform transformA() {
         return __transformA;
     }
@@ -62,6 +74,9 @@ public final class b2DistanceInput extends Struct {
 
     private final b2Transform __transformA = new b2Transform(getPointer() + __transformA_offset, false);
 
+    /**
+     * The world transform for shape B
+     */
     public b2Transform transformB() {
         return __transformB;
     }
@@ -70,10 +85,16 @@ public final class b2DistanceInput extends Struct {
 
     private final b2Transform __transformB = new b2Transform(getPointer() + __transformB_offset, false);
 
+    /**
+     * Should the proxy radius be considered?
+     */
     public boolean useRadii() {
         return getValue(4) != 0;
     }
 
+    /**
+     * Should the proxy radius be considered?
+     */
     public void useRadii(boolean useRadii) {
         setValue(useRadii, 4);
     }

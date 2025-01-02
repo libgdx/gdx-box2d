@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * Axis-aligned bounding box
+ */
 public final class b2AABB extends Struct {
 
     private final static int __size;

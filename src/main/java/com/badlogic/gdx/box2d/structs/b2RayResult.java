@@ -7,6 +7,10 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * Result from b2World_RayCastClosest
+ * @ingroup world
+ */
 public final class b2RayResult extends Struct {
 
     private final static int __size;

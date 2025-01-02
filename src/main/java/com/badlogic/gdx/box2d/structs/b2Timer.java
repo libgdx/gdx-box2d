@@ -5,6 +5,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
+/**
+ * @cond
+ */
 public final class b2Timer extends Struct {
 
     private final static int __size;
@@ -36,12 +39,20 @@ public final class b2Timer extends Struct {
         return new b2Timer.b2TimerPointer(getPointer(), getsGCFreed());
     }
 
-    public long start() {
+    public long tv_sec() {
         return (long) getValue(0);
     }
 
-    public void start(long start) {
-        setValue(start, 0);
+    public void tv_sec(long tv_sec) {
+        setValue(tv_sec, 0);
+    }
+
+    public long tv_nsec() {
+        return (long) getValue(1);
+    }
+
+    public void tv_nsec(long tv_nsec) {
+        setValue(tv_nsec, 1);
     }
 
     public static final class b2TimerPointer extends StackElementPointer<b2Timer> {

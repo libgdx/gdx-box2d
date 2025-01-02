@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * Low level ray cast input data
+ */
 public final class b2RayCastInput extends Struct {
 
     private final static int __size;
@@ -37,6 +40,9 @@ public final class b2RayCastInput extends Struct {
         return new b2RayCastInput.b2RayCastInputPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * Start point of the ray cast
+     */
     public b2Vec2 origin() {
         return __origin;
     }
@@ -45,6 +51,9 @@ public final class b2RayCastInput extends Struct {
 
     private final b2Vec2 __origin = new b2Vec2(getPointer() + __origin_offset, false);
 
+    /**
+     * Translation of the ray cast
+     */
     public b2Vec2 translation() {
         return __translation;
     }
@@ -53,10 +62,16 @@ public final class b2RayCastInput extends Struct {
 
     private final b2Vec2 __translation = new b2Vec2(getPointer() + __translation_offset, false);
 
+    /**
+     * The maximum fraction of the translation to consider, typically 1
+     */
     public float maxFraction() {
         return (float) getValueFloat(2);
     }
 
+    /**
+     * The maximum fraction of the translation to consider, typically 1
+     */
     public void maxFraction(float maxFraction) {
         setValue(maxFraction, 2);
     }

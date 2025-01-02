@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.enums.b2TOIState;
 
+/**
+ * Output parameters for b2TimeOfImpact.
+ */
 public final class b2TOIOutput extends Struct {
 
     private final static int __size;
@@ -37,18 +40,30 @@ public final class b2TOIOutput extends Struct {
         return new b2TOIOutput.b2TOIOutputPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The type of result
+     */
     public b2TOIState state() {
         return b2TOIState.getByIndex((int) getValue(0));
     }
 
+    /**
+     * The type of result
+     */
     public void state(b2TOIState state) {
         setValue(state.getIndex(), 0);
     }
 
+    /**
+     * The sweep time of the collision
+     */
     public float fraction() {
         return (float) getValueFloat(1);
     }
 
+    /**
+     * The sweep time of the collision
+     */
     public void fraction(float fraction) {
         setValue(fraction, 1);
     }

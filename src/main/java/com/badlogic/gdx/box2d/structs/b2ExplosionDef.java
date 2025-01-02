@@ -6,6 +6,11 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * The explosion definition is used to configure options for explosions. Explosions
+ * consider shape geometry when computing the impulse.
+ * @ingroup world
+ */
 public final class b2ExplosionDef extends Struct {
 
     private final static int __size;
@@ -37,14 +42,23 @@ public final class b2ExplosionDef extends Struct {
         return new b2ExplosionDef.b2ExplosionDefPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * Mask bits to filter shapes
+     */
     public long maskBits() {
         return (long) getValue(0);
     }
 
+    /**
+     * Mask bits to filter shapes
+     */
     public void maskBits(long maskBits) {
         setValue(maskBits, 0);
     }
 
+    /**
+     * The center of the explosion in world space
+     */
     public b2Vec2 position() {
         return __position;
     }
@@ -53,26 +67,48 @@ public final class b2ExplosionDef extends Struct {
 
     private final b2Vec2 __position = new b2Vec2(getPointer() + __position_offset, false);
 
+    /**
+     * The radius of the explosion
+     */
     public float radius() {
         return (float) getValueFloat(2);
     }
 
+    /**
+     * The radius of the explosion
+     */
     public void radius(float radius) {
         setValue(radius, 2);
     }
 
+    /**
+     * The falloff distance beyond the radius. Impulse is reduced to zero at this distance.
+     */
     public float falloff() {
         return (float) getValueFloat(3);
     }
 
+    /**
+     * The falloff distance beyond the radius. Impulse is reduced to zero at this distance.
+     */
     public void falloff(float falloff) {
         setValue(falloff, 3);
     }
 
+    /**
+     *  Impulse per unit length. This applies an impulse according to the shape perimeter that
+     * 	 is facing the explosion. Explosions only apply to circles, capsules, and polygons. This
+     * 	 may be negative for implosions.
+     */
     public float impulsePerLength() {
         return (float) getValueFloat(4);
     }
 
+    /**
+     *  Impulse per unit length. This applies an impulse according to the shape perimeter that
+     * 	 is facing the explosion. Explosions only apply to circles, capsules, and polygons. This
+     * 	 may be negative for implosions.
+     */
     public void impulsePerLength(float impulsePerLength) {
         setValue(impulsePerLength, 4);
     }

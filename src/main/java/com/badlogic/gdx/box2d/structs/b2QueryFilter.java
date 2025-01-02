@@ -5,6 +5,12 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
+/**
+ * The query filter is used to filter collisions between queries and shapes. For example,
+ * you may want a ray-cast representing a projectile to hit players and the static environment
+ * but not debris.
+ * @ingroup shape
+ */
 public final class b2QueryFilter extends Struct {
 
     private final static int __size;
@@ -36,18 +42,32 @@ public final class b2QueryFilter extends Struct {
         return new b2QueryFilter.b2QueryFilterPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The collision category bits of this query. Normally you would just set one bit.
+     */
     public long categoryBits() {
         return (long) getValue(0);
     }
 
+    /**
+     * The collision category bits of this query. Normally you would just set one bit.
+     */
     public void categoryBits(long categoryBits) {
         setValue(categoryBits, 0);
     }
 
+    /**
+     *  The collision mask bits. This states the shape categories that this
+     * 	 query would accept for collision.
+     */
     public long maskBits() {
         return (long) getValue(1);
     }
 
+    /**
+     *  The collision mask bits. This states the shape categories that this
+     * 	 query would accept for collision.
+     */
     public void maskBits(long maskBits) {
         setValue(maskBits, 1);
     }

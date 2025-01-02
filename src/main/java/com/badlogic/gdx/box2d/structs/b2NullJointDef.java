@@ -7,6 +7,11 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
+/**
+ * A null joint is used to disable collision between two specific bodies.
+ *
+ * @ingroup null_joint
+ */
 public final class b2NullJointDef extends Struct {
 
     private final static int __size;
@@ -38,6 +43,9 @@ public final class b2NullJointDef extends Struct {
         return new b2NullJointDef.b2NullJointDefPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The first attached body.
+     */
     public b2BodyId bodyIdA() {
         return __bodyIdA;
     }
@@ -46,6 +54,9 @@ public final class b2NullJointDef extends Struct {
 
     private final b2BodyId __bodyIdA = new b2BodyId(getPointer() + __bodyIdA_offset, false);
 
+    /**
+     * The second attached body.
+     */
     public b2BodyId bodyIdB() {
         return __bodyIdB;
     }
@@ -54,18 +65,30 @@ public final class b2NullJointDef extends Struct {
 
     private final b2BodyId __bodyIdB = new b2BodyId(getPointer() + __bodyIdB_offset, false);
 
+    /**
+     * User data pointer
+     */
     public VoidPointer userData() {
         return new VoidPointer(getValue(2), false);
     }
 
+    /**
+     * User data pointer
+     */
     public void userData(VoidPointer userData) {
         setValue(userData.getPointer(), 2);
     }
 
+    /**
+     * Used internally to detect a valid definition. DO NOT SET.
+     */
     public int internalValue() {
         return (int) getValue(3);
     }
 
+    /**
+     * Used internally to detect a valid definition. DO NOT SET.
+     */
     public void internalValue(int internalValue) {
         setValue(internalValue, 3);
     }

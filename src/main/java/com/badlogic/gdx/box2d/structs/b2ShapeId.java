@@ -5,6 +5,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
+/**
+ * Shape id references a shape instance. This should be treated as an opaque handle.
+ */
 public final class b2ShapeId extends Struct {
 
     private final static int __size;

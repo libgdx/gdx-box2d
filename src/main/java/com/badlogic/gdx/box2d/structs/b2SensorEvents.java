@@ -7,6 +7,11 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2SensorBeginTouchEvent;
 import com.badlogic.gdx.box2d.structs.b2SensorEndTouchEvent;
 
+/**
+ * Sensor events are buffered in the Box2D world and are available
+ * as begin/end overlap event arrays after the time step is complete.
+ * Note: these may become invalid if bodies and/or shapes are destroyed
+ */
 public final class b2SensorEvents extends Struct {
 
     private final static int __size;
@@ -38,34 +43,58 @@ public final class b2SensorEvents extends Struct {
         return new b2SensorEvents.b2SensorEventsPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * Array of sensor begin touch events
+     */
     public b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer beginEvents() {
         return new b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer(getValue(0), false);
     }
 
+    /**
+     * Array of sensor begin touch events
+     */
     public void beginEvents(b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer beginEvents) {
         setValue(beginEvents.getPointer(), 0);
     }
 
+    /**
+     * Array of sensor end touch events
+     */
     public b2SensorEndTouchEvent.b2SensorEndTouchEventPointer endEvents() {
         return new b2SensorEndTouchEvent.b2SensorEndTouchEventPointer(getValue(1), false);
     }
 
+    /**
+     * Array of sensor end touch events
+     */
     public void endEvents(b2SensorEndTouchEvent.b2SensorEndTouchEventPointer endEvents) {
         setValue(endEvents.getPointer(), 1);
     }
 
+    /**
+     * The number of begin touch events
+     */
     public int beginCount() {
         return (int) getValue(2);
     }
 
+    /**
+     * The number of begin touch events
+     */
     public void beginCount(int beginCount) {
         setValue(beginCount, 2);
     }
 
+    /**
+     * The number of end touch events
+     */
     public int endCount() {
         return (int) getValue(3);
     }
 
+    /**
+     * The number of end touch events
+     */
     public void endCount(int endCount) {
         setValue(endCount, 3);
     }

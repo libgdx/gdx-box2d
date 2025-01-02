@@ -4,6 +4,12 @@ import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 import java.util.HashMap;
 
+/**
+ * These colors are used for debug draw.
+ * See https://www.rapidtables.com/web/color/index.html
+ * https://johndecember.com/html/spec/colorsvg.html
+ * https://upload.wikimedia.org/wikipedia/commons/2/2b/SVG_Recognized_color_keyword_names.svg
+ */
 public enum b2HexColor implements CEnum {
 
     b2_colorBlack(0),

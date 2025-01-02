@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * A 2-by-2 Matrix
+ */
 public final class b2Mat22 extends Struct {
 
     private final static int __size;
@@ -37,6 +40,9 @@ public final class b2Mat22 extends Struct {
         return new b2Mat22.b2Mat22Pointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * columns
+     */
     public b2Vec2 cx() {
         return __cx;
     }
@@ -45,6 +51,9 @@ public final class b2Mat22 extends Struct {
 
     private final b2Vec2 __cx = new b2Vec2(getPointer() + __cx_offset, false);
 
+    /**
+     * columns
+     */
     public b2Vec2 cy() {
         return __cy;
     }

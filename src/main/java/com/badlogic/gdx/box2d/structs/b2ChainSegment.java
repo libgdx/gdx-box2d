@@ -7,6 +7,11 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Segment;
 
+/**
+ * A line segment with one-sided collision. Only collides on the right side.
+ * Several of these are generated for a chain shape.
+ * ghost1 -> point1 -> point2 -> ghost2
+ */
 public final class b2ChainSegment extends Struct {
 
     private final static int __size;
@@ -38,6 +43,9 @@ public final class b2ChainSegment extends Struct {
         return new b2ChainSegment.b2ChainSegmentPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The tail ghost vertex
+     */
     public b2Vec2 ghost1() {
         return __ghost1;
     }
@@ -46,6 +54,9 @@ public final class b2ChainSegment extends Struct {
 
     private final b2Vec2 __ghost1 = new b2Vec2(getPointer() + __ghost1_offset, false);
 
+    /**
+     * The line segment
+     */
     public b2Segment segment() {
         return __segment;
     }
@@ -54,6 +65,9 @@ public final class b2ChainSegment extends Struct {
 
     private final b2Segment __segment = new b2Segment(getPointer() + __segment_offset, false);
 
+    /**
+     * The head ghost vertex
+     */
     public b2Vec2 ghost2() {
         return __ghost2;
     }
@@ -62,10 +76,16 @@ public final class b2ChainSegment extends Struct {
 
     private final b2Vec2 __ghost2 = new b2Vec2(getPointer() + __ghost2_offset, false);
 
+    /**
+     * The owning chain shape index (internal usage only)
+     */
     public int chainId() {
         return (int) getValue(3);
     }
 
+    /**
+     * The owning chain shape index (internal usage only)
+     */
     public void chainId(int chainId) {
         setValue(chainId, 3);
     }

@@ -7,6 +7,9 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Rot;
 
+/**
+ * A 2D rigid transform
+ */
 public final class b2Transform extends Struct {
 
     private final static int __size;

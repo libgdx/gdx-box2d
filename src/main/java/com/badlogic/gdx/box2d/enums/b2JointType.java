@@ -3,6 +3,13 @@ package com.badlogic.gdx.box2d.enums;
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 
+/**
+ * Joint type enumeration
+ *
+ * This is useful because all joint types use b2JointId and sometimes you
+ * want to get the type of a joint.
+ * @ingroup joint
+ */
 public enum b2JointType implements CEnum {
 
     b2_distanceJoint(0),

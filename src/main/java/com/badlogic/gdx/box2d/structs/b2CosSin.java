@@ -5,6 +5,10 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
+/**
+ * Cosine and sine pair
+ * This uses a custom implementation designed for cross-platform determinism
+ */
 public final class b2CosSin extends Struct {
 
     private final static int __size;
@@ -36,10 +40,16 @@ public final class b2CosSin extends Struct {
         return new b2CosSin.b2CosSinPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * cosine and sine
+     */
     public float cosine() {
         return (float) getValueFloat(0);
     }
 
+    /**
+     * cosine and sine
+     */
     public void cosine(float cosine) {
         setValue(cosine, 0);
     }

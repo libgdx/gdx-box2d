@@ -6,6 +6,10 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * A convex hull. Used to create convex polygons.
+ * @warning Do not modify these values directly, instead use b2ComputeHull()
+ */
 public final class b2Hull extends Struct {
 
     private final static int __size;
@@ -37,6 +41,9 @@ public final class b2Hull extends Struct {
         return new b2Hull.b2HullPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The final points of the hull
+     */
     public b2Vec2.b2Vec2Pointer points() {
         return __points;
     }
@@ -45,10 +52,16 @@ public final class b2Hull extends Struct {
 
     private final b2Vec2.b2Vec2Pointer __points = new b2Vec2.b2Vec2Pointer(getPointer() + __points_offset, false).guardCount(8);
 
+    /**
+     * The number of points
+     */
     public int count() {
         return (int) getValue(8);
     }
 
+    /**
+     * The number of points
+     */
     public void count(int count) {
         setValue(count, 8);
     }

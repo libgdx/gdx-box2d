@@ -8,6 +8,9 @@ import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Transform;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * Input parameters for b2ShapeCast
+ */
 public final class b2ShapeCastPairInput extends Struct {
 
     private final static int __size;
@@ -39,6 +42,9 @@ public final class b2ShapeCastPairInput extends Struct {
         return new b2ShapeCastPairInput.b2ShapeCastPairInputPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The proxy for shape A
+     */
     public b2ShapeProxy proxyA() {
         return __proxyA;
     }
@@ -47,6 +53,9 @@ public final class b2ShapeCastPairInput extends Struct {
 
     private final b2ShapeProxy __proxyA = new b2ShapeProxy(getPointer() + __proxyA_offset, false);
 
+    /**
+     * The proxy for shape B
+     */
     public b2ShapeProxy proxyB() {
         return __proxyB;
     }
@@ -55,6 +64,9 @@ public final class b2ShapeCastPairInput extends Struct {
 
     private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
+    /**
+     * The world transform for shape A
+     */
     public b2Transform transformA() {
         return __transformA;
     }
@@ -63,6 +75,9 @@ public final class b2ShapeCastPairInput extends Struct {
 
     private final b2Transform __transformA = new b2Transform(getPointer() + __transformA_offset, false);
 
+    /**
+     * The world transform for shape B
+     */
     public b2Transform transformB() {
         return __transformB;
     }
@@ -71,6 +86,9 @@ public final class b2ShapeCastPairInput extends Struct {
 
     private final b2Transform __transformB = new b2Transform(getPointer() + __transformB_offset, false);
 
+    /**
+     * The translation of shape B
+     */
     public b2Vec2 translationB() {
         return __translationB;
     }
@@ -79,10 +97,16 @@ public final class b2ShapeCastPairInput extends Struct {
 
     private final b2Vec2 __translationB = new b2Vec2(getPointer() + __translationB_offset, false);
 
+    /**
+     * The fraction of the translation to consider, typically 1
+     */
     public float maxFraction() {
         return (float) getValueFloat(5);
     }
 
+    /**
+     * The fraction of the translation to consider, typically 1
+     */
     public void maxFraction(float maxFraction) {
         setValue(maxFraction, 5);
     }

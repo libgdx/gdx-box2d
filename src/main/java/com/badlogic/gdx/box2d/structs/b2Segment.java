@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * A line segment with two-sided collision.
+ */
 public final class b2Segment extends Struct {
 
     private final static int __size;
@@ -37,6 +40,9 @@ public final class b2Segment extends Struct {
         return new b2Segment.b2SegmentPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The first point
+     */
     public b2Vec2 point1() {
         return __point1;
     }
@@ -45,6 +51,9 @@ public final class b2Segment extends Struct {
 
     private final b2Vec2 __point1 = new b2Vec2(getPointer() + __point1_offset, false);
 
+    /**
+     * The second point
+     */
     public b2Vec2 point2() {
         return __point2;
     }

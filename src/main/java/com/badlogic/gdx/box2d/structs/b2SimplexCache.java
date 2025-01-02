@@ -6,6 +6,12 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 
+/**
+ * Used to warm start the GJK simplex. If you call this function multiple times with nearby
+ * transforms this might improve performance. Otherwise you can zero initialize this.
+ * The distance cache must be initialized to zero on the first call.
+ * Users should generally just zero initialize this structure for each call.
+ */
 public final class b2SimplexCache extends Struct {
 
     private final static int __size;
@@ -37,14 +43,23 @@ public final class b2SimplexCache extends Struct {
         return new b2SimplexCache.b2SimplexCachePointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The number of stored simplex points
+     */
     public char count() {
         return (char) getValue(0);
     }
 
+    /**
+     * The number of stored simplex points
+     */
     public void count(char count) {
         setValue(count, 0);
     }
 
+    /**
+     * The cached simplex indices on shape A
+     */
     public CSizedIntPointer indexA() {
         return __indexA;
     }
@@ -53,6 +68,9 @@ public final class b2SimplexCache extends Struct {
 
     private final CSizedIntPointer __indexA = new CSizedIntPointer(getPointer() + __indexA_offset, false, "uint8_t").guardCount(3);
 
+    /**
+     * The cached simplex indices on shape B
+     */
     public CSizedIntPointer indexB() {
         return __indexB;
     }

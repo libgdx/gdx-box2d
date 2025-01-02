@@ -3,13 +3,35 @@ package com.badlogic.gdx.box2d.enums;
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 
+/**
+ * Shape type
+ * @ingroup shape
+ */
 public enum b2ShapeType implements CEnum {
 
+    /**
+     * A circle with an offset
+     */
     b2_circleShape(0),
+    /**
+     * A capsule is an extruded circle
+     */
     b2_capsuleShape(1),
+    /**
+     * A line segment
+     */
     b2_segmentShape(2),
+    /**
+     * A convex polygon
+     */
     b2_polygonShape(3),
+    /**
+     * A line segment owned by a chain shape
+     */
     b2_chainSegmentShape(4),
+    /**
+     * The number of shape types
+     */
     b2_shapeTypeCount(5);
 
     private final int index;

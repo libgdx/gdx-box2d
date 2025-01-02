@@ -5,6 +5,10 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
+/**
+ * @cond
+ * Profiling data. Times are in milliseconds.
+ */
 public final class b2Profile extends Struct {
 
     private final static int __size;

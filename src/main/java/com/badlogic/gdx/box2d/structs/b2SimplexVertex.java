@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * Simplex vertex for debugging the GJK algorithm
+ */
 public final class b2SimplexVertex extends Struct {
 
     private final static int __size;
@@ -37,6 +40,9 @@ public final class b2SimplexVertex extends Struct {
         return new b2SimplexVertex.b2SimplexVertexPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * support point in proxyA
+     */
     public b2Vec2 wA() {
         return __wA;
     }
@@ -45,6 +51,9 @@ public final class b2SimplexVertex extends Struct {
 
     private final b2Vec2 __wA = new b2Vec2(getPointer() + __wA_offset, false);
 
+    /**
+     * support point in proxyB
+     */
     public b2Vec2 wB() {
         return __wB;
     }
@@ -53,6 +62,9 @@ public final class b2SimplexVertex extends Struct {
 
     private final b2Vec2 __wB = new b2Vec2(getPointer() + __wB_offset, false);
 
+    /**
+     * wB - wA
+     */
     public b2Vec2 w() {
         return __w;
     }
@@ -61,26 +73,44 @@ public final class b2SimplexVertex extends Struct {
 
     private final b2Vec2 __w = new b2Vec2(getPointer() + __w_offset, false);
 
+    /**
+     * barycentric coordinate for closest point
+     */
     public float a() {
         return (float) getValueFloat(3);
     }
 
+    /**
+     * barycentric coordinate for closest point
+     */
     public void a(float a) {
         setValue(a, 3);
     }
 
+    /**
+     * wA index
+     */
     public int indexA() {
         return (int) getValue(4);
     }
 
+    /**
+     * wA index
+     */
     public void indexA(int indexA) {
         setValue(indexA, 4);
     }
 
+    /**
+     * wB index
+     */
     public int indexB() {
         return (int) getValue(5);
     }
 
+    /**
+     * wB index
+     */
     public void indexB(int indexB) {
         setValue(indexB, 5);
     }

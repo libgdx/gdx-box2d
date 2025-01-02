@@ -6,6 +6,12 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 
+/**
+ *  An end touch event is generated when two shapes stop touching.
+ * 	You will get an end event if you do anything that destroys contacts previous to the last
+ * 	world step. These include things like setting the transform, destroying a body
+ * 	or shape, or changing a filter or body type.
+ */
 public final class b2ContactEndTouchEvent extends Struct {
 
     private final static int __size;
@@ -37,6 +43,11 @@ public final class b2ContactEndTouchEvent extends Struct {
         return new b2ContactEndTouchEvent.b2ContactEndTouchEventPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     *  Id of the first shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
     public b2ShapeId shapeIdA() {
         return __shapeIdA;
     }
@@ -45,6 +56,11 @@ public final class b2ContactEndTouchEvent extends Struct {
 
     private final b2ShapeId __shapeIdA = new b2ShapeId(getPointer() + __shapeIdA_offset, false);
 
+    /**
+     *  Id of the second shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
     public b2ShapeId shapeIdB() {
         return __shapeIdB;
     }

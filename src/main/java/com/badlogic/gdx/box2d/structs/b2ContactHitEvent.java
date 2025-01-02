@@ -7,6 +7,9 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * A hit touch event is generated when two shapes collide with a speed faster than the hit speed threshold.
+ */
 public final class b2ContactHitEvent extends Struct {
 
     private final static int __size;
@@ -38,6 +41,9 @@ public final class b2ContactHitEvent extends Struct {
         return new b2ContactHitEvent.b2ContactHitEventPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * Id of the first shape
+     */
     public b2ShapeId shapeIdA() {
         return __shapeIdA;
     }
@@ -46,6 +52,9 @@ public final class b2ContactHitEvent extends Struct {
 
     private final b2ShapeId __shapeIdA = new b2ShapeId(getPointer() + __shapeIdA_offset, false);
 
+    /**
+     * Id of the second shape
+     */
     public b2ShapeId shapeIdB() {
         return __shapeIdB;
     }
@@ -54,6 +63,9 @@ public final class b2ContactHitEvent extends Struct {
 
     private final b2ShapeId __shapeIdB = new b2ShapeId(getPointer() + __shapeIdB_offset, false);
 
+    /**
+     * Point where the shapes hit
+     */
     public b2Vec2 point() {
         return __point;
     }
@@ -62,6 +74,9 @@ public final class b2ContactHitEvent extends Struct {
 
     private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
 
+    /**
+     * Normal vector pointing from shape A to shape B
+     */
     public b2Vec2 normal() {
         return __normal;
     }
@@ -70,10 +85,16 @@ public final class b2ContactHitEvent extends Struct {
 
     private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
 
+    /**
+     * The speed the shapes are approaching. Always positive. Typically in meters per second.
+     */
     public float approachSpeed() {
         return (float) getValueFloat(4);
     }
 
+    /**
+     * The speed the shapes are approaching. Always positive. Typically in meters per second.
+     */
     public void approachSpeed(float approachSpeed) {
         setValue(approachSpeed, 4);
     }

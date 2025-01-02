@@ -7,6 +7,9 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 import com.badlogic.gdx.box2d.structs.b2Manifold;
 
+/**
+ * A begin touch event is generated when two shapes begin touching.
+ */
 public final class b2ContactBeginTouchEvent extends Struct {
 
     private final static int __size;
@@ -38,6 +41,9 @@ public final class b2ContactBeginTouchEvent extends Struct {
         return new b2ContactBeginTouchEvent.b2ContactBeginTouchEventPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * Id of the first shape
+     */
     public b2ShapeId shapeIdA() {
         return __shapeIdA;
     }
@@ -46,6 +52,9 @@ public final class b2ContactBeginTouchEvent extends Struct {
 
     private final b2ShapeId __shapeIdA = new b2ShapeId(getPointer() + __shapeIdA_offset, false);
 
+    /**
+     * Id of the second shape
+     */
     public b2ShapeId shapeIdB() {
         return __shapeIdB;
     }
@@ -54,6 +63,10 @@ public final class b2ContactBeginTouchEvent extends Struct {
 
     private final b2ShapeId __shapeIdB = new b2ShapeId(getPointer() + __shapeIdB_offset, false);
 
+    /**
+     *  The initial contact manifold. This is recorded before the solver is called,
+     * 	 so all the impulses will be zero.
+     */
     public b2Manifold manifold() {
         return __manifold;
     }

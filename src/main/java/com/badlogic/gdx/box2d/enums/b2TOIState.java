@@ -3,6 +3,9 @@ package com.badlogic.gdx.box2d.enums;
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 
+/**
+ * Describes the TOI output
+ */
 public enum b2TOIState implements CEnum {
 
     b2_toiStateUnknown(0), b2_toiStateFailed(1), b2_toiStateOverlapped(2), b2_toiStateHit(3), b2_toiStateSeparated(4);

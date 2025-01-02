@@ -6,6 +6,14 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * A solid convex polygon. It is assumed that the interior of the polygon is to
+ * the left of each edge.
+ * Polygons have a maximum number of vertices equal to B2_MAX_POLYGON_VERTICES.
+ * In most cases you should not need many vertices for a convex polygon.
+ * @warning DO NOT fill this out manually, instead use a helper function like
+ * b2MakePolygon or b2MakeBox.
+ */
 public final class b2Polygon extends Struct {
 
     private final static int __size;
@@ -37,6 +45,9 @@ public final class b2Polygon extends Struct {
         return new b2Polygon.b2PolygonPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The polygon vertices
+     */
     public b2Vec2.b2Vec2Pointer vertices() {
         return __vertices;
     }
@@ -45,6 +56,9 @@ public final class b2Polygon extends Struct {
 
     private final b2Vec2.b2Vec2Pointer __vertices = new b2Vec2.b2Vec2Pointer(getPointer() + __vertices_offset, false).guardCount(8);
 
+    /**
+     * The outward normal vectors of the polygon sides
+     */
     public b2Vec2.b2Vec2Pointer normals() {
         return __normals;
     }
@@ -53,6 +67,9 @@ public final class b2Polygon extends Struct {
 
     private final b2Vec2.b2Vec2Pointer __normals = new b2Vec2.b2Vec2Pointer(getPointer() + __normals_offset, false).guardCount(8);
 
+    /**
+     * The centroid of the polygon
+     */
     public b2Vec2 centroid() {
         return __centroid;
     }
@@ -61,18 +78,30 @@ public final class b2Polygon extends Struct {
 
     private final b2Vec2 __centroid = new b2Vec2(getPointer() + __centroid_offset, false);
 
+    /**
+     * The external radius for rounded polygons
+     */
     public float radius() {
         return (float) getValueFloat(17);
     }
 
+    /**
+     * The external radius for rounded polygons
+     */
     public void radius(float radius) {
         setValue(radius, 17);
     }
 
+    /**
+     * The number of polygon vertices
+     */
     public int count() {
         return (int) getValue(18);
     }
 
+    /**
+     * The number of polygon vertices
+     */
     public void count(int count) {
         setValue(count, 18);
     }

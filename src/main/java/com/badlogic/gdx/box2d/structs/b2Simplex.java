@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2SimplexVertex;
 
+/**
+ * Simplex from the GJK algorithm
+ */
 public final class b2Simplex extends Struct {
 
     private final static int __size;
@@ -37,6 +40,9 @@ public final class b2Simplex extends Struct {
         return new b2Simplex.b2SimplexPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * vertices
+     */
     public b2SimplexVertex v1() {
         return __v1;
     }
@@ -45,6 +51,9 @@ public final class b2Simplex extends Struct {
 
     private final b2SimplexVertex __v1 = new b2SimplexVertex(getPointer() + __v1_offset, false);
 
+    /**
+     * vertices
+     */
     public b2SimplexVertex v2() {
         return __v2;
     }
@@ -53,6 +62,9 @@ public final class b2Simplex extends Struct {
 
     private final b2SimplexVertex __v2 = new b2SimplexVertex(getPointer() + __v2_offset, false);
 
+    /**
+     * vertices
+     */
     public b2SimplexVertex v3() {
         return __v3;
     }
@@ -61,10 +73,16 @@ public final class b2Simplex extends Struct {
 
     private final b2SimplexVertex __v3 = new b2SimplexVertex(getPointer() + __v3_offset, false);
 
+    /**
+     * number of valid vertices
+     */
     public int count() {
         return (int) getValue(3);
     }
 
+    /**
+     * number of valid vertices
+     */
     public void count(int count) {
         setValue(count, 3);
     }

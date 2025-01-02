@@ -5,6 +5,10 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
+/**
+ * 2D rotation
+ * This is similar to using a complex number for rotation
+ */
 public final class b2Rot extends Struct {
 
     private final static int __size;
@@ -36,18 +40,30 @@ public final class b2Rot extends Struct {
         return new b2Rot.b2RotPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * cosine and sine
+     */
     public float c() {
         return (float) getValueFloat(0);
     }
 
+    /**
+     * cosine and sine
+     */
     public void c(float c) {
         setValue(c, 0);
     }
 
+    /**
+     * cosine and sine
+     */
     public float s() {
         return (float) getValueFloat(1);
     }
 
+    /**
+     * cosine and sine
+     */
     public void s(float s) {
         setValue(s, 1);
     }

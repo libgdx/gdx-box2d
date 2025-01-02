@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * Low level ray cast or shape-cast output data
+ */
 public final class b2CastOutput extends Struct {
 
     private final static int __size;
@@ -37,6 +40,9 @@ public final class b2CastOutput extends Struct {
         return new b2CastOutput.b2CastOutputPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The surface normal at the hit point
+     */
     public b2Vec2 normal() {
         return __normal;
     }
@@ -45,6 +51,9 @@ public final class b2CastOutput extends Struct {
 
     private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
 
+    /**
+     * The surface hit point
+     */
     public b2Vec2 point() {
         return __point;
     }
@@ -53,26 +62,44 @@ public final class b2CastOutput extends Struct {
 
     private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
 
+    /**
+     * The fraction of the input translation at collision
+     */
     public float fraction() {
         return (float) getValueFloat(2);
     }
 
+    /**
+     * The fraction of the input translation at collision
+     */
     public void fraction(float fraction) {
         setValue(fraction, 2);
     }
 
+    /**
+     * The number of iterations used
+     */
     public int iterations() {
         return (int) getValue(3);
     }
 
+    /**
+     * The number of iterations used
+     */
     public void iterations(int iterations) {
         setValue(iterations, 3);
     }
 
+    /**
+     * Did the cast hit?
+     */
     public boolean hit() {
         return getValue(4) != 0;
     }
 
+    /**
+     * Did the cast hit?
+     */
     public void hit(boolean hit) {
         setValue(hit, 4);
     }

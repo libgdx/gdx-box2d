@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * Result of computing the distance between two line segments
+ */
 public final class b2SegmentDistanceResult extends Struct {
 
     private final static int __size;
@@ -37,6 +40,9 @@ public final class b2SegmentDistanceResult extends Struct {
         return new b2SegmentDistanceResult.b2SegmentDistanceResultPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The closest point on the first segment
+     */
     public b2Vec2 closest1() {
         return __closest1;
     }
@@ -45,6 +51,9 @@ public final class b2SegmentDistanceResult extends Struct {
 
     private final b2Vec2 __closest1 = new b2Vec2(getPointer() + __closest1_offset, false);
 
+    /**
+     * The closest point on the second segment
+     */
     public b2Vec2 closest2() {
         return __closest2;
     }
@@ -53,26 +62,44 @@ public final class b2SegmentDistanceResult extends Struct {
 
     private final b2Vec2 __closest2 = new b2Vec2(getPointer() + __closest2_offset, false);
 
+    /**
+     * The barycentric coordinate on the first segment
+     */
     public float fraction1() {
         return (float) getValueFloat(2);
     }
 
+    /**
+     * The barycentric coordinate on the first segment
+     */
     public void fraction1(float fraction1) {
         setValue(fraction1, 2);
     }
 
+    /**
+     * The barycentric coordinate on the second segment
+     */
     public float fraction2() {
         return (float) getValueFloat(3);
     }
 
+    /**
+     * The barycentric coordinate on the second segment
+     */
     public void fraction2(float fraction2) {
         setValue(fraction2, 3);
     }
 
+    /**
+     * The squared distance between the closest points
+     */
     public float distanceSquared() {
         return (float) getValueFloat(4);
     }
 
+    /**
+     * The squared distance between the closest points
+     */
     public void distanceSquared(float distanceSquared) {
         setValue(distanceSquared, 4);
     }

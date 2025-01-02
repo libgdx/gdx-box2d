@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * A distance proxy is used by the GJK algorithm. It encapsulates any shape.
+ */
 public final class b2ShapeProxy extends Struct {
 
     private final static int __size;
@@ -37,6 +40,9 @@ public final class b2ShapeProxy extends Struct {
         return new b2ShapeProxy.b2ShapeProxyPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The point cloud
+     */
     public b2Vec2.b2Vec2Pointer points() {
         return __points;
     }
@@ -45,18 +51,30 @@ public final class b2ShapeProxy extends Struct {
 
     private final b2Vec2.b2Vec2Pointer __points = new b2Vec2.b2Vec2Pointer(getPointer() + __points_offset, false).guardCount(8);
 
+    /**
+     * The number of points
+     */
     public int count() {
         return (int) getValue(8);
     }
 
+    /**
+     * The number of points
+     */
     public void count(int count) {
         setValue(count, 8);
     }
 
+    /**
+     * The external radius of the point cloud
+     */
     public float radius() {
         return (float) getValueFloat(9);
     }
 
+    /**
+     * The external radius of the point cloud
+     */
     public void radius(float radius) {
         setValue(radius, 9);
     }

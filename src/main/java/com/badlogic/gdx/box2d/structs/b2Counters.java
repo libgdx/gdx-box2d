@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 
+/**
+ * Counters that give details of the simulation size.
+ */
 public final class b2Counters extends Struct {
 
     private final static int __size;

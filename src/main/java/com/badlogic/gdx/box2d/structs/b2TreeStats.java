@@ -5,6 +5,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
+/**
+ * These are performance results returned by dynamic tree queries.
+ */
 public final class b2TreeStats extends Struct {
 
     private final static int __size;
@@ -36,18 +39,30 @@ public final class b2TreeStats extends Struct {
         return new b2TreeStats.b2TreeStatsPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * Number of internal nodes visited during the query
+     */
     public int nodeVisits() {
         return (int) getValue(0);
     }
 
+    /**
+     * Number of internal nodes visited during the query
+     */
     public void nodeVisits(int nodeVisits) {
         setValue(nodeVisits, 0);
     }
 
+    /**
+     * Number of leaf nodes visited during the query
+     */
     public int leafVisits() {
         return (int) getValue(1);
     }
 
+    /**
+     * Number of leaf nodes visited during the query
+     */
     public void leafVisits(int leafVisits) {
         setValue(leafVisits, 1);
     }

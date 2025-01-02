@@ -6,6 +6,11 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyMoveEvent;
 
+/**
+ * Body events are buffered in the Box2D world and are available
+ * as event arrays after the time step is complete.
+ * Note: this data becomes invalid if bodies are destroyed
+ */
 public final class b2BodyEvents extends Struct {
 
     private final static int __size;
@@ -37,18 +42,30 @@ public final class b2BodyEvents extends Struct {
         return new b2BodyEvents.b2BodyEventsPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * Array of move events
+     */
     public b2BodyMoveEvent.b2BodyMoveEventPointer moveEvents() {
         return new b2BodyMoveEvent.b2BodyMoveEventPointer(getValue(0), false);
     }
 
+    /**
+     * Array of move events
+     */
     public void moveEvents(b2BodyMoveEvent.b2BodyMoveEventPointer moveEvents) {
         setValue(moveEvents.getPointer(), 0);
     }
 
+    /**
+     * Number of move events
+     */
     public int moveCount() {
         return (int) getValue(1);
     }
 
+    /**
+     * Number of move events
+     */
     public void moveCount(int moveCount) {
         setValue(moveCount, 1);
     }

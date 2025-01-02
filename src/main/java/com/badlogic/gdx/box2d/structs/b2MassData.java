@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
+/**
+ * This holds the mass data computed for a shape.
+ */
 public final class b2MassData extends Struct {
 
     private final static int __size;
@@ -37,14 +40,23 @@ public final class b2MassData extends Struct {
         return new b2MassData.b2MassDataPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The mass of the shape, usually in kilograms.
+     */
     public float mass() {
         return (float) getValueFloat(0);
     }
 
+    /**
+     * The mass of the shape, usually in kilograms.
+     */
     public void mass(float mass) {
         setValue(mass, 0);
     }
 
+    /**
+     * The position of the shape's centroid relative to the shape's origin.
+     */
     public b2Vec2 center() {
         return __center;
     }
@@ -53,10 +65,16 @@ public final class b2MassData extends Struct {
 
     private final b2Vec2 __center = new b2Vec2(getPointer() + __center_offset, false);
 
+    /**
+     * The rotational inertia of the shape about the local origin.
+     */
     public float rotationalInertia() {
         return (float) getValueFloat(2);
     }
 
+    /**
+     * The rotational inertia of the shape about the local origin.
+     */
     public void rotationalInertia(float rotationalInertia) {
         setValue(rotationalInertia, 2);
     }

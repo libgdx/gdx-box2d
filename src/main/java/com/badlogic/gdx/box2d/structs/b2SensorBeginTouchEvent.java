@@ -6,6 +6,9 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 
+/**
+ * A begin touch event is generated when a shape starts to overlap a sensor shape.
+ */
 public final class b2SensorBeginTouchEvent extends Struct {
 
     private final static int __size;
@@ -37,6 +40,9 @@ public final class b2SensorBeginTouchEvent extends Struct {
         return new b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * The id of the sensor shape
+     */
     public b2ShapeId sensorShapeId() {
         return __sensorShapeId;
     }
@@ -45,6 +51,9 @@ public final class b2SensorBeginTouchEvent extends Struct {
 
     private final b2ShapeId __sensorShapeId = new b2ShapeId(getPointer() + __sensorShapeId_offset, false);
 
+    /**
+     * The id of the dynamic shape that began touching the sensor shape
+     */
     public b2ShapeId visitorShapeId() {
         return __visitorShapeId;
     }

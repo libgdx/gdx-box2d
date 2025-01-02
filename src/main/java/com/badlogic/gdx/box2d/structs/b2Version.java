@@ -5,6 +5,10 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
+/**
+ * Version numbering scheme.
+ * See https://semver.org/
+ */
 public final class b2Version extends Struct {
 
     private final static int __size;
@@ -36,26 +40,44 @@ public final class b2Version extends Struct {
         return new b2Version.b2VersionPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * Significant changes
+     */
     public int major() {
         return (int) getValue(0);
     }
 
+    /**
+     * Significant changes
+     */
     public void major(int major) {
         setValue(major, 0);
     }
 
+    /**
+     * Incremental changes
+     */
     public int minor() {
         return (int) getValue(1);
     }
 
+    /**
+     * Incremental changes
+     */
     public void minor(int minor) {
         setValue(minor, 1);
     }
 
+    /**
+     * Bug fixes
+     */
     public int revision() {
         return (int) getValue(2);
     }
 
+    /**
+     * Bug fixes
+     */
     public void revision(int revision) {
         setValue(revision, 2);
     }

@@ -8,6 +8,11 @@ import com.badlogic.gdx.box2d.structs.b2ContactBeginTouchEvent;
 import com.badlogic.gdx.box2d.structs.b2ContactEndTouchEvent;
 import com.badlogic.gdx.box2d.structs.b2ContactHitEvent;
 
+/**
+ * Contact events are buffered in the Box2D world and are available
+ * as event arrays after the time step is complete.
+ * Note: these may become invalid if bodies and/or shapes are destroyed
+ */
 public final class b2ContactEvents extends Struct {
 
     private final static int __size;
@@ -39,50 +44,86 @@ public final class b2ContactEvents extends Struct {
         return new b2ContactEvents.b2ContactEventsPointer(getPointer(), getsGCFreed());
     }
 
+    /**
+     * Array of begin touch events
+     */
     public b2ContactBeginTouchEvent.b2ContactBeginTouchEventPointer beginEvents() {
         return new b2ContactBeginTouchEvent.b2ContactBeginTouchEventPointer(getValue(0), false);
     }
 
+    /**
+     * Array of begin touch events
+     */
     public void beginEvents(b2ContactBeginTouchEvent.b2ContactBeginTouchEventPointer beginEvents) {
         setValue(beginEvents.getPointer(), 0);
     }
 
+    /**
+     * Array of end touch events
+     */
     public b2ContactEndTouchEvent.b2ContactEndTouchEventPointer endEvents() {
         return new b2ContactEndTouchEvent.b2ContactEndTouchEventPointer(getValue(1), false);
     }
 
+    /**
+     * Array of end touch events
+     */
     public void endEvents(b2ContactEndTouchEvent.b2ContactEndTouchEventPointer endEvents) {
         setValue(endEvents.getPointer(), 1);
     }
 
+    /**
+     * Array of hit events
+     */
     public b2ContactHitEvent.b2ContactHitEventPointer hitEvents() {
         return new b2ContactHitEvent.b2ContactHitEventPointer(getValue(2), false);
     }
 
+    /**
+     * Array of hit events
+     */
     public void hitEvents(b2ContactHitEvent.b2ContactHitEventPointer hitEvents) {
         setValue(hitEvents.getPointer(), 2);
     }
 
+    /**
+     * Number of begin touch events
+     */
     public int beginCount() {
         return (int) getValue(3);
     }
 
+    /**
+     * Number of begin touch events
+     */
     public void beginCount(int beginCount) {
         setValue(beginCount, 3);
     }
 
+    /**
+     * Number of end touch events
+     */
     public int endCount() {
         return (int) getValue(4);
     }
 
+    /**
+     * Number of end touch events
+     */
     public void endCount(int endCount) {
         setValue(endCount, 4);
     }
 
+    /**
+     * Number of hit events
+     */
     public int hitCount() {
         return (int) getValue(5);
     }
 
+    /**
+     * Number of hit events
+     */
     public void hitCount(int hitCount) {
         setValue(hitCount, 5);
     }
