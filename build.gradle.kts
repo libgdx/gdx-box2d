@@ -62,6 +62,13 @@ java {
     withJavadocJar()
 }
 
+tasks.javadoc {
+    (options as StandardJavadocDocletOptions).apply {
+        // TODO: Make gen rather generate valid javadoc
+        addStringOption("Xdoclint:none,-missing", "-quiet")
+    }
+}
+
 tasks.test {
     outputs.upToDateWhen { false }
     dependsOn("jnigenBuildHost", "jnigenPackageAllDesktop")
