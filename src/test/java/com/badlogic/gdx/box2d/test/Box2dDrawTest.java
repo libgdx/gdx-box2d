@@ -87,7 +87,7 @@ public class Box2dDrawTest {
 
             Polygon polygon = new Polygon();
             for (int i = 0; i < vertexCount; i++) {
-                b2Vec2 vec2 = vertices.get(i);
+                b2Vec2 vec2 = vertices.asStackElement(i);
                 polygon.addPoint((int)vec2.x() * 10, (int)vec2.y() * 10);
             }
 
