@@ -84,6 +84,7 @@ import com.badlogic.gdx.box2d.Box2d_Internal.b2TreeRayCastCallbackFcn_Internal;
 import com.badlogic.gdx.box2d.Box2d_Internal.b2FreeFcn_Internal;
 import com.badlogic.gdx.box2d.Box2d_Internal.b2FinishTaskCallback_Internal;
 
+@SuppressWarnings("unused")
 public final class Box2d {
 
     static {
@@ -108,7 +109,7 @@ public final class Box2d {
 static jclass illegalArgumentExceptionClass = NULL;
 static jclass cxxExceptionClass = NULL;
 */
-    private static native void init(Class illegalArgumentException, Class cxxException);/*
+    private static native void init(Class<?> illegalArgumentException, Class<?> cxxException);/*
     	illegalArgumentExceptionClass = (jclass)env->NewGlobalRef(illegalArgumentException);
     	cxxExceptionClass = (jclass)env->NewGlobalRef(cxxException);
     */
@@ -3045,7 +3046,7 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      *  Cast a circle through the world. Similar to a cast ray except that a circle is cast instead of a point.
-     * 	@see b2World_CastRay
+     * 	@see Box2d#b2World_CastRay
      */
     public static b2TreeStats b2World_CastCircle(b2WorldId worldId, b2Circle.b2CirclePointer circle, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
         return new b2TreeStats(b2World_CastCircle_internal(worldId.getPointer(), circle.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
@@ -3062,7 +3063,7 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      *  Cast a capsule through the world. Similar to a cast ray except that a capsule is cast instead of a point.
-     * 	@see b2World_CastRay
+     * 	@see Box2d#b2World_CastRay
      */
     public static b2TreeStats b2World_CastCapsule(b2WorldId worldId, b2Capsule.b2CapsulePointer capsule, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
         return new b2TreeStats(b2World_CastCapsule_internal(worldId.getPointer(), capsule.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
@@ -3079,7 +3080,7 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      *  Cast a polygon through the world. Similar to a cast ray except that a polygon is cast instead of a point.
-     * 	@see b2World_CastRay
+     * 	@see Box2d#b2World_CastRay
      */
     public static b2TreeStats b2World_CastPolygon(b2WorldId worldId, b2Polygon.b2PolygonPointer polygon, b2Transform originTransform, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
         return new b2TreeStats(b2World_CastPolygon_internal(worldId.getPointer(), polygon.getPointer(), originTransform.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer()), true);
@@ -4515,7 +4516,7 @@ static jclass cxxExceptionClass = NULL;
     /**
      *  Destroy a shape. You may defer the body mass update which can improve performance if several shapes on a
      * 	body are destroyed at once.
-     * 	@see b2Body_ApplyMassFromShapes
+     * 	@see Box2d#b2Body_ApplyMassFromShapes
      */
     public static void b2DestroyShape(b2ShapeId shapeId, boolean updateBodyMass) {
         b2DestroyShape_internal(shapeId.getPointer(), updateBodyMass);
@@ -4838,7 +4839,7 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Enable contact hit events for this shape. Ignored for sensors.
-     * @see b2WorldDef.hitEventThreshold
+     * @see b2WorldDef#hitEventThreshold
      */
     public static void b2Shape_EnableHitEvents(b2ShapeId shapeId, boolean flag) {
         b2Shape_EnableHitEvents_internal(shapeId.getPointer(), flag);
@@ -4979,7 +4980,7 @@ static jclass cxxExceptionClass = NULL;
     /**
      * Allows you to change a shape to be a circle or update the current circle.
      * This does not modify the mass properties.
-     * @see b2Body_ApplyMassFromShapes
+     * @see Box2d#b2Body_ApplyMassFromShapes
      */
     public static void b2Shape_SetCircle(b2ShapeId shapeId, b2Circle.b2CirclePointer circle) {
         b2Shape_SetCircle_internal(shapeId.getPointer(), circle.getPointer());
@@ -4994,7 +4995,7 @@ static jclass cxxExceptionClass = NULL;
     /**
      * Allows you to change a shape to be a capsule or update the current capsule.
      * This does not modify the mass properties.
-     * @see b2Body_ApplyMassFromShapes
+     * @see Box2d#b2Body_ApplyMassFromShapes
      */
     public static void b2Shape_SetCapsule(b2ShapeId shapeId, b2Capsule.b2CapsulePointer capsule) {
         b2Shape_SetCapsule_internal(shapeId.getPointer(), capsule.getPointer());
@@ -5022,7 +5023,7 @@ static jclass cxxExceptionClass = NULL;
     /**
      * Allows you to change a shape to be a polygon or update the current polygon.
      * This does not modify the mass properties.
-     * @see b2Body_ApplyMassFromShapes
+     * @see Box2d#b2Body_ApplyMassFromShapes
      */
     public static void b2Shape_SetPolygon(b2ShapeId shapeId, b2Polygon.b2PolygonPointer polygon) {
         b2Shape_SetPolygon_internal(shapeId.getPointer(), polygon.getPointer());
@@ -7117,7 +7118,7 @@ static jclass cxxExceptionClass = NULL;
         /**
          * Prototype callback for overlap queries.
          * Called for each shape found in the query.
-         * @see b2World_QueryAABB
+         * @see Box2d#b2World_OverlapAABB
          * @return false to terminate the query.
          * @ingroup world
          */
@@ -7180,7 +7181,7 @@ static jclass cxxExceptionClass = NULL;
          * @param fraction the fraction along the ray at the point of intersection
          * @param context the user context
          * @return -1 to filter, 0 to terminate, fraction to clip the ray for closest hit, 1 to continue
-         * @see b2World_CastRay
+         * @see Box2d#b2World_CastRay
          * @ingroup world
          */
         float b2CastResultFcn_call(b2ShapeId shapeId, b2Vec2 point, b2Vec2 normal, float fraction, VoidPointer context);
