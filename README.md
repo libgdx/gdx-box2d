@@ -16,6 +16,9 @@ gdx-box2d provides the following artifacts:
 - `com.badlogicgames.gdx:gdx-box2d-platform:$version:natives-x86`
 - `com.badlogicgames.gdx:gdx-box2d-platform:$version:natives-x86_64`
 
+Additionally, the following utility artifact is provided:
+- `com.badlogicgames.gdx:gdx-box2d-utils:$version`
+
 ## Usage
 
 At first, you need to call `com.badlogic.gdx.box2d.Box2d#initialize`. This will load the shared libraries and set up the native code.  
