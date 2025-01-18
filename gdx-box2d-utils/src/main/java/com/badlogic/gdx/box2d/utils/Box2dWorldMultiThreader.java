@@ -10,6 +10,14 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * This class implements a basic TaskSystem in java, for multithreading of a box2d world.
+ * One {@link Box2dWorldMultiThreader} handles one world.
+ * The MultiThreader will create and keep alive the configured amount of workers,
+ * After every world step, {@link Box2dWorldMultiThreader#afterStep()} needs to be called.
+ * After the world is destroyed, {@link Box2dWorldMultiThreader#dispose()} needs to be called.
+ * This class, like box2d, is not thread safe.
+ */
 public class Box2dWorldMultiThreader implements Disposable {
 
     private static final int MAX_TASKS = 128;
@@ -24,6 +32,15 @@ public class Box2dWorldMultiThreader implements Disposable {
     private int taskCount = 0;
     private boolean running = true;
 
+    /**
+     * This method creates and configures a {@link b2WorldDef} to use a newly created {@link Box2dWorldMultiThreader}
+     *
+     * After the world is destroyed, {@link Box2dWorldMultiThreader#dispose()} needs to be called.
+     *
+     * @param worldDef The world to configure
+     * @param numWorkers The amount of worker
+     * @return The created {@link Box2dWorldMultiThreader}
+     */
     public static Box2dWorldMultiThreader createForWorld(b2WorldDef worldDef, int numWorkers) {
         Box2dWorldMultiThreader multiThreader = new Box2dWorldMultiThreader(numWorkers);
         multiThreader.configureForWorld(worldDef);
@@ -35,7 +52,7 @@ public class Box2dWorldMultiThreader implements Disposable {
             throw new IllegalArgumentException("Number of workers must be greater than 1");
         this.numWorkers = numWorkers;
         this.workers = new Thread[numWorkers];
-        taskChunks = new ArrayBlockingQueue<>(MAX_TASKS * numWorkers);
+        this.taskChunks = new ArrayBlockingQueue<>(MAX_TASKS * numWorkers);
 
         for (int i = 0; i < numWorkers; i++) {
             final int workerId = i;
@@ -106,11 +123,17 @@ public class Box2dWorldMultiThreader implements Disposable {
         worldDef.workerCount(numWorkers);
     }
 
+    /**
+     * This method needs to be called after every world step
+     */
     public void afterStep() {
         taskCount = 0;
     }
 
 
+    /**
+     * Cleans up all resources. Should not be called before destroying the world.
+     */
     @Override
     public void dispose() {
         running = false;
