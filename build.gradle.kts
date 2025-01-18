@@ -264,7 +264,7 @@ allprojects {
         }
         repositories {
             maven {
-                url = if(version.toString().endsWith("SNAPSHOT")) uri(snapshotRepositoryUrl) else uri(releaseRepositoryUrl)
+                url = if(isReleaseBuild) uri(releaseRepositoryUrl) else uri(snapshotRepositoryUrl)
 
                 if (repositoryUsername.isNotEmpty() || repositoryPassword.isNotEmpty()) {
                     credentials {
