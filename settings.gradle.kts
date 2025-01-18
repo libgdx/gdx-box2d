@@ -1,5 +1,7 @@
 rootProject.name = "gdx-box2d"
 
+include("gdx-box2d-utils")
+
 pluginManagement {
     repositories {
         mavenCentral()

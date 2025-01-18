@@ -6,12 +6,7 @@ import kotlin.io.path.createTempDirectory
 plugins {
     id("java-library")
     id("com.badlogicgames.jnigen.jnigen-gradle") version "3.0.0-SNAPSHOT"
-    id("maven-publish")
-    id("signing")
 }
-
-java.sourceCompatibility = JavaVersion.VERSION_1_8
-java.targetCompatibility = JavaVersion.VERSION_1_8
 
 val isReleaseBuild: Boolean
     get() = project.hasProperty("RELEASE")
@@ -33,16 +28,6 @@ version = property("version") as String + if (isReleaseBuild) "" else "-SNAPSHOT
 
 val jnigenVersion = property("jnigen.version") as String
 
-repositories {
-    mavenCentral()
-    maven {
-        url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-        mavenContent {
-            snapshotsOnly()
-        }
-    }
-}
-
 dependencies {
     api("com.badlogicgames.jnigen:jnigen-loader:${jnigenVersion}")
     api("com.badlogicgames.jnigen:jnigen-runtime:${jnigenVersion}")
@@ -55,11 +40,6 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly(files("build/jnigen/libs/gdx-box2d-natives-desktop.jar"))
-}
-
-java {
-    withSourcesJar()
-    withJavadocJar()
 }
 
 tasks.javadoc {
@@ -201,70 +181,111 @@ jnigen {
     addIOS()
 }
 
-publishing {
-    publications {
-        register("mavenJava", MavenPublication::class) {
-            from(components["java"])
+artifacts {
+    artifacts {
+        val packageTasks = listOf(
+            tasks.named("jnigenPackageAllAndroid"),
+            tasks.named("jnigenPackageAllIOS"),
+            tasks.named("jnigenPackageAllDesktop")
+        )
 
-            versionMapping {
-                usage("java-api") {
-                    fromResolutionOf("runtimeClasspath")
-                }
-                usage("java-runtime") {
-                    fromResolutionResult()
-                }
-            }
-
-            pom {
-                name = property("POM_NAME") as String
-                description = property("POM_DESCRIPTION") as String
-                url = property("POM_URL") as String
-                licenses {
-                    license {
-                        name = property("POM_LICENCE_NAME") as String
-                        url = property("POM_LICENCE_URL") as String
-                        distribution = property("POM_LICENCE_DIST") as String
-                    }
-                }
-                developers {
-                    developer {
-                        id = "Tomski"
-                        name = "Tom Wojciechowski"
-                        email = "tomwojciechowski@asidik.com"
-                    }
-                }
-                scm {
-                    connection = property("POM_SCM_CONNECTION") as String
-                    developerConnection = property("POM_SCM_DEV_CONNECTION") as String
-                    url = property("POM_SCM_URL") as String
+        packageTasks.forEach { packageTask ->
+            packageTask.get().outputs.files.forEach { file ->
+                archives(file) {
+                    builtBy(packageTask)
                 }
             }
         }
     }
+}
+
+allprojects {
+    apply(plugin = "java-library")
+    apply(plugin = "maven-publish")
+    apply(plugin = "signing")
 
     repositories {
+        mavenCentral()
         maven {
-            url = if(version.toString().endsWith("SNAPSHOT")) uri(snapshotRepositoryUrl) else uri(releaseRepositoryUrl)
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+            mavenContent {
+                snapshotsOnly()
+            }
+        }
+    }
 
-            if (repositoryUsername.isNotEmpty() || repositoryPassword.isNotEmpty()) {
-                credentials {
-                    username = repositoryUsername
-                    password = repositoryPassword
+    configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+
+        withSourcesJar()
+        withJavadocJar()
+    }
+
+    configure<PublishingExtension> {
+        publications {
+            register("mavenJava", MavenPublication::class) {
+                from(components["java"])
+
+                versionMapping {
+                    usage("java-api") {
+                        fromResolutionOf("runtimeClasspath")
+                    }
+                    usage("java-runtime") {
+                        fromResolutionResult()
+                    }
+                }
+
+                pom {
+                    name = property("POM_NAME") as String
+                    description = property("POM_DESCRIPTION") as String
+                    url = property("POM_URL") as String
+                    licenses {
+                        license {
+                            name = property("POM_LICENCE_NAME") as String
+                            url = property("POM_LICENCE_URL") as String
+                            distribution = property("POM_LICENCE_DIST") as String
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = "Tomski"
+                            name = "Tom Wojciechowski"
+                            email = "tomwojciechowski@asidik.com"
+                        }
+                    }
+                    scm {
+                        connection = property("POM_SCM_CONNECTION") as String
+                        developerConnection = property("POM_SCM_DEV_CONNECTION") as String
+                        url = property("POM_SCM_URL") as String
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                url = if(version.toString().endsWith("SNAPSHOT")) uri(snapshotRepositoryUrl) else uri(releaseRepositoryUrl)
+
+                if (repositoryUsername.isNotEmpty() || repositoryPassword.isNotEmpty()) {
+                    credentials {
+                        username = repositoryUsername
+                        password = repositoryPassword
+                    }
                 }
             }
         }
     }
-}
 
-signing {
-    useGpgCmd()
-    sign(publishing.publications)
-}
+    val publishing = extensions.getByType<PublishingExtension>()
+    configure<SigningExtension> {
+        useGpgCmd()
+        sign(publishing.publications)
+    }
 
-//Simply using "required" in signing block doesn't work because taskGraph isn't ready yet.
-gradle.taskGraph.whenReady {
-    tasks.withType<Sign> {
-        onlyIf { isReleaseBuild }
+    //Simply using "required" in signing block doesn't work because taskGraph isn't ready yet.
+    gradle.taskGraph.whenReady {
+        tasks.withType<Sign> {
+            onlyIf { isReleaseBuild }
+        }
     }
 }
-
