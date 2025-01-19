@@ -12,13 +12,13 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * This class implements a basic TaskSystem in java, for multithreading of a box2d world.
- * One {@link Box2dWorldMultiThreader} handles one world.
+ * One {@link Box2dWorldTaskSystem} handles one world.
  * The MultiThreader will create and keep alive the configured amount of workers,
- * After every world step, {@link Box2dWorldMultiThreader#afterStep()} needs to be called.
- * After the world is destroyed, {@link Box2dWorldMultiThreader#dispose()} needs to be called.
+ * After every world step, {@link Box2dWorldTaskSystem#afterStep()} needs to be called.
+ * After the world is destroyed, {@link Box2dWorldTaskSystem#dispose()} needs to be called.
  * This class, like box2d, is not thread safe.
  */
-public class Box2dWorldMultiThreader implements Disposable {
+public class Box2dWorldTaskSystem implements Disposable {
 
     private static final int MAX_TASKS = 128;
 
@@ -33,21 +33,21 @@ public class Box2dWorldMultiThreader implements Disposable {
     private boolean running = true;
 
     /**
-     * This method creates and configures a {@link b2WorldDef} to use a newly created {@link Box2dWorldMultiThreader}
+     * This method creates and configures a {@link b2WorldDef} to use a newly created {@link Box2dWorldTaskSystem}
      *
-     * After the world is destroyed, {@link Box2dWorldMultiThreader#dispose()} needs to be called.
+     * After the world is destroyed, {@link Box2dWorldTaskSystem#dispose()} needs to be called.
      *
      * @param worldDef The world to configure
      * @param numWorkers The amount of worker
-     * @return The created {@link Box2dWorldMultiThreader}
+     * @return The created {@link Box2dWorldTaskSystem}
      */
-    public static Box2dWorldMultiThreader createForWorld(b2WorldDef worldDef, int numWorkers) {
-        Box2dWorldMultiThreader multiThreader = new Box2dWorldMultiThreader(numWorkers);
+    public static Box2dWorldTaskSystem createForWorld(b2WorldDef worldDef, int numWorkers) {
+        Box2dWorldTaskSystem multiThreader = new Box2dWorldTaskSystem(numWorkers);
         multiThreader.configureForWorld(worldDef);
         return multiThreader;
     }
 
-    private Box2dWorldMultiThreader(int numWorkers) {
+    private Box2dWorldTaskSystem(int numWorkers) {
         if (numWorkers <= 1)
             throw new IllegalArgumentException("Number of workers must be greater than 1");
         this.numWorkers = numWorkers;

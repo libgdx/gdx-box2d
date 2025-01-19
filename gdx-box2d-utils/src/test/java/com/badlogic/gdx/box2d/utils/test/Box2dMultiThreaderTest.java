@@ -3,7 +3,7 @@ package com.badlogic.gdx.box2d.utils.test;
 import com.badlogic.gdx.box2d.Box2d;
 import com.badlogic.gdx.box2d.enums.b2BodyType;
 import com.badlogic.gdx.box2d.structs.*;
-import com.badlogic.gdx.box2d.utils.Box2dWorldMultiThreader;
+import com.badlogic.gdx.box2d.utils.Box2dWorldTaskSystem;
 import org.junit.jupiter.api.Test;
 
 import static com.badlogic.gdx.box2d.Box2d.*;
@@ -19,9 +19,9 @@ public class Box2dMultiThreaderTest {
         b2WorldDef worldDef = b2DefaultWorldDef();
         worldDef.enableSleep(false);
 
-        Box2dWorldMultiThreader multiThreader = null;
+        Box2dWorldTaskSystem multiThreader = null;
         if (workerCount > 1)
-            multiThreader = Box2dWorldMultiThreader.createForWorld(worldDef, workerCount);
+            multiThreader = Box2dWorldTaskSystem.createForWorld(worldDef, workerCount);
 
         b2WorldId worldId = b2CreateWorld(worldDef.asPointer());
         b2BodyId[] bodies = new b2BodyId[e_count];
