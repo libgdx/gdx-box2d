@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static com.badlogic.gdx.box2d.Box2d.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Box2dMultiThreaderTest {
+public class Box2dWorldTaskSystemTest {
 
     private static final int e_columns = 10;
     private static final int e_rows = 10;
