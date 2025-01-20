@@ -28,27 +28,6 @@ diff --git a/src/main/java/com/badlogic/gdx/box2d/Box2d.java b/src/main/java/com
      }
  
      public static void initialize() {
-@@ -4733,20 +4741,6 @@
-     	return 0;
-     */
- 
--    /**
--     * Get the allowed clip fraction.
--     */
--    public static float b2Shape_GetAllowedClipFraction(b2ShapeId shapeId) {
--        return b2Shape_GetAllowedClipFraction_internal(shapeId.getPointer());
--    }
--
--    static private native float b2Shape_GetAllowedClipFraction_internal(long shapeId);/*
--    	HANDLE_JAVA_EXCEPTION_START()
--    	return (jfloat)b2Shape_GetAllowedClipFraction(*(b2ShapeId*)shapeId);
--    	HANDLE_JAVA_EXCEPTION_END()
--    	return 0;
--    */
--
-     /**
-      * Get the shape filter
-      */
 @@ -7122,7 +7116,7 @@
          /**
           * Prototype callback for overlap queries.

@@ -3819,6 +3819,38 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
+     * Get the linear velocity of a local point attached to a body. Usually in meters per second.
+     */
+    public static b2Vec2 b2Body_GetLocalPointVelocity(b2BodyId bodyId, b2Vec2 localPoint) {
+        return new b2Vec2(b2Body_GetLocalPointVelocity_internal(bodyId.getPointer(), localPoint.getPointer()), true);
+    }
+
+    static private native long b2Body_GetLocalPointVelocity_internal(long bodyId, long localPoint);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Vec2* _ret = (b2Vec2*)malloc(sizeof(b2Vec2));
+    	*_ret = b2Body_GetLocalPointVelocity(*(b2BodyId*)bodyId, *(b2Vec2*)localPoint);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Get the linear velocity of a world point attached to a body. Usually in meters per second.
+     */
+    public static b2Vec2 b2Body_GetWorldPointVelocity(b2BodyId bodyId, b2Vec2 worldPoint) {
+        return new b2Vec2(b2Body_GetWorldPointVelocity_internal(bodyId.getPointer(), worldPoint.getPointer()), true);
+    }
+
+    static private native long b2Body_GetWorldPointVelocity_internal(long bodyId, long worldPoint);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Vec2* _ret = (b2Vec2*)malloc(sizeof(b2Vec2));
+    	*_ret = b2Body_GetWorldPointVelocity(*(b2BodyId*)bodyId, *(b2Vec2*)worldPoint);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
      * Apply a force at a world point. If the force is not applied at the center of mass,
      * it will generate a torque and affect the angular velocity. This optionally wakes up the body.
      * The force is ignored if the body is not awake.
@@ -5129,6 +5161,22 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	b2AABB* _ret = (b2AABB*)malloc(sizeof(b2AABB));
     	*_ret = b2Shape_GetAABB(*(b2ShapeId*)shapeId);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Get the mass data for a shape
+     */
+    public static b2MassData b2Shape_GetMassData(b2ShapeId shapeId) {
+        return new b2MassData(b2Shape_GetMassData_internal(shapeId.getPointer()), true);
+    }
+
+    static private native long b2Shape_GetMassData_internal(long shapeId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2MassData* _ret = (b2MassData*)malloc(sizeof(b2MassData));
+    	*_ret = b2Shape_GetMassData(*(b2ShapeId*)shapeId);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
