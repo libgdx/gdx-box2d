@@ -70,6 +70,7 @@ public class Box2dWorldTaskSystem implements Disposable {
                    }
                }
             }, "Box2d-Worker-" + workerId);
+            workers[i].setDaemon(true);
             workers[i].start();
         }
 
