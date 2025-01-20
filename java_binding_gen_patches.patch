@@ -1,0 +1,60 @@
+diff --git a/src/main/java/com/badlogic/gdx/box2d/Box2d.java b/src/main/java/com/badlogic/gdx/box2d/Box2d.java
+--- a/src/main/java/com/badlogic/gdx/box2d/Box2d.java	(date 1737370055253)
++++ b/src/main/java/com/badlogic/gdx/box2d/Box2d.java	(revision 5cc52a55c8a151d2f30f995f2dc59643fbc04057)
+@@ -1,5 +1,6 @@
+ package com.badlogic.gdx.box2d;
+ 
++import com.badlogic.gdx.jnigen.loader.SharedLibraryLoader;
+ import com.badlogic.gdx.jnigen.runtime.c.CXXException;
+ import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
+ import com.badlogic.gdx.jnigen.runtime.CHandler;
+@@ -82,12 +83,19 @@
+ import com.badlogic.gdx.box2d.Box2d_Internal.b2FreeFcn_Internal;
+ import com.badlogic.gdx.box2d.Box2d_Internal.b2FinishTaskCallback_Internal;
+ 
++@SuppressWarnings("unused")
+ public final class Box2d {
+ 
+     static {
++        new SharedLibraryLoader().load("gdx-box2d");
+         CHandler.init();
+         FFITypes.init();
+         init(IllegalArgumentException.class, CXXException.class);
++
++        // Yes, this technically leaks, but this is expected to live for the entire program lifetime
++        b2SetAssertFcn(ClosureObject.fromClosure((condition, fileName, lineNumber) -> {
++            throw new Box2dAssertionError("BOX2D ASSERTION: " + condition.getString() + ", " + fileName.getString() + ", line " + lineNumber);
++        }));
+     }
+ 
+     public static void initialize() {
+@@ -4733,20 +4741,6 @@
+     	return 0;
+     */
+ 
+-    /**
+-     * Get the allowed clip fraction.
+-     */
+-    public static float b2Shape_GetAllowedClipFraction(b2ShapeId shapeId) {
+-        return b2Shape_GetAllowedClipFraction_internal(shapeId.getPointer());
+-    }
+-
+-    static private native float b2Shape_GetAllowedClipFraction_internal(long shapeId);/*
+-    	HANDLE_JAVA_EXCEPTION_START()
+-    	return (jfloat)b2Shape_GetAllowedClipFraction(*(b2ShapeId*)shapeId);
+-    	HANDLE_JAVA_EXCEPTION_END()
+-    	return 0;
+-    */
+-
+     /**
+      * Get the shape filter
+      */
+@@ -7122,7 +7116,7 @@
+         /**
+          * Prototype callback for overlap queries.
+          * Called for each shape found in the query.
+-         * @see b2World_OverlapABB
++         * @see Box2d#b2World_OverlapAABB
+          * @return false to terminate the query.
+          * @ingroup world
+          */
