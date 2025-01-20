@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Disposable;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This class implements a basic TaskSystem in java, for multithreading of a box2d world.
@@ -24,6 +25,8 @@ public class Box2dWorldTaskSystem implements Disposable {
 
     private final Thread[] workers;
     private final int numWorkers;
+    private final AtomicInteger aliveWorkers;
+    private final Box2dWorldTaskSystemDeathHandler deathHandler;
     private final BlockingQueue<Box2dTaskChunk> taskChunks;
     private final CountDownLatch[] countDownLatches = new CountDownLatch[MAX_TASKS];
     private final ClosureObject<Box2d.b2EnqueueTaskCallback> enqueueTaskCallback;
@@ -39,36 +42,41 @@ public class Box2dWorldTaskSystem implements Disposable {
      *
      * @param worldDef The world to configure
      * @param numWorkers The amount of worker
+     * @param deathHandler Handler for when the task system dies. see {@link Box2dWorldTaskSystemDeathHandler}
      * @return The created {@link Box2dWorldTaskSystem}
      */
-    public static Box2dWorldTaskSystem createForWorld(b2WorldDef worldDef, int numWorkers) {
-        Box2dWorldTaskSystem multiThreader = new Box2dWorldTaskSystem(numWorkers);
+    public static Box2dWorldTaskSystem createForWorld(b2WorldDef worldDef, int numWorkers, Box2dWorldTaskSystemDeathHandler deathHandler) {
+        Box2dWorldTaskSystem multiThreader = new Box2dWorldTaskSystem(numWorkers, deathHandler);
         multiThreader.configureForWorld(worldDef);
         return multiThreader;
     }
 
-    private Box2dWorldTaskSystem(int numWorkers) {
+    private Box2dWorldTaskSystem(int numWorkers, Box2dWorldTaskSystemDeathHandler deathHandler) {
         if (numWorkers <= 1)
             throw new IllegalArgumentException("Number of workers must be greater than 1");
         this.numWorkers = numWorkers;
         this.workers = new Thread[numWorkers];
         this.taskChunks = new ArrayBlockingQueue<>(MAX_TASKS * numWorkers);
+        this.aliveWorkers = new AtomicInteger(numWorkers);
+        this.deathHandler = deathHandler;
 
         for (int i = 0; i < numWorkers; i++) {
             final int workerId = i;
             workers[i] = new Thread(() -> {
-               while (running) {
-                   try {
-                       Box2dTaskChunk task = taskChunks.take();
+                try {
+                    while (running) {
                        try {
+                           Box2dTaskChunk task = taskChunks.take();
                            task.execute(workerId);
-                       } finally {
                            countDownLatches[task.taskIndex].countDown();
+                       } catch (InterruptedException e) {
+                           break;
                        }
-                   } catch (InterruptedException e) {
-                       break;
                    }
-               }
+                } finally {
+                    if (running)
+                        onThreadDies();
+                }
             }, "Box2d-Worker-" + workerId);
             workers[i].setDaemon(true);
             workers[i].start();
@@ -113,9 +121,15 @@ public class Box2dWorldTaskSystem implements Disposable {
                 countDownLatches[taskId].await();
                 countDownLatches[taskId] = null;
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                throw new Box2dWorldTaskSystemInterruptException(e);
             }
         });
+    }
+
+    private void onThreadDies() {
+        if (aliveWorkers.getAndDecrement() == numWorkers) {
+            deathHandler.taskSystemDied();
+        }
     }
 
     private void configureForWorld(b2WorldDef worldDef) {
@@ -130,7 +144,6 @@ public class Box2dWorldTaskSystem implements Disposable {
     public void afterStep() {
         taskCount = 0;
     }
-
 
     /**
      * Cleans up all resources. Should not be called before destroying the world.
@@ -170,5 +183,26 @@ public class Box2dWorldTaskSystem implements Disposable {
         public void execute(int workerId) {
             task.getClosure().b2TaskCallback_call(start, end, workerId, taskContext);
         }
+    }
+
+    public static class Box2dWorldTaskSystemInterruptException extends RuntimeException {
+        public Box2dWorldTaskSystemInterruptException(InterruptedException e) {
+            super(e);
+        }
+    }
+
+    @FunctionalInterface
+    public interface Box2dWorldTaskSystemDeathHandler {
+        /**
+         * So, your task system died, hooray! This was caused by an exception on a worker thread. <br>
+         * The most important thing to do now is, to call {@link Thread#interrupt()} on the thread, that runs {@link Box2d#b2World_Step}.<br>
+         * This will make your {@link Box2d#b2World_Step} method throw a {@link Box2dWorldTaskSystemInterruptException}.<br>
+         * Now you have two options:<br>
+         * 1. Let everything crash and don't catch the exception <br>
+         * 2. Catch the exception and handle it gracefully. After you caught the exception, you can safely dispose the current TaskSystem.
+         *      You should also be able to gracefully tear down the world, but that's more risky. In any case, you shouldn't use the world further and create a new one. <br>
+         * The exception that made the worker thread crash can be seen over the {@link Thread#setDefaultUncaughtExceptionHandler}}
+         */
+        void taskSystemDied();
     }
 }

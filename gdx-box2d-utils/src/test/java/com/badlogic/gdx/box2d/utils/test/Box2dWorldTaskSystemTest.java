@@ -20,8 +20,10 @@ public class Box2dWorldTaskSystemTest {
         worldDef.enableSleep(false);
 
         Box2dWorldTaskSystem multiThreader = null;
-        if (workerCount > 1)
-            multiThreader = Box2dWorldTaskSystem.createForWorld(worldDef, workerCount);
+        if (workerCount > 1) {
+            Thread currentThread = Thread.currentThread();
+            multiThreader = Box2dWorldTaskSystem.createForWorld(worldDef, workerCount, currentThread::interrupt);
+        }
 
         b2WorldId worldId = b2CreateWorld(worldDef.asPointer());
         b2BodyId[] bodies = new b2BodyId[e_count];
