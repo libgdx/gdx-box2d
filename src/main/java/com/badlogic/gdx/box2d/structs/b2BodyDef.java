@@ -7,6 +7,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.enums.b2BodyType;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Rot;
+import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
@@ -23,7 +24,7 @@ public final class b2BodyDef extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(13).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(12).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -181,59 +182,73 @@ public final class b2BodyDef extends Struct {
     }
 
     /**
+     * Optional body name for debugging. Up to 31 characters (excluding null termination)
+     */
+    public CSizedIntPointer name() {
+        return new CSizedIntPointer(getValue(9), false, "const char");
+    }
+
+    /**
+     * Optional body name for debugging. Up to 31 characters (excluding null termination)
+     */
+    public void name(CSizedIntPointer name) {
+        setValue(name.getPointer(), 9);
+    }
+
+    /**
      * Use this to store application specific body data.
      */
     public VoidPointer userData() {
-        return new VoidPointer(getValue(9), false);
+        return new VoidPointer(getValue(10), false);
     }
 
     /**
      * Use this to store application specific body data.
      */
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 9);
+        setValue(userData.getPointer(), 10);
     }
 
     /**
      * Set this flag to false if this body should never fall asleep.
      */
     public boolean enableSleep() {
-        return getValue(10) != 0;
+        return getValue(11) != 0;
     }
 
     /**
      * Set this flag to false if this body should never fall asleep.
      */
     public void enableSleep(boolean enableSleep) {
-        setValue(enableSleep, 10);
+        setValue(enableSleep, 11);
     }
 
     /**
      * Is this body initially awake or sleeping?
      */
     public boolean isAwake() {
-        return getValue(11) != 0;
+        return getValue(12) != 0;
     }
 
     /**
      * Is this body initially awake or sleeping?
      */
     public void isAwake(boolean isAwake) {
-        setValue(isAwake, 11);
+        setValue(isAwake, 12);
     }
 
     /**
      * Should this body be prevented from rotating? Useful for characters.
      */
     public boolean fixedRotation() {
-        return getValue(12) != 0;
+        return getValue(13) != 0;
     }
 
     /**
      * Should this body be prevented from rotating? Useful for characters.
      */
     public void fixedRotation(boolean fixedRotation) {
-        setValue(fixedRotation, 12);
+        setValue(fixedRotation, 13);
     }
 
     /**
@@ -243,7 +258,7 @@ public final class b2BodyDef extends Struct {
      * 	 continuous collision. They may interfere with joint constraints.
      */
     public boolean isBullet() {
-        return getValue(13) != 0;
+        return getValue(14) != 0;
     }
 
     /**
@@ -253,21 +268,21 @@ public final class b2BodyDef extends Struct {
      * 	 continuous collision. They may interfere with joint constraints.
      */
     public void isBullet(boolean isBullet) {
-        setValue(isBullet, 13);
+        setValue(isBullet, 14);
     }
 
     /**
      * Used to disable a body. A disabled body does not move or collide.
      */
     public boolean isEnabled() {
-        return getValue(14) != 0;
+        return getValue(15) != 0;
     }
 
     /**
      * Used to disable a body. A disabled body does not move or collide.
      */
     public void isEnabled(boolean isEnabled) {
-        setValue(isEnabled, 14);
+        setValue(isEnabled, 15);
     }
 
     /**
@@ -275,7 +290,7 @@ public final class b2BodyDef extends Struct {
      * 	 for circular objects, like wheels.
      */
     public boolean allowFastRotation() {
-        return getValue(15) != 0;
+        return getValue(16) != 0;
     }
 
     /**
@@ -283,21 +298,21 @@ public final class b2BodyDef extends Struct {
      * 	 for circular objects, like wheels.
      */
     public void allowFastRotation(boolean allowFastRotation) {
-        setValue(allowFastRotation, 15);
+        setValue(allowFastRotation, 16);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return (int) getValue(16);
+        return (int) getValue(17);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        setValue(internalValue, 16);
+        setValue(internalValue, 17);
     }
 
     public static final class b2BodyDefPointer extends StackElementPointer<b2BodyDef> {

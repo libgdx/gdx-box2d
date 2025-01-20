@@ -20,7 +20,7 @@ public final class b2DynamicTree extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(34).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(33).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -132,7 +132,7 @@ public final class b2DynamicTree extends Struct {
      * Leaf indices for rebuild
      */
     public CSizedIntPointer leafIndices() {
-        return new CSizedIntPointer(getValue(6), false, "int32_t");
+        return new CSizedIntPointer(getValue(6), false, "int");
     }
 
     /**
@@ -174,7 +174,7 @@ public final class b2DynamicTree extends Struct {
      * Bins for sorting during rebuild
      */
     public CSizedIntPointer binIndices() {
-        return new CSizedIntPointer(getValue(9), false, "int32_t");
+        return new CSizedIntPointer(getValue(9), false, "int");
     }
 
     /**

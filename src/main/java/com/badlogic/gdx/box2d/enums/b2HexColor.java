@@ -5,7 +5,7 @@ import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 import java.util.HashMap;
 
 /**
- * These colors are used for debug draw.
+ * These colors are used for debug draw and mostly match the named SVG colors.
  * See https://www.rapidtables.com/web/color/index.html
  * https://johndecember.com/html/spec/colorsvg.html
  * https://upload.wikimedia.org/wikipedia/commons/2/2b/SVG_Recognized_color_keyword_names.svg

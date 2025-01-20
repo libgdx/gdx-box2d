@@ -20,7 +20,7 @@ public final class b2ManifoldPoint extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(40).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(39).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -57,8 +57,8 @@ public final class b2ManifoldPoint extends Struct {
     private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
 
     /**
-     *  Location of the contact point relative to bodyA's origin in world space
-     * 	 @note When used internally to the Box2D solver, this is relative to the center of mass.
+     *  Location of the contact point relative to shapeA's origin in world space
+     * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
      */
     public b2Vec2 anchorA() {
         return __anchorA;
@@ -69,8 +69,8 @@ public final class b2ManifoldPoint extends Struct {
     private final b2Vec2 __anchorA = new b2Vec2(getPointer() + __anchorA_offset, false);
 
     /**
-     *  Location of the contact point relative to bodyB's origin in world space
-     * 	 @note When used internally to the Box2D solver, this is relative to the center of mass.
+     *  Location of the contact point relative to shapeB's origin in world space
+     * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
      */
     public b2Vec2 anchorB() {
         return __anchorB;

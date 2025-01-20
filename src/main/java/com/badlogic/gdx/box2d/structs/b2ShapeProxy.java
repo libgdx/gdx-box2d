@@ -16,7 +16,7 @@ public final class b2ShapeProxy extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(63).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(62).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

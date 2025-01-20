@@ -22,7 +22,7 @@ public final class b2MouseJointDef extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(44).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(43).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -47,7 +47,7 @@ public final class b2MouseJointDef extends Struct {
     }
 
     /**
-     * The first attached body.
+     * The first attached body. This is assumed to be static.
      */
     public b2BodyId bodyIdA() {
         return __bodyIdA;

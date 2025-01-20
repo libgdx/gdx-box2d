@@ -8,9 +8,9 @@ import com.badlogic.gdx.box2d.structs.b2ShapeId;
 
 /**
  *  An end touch event is generated when a shape stops overlapping a sensor shape.
- * 	You will get an end event if you do anything that destroys contacts previous to the last
- * 	world step.  These include things like setting the transform, destroying a body
- * 	or shape, or changing a filter or body type.
+ * 	These include things like setting the transform, destroying a body or shape, or changing
+ * 	a filter. You will also get an end event if the sensor or visitor are destroyed.
+ * 	Therefore you should always confirm the shape id is valid using b2Shape_IsValid.
  */
 public final class b2SensorEndTouchEvent extends Struct {
 
@@ -19,7 +19,7 @@ public final class b2SensorEndTouchEvent extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(57).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(56).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

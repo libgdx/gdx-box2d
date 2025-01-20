@@ -18,7 +18,7 @@ public final class b2ShapeCastPairInput extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(60).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(59).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

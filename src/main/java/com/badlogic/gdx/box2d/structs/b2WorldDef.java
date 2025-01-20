@@ -25,7 +25,7 @@ public final class b2WorldDef extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(78).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(76).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -77,59 +77,65 @@ public final class b2WorldDef extends Struct {
     }
 
     /**
-     * This parameter controls how fast overlap is resolved and usually has units of meters per second
-     */
-    public float contactPushSpeed() {
-        return (float) getValueFloat(2);
-    }
-
-    /**
-     * This parameter controls how fast overlap is resolved and usually has units of meters per second
-     */
-    public void contactPushSpeed(float contactPushSpeed) {
-        setValue(contactPushSpeed, 2);
-    }
-
-    /**
      * Threshold speed for hit events. Usually meters per second.
      */
     public float hitEventThreshold() {
-        return (float) getValueFloat(3);
+        return (float) getValueFloat(2);
     }
 
     /**
      * Threshold speed for hit events. Usually meters per second.
      */
     public void hitEventThreshold(float hitEventThreshold) {
-        setValue(hitEventThreshold, 3);
+        setValue(hitEventThreshold, 2);
     }
 
     /**
-     * Contact stiffness. Cycles per second.
+     * Contact stiffness. Cycles per second. Increasing this increases the speed of overlap recovery, but can introduce jitter.
      */
     public float contactHertz() {
+        return (float) getValueFloat(3);
+    }
+
+    /**
+     * Contact stiffness. Cycles per second. Increasing this increases the speed of overlap recovery, but can introduce jitter.
+     */
+    public void contactHertz(float contactHertz) {
+        setValue(contactHertz, 3);
+    }
+
+    /**
+     *  Contact bounciness. Non-dimensional. You can speed up overlap recovery by decreasing this with
+     * 	 the trade-off that overlap resolution becomes more energetic.
+     */
+    public float contactDampingRatio() {
         return (float) getValueFloat(4);
     }
 
     /**
-     * Contact stiffness. Cycles per second.
+     *  Contact bounciness. Non-dimensional. You can speed up overlap recovery by decreasing this with
+     * 	 the trade-off that overlap resolution becomes more energetic.
      */
-    public void contactHertz(float contactHertz) {
-        setValue(contactHertz, 4);
+    public void contactDampingRatio(float contactDampingRatio) {
+        setValue(contactDampingRatio, 4);
     }
 
     /**
-     * Contact bounciness. Non-dimensional.
+     *  This parameter controls how fast overlap is resolved and usually has units of meters per second. This only
+     * 	 puts a cap on the resolution speed. The resolution speed is increased by increasing the hertz and/or
+     * 	 decreasing the damping ratio.
      */
-    public float contactDampingRatio() {
+    public float contactPushMaxSpeed() {
         return (float) getValueFloat(5);
     }
 
     /**
-     * Contact bounciness. Non-dimensional.
+     *  This parameter controls how fast overlap is resolved and usually has units of meters per second. This only
+     * 	 puts a cap on the resolution speed. The resolution speed is increased by increasing the hertz and/or
+     * 	 decreasing the damping ratio.
      */
-    public void contactDampingRatio(float contactDampingRatio) {
-        setValue(contactDampingRatio, 5);
+    public void contactPushMaxSpeed(float contactPushMaxSpeed) {
+        setValue(contactPushMaxSpeed, 5);
     }
 
     /**
@@ -234,6 +240,10 @@ public final class b2WorldDef extends Struct {
      *  Number of workers to use with the provided task system. Box2D performs best when using only
      * 	 performance cores and accessing a single L2 cache. Efficiency cores and hyper-threading provide
      * 	 little benefit and may even harm performance.
+     * 	 @note Box2D does not create threads. This is the number of threads your applications has created
+     * 	 that you are allocating to b2World_Step.
+     * 	 @warning Do not modify the default value unless you are also providing a task system and providing
+     * 	 task callbacks (enqueueTask and finishTask).
      */
     public int workerCount() {
         return (int) getValue(13);
@@ -243,6 +253,10 @@ public final class b2WorldDef extends Struct {
      *  Number of workers to use with the provided task system. Box2D performs best when using only
      * 	 performance cores and accessing a single L2 cache. Efficiency cores and hyper-threading provide
      * 	 little benefit and may even harm performance.
+     * 	 @note Box2D does not create threads. This is the number of threads your applications has created
+     * 	 that you are allocating to b2World_Step.
+     * 	 @warning Do not modify the default value unless you are also providing a task system and providing
+     * 	 task callbacks (enqueueTask and finishTask).
      */
     public void workerCount(int workerCount) {
         setValue(workerCount, 13);

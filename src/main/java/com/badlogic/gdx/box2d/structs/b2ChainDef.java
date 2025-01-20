@@ -32,7 +32,7 @@ public final class b2ChainDef extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(19).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(18).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -166,17 +166,31 @@ public final class b2ChainDef extends Struct {
     }
 
     /**
+     * Generate events when a sensor overlaps this chain
+     */
+    public boolean enableSensorEvents() {
+        return getValue(8) != 0;
+    }
+
+    /**
+     * Generate events when a sensor overlaps this chain
+     */
+    public void enableSensorEvents(boolean enableSensorEvents) {
+        setValue(enableSensorEvents, 8);
+    }
+
+    /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return (int) getValue(8);
+        return (int) getValue(9);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        setValue(internalValue, 8);
+        setValue(internalValue, 9);
     }
 
     public static final class b2ChainDefPointer extends StackElementPointer<b2ChainDef> {

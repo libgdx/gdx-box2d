@@ -16,7 +16,7 @@ public final class b2Mat22 extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(42).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(41).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

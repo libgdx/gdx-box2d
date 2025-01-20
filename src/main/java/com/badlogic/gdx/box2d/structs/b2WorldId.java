@@ -15,7 +15,7 @@ public final class b2WorldId extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(79).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(77).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -47,12 +47,12 @@ public final class b2WorldId extends Struct {
         setValue(index1, 0);
     }
 
-    public char revision() {
+    public char generation() {
         return (char) getValue(1);
     }
 
-    public void revision(char revision) {
-        setValue(revision, 1);
+    public void generation(char generation) {
+        setValue(generation, 1);
     }
 
     public static final class b2WorldIdPointer extends StackElementPointer<b2WorldId> {

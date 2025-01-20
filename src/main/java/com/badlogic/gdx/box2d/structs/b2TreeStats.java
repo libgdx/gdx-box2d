@@ -15,7 +15,7 @@ public final class b2TreeStats extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(73).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(71).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

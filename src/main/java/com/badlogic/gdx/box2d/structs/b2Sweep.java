@@ -19,7 +19,7 @@ public final class b2Sweep extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(67).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(66).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

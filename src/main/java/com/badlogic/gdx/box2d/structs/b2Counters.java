@@ -16,7 +16,7 @@ public final class b2Counters extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(29).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(28).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -126,7 +126,7 @@ public final class b2Counters extends Struct {
 
     private static final int __colorCounts_offset = CHandler.getOffsetForField(__ffi_type, 10);
 
-    private final CSizedIntPointer __colorCounts = new CSizedIntPointer(getPointer() + __colorCounts_offset, false, "int32_t").guardCount(12);
+    private final CSizedIntPointer __colorCounts = new CSizedIntPointer(getPointer() + __colorCounts_offset, false, "int").guardCount(12);
 
     public static final class b2CountersPointer extends StackElementPointer<b2Counters> {
 

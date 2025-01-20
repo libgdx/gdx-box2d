@@ -16,7 +16,7 @@ public final class b2Profile extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(48).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(47).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -72,148 +72,148 @@ public final class b2Profile extends Struct {
         setValue(solve, 3);
     }
 
-    public float buildIslands() {
+    public float mergeIslands() {
         return (float) getValueFloat(4);
     }
 
-    public void buildIslands(float buildIslands) {
-        setValue(buildIslands, 4);
+    public void mergeIslands(float mergeIslands) {
+        setValue(mergeIslands, 4);
     }
 
-    public float solveConstraints() {
+    public float prepareStages() {
         return (float) getValueFloat(5);
     }
 
-    public void solveConstraints(float solveConstraints) {
-        setValue(solveConstraints, 5);
+    public void prepareStages(float prepareStages) {
+        setValue(prepareStages, 5);
     }
 
-    public float prepareTasks() {
+    public float solveConstraints() {
         return (float) getValueFloat(6);
     }
 
-    public void prepareTasks(float prepareTasks) {
-        setValue(prepareTasks, 6);
-    }
-
-    public float solverTasks() {
-        return (float) getValueFloat(7);
-    }
-
-    public void solverTasks(float solverTasks) {
-        setValue(solverTasks, 7);
+    public void solveConstraints(float solveConstraints) {
+        setValue(solveConstraints, 6);
     }
 
     public float prepareConstraints() {
-        return (float) getValueFloat(8);
+        return (float) getValueFloat(7);
     }
 
     public void prepareConstraints(float prepareConstraints) {
-        setValue(prepareConstraints, 8);
+        setValue(prepareConstraints, 7);
     }
 
     public float integrateVelocities() {
-        return (float) getValueFloat(9);
+        return (float) getValueFloat(8);
     }
 
     public void integrateVelocities(float integrateVelocities) {
-        setValue(integrateVelocities, 9);
+        setValue(integrateVelocities, 8);
     }
 
     public float warmStart() {
-        return (float) getValueFloat(10);
+        return (float) getValueFloat(9);
     }
 
     public void warmStart(float warmStart) {
-        setValue(warmStart, 10);
+        setValue(warmStart, 9);
     }
 
-    public float solveVelocities() {
-        return (float) getValueFloat(11);
+    public float solveImpulses() {
+        return (float) getValueFloat(10);
     }
 
-    public void solveVelocities(float solveVelocities) {
-        setValue(solveVelocities, 11);
+    public void solveImpulses(float solveImpulses) {
+        setValue(solveImpulses, 10);
     }
 
     public float integratePositions() {
-        return (float) getValueFloat(12);
+        return (float) getValueFloat(11);
     }
 
     public void integratePositions(float integratePositions) {
-        setValue(integratePositions, 12);
+        setValue(integratePositions, 11);
     }
 
-    public float relaxVelocities() {
-        return (float) getValueFloat(13);
+    public float relaxImpulses() {
+        return (float) getValueFloat(12);
     }
 
-    public void relaxVelocities(float relaxVelocities) {
-        setValue(relaxVelocities, 13);
+    public void relaxImpulses(float relaxImpulses) {
+        setValue(relaxImpulses, 12);
     }
 
     public float applyRestitution() {
-        return (float) getValueFloat(14);
+        return (float) getValueFloat(13);
     }
 
     public void applyRestitution(float applyRestitution) {
-        setValue(applyRestitution, 14);
+        setValue(applyRestitution, 13);
     }
 
     public float storeImpulses() {
-        return (float) getValueFloat(15);
+        return (float) getValueFloat(14);
     }
 
     public void storeImpulses(float storeImpulses) {
-        setValue(storeImpulses, 15);
-    }
-
-    public float finalizeBodies() {
-        return (float) getValueFloat(16);
-    }
-
-    public void finalizeBodies(float finalizeBodies) {
-        setValue(finalizeBodies, 16);
+        setValue(storeImpulses, 14);
     }
 
     public float splitIslands() {
-        return (float) getValueFloat(17);
+        return (float) getValueFloat(15);
     }
 
     public void splitIslands(float splitIslands) {
-        setValue(splitIslands, 17);
+        setValue(splitIslands, 15);
     }
 
-    public float sleepIslands() {
-        return (float) getValueFloat(18);
+    public float transforms() {
+        return (float) getValueFloat(16);
     }
 
-    public void sleepIslands(float sleepIslands) {
-        setValue(sleepIslands, 18);
+    public void transforms(float transforms) {
+        setValue(transforms, 16);
     }
 
     public float hitEvents() {
-        return (float) getValueFloat(19);
+        return (float) getValueFloat(17);
     }
 
     public void hitEvents(float hitEvents) {
-        setValue(hitEvents, 19);
+        setValue(hitEvents, 17);
     }
 
-    public float broadphase() {
+    public float refit() {
+        return (float) getValueFloat(18);
+    }
+
+    public void refit(float refit) {
+        setValue(refit, 18);
+    }
+
+    public float bullets() {
+        return (float) getValueFloat(19);
+    }
+
+    public void bullets(float bullets) {
+        setValue(bullets, 19);
+    }
+
+    public float sleepIslands() {
         return (float) getValueFloat(20);
     }
 
-    public void broadphase(float broadphase) {
-        setValue(broadphase, 20);
+    public void sleepIslands(float sleepIslands) {
+        setValue(sleepIslands, 20);
     }
 
-    public float continuous() {
+    public float sensors() {
         return (float) getValueFloat(21);
     }
 
-    public void continuous(float continuous) {
-        setValue(continuous, 21);
+    public void sensors(float sensors) {
+        setValue(sensors, 21);
     }
 
     public static final class b2ProfilePointer extends StackElementPointer<b2Profile> {

@@ -16,7 +16,7 @@ public final class b2SegmentDistanceResult extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(55).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(54).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

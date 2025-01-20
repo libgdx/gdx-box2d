@@ -15,7 +15,7 @@ public final class b2BodyId extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(15).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(14).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -55,12 +55,12 @@ public final class b2BodyId extends Struct {
         setValue(world0, 1);
     }
 
-    public char revision() {
+    public char generation() {
         return (char) getValue(2);
     }
 
-    public void revision(char revision) {
-        setValue(revision, 2);
+    public void generation(char generation) {
+        setValue(generation, 2);
     }
 
     public static final class b2BodyIdPointer extends StackElementPointer<b2BodyId> {

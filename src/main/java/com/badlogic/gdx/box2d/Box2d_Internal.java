@@ -167,9 +167,6 @@ public final class Box2d_Internal {
     public final static class b2CosSin_Internal {
     }
 
-    public final static class b2Timer_Internal {
-    }
-
     public final static class b2WorldId_Internal {
     }
 
@@ -261,7 +258,7 @@ public final class Box2d_Internal {
 
         public interface DrawSolidPolygon_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(69), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
             void DrawSolidPolygon_call(b2Transform transform, b2Vec2.b2Vec2Pointer vertices, int vertexCount, float radius, b2HexColor color, VoidPointer context);
 
@@ -290,7 +287,7 @@ public final class Box2d_Internal {
 
         public interface DrawCircle_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
             void DrawCircle_call(b2Vec2 center, float radius, b2HexColor color, VoidPointer context);
 
@@ -317,7 +314,7 @@ public final class Box2d_Internal {
 
         public interface DrawSolidCircle_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(69), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
             void DrawSolidCircle_call(b2Transform transform, float radius, b2HexColor color, VoidPointer context);
 
@@ -344,7 +341,7 @@ public final class Box2d_Internal {
 
         public interface DrawSolidCapsule_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
             void DrawSolidCapsule_call(b2Vec2 p1, b2Vec2 p2, float radius, b2HexColor color, VoidPointer context);
 
@@ -372,7 +369,7 @@ public final class Box2d_Internal {
 
         public interface DrawSegment_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
             void DrawSegment_call(b2Vec2 p1, b2Vec2 p2, b2HexColor color, VoidPointer context);
 
@@ -399,7 +396,7 @@ public final class Box2d_Internal {
 
         public interface DrawTransform_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(71), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(69), FFITypes.getCTypeInfo(-1) };
 
             void DrawTransform_call(b2Transform transform, VoidPointer context);
 
@@ -424,7 +421,7 @@ public final class Box2d_Internal {
 
         public interface DrawPoint_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
             void DrawPoint_call(b2Vec2 p, float size, b2HexColor color, VoidPointer context);
 
@@ -451,25 +448,26 @@ public final class Box2d_Internal {
 
         public interface DrawString_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
-            void DrawString_call(b2Vec2 p, CSizedIntPointer s, VoidPointer context);
+            void DrawString_call(b2Vec2 p, CSizedIntPointer s, b2HexColor color, VoidPointer context);
 
             default CTypeInfo[] functionSignature() {
                 return __ffi_cache;
             }
 
             default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-                DrawString_call(new b2Vec2(parameters[0].asLong(), true), new CSizedIntPointer(parameters[1].asLong(), false, "const char"), new VoidPointer(parameters[2].asLong(), false));
+                DrawString_call(new b2Vec2(parameters[0].asLong(), true), new CSizedIntPointer(parameters[1].asLong(), false, "const char"), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
             }
 
             public static DrawString DrawString_downcall(long fnPtr) {
                 ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawString_Internal.__ffi_cache);
-                return (p, s, context) -> {
+                return (p, s, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                     useEncoder.setValue(0, p);
                     useEncoder.setValue(1, s);
-                    useEncoder.setValue(2, context);
+                    useEncoder.setValue(2, color);
+                    useEncoder.setValue(3, context);
                     useEncoder.invoke();
                 };
             }
@@ -490,7 +488,7 @@ public final class Box2d_Internal {
 
     public interface b2OverlapResultFcn_Internal extends Closure {
 
-        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(-1) };
 
         boolean b2OverlapResultFcn_call(b2ShapeId shapeId, VoidPointer context);
 
@@ -517,7 +515,7 @@ public final class Box2d_Internal {
 
     public interface b2TreeQueryCallbackFcn_Internal extends Closure {
 
-        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         boolean b2TreeQueryCallbackFcn_call(int proxyId, int userData, VoidPointer context);
 
@@ -545,7 +543,7 @@ public final class Box2d_Internal {
 
     public interface b2TaskCallback_Internal extends Closure {
 
-        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(8), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(7), FFITypes.getCTypeInfo(-1) };
 
         void b2TaskCallback_call(int startIndex, int endIndex, long workerIndex, VoidPointer taskContext);
 
@@ -572,7 +570,7 @@ public final class Box2d_Internal {
 
     public interface b2EnqueueTaskCallback_Internal extends Closure {
 
-        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
         VoidPointer b2EnqueueTaskCallback_call(ClosureObject<b2TaskCallback> task, int itemCount, int minRange, VoidPointer taskContext, VoidPointer userContext);
 
@@ -602,7 +600,7 @@ public final class Box2d_Internal {
 
     public interface b2CastResultFcn_Internal extends Closure {
 
-        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(74), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1) };
 
         float b2CastResultFcn_call(b2ShapeId shapeId, b2Vec2 point, b2Vec2 normal, float fraction, VoidPointer context);
 
@@ -632,7 +630,7 @@ public final class Box2d_Internal {
 
     public interface b2TreeShapeCastCallbackFcn_Internal extends Closure {
 
-        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         float b2TreeShapeCastCallbackFcn_call(b2ShapeCastInput.b2ShapeCastInputPointer input, int proxyId, int userData, VoidPointer context);
 
@@ -661,7 +659,7 @@ public final class Box2d_Internal {
 
     public interface b2PreSolveFcn_Internal extends Closure {
 
-        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1) };
 
         boolean b2PreSolveFcn_call(b2ShapeId shapeIdA, b2ShapeId shapeIdB, b2Manifold.b2ManifoldPointer manifold, VoidPointer context);
 
@@ -690,7 +688,7 @@ public final class Box2d_Internal {
 
     public interface b2AllocFcn_Internal extends Closure {
 
-        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(11), FFITypes.getCTypeInfo(4) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(10), FFITypes.getCTypeInfo(4) };
 
         VoidPointer b2AllocFcn_call(long size, int alignment);
 
@@ -745,7 +743,7 @@ public final class Box2d_Internal {
 
     public interface b2CustomFilterFcn_Internal extends Closure {
 
-        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(62), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(0), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(61), FFITypes.getCTypeInfo(-1) };
 
         boolean b2CustomFilterFcn_call(b2ShapeId shapeIdA, b2ShapeId shapeIdB, VoidPointer context);
 
@@ -773,7 +771,7 @@ public final class Box2d_Internal {
 
     public interface b2TreeRayCastCallbackFcn_Internal extends Closure {
 
-        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(5), FFITypes.getCTypeInfo(-1) };
+        CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
 
         float b2TreeRayCastCallbackFcn_call(b2RayCastInput.b2RayCastInputPointer input, int proxyId, int userData, VoidPointer context);
 

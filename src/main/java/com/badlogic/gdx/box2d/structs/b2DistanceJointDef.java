@@ -24,7 +24,7 @@ public final class b2DistanceJointDef extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(32).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(31).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 

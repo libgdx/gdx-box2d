@@ -34,7 +34,7 @@ public final class b2DebugDraw extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(30).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(29).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -171,14 +171,14 @@ public final class b2DebugDraw extends Struct {
     }
 
     /**
-     * Draw a string.
+     * Draw a string in world space
      */
     public ClosureObject<DrawString> DrawString() {
         return CHandler.getClosureObject(getValue(8), DrawString_Internal::DrawString_downcall);
     }
 
     /**
-     * Draw a string.
+     * Draw a string in world space
      */
     public void DrawString(ClosureObject<DrawString> DrawString) {
         setValue(DrawString.getPointer(), 8);
@@ -280,87 +280,101 @@ public final class b2DebugDraw extends Struct {
     }
 
     /**
+     * Option to draw body names
+     */
+    public boolean drawBodyNames() {
+        return getValue(16) != 0;
+    }
+
+    /**
+     * Option to draw body names
+     */
+    public void drawBodyNames(boolean drawBodyNames) {
+        setValue(drawBodyNames, 16);
+    }
+
+    /**
      * Option to draw contact points
      */
     public boolean drawContacts() {
-        return getValue(16) != 0;
+        return getValue(17) != 0;
     }
 
     /**
      * Option to draw contact points
      */
     public void drawContacts(boolean drawContacts) {
-        setValue(drawContacts, 16);
+        setValue(drawContacts, 17);
     }
 
     /**
      * Option to visualize the graph coloring used for contacts and joints
      */
     public boolean drawGraphColors() {
-        return getValue(17) != 0;
+        return getValue(18) != 0;
     }
 
     /**
      * Option to visualize the graph coloring used for contacts and joints
      */
     public void drawGraphColors(boolean drawGraphColors) {
-        setValue(drawGraphColors, 17);
+        setValue(drawGraphColors, 18);
     }
 
     /**
      * Option to draw contact normals
      */
     public boolean drawContactNormals() {
-        return getValue(18) != 0;
+        return getValue(19) != 0;
     }
 
     /**
      * Option to draw contact normals
      */
     public void drawContactNormals(boolean drawContactNormals) {
-        setValue(drawContactNormals, 18);
+        setValue(drawContactNormals, 19);
     }
 
     /**
      * Option to draw contact normal impulses
      */
     public boolean drawContactImpulses() {
-        return getValue(19) != 0;
+        return getValue(20) != 0;
     }
 
     /**
      * Option to draw contact normal impulses
      */
     public void drawContactImpulses(boolean drawContactImpulses) {
-        setValue(drawContactImpulses, 19);
+        setValue(drawContactImpulses, 20);
     }
 
     /**
      * Option to draw contact friction impulses
      */
     public boolean drawFrictionImpulses() {
-        return getValue(20) != 0;
+        return getValue(21) != 0;
     }
 
     /**
      * Option to draw contact friction impulses
      */
     public void drawFrictionImpulses(boolean drawFrictionImpulses) {
-        setValue(drawFrictionImpulses, 20);
+        setValue(drawFrictionImpulses, 21);
     }
 
     /**
      * User context that is passed as an argument to drawing callback functions
      */
     public VoidPointer context() {
-        return new VoidPointer(getValue(21), false);
+        return new VoidPointer(getValue(22), false);
     }
 
     /**
      * User context that is passed as an argument to drawing callback functions
      */
     public void context(VoidPointer context) {
-        setValue(context.getPointer(), 21);
+        setValue(context.getPointer(), 22);
     }
 
     public static final class b2DebugDrawPointer extends StackElementPointer<b2DebugDraw> {
@@ -458,8 +472,8 @@ public final class b2DebugDraw extends Struct {
     public interface DrawString extends Closure, DrawString_Internal {
 
         /**
-         * Draw a string.
+         * Draw a string in world space
          */
-        void DrawString_call(b2Vec2 p, CSizedIntPointer s, VoidPointer context);
+        void DrawString_call(b2Vec2 p, CSizedIntPointer s, b2HexColor color, VoidPointer context);
     }
 }

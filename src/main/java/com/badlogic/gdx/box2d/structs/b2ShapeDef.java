@@ -21,7 +21,7 @@ public final class b2ShapeDef extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(61).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(60).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -159,47 +159,31 @@ public final class b2ShapeDef extends Struct {
     }
 
     /**
-     *  Enable sensor events for this shape. Only applies to kinematic and dynamic bodies.
-     * 	 This applies for sensors and non-sensors.
-     */
-    public boolean enableSensorEvents() {
-        return getValue(8) != 0;
-    }
-
-    /**
-     *  Enable sensor events for this shape. Only applies to kinematic and dynamic bodies.
-     * 	 This applies for sensors and non-sensors.
-     */
-    public void enableSensorEvents(boolean enableSensorEvents) {
-        setValue(enableSensorEvents, 8);
-    }
-
-    /**
      * Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
      */
     public boolean enableContactEvents() {
-        return getValue(9) != 0;
+        return getValue(8) != 0;
     }
 
     /**
      * Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
      */
     public void enableContactEvents(boolean enableContactEvents) {
-        setValue(enableContactEvents, 9);
+        setValue(enableContactEvents, 8);
     }
 
     /**
      * Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
      */
     public boolean enableHitEvents() {
-        return getValue(10) != 0;
+        return getValue(9) != 0;
     }
 
     /**
      * Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
      */
     public void enableHitEvents(boolean enableHitEvents) {
-        setValue(enableHitEvents, 10);
+        setValue(enableHitEvents, 9);
     }
 
     /**
@@ -207,7 +191,7 @@ public final class b2ShapeDef extends Struct {
      * 	 and must be carefully handled due to threading. Ignored for sensors.
      */
     public boolean enablePreSolveEvents() {
-        return getValue(11) != 0;
+        return getValue(10) != 0;
     }
 
     /**
@@ -215,7 +199,7 @@ public final class b2ShapeDef extends Struct {
      * 	 and must be carefully handled due to threading. Ignored for sensors.
      */
     public void enablePreSolveEvents(boolean enablePreSolveEvents) {
-        setValue(enablePreSolveEvents, 11);
+        setValue(enablePreSolveEvents, 10);
     }
 
     /**
@@ -225,7 +209,7 @@ public final class b2ShapeDef extends Struct {
      * 	 This is implicitly always true for sensors, dynamic bodies, and kinematic bodies.
      */
     public boolean invokeContactCreation() {
-        return getValue(12) != 0;
+        return getValue(11) != 0;
     }
 
     /**
@@ -235,35 +219,35 @@ public final class b2ShapeDef extends Struct {
      * 	 This is implicitly always true for sensors, dynamic bodies, and kinematic bodies.
      */
     public void invokeContactCreation(boolean invokeContactCreation) {
-        setValue(invokeContactCreation, 12);
+        setValue(invokeContactCreation, 11);
     }
 
     /**
      * Should the body update the mass properties when this shape is created. Default is true.
      */
     public boolean updateBodyMass() {
-        return getValue(13) != 0;
+        return getValue(12) != 0;
     }
 
     /**
      * Should the body update the mass properties when this shape is created. Default is true.
      */
     public void updateBodyMass(boolean updateBodyMass) {
-        setValue(updateBodyMass, 13);
+        setValue(updateBodyMass, 12);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return (int) getValue(14);
+        return (int) getValue(13);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        setValue(internalValue, 14);
+        setValue(internalValue, 13);
     }
 
     public static final class b2ShapeDefPointer extends StackElementPointer<b2ShapeDef> {

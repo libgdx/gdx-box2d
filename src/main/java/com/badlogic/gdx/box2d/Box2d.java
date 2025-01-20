@@ -6,7 +6,6 @@ import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 import com.badlogic.gdx.box2d.structs.b2Version;
-import com.badlogic.gdx.box2d.structs.b2Timer;
 import com.badlogic.gdx.box2d.structs.b2CosSin;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.jnigen.runtime.pointer.FloatPointer;
@@ -186,52 +185,53 @@ static jclass cxxExceptionClass = NULL;
     	return 0;
     */
 
-    public static b2Timer b2CreateTimer() {
-        return new b2Timer(b2CreateTimer_internal(), true);
+    /**
+     * Get the absolute number of system ticks. The value is platform specific.
+     */
+    public static long b2GetTicks() {
+        return b2GetTicks_internal();
     }
 
-    static private native long b2CreateTimer_internal();/*
+    static private native long b2GetTicks_internal();/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	b2Timer* _ret = (b2Timer*)malloc(sizeof(b2Timer));
-    	*_ret = b2CreateTimer();
-    	return (jlong)_ret;
+    	return (jlong)b2GetTicks();
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static float b2GetMilliseconds(b2Timer.b2TimerPointer timer) {
-        return b2GetMilliseconds_internal(timer.getPointer());
+    /**
+     * Get the milliseconds passed from an initial tick value.
+     */
+    public static float b2GetMilliseconds(long ticks) {
+        return b2GetMilliseconds_internal(ticks);
     }
 
-    static private native float b2GetMilliseconds_internal(long timer);/*
+    static private native float b2GetMilliseconds_internal(long ticks);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2GetMilliseconds((const b2Timer *)timer);
+    	CHECK_AND_THROW_C_TYPE(env, uint64_t, ticks, 0, return 0);
+    	return (jfloat)b2GetMilliseconds((uint64_t)ticks);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static float b2GetMillisecondsAndReset(b2Timer.b2TimerPointer timer) {
-        return b2GetMillisecondsAndReset_internal(timer.getPointer());
+    /**
+     * Get the milliseconds passed from an initial tick value.
+     */
+    public static float b2GetMillisecondsAndReset(CSizedIntPointer ticks) {
+        ticks.assertHasCTypeBacking("uint64_t");
+        return b2GetMillisecondsAndReset_internal(ticks.getPointer());
     }
 
-    static private native float b2GetMillisecondsAndReset_internal(long timer);/*
+    static private native float b2GetMillisecondsAndReset_internal(long ticks);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2GetMillisecondsAndReset((b2Timer *)timer);
+    	return (jfloat)b2GetMillisecondsAndReset((uint64_t *)ticks);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
 
-    public static void b2SleepMilliseconds(int milliseconds) {
-        b2SleepMilliseconds_internal(milliseconds);
-    }
-
-    static private native void b2SleepMilliseconds_internal(int milliseconds);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, int, milliseconds, 0, return);
-    	b2SleepMilliseconds((int)milliseconds);
-    	HANDLE_JAVA_EXCEPTION_END()
-    */
-
+    /**
+     * Yield to be used in a busy loop.
+     */
     public static void b2Yield() {
         b2Yield_internal();
     }
@@ -773,7 +773,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Integration rotation from angular velocity
+     * Integrate rotation from angular velocity
      * @param q1 initial rotation
      * @param deltaAngle the angular displacement in radians
      */
@@ -1804,9 +1804,9 @@ static jclass cxxExceptionClass = NULL;
 
     static private native long b2ComputeHull_internal(long points, int count);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, int32_t, count, 1, return 0);
+    	CHECK_AND_THROW_C_TYPE(env, int, count, 1, return 0);
     	b2Hull* _ret = (b2Hull*)malloc(sizeof(b2Hull));
-    	*_ret = b2ComputeHull((const b2Vec2 *)points, (int32_t)count);
+    	*_ret = b2ComputeHull((const b2Vec2 *)points, (int)count);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -1889,9 +1889,9 @@ static jclass cxxExceptionClass = NULL;
 
     static private native long b2MakeProxy_internal(long vertices, int count, float radius);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, int32_t, count, 1, return 0);
+    	CHECK_AND_THROW_C_TYPE(env, int, count, 1, return 0);
     	b2ShapeProxy* _ret = (b2ShapeProxy*)malloc(sizeof(b2ShapeProxy));
-    	*_ret = b2MakeProxy((const b2Vec2 *)vertices, (int32_t)count, (float)radius);
+    	*_ret = b2MakeProxy((const b2Vec2 *)vertices, (int)count, (float)radius);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -2162,9 +2162,9 @@ static jclass cxxExceptionClass = NULL;
 
     static private native int b2DynamicTree_CreateProxy_internal(long tree, long aabb, long categoryBits, int userData);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, int32_t, userData, 3, return 0);
+    	CHECK_AND_THROW_C_TYPE(env, int, userData, 3, return 0);
     	CHECK_AND_THROW_C_TYPE(env, uint64_t, categoryBits, 2, return 0);
-    	return (jint)b2DynamicTree_CreateProxy((b2DynamicTree *)tree, *(b2AABB*)aabb, (uint64_t)categoryBits, (int32_t)userData);
+    	return (jint)b2DynamicTree_CreateProxy((b2DynamicTree *)tree, *(b2AABB*)aabb, (uint64_t)categoryBits, (int)userData);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -2178,8 +2178,8 @@ static jclass cxxExceptionClass = NULL;
 
     static private native void b2DynamicTree_DestroyProxy_internal(long tree, int proxyId);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, int32_t, proxyId, 1, return);
-    	b2DynamicTree_DestroyProxy((b2DynamicTree *)tree, (int32_t)proxyId);
+    	CHECK_AND_THROW_C_TYPE(env, int, proxyId, 1, return);
+    	b2DynamicTree_DestroyProxy((b2DynamicTree *)tree, (int)proxyId);
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
@@ -2192,8 +2192,8 @@ static jclass cxxExceptionClass = NULL;
 
     static private native void b2DynamicTree_MoveProxy_internal(long tree, int proxyId, long aabb);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, int32_t, proxyId, 1, return);
-    	b2DynamicTree_MoveProxy((b2DynamicTree *)tree, (int32_t)proxyId, *(b2AABB*)aabb);
+    	CHECK_AND_THROW_C_TYPE(env, int, proxyId, 1, return);
+    	b2DynamicTree_MoveProxy((b2DynamicTree *)tree, (int)proxyId, *(b2AABB*)aabb);
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
@@ -2206,8 +2206,8 @@ static jclass cxxExceptionClass = NULL;
 
     static private native void b2DynamicTree_EnlargeProxy_internal(long tree, int proxyId, long aabb);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, int32_t, proxyId, 1, return);
-    	b2DynamicTree_EnlargeProxy((b2DynamicTree *)tree, (int32_t)proxyId, *(b2AABB*)aabb);
+    	CHECK_AND_THROW_C_TYPE(env, int, proxyId, 1, return);
+    	b2DynamicTree_EnlargeProxy((b2DynamicTree *)tree, (int)proxyId, *(b2AABB*)aabb);
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
@@ -2286,21 +2286,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Validate this tree. For testing.
-     */
-    public static void b2DynamicTree_Validate(b2DynamicTree.b2DynamicTreePointer tree) {
-        b2DynamicTree_Validate_internal(tree.getPointer());
-    }
-
-    static private native void b2DynamicTree_Validate_internal(long tree);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2DynamicTree_Validate((const b2DynamicTree *)tree);
-    	HANDLE_JAVA_EXCEPTION_END()
-    */
-
-    /**
-     * Compute the height of the binary tree in O(N) time. Should not be
-     * called often.
+     * Get the height of the binary tree.
      */
     public static int b2DynamicTree_GetHeight(b2DynamicTree.b2DynamicTreePointer tree) {
         return b2DynamicTree_GetHeight_internal(tree.getPointer());
@@ -2379,8 +2365,8 @@ static jclass cxxExceptionClass = NULL;
 
     static private native int b2DynamicTree_GetUserData_internal(long tree, int proxyId);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, int32_t, proxyId, 1, return 0);
-    	return (jint)b2DynamicTree_GetUserData((const b2DynamicTree *)tree, (int32_t)proxyId);
+    	CHECK_AND_THROW_C_TYPE(env, int, proxyId, 1, return 0);
+    	return (jint)b2DynamicTree_GetUserData((const b2DynamicTree *)tree, (int)proxyId);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -2394,12 +2380,38 @@ static jclass cxxExceptionClass = NULL;
 
     static private native long b2DynamicTree_GetAABB_internal(long tree, int proxyId);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, int32_t, proxyId, 1, return 0);
+    	CHECK_AND_THROW_C_TYPE(env, int, proxyId, 1, return 0);
     	b2AABB* _ret = (b2AABB*)malloc(sizeof(b2AABB));
-    	*_ret = b2DynamicTree_GetAABB((const b2DynamicTree *)tree, (int32_t)proxyId);
+    	*_ret = b2DynamicTree_GetAABB((const b2DynamicTree *)tree, (int)proxyId);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
+    */
+
+    /**
+     * Validate this tree. For testing.
+     */
+    public static void b2DynamicTree_Validate(b2DynamicTree.b2DynamicTreePointer tree) {
+        b2DynamicTree_Validate_internal(tree.getPointer());
+    }
+
+    static private native void b2DynamicTree_Validate_internal(long tree);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2DynamicTree_Validate((const b2DynamicTree *)tree);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    /**
+     * Validate this tree has no enlarged AABBs. For testing.
+     */
+    public static void b2DynamicTree_ValidateNoEnlarged(b2DynamicTree.b2DynamicTreePointer tree) {
+        b2DynamicTree_ValidateNoEnlarged_internal(tree.getPointer());
+    }
+
+    static private native void b2DynamicTree_ValidateNoEnlarged_internal(long tree);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2DynamicTree_ValidateNoEnlarged((const b2DynamicTree *)tree);
+    	HANDLE_JAVA_EXCEPTION_END()
     */
 
     /**
@@ -3569,6 +3581,34 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
+     * Set the body name. Up to 31 characters excluding 0 termination.
+     */
+    public static void b2Body_SetName(b2BodyId bodyId, CSizedIntPointer name) {
+        name.assertHasCTypeBacking("const char");
+        b2Body_SetName_internal(bodyId.getPointer(), name.getPointer());
+    }
+
+    static private native void b2Body_SetName_internal(long bodyId, long name);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Body_SetName(*(b2BodyId*)bodyId, (const char *)name);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    /**
+     * Get the body name. May be null.
+     */
+    public static CSizedIntPointer b2Body_GetName(b2BodyId bodyId) {
+        return new CSizedIntPointer(b2Body_GetName_internal(bodyId.getPointer()), false, "const char");
+    }
+
+    static private native long b2Body_GetName_internal(long bodyId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jlong)b2Body_GetName(*(b2BodyId*)bodyId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
      * Set the user data for a body
      */
     public static void b2Body_SetUserData(b2BodyId bodyId, VoidPointer userData) {
@@ -4270,22 +4310,6 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Enable/disable sensor events on all shapes.
-     * @see b2ShapeDef::enableSensorEvents
-     * @warning changing this at runtime may cause mismatched begin/end touch events
-     */
-    public static void b2Body_EnableSensorEvents(b2BodyId bodyId, boolean flag) {
-        b2Body_EnableSensorEvents_internal(bodyId.getPointer(), flag);
-    }
-
-    static private native void b2Body_EnableSensorEvents_internal(long bodyId, boolean flag);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, bool, flag, 1, return);
-    	b2Body_EnableSensorEvents(*(b2BodyId*)bodyId, (bool)flag);
-    	HANDLE_JAVA_EXCEPTION_END()
-    */
-
-    /**
      * Enable/disable contact events on all shapes.
      * @see b2ShapeDef::enableContactEvents
      * @warning changing this at runtime may cause mismatched begin/end touch events
@@ -4734,7 +4758,9 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Set the current filter. This is almost as expensive as recreating the shape.
+     * Set the current filter. This is almost as expensive as recreating the shape. This may cause
+     * contacts to be immediately destroyed. However contacts are not created until the next world step.
+     * Sensor overlap state is also not updated until the next world step.
      * @see b2ShapeDef::filter
      */
     public static void b2Shape_SetFilter(b2ShapeId shapeId, b2Filter filter) {
@@ -4745,36 +4771,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Shape_SetFilter(*(b2ShapeId*)shapeId, *(b2Filter*)filter);
     	HANDLE_JAVA_EXCEPTION_END()
-    */
-
-    /**
-     * Enable sensor events for this shape. Only applies to kinematic and dynamic bodies.
-     * @see b2ShapeDef::isSensor
-     * @warning changing this at run-time may lead to lost begin/end events
-     */
-    public static void b2Shape_EnableSensorEvents(b2ShapeId shapeId, boolean flag) {
-        b2Shape_EnableSensorEvents_internal(shapeId.getPointer(), flag);
-    }
-
-    static private native void b2Shape_EnableSensorEvents_internal(long shapeId, boolean flag);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, bool, flag, 1, return);
-    	b2Shape_EnableSensorEvents(*(b2ShapeId*)shapeId, (bool)flag);
-    	HANDLE_JAVA_EXCEPTION_END()
-    */
-
-    /**
-     * Returns true if sensor events are enabled
-     */
-    public static boolean b2Shape_AreSensorEventsEnabled(b2ShapeId shapeId) {
-        return b2Shape_AreSensorEventsEnabled_internal(shapeId.getPointer());
-    }
-
-    static private native boolean b2Shape_AreSensorEventsEnabled_internal(long shapeId);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2Shape_AreSensorEventsEnabled(*(b2ShapeId*)shapeId);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
     */
 
     /**
@@ -5104,19 +5100,20 @@ static jclass cxxExceptionClass = NULL;
     /**
      * Get the overlapped shapes for a sensor shape.
      * @param shapeId the id of a sensor shape
-     * @param overlappedShapes a user allocated array that is filled with the overlapping shapes
+     * @param overlaps a user allocated array that is filled with the overlapping shapes
      * @param capacity the capacity of overlappedShapes
      * @returns the number of elements filled in the provided array
      * @warning do not ignore the return value, it specifies the valid number of elements
+     * @warning overlaps may contain destroyed shapes so use b2Shape_IsValid to confirm each overlap
      */
-    public static int b2Shape_GetSensorOverlaps(b2ShapeId shapeId, b2ShapeId.b2ShapeIdPointer overlappedShapes, int capacity) {
-        return b2Shape_GetSensorOverlaps_internal(shapeId.getPointer(), overlappedShapes.getPointer(), capacity);
+    public static int b2Shape_GetSensorOverlaps(b2ShapeId shapeId, b2ShapeId.b2ShapeIdPointer overlaps, int capacity) {
+        return b2Shape_GetSensorOverlaps_internal(shapeId.getPointer(), overlaps.getPointer(), capacity);
     }
 
-    static private native int b2Shape_GetSensorOverlaps_internal(long shapeId, long overlappedShapes, int capacity);/*
+    static private native int b2Shape_GetSensorOverlaps_internal(long shapeId, long overlaps, int capacity);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, int, capacity, 2, return 0);
-    	return (jint)b2Shape_GetSensorOverlaps(*(b2ShapeId*)shapeId, (b2ShapeId *)overlappedShapes, (int)capacity);
+    	return (jint)b2Shape_GetSensorOverlaps(*(b2ShapeId*)shapeId, (b2ShapeId *)overlaps, (int)capacity);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -5139,6 +5136,7 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Get the closest point on a shape to a target point. Target and result are in world space.
+     * todo need sample
      */
     public static b2Vec2 b2Shape_GetClosestPoint(b2ShapeId shapeId, b2Vec2 target) {
         return new b2Vec2(b2Shape_GetClosestPoint_internal(shapeId.getPointer(), target.getPointer()), true);
@@ -5489,7 +5487,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the current constraint force for this joint
+     * Get the current constraint force for this joint. Usually in Newtons.
      */
     public static b2Vec2 b2Joint_GetConstraintForce(b2JointId jointId) {
         return new b2Vec2(b2Joint_GetConstraintForce_internal(jointId.getPointer()), true);
@@ -5505,7 +5503,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the current constraint torque for this joint
+     * Get the current constraint torque for this joint. Usually in Newton * meters.
      */
     public static float b2Joint_GetConstraintTorque(b2JointId jointId) {
         return b2Joint_GetConstraintTorque_internal(jointId.getPointer());
@@ -7243,12 +7241,13 @@ static jclass cxxExceptionClass = NULL;
          * Prototype for a contact filter callback.
          * This is called when a contact pair is considered for collision. This allows you to
          * perform custom logic to prevent collision between shapes. This is only called if
-         * one of the two shapes has custom filtering enabled. @see b2ShapeDef.
+         * one of the two shapes has custom filtering enabled.
          * Notes:
          * - this function must be thread-safe
          * - this is only called if one of the two shapes has enabled custom filtering
          * - this is called only for awake dynamic bodies
          * Return false if you want to disable the collision
+         * @see b2ShapeDef
          * @warning Do not attempt to modify the world inside this callback
          * @ingroup world
          */

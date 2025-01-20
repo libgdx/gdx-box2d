@@ -48,214 +48,213 @@ switch(id) {
 		GET_NATIVE_TYPE(int32_t, nativeType);
 		return nativeType;
 	case 6:
-		GET_NATIVE_TYPE(int64_t, nativeType);
-		return nativeType;
-	case 7:
 		GET_NATIVE_TYPE(uint16_t, nativeType);
 		return nativeType;
-	case 8:
+	case 7:
 		GET_NATIVE_TYPE(uint32_t, nativeType);
 		return nativeType;
-	case 9:
+	case 8:
 		GET_NATIVE_TYPE(uint64_t, nativeType);
 		return nativeType;
-	case 10:
+	case 9:
 		GET_NATIVE_TYPE(uint8_t, nativeType);
 		return nativeType;
-	case 11:
+	case 10:
 		GET_NATIVE_TYPE(unsigned int, nativeType);
 		return nativeType;
-	case 12:
+	case 11:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
 		return nativeType;
-	case 13:
+	case 12:
 		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 17;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 17);
+		nativeType->field_count = 18;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 18);
 		nativeType->fields[0] = getNativeType(4);
-		nativeType->fields[1] = getNativeType(74);
-		nativeType->fields[2] = getNativeType(53);
-		nativeType->fields[3] = getNativeType(74);
+		nativeType->fields[1] = getNativeType(72);
+		nativeType->fields[2] = getNativeType(52);
+		nativeType->fields[3] = getNativeType(72);
 		nativeType->fields[4] = getNativeType(3);
 		nativeType->fields[5] = getNativeType(3);
 		nativeType->fields[6] = getNativeType(3);
 		nativeType->fields[7] = getNativeType(3);
 		nativeType->fields[8] = getNativeType(3);
 		nativeType->fields[9] = getNativeType(-1);
-		nativeType->fields[10] = getNativeType(0);
+		nativeType->fields[10] = getNativeType(-1);
 		nativeType->fields[11] = getNativeType(0);
 		nativeType->fields[12] = getNativeType(0);
 		nativeType->fields[13] = getNativeType(0);
 		nativeType->fields[14] = getNativeType(0);
 		nativeType->fields[15] = getNativeType(0);
-		nativeType->fields[16] = getNativeType(5);
+		nativeType->fields[16] = getNativeType(0);
+		nativeType->fields[17] = getNativeType(4);
+		return nativeType;
+	case 13:
+		nativeType->type = STRUCT_TYPE;
+		nativeType->field_count = 2;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
+		nativeType->fields[0] = getNativeType(-1);
+		nativeType->fields[1] = getNativeType(4);
 		return nativeType;
 	case 14:
 		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 2;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(-1);
-		nativeType->fields[1] = getNativeType(5);
+		nativeType->field_count = 3;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
+		nativeType->fields[0] = getNativeType(5);
+		nativeType->fields[1] = getNativeType(6);
+		nativeType->fields[2] = getNativeType(6);
 		return nativeType;
 	case 15:
 		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 3;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
-		nativeType->fields[0] = getNativeType(5);
-		nativeType->fields[1] = getNativeType(7);
-		nativeType->fields[2] = getNativeType(7);
-		return nativeType;
-	case 16:
-		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 4;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 4);
-		nativeType->fields[0] = getNativeType(71);
-		nativeType->fields[1] = getNativeType(15);
+		nativeType->fields[0] = getNativeType(69);
+		nativeType->fields[1] = getNativeType(14);
 		nativeType->fields[2] = getNativeType(-1);
 		nativeType->fields[3] = getNativeType(0);
 		return nativeType;
-	case 17:
+	case 16:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 3;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
 		nativeType->fields[2] = getNativeType(3);
 		return nativeType;
-	case 18:
+	case 17:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 5;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 5);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
 		nativeType->fields[2] = getNativeType(3);
-		nativeType->fields[3] = getNativeType(5);
+		nativeType->fields[3] = getNativeType(4);
 		nativeType->fields[4] = getNativeType(0);
 		return nativeType;
-	case 19:
+	case 18:
 		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 9;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 9);
+		nativeType->field_count = 10;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 10);
 		nativeType->fields[0] = getNativeType(-1);
 		nativeType->fields[1] = getNativeType(-1);
-		nativeType->fields[2] = getNativeType(5);
+		nativeType->fields[2] = getNativeType(4);
 		nativeType->fields[3] = getNativeType(3);
 		nativeType->fields[4] = getNativeType(3);
-		nativeType->fields[5] = getNativeType(36);
-		nativeType->fields[6] = getNativeType(8);
+		nativeType->fields[5] = getNativeType(35);
+		nativeType->fields[6] = getNativeType(7);
 		nativeType->fields[7] = getNativeType(0);
-		nativeType->fields[8] = getNativeType(5);
+		nativeType->fields[8] = getNativeType(0);
+		nativeType->fields[9] = getNativeType(4);
 		return nativeType;
-	case 20:
+	case 19:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 3;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
 		nativeType->fields[0] = getNativeType(5);
-		nativeType->fields[1] = getNativeType(7);
-		nativeType->fields[2] = getNativeType(7);
+		nativeType->fields[1] = getNativeType(6);
+		nativeType->fields[2] = getNativeType(6);
 		return nativeType;
-	case 21:
+	case 20:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 4;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 4);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(54);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(5);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(53);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(4);
 		return nativeType;
-	case 22:
+	case 21:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
 		nativeType->fields[1] = getNativeType(3);
+		return nativeType;
+	case 22:
+		nativeType->type = STRUCT_TYPE;
+		nativeType->field_count = 3;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
+		nativeType->fields[0] = getNativeType(61);
+		nativeType->fields[1] = getNativeType(61);
+		nativeType->fields[2] = getNativeType(38);
 		return nativeType;
 	case 23:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 3;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
-		nativeType->fields[0] = getNativeType(62);
-		nativeType->fields[1] = getNativeType(62);
-		nativeType->fields[2] = getNativeType(39);
+		nativeType->fields[0] = getNativeType(61);
+		nativeType->fields[1] = getNativeType(61);
+		nativeType->fields[2] = getNativeType(38);
 		return nativeType;
 	case 24:
 		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 3;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
-		nativeType->fields[0] = getNativeType(62);
-		nativeType->fields[1] = getNativeType(62);
-		nativeType->fields[2] = getNativeType(39);
-		return nativeType;
-	case 25:
-		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(62);
-		nativeType->fields[1] = getNativeType(62);
+		nativeType->fields[0] = getNativeType(61);
+		nativeType->fields[1] = getNativeType(61);
 		return nativeType;
-	case 26:
+	case 25:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 6;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 6);
 		nativeType->fields[0] = getNativeType(-1);
 		nativeType->fields[1] = getNativeType(-1);
 		nativeType->fields[2] = getNativeType(-1);
-		nativeType->fields[3] = getNativeType(5);
-		nativeType->fields[4] = getNativeType(5);
-		nativeType->fields[5] = getNativeType(5);
+		nativeType->fields[3] = getNativeType(4);
+		nativeType->fields[4] = getNativeType(4);
+		nativeType->fields[5] = getNativeType(4);
 		return nativeType;
-	case 27:
+	case 26:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 5;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 5);
-		nativeType->fields[0] = getNativeType(62);
-		nativeType->fields[1] = getNativeType(62);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(61);
+		nativeType->fields[1] = getNativeType(61);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(72);
 		nativeType->fields[4] = getNativeType(3);
 		return nativeType;
-	case 28:
+	case 27:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
 		nativeType->fields[0] = getNativeType(3);
 		nativeType->fields[1] = getNativeType(3);
 		return nativeType;
+	case 28:
+		nativeType->type = STRUCT_TYPE;
+		nativeType->field_count = 22;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 22);
+		nativeType->fields[0] = getNativeType(4);
+		nativeType->fields[1] = getNativeType(4);
+		nativeType->fields[2] = getNativeType(4);
+		nativeType->fields[3] = getNativeType(4);
+		nativeType->fields[4] = getNativeType(4);
+		nativeType->fields[5] = getNativeType(4);
+		nativeType->fields[6] = getNativeType(4);
+		nativeType->fields[7] = getNativeType(4);
+		nativeType->fields[8] = getNativeType(4);
+		nativeType->fields[9] = getNativeType(4);
+		nativeType->fields[10] = getNativeType(4);
+		nativeType->fields[11] = getNativeType(4);
+		nativeType->fields[12] = getNativeType(4);
+		nativeType->fields[13] = getNativeType(4);
+		nativeType->fields[14] = getNativeType(4);
+		nativeType->fields[15] = getNativeType(4);
+		nativeType->fields[16] = getNativeType(4);
+		nativeType->fields[17] = getNativeType(4);
+		nativeType->fields[18] = getNativeType(4);
+		nativeType->fields[19] = getNativeType(4);
+		nativeType->fields[20] = getNativeType(4);
+		nativeType->fields[21] = getNativeType(4);
+		return nativeType;
 	case 29:
 		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 22;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 22);
-		nativeType->fields[0] = getNativeType(5);
-		nativeType->fields[1] = getNativeType(5);
-		nativeType->fields[2] = getNativeType(5);
-		nativeType->fields[3] = getNativeType(5);
-		nativeType->fields[4] = getNativeType(5);
-		nativeType->fields[5] = getNativeType(5);
-		nativeType->fields[6] = getNativeType(5);
-		nativeType->fields[7] = getNativeType(5);
-		nativeType->fields[8] = getNativeType(5);
-		nativeType->fields[9] = getNativeType(5);
-		nativeType->fields[10] = getNativeType(5);
-		nativeType->fields[11] = getNativeType(5);
-		nativeType->fields[12] = getNativeType(5);
-		nativeType->fields[13] = getNativeType(5);
-		nativeType->fields[14] = getNativeType(5);
-		nativeType->fields[15] = getNativeType(5);
-		nativeType->fields[16] = getNativeType(5);
-		nativeType->fields[17] = getNativeType(5);
-		nativeType->fields[18] = getNativeType(5);
-		nativeType->fields[19] = getNativeType(5);
-		nativeType->fields[20] = getNativeType(5);
-		nativeType->fields[21] = getNativeType(5);
-		return nativeType;
-	case 30:
-		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 22;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 22);
+		nativeType->field_count = 23;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 23);
 		nativeType->fields[0] = getNativeType(-1);
 		nativeType->fields[1] = getNativeType(-1);
 		nativeType->fields[2] = getNativeType(-1);
@@ -265,7 +264,7 @@ switch(id) {
 		nativeType->fields[6] = getNativeType(-1);
 		nativeType->fields[7] = getNativeType(-1);
 		nativeType->fields[8] = getNativeType(-1);
-		nativeType->fields[9] = getNativeType(12);
+		nativeType->fields[9] = getNativeType(11);
 		nativeType->fields[10] = getNativeType(0);
 		nativeType->fields[11] = getNativeType(0);
 		nativeType->fields[12] = getNativeType(0);
@@ -277,26 +276,27 @@ switch(id) {
 		nativeType->fields[18] = getNativeType(0);
 		nativeType->fields[19] = getNativeType(0);
 		nativeType->fields[20] = getNativeType(0);
-		nativeType->fields[21] = getNativeType(-1);
+		nativeType->fields[21] = getNativeType(0);
+		nativeType->fields[22] = getNativeType(-1);
 		return nativeType;
-	case 31:
+	case 30:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 5;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 5);
-		nativeType->fields[0] = getNativeType(63);
-		nativeType->fields[1] = getNativeType(63);
-		nativeType->fields[2] = getNativeType(71);
-		nativeType->fields[3] = getNativeType(71);
+		nativeType->fields[0] = getNativeType(62);
+		nativeType->fields[1] = getNativeType(62);
+		nativeType->fields[2] = getNativeType(69);
+		nativeType->fields[3] = getNativeType(69);
 		nativeType->fields[4] = getNativeType(0);
 		return nativeType;
-	case 32:
+	case 31:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 17;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 17);
-		nativeType->fields[0] = getNativeType(15);
-		nativeType->fields[1] = getNativeType(15);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(14);
+		nativeType->fields[1] = getNativeType(14);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(72);
 		nativeType->fields[4] = getNativeType(3);
 		nativeType->fields[5] = getNativeType(0);
 		nativeType->fields[6] = getNativeType(3);
@@ -309,184 +309,184 @@ switch(id) {
 		nativeType->fields[13] = getNativeType(3);
 		nativeType->fields[14] = getNativeType(0);
 		nativeType->fields[15] = getNativeType(-1);
-		nativeType->fields[16] = getNativeType(5);
+		nativeType->fields[16] = getNativeType(4);
 		return nativeType;
-	case 33:
+	case 32:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 5;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 5);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
 		nativeType->fields[2] = getNativeType(3);
-		nativeType->fields[3] = getNativeType(5);
-		nativeType->fields[4] = getNativeType(5);
+		nativeType->fields[3] = getNativeType(4);
+		nativeType->fields[4] = getNativeType(4);
 		return nativeType;
-	case 34:
+	case 33:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 11;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 11);
 		nativeType->fields[0] = getNativeType(-1);
-		nativeType->fields[1] = getNativeType(5);
-		nativeType->fields[2] = getNativeType(5);
-		nativeType->fields[3] = getNativeType(5);
-		nativeType->fields[4] = getNativeType(5);
-		nativeType->fields[5] = getNativeType(5);
+		nativeType->fields[1] = getNativeType(4);
+		nativeType->fields[2] = getNativeType(4);
+		nativeType->fields[3] = getNativeType(4);
+		nativeType->fields[4] = getNativeType(4);
+		nativeType->fields[5] = getNativeType(4);
 		nativeType->fields[6] = getNativeType(-1);
 		nativeType->fields[7] = getNativeType(-1);
 		nativeType->fields[8] = getNativeType(-1);
 		nativeType->fields[9] = getNativeType(-1);
-		nativeType->fields[10] = getNativeType(5);
+		nativeType->fields[10] = getNativeType(4);
 		return nativeType;
-	case 35:
+	case 34:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 5;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 5);
-		nativeType->fields[0] = getNativeType(9);
-		nativeType->fields[1] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(8);
+		nativeType->fields[1] = getNativeType(72);
 		nativeType->fields[2] = getNativeType(3);
 		nativeType->fields[3] = getNativeType(3);
 		nativeType->fields[4] = getNativeType(3);
 		return nativeType;
-	case 36:
+	case 35:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 3;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
-		nativeType->fields[0] = getNativeType(9);
-		nativeType->fields[1] = getNativeType(9);
-		nativeType->fields[2] = getNativeType(5);
+		nativeType->fields[0] = getNativeType(8);
+		nativeType->fields[1] = getNativeType(8);
+		nativeType->fields[2] = getNativeType(4);
 		return nativeType;
-	case 37:
+	case 36:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 9;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 9);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(74);
-		nativeType->fields[4] = getNativeType(74);
-		nativeType->fields[5] = getNativeType(74);
-		nativeType->fields[6] = getNativeType(74);
-		nativeType->fields[7] = getNativeType(74);
-		nativeType->fields[8] = getNativeType(5);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(72);
+		nativeType->fields[4] = getNativeType(72);
+		nativeType->fields[5] = getNativeType(72);
+		nativeType->fields[6] = getNativeType(72);
+		nativeType->fields[7] = getNativeType(72);
+		nativeType->fields[8] = getNativeType(4);
 		return nativeType;
-	case 38:
+	case 37:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 3;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
 		nativeType->fields[0] = getNativeType(5);
-		nativeType->fields[1] = getNativeType(7);
-		nativeType->fields[2] = getNativeType(7);
+		nativeType->fields[1] = getNativeType(6);
+		nativeType->fields[2] = getNativeType(6);
 		return nativeType;
-	case 39:
+	case 38:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 4;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 4);
-		nativeType->fields[0] = getNativeType(40);
-		nativeType->fields[1] = getNativeType(40);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(5);
+		nativeType->fields[0] = getNativeType(39);
+		nativeType->fields[1] = getNativeType(39);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(4);
 		return nativeType;
-	case 40:
+	case 39:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 10;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 10);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
-		nativeType->fields[2] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
+		nativeType->fields[2] = getNativeType(72);
 		nativeType->fields[3] = getNativeType(3);
 		nativeType->fields[4] = getNativeType(3);
 		nativeType->fields[5] = getNativeType(3);
 		nativeType->fields[6] = getNativeType(3);
 		nativeType->fields[7] = getNativeType(3);
-		nativeType->fields[8] = getNativeType(7);
+		nativeType->fields[8] = getNativeType(6);
 		nativeType->fields[9] = getNativeType(0);
 		return nativeType;
-	case 41:
+	case 40:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 3;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
 		nativeType->fields[0] = getNativeType(3);
-		nativeType->fields[1] = getNativeType(74);
+		nativeType->fields[1] = getNativeType(72);
 		nativeType->fields[2] = getNativeType(3);
 		return nativeType;
-	case 42:
+	case 41:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
 		return nativeType;
-	case 43:
+	case 42:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 10;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 10);
-		nativeType->fields[0] = getNativeType(15);
-		nativeType->fields[1] = getNativeType(15);
-		nativeType->fields[2] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(14);
+		nativeType->fields[1] = getNativeType(14);
+		nativeType->fields[2] = getNativeType(72);
 		nativeType->fields[3] = getNativeType(3);
 		nativeType->fields[4] = getNativeType(3);
 		nativeType->fields[5] = getNativeType(3);
 		nativeType->fields[6] = getNativeType(3);
 		nativeType->fields[7] = getNativeType(0);
 		nativeType->fields[8] = getNativeType(-1);
-		nativeType->fields[9] = getNativeType(5);
+		nativeType->fields[9] = getNativeType(4);
 		return nativeType;
-	case 44:
+	case 43:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 9;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 9);
-		nativeType->fields[0] = getNativeType(15);
-		nativeType->fields[1] = getNativeType(15);
-		nativeType->fields[2] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(14);
+		nativeType->fields[1] = getNativeType(14);
+		nativeType->fields[2] = getNativeType(72);
 		nativeType->fields[3] = getNativeType(3);
 		nativeType->fields[4] = getNativeType(3);
 		nativeType->fields[5] = getNativeType(3);
 		nativeType->fields[6] = getNativeType(0);
 		nativeType->fields[7] = getNativeType(-1);
-		nativeType->fields[8] = getNativeType(5);
+		nativeType->fields[8] = getNativeType(4);
 		return nativeType;
-	case 45:
+	case 44:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 4;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 4);
-		nativeType->fields[0] = getNativeType(15);
-		nativeType->fields[1] = getNativeType(15);
+		nativeType->fields[0] = getNativeType(14);
+		nativeType->fields[1] = getNativeType(14);
 		nativeType->fields[2] = getNativeType(-1);
-		nativeType->fields[3] = getNativeType(5);
+		nativeType->fields[3] = getNativeType(4);
 		return nativeType;
-	case 46:
+	case 45:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 19;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 19);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(74);
-		nativeType->fields[4] = getNativeType(74);
-		nativeType->fields[5] = getNativeType(74);
-		nativeType->fields[6] = getNativeType(74);
-		nativeType->fields[7] = getNativeType(74);
-		nativeType->fields[8] = getNativeType(74);
-		nativeType->fields[9] = getNativeType(74);
-		nativeType->fields[10] = getNativeType(74);
-		nativeType->fields[11] = getNativeType(74);
-		nativeType->fields[12] = getNativeType(74);
-		nativeType->fields[13] = getNativeType(74);
-		nativeType->fields[14] = getNativeType(74);
-		nativeType->fields[15] = getNativeType(74);
-		nativeType->fields[16] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(72);
+		nativeType->fields[4] = getNativeType(72);
+		nativeType->fields[5] = getNativeType(72);
+		nativeType->fields[6] = getNativeType(72);
+		nativeType->fields[7] = getNativeType(72);
+		nativeType->fields[8] = getNativeType(72);
+		nativeType->fields[9] = getNativeType(72);
+		nativeType->fields[10] = getNativeType(72);
+		nativeType->fields[11] = getNativeType(72);
+		nativeType->fields[12] = getNativeType(72);
+		nativeType->fields[13] = getNativeType(72);
+		nativeType->fields[14] = getNativeType(72);
+		nativeType->fields[15] = getNativeType(72);
+		nativeType->fields[16] = getNativeType(72);
 		nativeType->fields[17] = getNativeType(3);
-		nativeType->fields[18] = getNativeType(5);
+		nativeType->fields[18] = getNativeType(4);
 		return nativeType;
-	case 47:
+	case 46:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 18;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 18);
-		nativeType->fields[0] = getNativeType(15);
-		nativeType->fields[1] = getNativeType(15);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(74);
-		nativeType->fields[4] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(14);
+		nativeType->fields[1] = getNativeType(14);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(72);
+		nativeType->fields[4] = getNativeType(72);
 		nativeType->fields[5] = getNativeType(3);
 		nativeType->fields[6] = getNativeType(0);
 		nativeType->fields[7] = getNativeType(3);
@@ -499,9 +499,9 @@ switch(id) {
 		nativeType->fields[14] = getNativeType(3);
 		nativeType->fields[15] = getNativeType(0);
 		nativeType->fields[16] = getNativeType(-1);
-		nativeType->fields[17] = getNativeType(5);
+		nativeType->fields[17] = getNativeType(4);
 		return nativeType;
-	case 48:
+	case 47:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 22;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 22);
@@ -528,41 +528,41 @@ switch(id) {
 		nativeType->fields[20] = getNativeType(3);
 		nativeType->fields[21] = getNativeType(3);
 		return nativeType;
-	case 49:
+	case 48:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(9);
-		nativeType->fields[1] = getNativeType(9);
+		nativeType->fields[0] = getNativeType(8);
+		nativeType->fields[1] = getNativeType(8);
 		return nativeType;
-	case 50:
+	case 49:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 3;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
 		nativeType->fields[2] = getNativeType(3);
 		return nativeType;
-	case 51:
+	case 50:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 7;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 7);
-		nativeType->fields[0] = getNativeType(62);
-		nativeType->fields[1] = getNativeType(74);
-		nativeType->fields[2] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(61);
+		nativeType->fields[1] = getNativeType(72);
+		nativeType->fields[2] = getNativeType(72);
 		nativeType->fields[3] = getNativeType(3);
 		nativeType->fields[4] = getNativeType(4);
 		nativeType->fields[5] = getNativeType(4);
 		nativeType->fields[6] = getNativeType(0);
 		return nativeType;
-	case 52:
+	case 51:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 18;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 18);
-		nativeType->fields[0] = getNativeType(15);
-		nativeType->fields[1] = getNativeType(15);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(14);
+		nativeType->fields[1] = getNativeType(14);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(72);
 		nativeType->fields[4] = getNativeType(3);
 		nativeType->fields[5] = getNativeType(0);
 		nativeType->fields[6] = getNativeType(3);
@@ -576,227 +576,211 @@ switch(id) {
 		nativeType->fields[14] = getNativeType(3);
 		nativeType->fields[15] = getNativeType(0);
 		nativeType->fields[16] = getNativeType(-1);
-		nativeType->fields[17] = getNativeType(5);
+		nativeType->fields[17] = getNativeType(4);
 		return nativeType;
-	case 53:
+	case 52:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
 		nativeType->fields[0] = getNativeType(3);
 		nativeType->fields[1] = getNativeType(3);
 		return nativeType;
-	case 54:
+	case 53:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
 		return nativeType;
-	case 55:
+	case 54:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 5;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 5);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
 		nativeType->fields[2] = getNativeType(3);
 		nativeType->fields[3] = getNativeType(3);
 		nativeType->fields[4] = getNativeType(3);
+		return nativeType;
+	case 55:
+		nativeType->type = STRUCT_TYPE;
+		nativeType->field_count = 2;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
+		nativeType->fields[0] = getNativeType(61);
+		nativeType->fields[1] = getNativeType(61);
 		return nativeType;
 	case 56:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(62);
-		nativeType->fields[1] = getNativeType(62);
+		nativeType->fields[0] = getNativeType(61);
+		nativeType->fields[1] = getNativeType(61);
 		return nativeType;
 	case 57:
-		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 2;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(62);
-		nativeType->fields[1] = getNativeType(62);
-		return nativeType;
-	case 58:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 4;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 4);
 		nativeType->fields[0] = getNativeType(-1);
 		nativeType->fields[1] = getNativeType(-1);
-		nativeType->fields[2] = getNativeType(5);
-		nativeType->fields[3] = getNativeType(5);
+		nativeType->fields[2] = getNativeType(4);
+		nativeType->fields[3] = getNativeType(4);
 		return nativeType;
-	case 59:
+	case 58:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 12;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 12);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(74);
-		nativeType->fields[4] = getNativeType(74);
-		nativeType->fields[5] = getNativeType(74);
-		nativeType->fields[6] = getNativeType(74);
-		nativeType->fields[7] = getNativeType(74);
-		nativeType->fields[8] = getNativeType(5);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(72);
+		nativeType->fields[4] = getNativeType(72);
+		nativeType->fields[5] = getNativeType(72);
+		nativeType->fields[6] = getNativeType(72);
+		nativeType->fields[7] = getNativeType(72);
+		nativeType->fields[8] = getNativeType(4);
 		nativeType->fields[9] = getNativeType(3);
-		nativeType->fields[10] = getNativeType(74);
+		nativeType->fields[10] = getNativeType(72);
 		nativeType->fields[11] = getNativeType(3);
 		return nativeType;
-	case 60:
+	case 59:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 6;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 6);
-		nativeType->fields[0] = getNativeType(63);
-		nativeType->fields[1] = getNativeType(63);
-		nativeType->fields[2] = getNativeType(71);
-		nativeType->fields[3] = getNativeType(71);
-		nativeType->fields[4] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(62);
+		nativeType->fields[1] = getNativeType(62);
+		nativeType->fields[2] = getNativeType(69);
+		nativeType->fields[3] = getNativeType(69);
+		nativeType->fields[4] = getNativeType(72);
 		nativeType->fields[5] = getNativeType(3);
 		return nativeType;
-	case 61:
+	case 60:
 		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 15;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 15);
+		nativeType->field_count = 14;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 14);
 		nativeType->fields[0] = getNativeType(-1);
 		nativeType->fields[1] = getNativeType(3);
 		nativeType->fields[2] = getNativeType(3);
 		nativeType->fields[3] = getNativeType(3);
 		nativeType->fields[4] = getNativeType(3);
-		nativeType->fields[5] = getNativeType(36);
-		nativeType->fields[6] = getNativeType(8);
+		nativeType->fields[5] = getNativeType(35);
+		nativeType->fields[6] = getNativeType(7);
 		nativeType->fields[7] = getNativeType(0);
 		nativeType->fields[8] = getNativeType(0);
 		nativeType->fields[9] = getNativeType(0);
 		nativeType->fields[10] = getNativeType(0);
 		nativeType->fields[11] = getNativeType(0);
 		nativeType->fields[12] = getNativeType(0);
-		nativeType->fields[13] = getNativeType(0);
-		nativeType->fields[14] = getNativeType(5);
+		nativeType->fields[13] = getNativeType(4);
 		return nativeType;
-	case 62:
+	case 61:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 3;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
 		nativeType->fields[0] = getNativeType(5);
-		nativeType->fields[1] = getNativeType(7);
-		nativeType->fields[2] = getNativeType(7);
+		nativeType->fields[1] = getNativeType(6);
+		nativeType->fields[2] = getNativeType(6);
 		return nativeType;
-	case 63:
+	case 62:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 10;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 10);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(74);
-		nativeType->fields[4] = getNativeType(74);
-		nativeType->fields[5] = getNativeType(74);
-		nativeType->fields[6] = getNativeType(74);
-		nativeType->fields[7] = getNativeType(74);
-		nativeType->fields[8] = getNativeType(5);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(72);
+		nativeType->fields[4] = getNativeType(72);
+		nativeType->fields[5] = getNativeType(72);
+		nativeType->fields[6] = getNativeType(72);
+		nativeType->fields[7] = getNativeType(72);
+		nativeType->fields[8] = getNativeType(4);
 		nativeType->fields[9] = getNativeType(3);
 		return nativeType;
-	case 64:
+	case 63:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 4;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 4);
-		nativeType->fields[0] = getNativeType(66);
-		nativeType->fields[1] = getNativeType(66);
-		nativeType->fields[2] = getNativeType(66);
-		nativeType->fields[3] = getNativeType(5);
+		nativeType->fields[0] = getNativeType(65);
+		nativeType->fields[1] = getNativeType(65);
+		nativeType->fields[2] = getNativeType(65);
+		nativeType->fields[3] = getNativeType(4);
 		return nativeType;
-	case 65:
+	case 64:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 7;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 7);
-		nativeType->fields[0] = getNativeType(7);
-		nativeType->fields[1] = getNativeType(10);
-		nativeType->fields[2] = getNativeType(10);
-		nativeType->fields[3] = getNativeType(10);
-		nativeType->fields[4] = getNativeType(10);
-		nativeType->fields[5] = getNativeType(10);
-		nativeType->fields[6] = getNativeType(10);
+		nativeType->fields[0] = getNativeType(6);
+		nativeType->fields[1] = getNativeType(9);
+		nativeType->fields[2] = getNativeType(9);
+		nativeType->fields[3] = getNativeType(9);
+		nativeType->fields[4] = getNativeType(9);
+		nativeType->fields[5] = getNativeType(9);
+		nativeType->fields[6] = getNativeType(9);
 		return nativeType;
-	case 66:
+	case 65:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 6;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 6);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
-		nativeType->fields[2] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
+		nativeType->fields[2] = getNativeType(72);
 		nativeType->fields[3] = getNativeType(3);
-		nativeType->fields[4] = getNativeType(5);
-		nativeType->fields[5] = getNativeType(5);
+		nativeType->fields[4] = getNativeType(4);
+		nativeType->fields[5] = getNativeType(4);
+		return nativeType;
+	case 66:
+		nativeType->type = STRUCT_TYPE;
+		nativeType->field_count = 5;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 5);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(72);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(52);
+		nativeType->fields[4] = getNativeType(52);
 		return nativeType;
 	case 67:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 5;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 5);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(74);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(53);
-		nativeType->fields[4] = getNativeType(53);
-		return nativeType;
-	case 68:
-		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 5;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 5);
-		nativeType->fields[0] = getNativeType(63);
-		nativeType->fields[1] = getNativeType(63);
-		nativeType->fields[2] = getNativeType(67);
-		nativeType->fields[3] = getNativeType(67);
+		nativeType->fields[0] = getNativeType(62);
+		nativeType->fields[1] = getNativeType(62);
+		nativeType->fields[2] = getNativeType(66);
+		nativeType->fields[3] = getNativeType(66);
 		nativeType->fields[4] = getNativeType(3);
 		return nativeType;
-	case 69:
+	case 68:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
 		nativeType->fields[0] = getNativeType(4);
 		nativeType->fields[1] = getNativeType(3);
 		return nativeType;
+	case 69:
+		nativeType->type = STRUCT_TYPE;
+		nativeType->field_count = 2;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
+		nativeType->fields[0] = getNativeType(72);
+		nativeType->fields[1] = getNativeType(52);
+		return nativeType;
 	case 70:
 		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 1;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 1);
-		nativeType->fields[0] = getNativeType(9);
+		nativeType->field_count = 0;
+		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 0);
 		return nativeType;
 	case 71:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(74);
-		nativeType->fields[1] = getNativeType(53);
+		nativeType->fields[0] = getNativeType(4);
+		nativeType->fields[1] = getNativeType(4);
 		return nativeType;
 	case 72:
-		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 9;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 9);
-		nativeType->fields[0] = getNativeType(12);
-		nativeType->fields[1] = getNativeType(9);
-		nativeType->fields[2] = getNativeType(5);
-		nativeType->fields[3] = getNativeType(5);
-		nativeType->fields[4] = getNativeType(5);
-		nativeType->fields[5] = getNativeType(5);
-		nativeType->fields[6] = getNativeType(5);
-		nativeType->fields[7] = getNativeType(7);
-		nativeType->fields[8] = getNativeType(7);
-		return nativeType;
-	case 73:
-		nativeType->type = STRUCT_TYPE;
-		nativeType->field_count = 2;
-		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(5);
-		nativeType->fields[1] = getNativeType(5);
-		return nativeType;
-	case 74:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
 		nativeType->fields[0] = getNativeType(3);
 		nativeType->fields[1] = getNativeType(3);
 		return nativeType;
-	case 75:
+	case 73:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 3;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 3);
@@ -804,14 +788,14 @@ switch(id) {
 		nativeType->fields[1] = getNativeType(4);
 		nativeType->fields[2] = getNativeType(4);
 		return nativeType;
-	case 76:
+	case 74:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 12;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 12);
-		nativeType->fields[0] = getNativeType(15);
-		nativeType->fields[1] = getNativeType(15);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(14);
+		nativeType->fields[1] = getNativeType(14);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(72);
 		nativeType->fields[4] = getNativeType(3);
 		nativeType->fields[5] = getNativeType(3);
 		nativeType->fields[6] = getNativeType(3);
@@ -819,17 +803,17 @@ switch(id) {
 		nativeType->fields[8] = getNativeType(3);
 		nativeType->fields[9] = getNativeType(0);
 		nativeType->fields[10] = getNativeType(-1);
-		nativeType->fields[11] = getNativeType(5);
+		nativeType->fields[11] = getNativeType(4);
 		return nativeType;
-	case 77:
+	case 75:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 17;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 17);
-		nativeType->fields[0] = getNativeType(15);
-		nativeType->fields[1] = getNativeType(15);
-		nativeType->fields[2] = getNativeType(74);
-		nativeType->fields[3] = getNativeType(74);
-		nativeType->fields[4] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(14);
+		nativeType->fields[1] = getNativeType(14);
+		nativeType->fields[2] = getNativeType(72);
+		nativeType->fields[3] = getNativeType(72);
+		nativeType->fields[4] = getNativeType(72);
 		nativeType->fields[5] = getNativeType(0);
 		nativeType->fields[6] = getNativeType(3);
 		nativeType->fields[7] = getNativeType(3);
@@ -841,13 +825,13 @@ switch(id) {
 		nativeType->fields[13] = getNativeType(3);
 		nativeType->fields[14] = getNativeType(0);
 		nativeType->fields[15] = getNativeType(-1);
-		nativeType->fields[16] = getNativeType(5);
+		nativeType->fields[16] = getNativeType(4);
 		return nativeType;
-	case 78:
+	case 76:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 19;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 19);
-		nativeType->fields[0] = getNativeType(74);
+		nativeType->fields[0] = getNativeType(72);
 		nativeType->fields[1] = getNativeType(3);
 		nativeType->fields[2] = getNativeType(3);
 		nativeType->fields[3] = getNativeType(3);
@@ -860,19 +844,19 @@ switch(id) {
 		nativeType->fields[10] = getNativeType(4);
 		nativeType->fields[11] = getNativeType(0);
 		nativeType->fields[12] = getNativeType(0);
-		nativeType->fields[13] = getNativeType(5);
+		nativeType->fields[13] = getNativeType(4);
 		nativeType->fields[14] = getNativeType(-1);
 		nativeType->fields[15] = getNativeType(-1);
 		nativeType->fields[16] = getNativeType(-1);
 		nativeType->fields[17] = getNativeType(-1);
-		nativeType->fields[18] = getNativeType(5);
+		nativeType->fields[18] = getNativeType(4);
 		return nativeType;
-	case 79:
+	case 77:
 		nativeType->type = STRUCT_TYPE;
 		nativeType->field_count = 2;
 		nativeType->fields = (native_type**)malloc(sizeof(native_type*) * 2);
-		nativeType->fields[0] = getNativeType(7);
-		nativeType->fields[1] = getNativeType(7);
+		nativeType->fields[0] = getNativeType(6);
+		nativeType->fields[1] = getNativeType(6);
 		return nativeType;
 	default:
 		return NULL;
@@ -898,18 +882,17 @@ switch(id) {
         CHandler.registerCType(ffiIdMap.get(4));
         ffiIdMap.put(5, CHandler.constructCTypeFromNativeType("int32_t", getNativeType(5)));
         CHandler.registerCType(ffiIdMap.get(5));
-        ffiIdMap.put(6, CHandler.constructCTypeFromNativeType("int64_t", getNativeType(6)));
+        ffiIdMap.put(6, CHandler.constructCTypeFromNativeType("uint16_t", getNativeType(6)));
         CHandler.registerCType(ffiIdMap.get(6));
-        ffiIdMap.put(7, CHandler.constructCTypeFromNativeType("uint16_t", getNativeType(7)));
+        ffiIdMap.put(7, CHandler.constructCTypeFromNativeType("uint32_t", getNativeType(7)));
         CHandler.registerCType(ffiIdMap.get(7));
-        ffiIdMap.put(8, CHandler.constructCTypeFromNativeType("uint32_t", getNativeType(8)));
+        ffiIdMap.put(8, CHandler.constructCTypeFromNativeType("uint64_t", getNativeType(8)));
         CHandler.registerCType(ffiIdMap.get(8));
-        ffiIdMap.put(9, CHandler.constructCTypeFromNativeType("uint64_t", getNativeType(9)));
+        ffiIdMap.put(9, CHandler.constructCTypeFromNativeType("uint8_t", getNativeType(9)));
         CHandler.registerCType(ffiIdMap.get(9));
-        ffiIdMap.put(10, CHandler.constructCTypeFromNativeType("uint8_t", getNativeType(10)));
+        ffiIdMap.put(10, CHandler.constructCTypeFromNativeType("unsigned int", getNativeType(10)));
         CHandler.registerCType(ffiIdMap.get(10));
-        ffiIdMap.put(11, CHandler.constructCTypeFromNativeType("unsigned int", getNativeType(11)));
-        CHandler.registerCType(ffiIdMap.get(11));
+        ffiIdMap.put(11, CHandler.constructStackElementCTypeFromNativeType(null, getNativeType(11)));
         ffiIdMap.put(12, CHandler.constructStackElementCTypeFromNativeType(null, getNativeType(12)));
         ffiIdMap.put(13, CHandler.constructStackElementCTypeFromNativeType(null, getNativeType(13)));
         ffiIdMap.put(14, CHandler.constructStackElementCTypeFromNativeType(null, getNativeType(14)));
@@ -976,7 +959,5 @@ switch(id) {
         ffiIdMap.put(75, CHandler.constructStackElementCTypeFromNativeType(null, getNativeType(75)));
         ffiIdMap.put(76, CHandler.constructStackElementCTypeFromNativeType(null, getNativeType(76)));
         ffiIdMap.put(77, CHandler.constructStackElementCTypeFromNativeType(null, getNativeType(77)));
-        ffiIdMap.put(78, CHandler.constructStackElementCTypeFromNativeType(null, getNativeType(78)));
-        ffiIdMap.put(79, CHandler.constructStackElementCTypeFromNativeType(null, getNativeType(79)));
     }
 }
