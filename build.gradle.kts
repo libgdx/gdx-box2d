@@ -52,24 +52,48 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.create("setup_box2d") {
+    inputs.dir("box2d")
+    inputs.file("patches/box2d_patches.patch")
+    outputs.dir("build/box2d_patched")
+
+    doFirst {
+        file("build/box2d_patched").deleteRecursively()
+    }
+    doLast {
+        copy {
+            from("box2d")
+            into("build/box2d_patched")
+        }
+        exec {
+            commandLine = listOf("patch")
+            workingDir = file("build/box2d_patched")
+            args = listOf("-p1", "-i", file("patches/box2d_patches.patch").absolutePath)
+        }
+    }
+}
+
 fun cmakeBuild(installDir: File, taskName: String, toolchainFile: File, extraFlags: Array<String> = emptyArray(),
                buildFlags: Array<String> = emptyArray(), installFlags: Array<String> = emptyArray(), otherCFlags: String = ""): Task {
     return tasks.create("build_box2d_${taskName}") {
         group = "box2d"
+        dependsOn("setup_box2d")
+        inputs.dir("build/box2d_patched")
         doLast {
             val tmpDir = createTempDirectory("build_box2d_${taskName}").resolve("box2d").toFile()
             tmpDir.mkdirs()
             installDir.mkdirs()
             exec {
                 commandLine = listOf("cmake")
-                args = listOf("-B", tmpDir.absolutePath, "-S", file("box2d").absolutePath,
+                args = listOf("-B", tmpDir.absolutePath, "-S", file("build/box2d_patched").absolutePath,
                     "-DBOX2D_SAMPLES=OFF",
                     "-DBOX2D_VALIDATE=OFF",
                     "-DBOX2D_SANITIZE=OFF",
                     "-DBOX2D_UNIT_TESTS=OFF",
                     "-DBOX2D_BENCHMARKS=OFF",
                     "-DBOX2D_PROFILE=OFF",
-                    "-DCMAKE_C_FLAGS=-fexceptions $otherCFlags -DB2_ENABLE_ASSERT",
+                    "-DBOX2D_ENABLE_ASSERTIONS=ON",
+                    "-DCMAKE_C_FLAGS=-fexceptions $otherCFlags",
                     "-DCMAKE_STAGING_PREFIX=${installDir.absolutePath}",
                     "-DCMAKE_INSTALL_LIBDIR=${installDir.toPath().resolve("libs")}",
                     "-DCMAKE_TOOLCHAIN_FILE=${toolchainFile.absolutePath}",

@@ -1,0 +1,55 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	(revision d0bf5166fc54446e64a8638b89ccfd57f5e2b2ad)
++++ b/CMakeLists.txt	(date 1737369032143)
+@@ -51,6 +51,8 @@
+ 	add_compile_options(-ffp-contract=off)
+ endif()
+
++option(BOX2D_ENABLE_ASSERTIONS "Enable Assertions" ON)
++
+ option(BOX2D_ENABLE_SIMD "Enable SIMD math (faster)" ON)
+
+ if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
+diff --git a/include/box2d/base.h b/include/box2d/base.h
+--- a/include/box2d/base.h	(revision d0bf5166fc54446e64a8638b89ccfd57f5e2b2ad)
++++ b/include/box2d/base.h	(date 1737372476808)
+@@ -77,13 +77,22 @@
+ #define B2_BREAKPOINT assert( 0 )
+ #endif
+
++#if defined( __GNUC__ ) || defined( __clang__ )
++#define likely(x)       __builtin_expect(!!(x), 1)
++#define unlikely(x)     __builtin_expect(!!(x), 0)
++#else
++#define likely(x)       (x)
++#define unlikely(x)     (x)
++#endif
++
+ #if !defined( NDEBUG ) || defined( B2_ENABLE_ASSERT )
+ B2_API int b2InternalAssertFcn( const char* condition, const char* fileName, int lineNumber );
+ #define B2_ASSERT( condition )                                                                                                   \
+ 	do                                                                                                                           \
+ 	{                                                                                                                            \
+-		if ( !( condition ) && b2InternalAssertFcn( #condition, __FILE__, (int)__LINE__ ) )                                          \
+-			B2_BREAKPOINT;                                                                                                       \
++        if (unlikely(!( condition )))                                                                                           \
++            if (b2InternalAssertFcn( #condition, __FILE__, (int)__LINE__ ))                                                     \
++                B2_BREAKPOINT;                                                                                                   \
+ 	}                                                                                                                            \
+ 	while ( 0 )
+ #else
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+--- a/src/CMakeLists.txt	(revision d0bf5166fc54446e64a8638b89ccfd57f5e2b2ad)
++++ b/src/CMakeLists.txt	(date 1737372381403)
+@@ -124,6 +124,11 @@
+ 	target_compile_definitions(box2d PRIVATE BOX2D_ENABLE_SIMD)
+ endif()
+
++if (BOX2D_ENABLE_ASSERTIONS)
++	message(STATUS "Box2D Assertions enabled")
++	target_compile_definitions(box2d PRIVATE B2_ENABLE_ASSERT)
++endif()
++
+ if (MSVC)
+ 	message(STATUS "Box2D on MSVC")
+ 	if (BUILD_SHARED_LIBS)
