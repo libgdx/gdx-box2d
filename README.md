@@ -1,7 +1,7 @@
 ## gdx-box2d
 
 This project contains java bindings for the v3 release of [Box2D](https://github.com/erincatto/box2d).  
-The project is build from commit [f377034920c42a26cd498c0a0b1b2e9f2b064989](https://github.com/erincatto/box2d/tree/f377034920c42a26cd498c0a0b1b2e9f2b064989).
+The project is build from commit [c7ce16a072173c3c19e8107838b90b419456459d](https://github.com/erincatto/box2d/tree/c7ce16a072173c3c19e8107838b90b419456459d).
 
 ## Installation
 
