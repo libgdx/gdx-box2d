@@ -3,6 +3,9 @@
 This project contains java bindings for the v3 release of [Box2D](https://github.com/erincatto/box2d).  
 The project is build from commit [c7ce16a072173c3c19e8107838b90b419456459d](https://github.com/erincatto/box2d/tree/c7ce16a072173c3c19e8107838b90b419456459d).
 
+> [!CAUTION]
+> The API is considered incubating and may change at any point.
+
 ## Installation
 
 The current version is: 0.1-SNAPSHOT
