@@ -172,8 +172,8 @@ jnigen {
         val combined = name + "_" + arch
 
         headerDirs += arrayOf("build/box2d/${combined}/include/")
-        cFlags += " -std=c11 -fexceptions -DB2_ENABLE_ASSERT "
-        cppFlags += " -std=c++11 -fexceptions -DB2_ENABLE_ASSERT "
+        cFlags += arrayOf("-std=c11", "-fexceptions", "-DB2_ENABLE_ASSERT")
+        cppFlags += arrayOf("-std=c++11", "-fexceptions", "-DB2_ENABLE_ASSERT")
         libraries += file("build/box2d/${combined}/libs/libbox2d.a").absolutePath
     }
 
@@ -189,9 +189,12 @@ jnigen {
     addMac(x64, x86)
 
     addAndroid {
-        libraries = ""
-        androidApplicationMk += "APP_PLATFORM := android-21\nAPP_STRIP_MODE := none\nAPP_STL := c++_shared"
-        linkerFlags += " -stdlib=libc++\nLOCAL_WHOLE_STATIC_LIBRARIES := static_box2d"
+        libraries = arrayOf()
+        androidApplicationMk += arrayOf("APP_PLATFORM := android-21",
+            "APP_STRIP_MODE := none",
+            "APP_STL := c++_shared")
+        linkerFlags += "-stdlib=libc++"
+        androidAndroidMkSharedLibModule += "LOCAL_WHOLE_STATIC_LIBRARIES := static_box2d"
         androidAndroidMk += arrayOf(
             "include \$(CLEAR_VARS)",
             "LOCAL_MODULE := static_box2d",
