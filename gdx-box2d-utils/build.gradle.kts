@@ -10,6 +10,8 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation(project(path = ":", configuration = "archives"))
+    testImplementation("com.badlogicgames.gdx:gdx-platform:${gdxVersion}:natives-desktop")
+    testImplementation("com.badlogicgames.gdx:gdx-backend-lwjgl3:${gdxVersion}")
 }
 
 tasks.test {
