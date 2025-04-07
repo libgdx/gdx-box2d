@@ -2,7 +2,7 @@ package com.badlogic.gdx.box2d.enums;
 
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
-import java.util.HashMap;
+import com.badlogic.gdx.jnigen.runtime.CHandler;
 
 /**
  * These colors are used for debug draw and mostly match the named SVG colors.
@@ -156,6 +156,8 @@ public enum b2HexColor implements CEnum {
     b2_colorIvory(16777200),
     b2_colorWhite(16777215);
 
+    private static final int __size = 4;
+
     private final int index;
 
     b2HexColor(int index) {
@@ -166,14 +168,301 @@ public enum b2HexColor implements CEnum {
         return index;
     }
 
-    public static b2HexColor getByIndex(int index) {
-        return _values.get(index);
+    public int getSize() {
+        return __size;
     }
 
-    private final static HashMap<Integer, b2HexColor> _values = new HashMap();
-
-    static {
-        for (b2HexColor _val : values()) _values.put(_val.index, _val);
+    public static b2HexColor getByIndex(int index) {
+        switch(index) {
+            case 8421504:
+                return b2_colorGray;
+            case 6908265:
+                return b2_colorDimGray;
+            case 8388736:
+                return b2_colorPurple;
+            case 25600:
+                return b2_colorDarkGreen;
+            case 0:
+                return b2_colorBlack;
+            case 11119017:
+                return b2_colorDarkGray;
+            case 12632256:
+                return b2_colorSilver;
+            case 10025880:
+                return b2_colorPaleGreen;
+            case 9498256:
+                return b2_colorLightGreen;
+            case 13882323:
+                return b2_colorLightGray;
+            case 9109643:
+                return b2_colorDarkMagenta;
+            case 9419919:
+                return b2_colorDarkSeaGreen;
+            case 2263842:
+                return b2_colorForestGreen;
+            case 3329330:
+                return b2_colorLimeGreen;
+            case 32768:
+                return b2_colorGreen;
+            case 65280:
+                return b2_colorLime;
+            case 16711935:
+                return b2_colorFuchsia_b2_colorMagenta;
+            case 16119285:
+                return b2_colorWhiteSmoke;
+            case 16777215:
+                return b2_colorWhite;
+            case 15794160:
+                return b2_colorHoneyDew;
+            case 14474460:
+                return b2_colorGainsboro;
+            case 14204888:
+                return b2_colorThistle;
+            case 14524637:
+                return b2_colorPlum;
+            case 15631086:
+                return b2_colorViolet;
+            case 16775930:
+                return b2_colorSnow;
+            case 16316671:
+                return b2_colorGhostWhite;
+            case 16773365:
+                return b2_colorLavenderBlush;
+            case 14315734:
+                return b2_colorOrchid;
+            case 15792383:
+                return b2_colorAliceBlue;
+            case 15794175:
+                return b2_colorAzure;
+            case 16775920:
+                return b2_colorFloralWhite;
+            case 16777200:
+                return b2_colorIvory;
+            case 16121850:
+                return b2_colorMintCream;
+            case 16774638:
+                return b2_colorSeaShell;
+            case 16643558:
+                return b2_colorOldLace;
+            case 15132410:
+                return b2_colorLavender;
+            case 16445670:
+                return b2_colorLinen;
+            case 16770273:
+                return b2_colorMistyRose;
+            case 14745599:
+                return b2_colorLightCyan;
+            case 16777184:
+                return b2_colorLightYellow;
+            case 16775388:
+                return b2_colorCornsilk;
+            case 16448210:
+                return b2_colorLightGoldenRodYellow;
+            case 16119260:
+                return b2_colorBeige;
+            case 16773077:
+                return b2_colorPapayaWhip;
+            case 16444375:
+                return b2_colorAntiqueWhite;
+            case 16772045:
+                return b2_colorBlanchedAlmond;
+            case 16775885:
+                return b2_colorLemonChiffon;
+            case 12357519:
+                return b2_colorRosyBrown;
+            case 16761035:
+                return b2_colorPink;
+            case 16770244:
+                return b2_colorBisque;
+            case 16758465:
+                return b2_colorLightPink;
+            case 11529966:
+                return b2_colorPaleTurquoise;
+            case 13047173:
+                return b2_colorMediumVioletRed;
+            case 15657130:
+                return b2_colorPaleGoldenRod;
+            case 16767673:
+                return b2_colorPeachPuff;
+            case 16113331:
+                return b2_colorWheat;
+            case 9699539:
+                return b2_colorDarkViolet;
+            case 9662683:
+                return b2_colorMediumPurple;
+            case 7048739:
+                return b2_colorOliveDrab;
+            case 14381203:
+                return b2_colorPaleVioletRed;
+            case 16770229:
+                return b2_colorMoccasin;
+            case 16738740:
+                return b2_colorHotPink;
+            case 11393254:
+                return b2_colorLightBlue;
+            case 3978097:
+                return b2_colorMediumSeaGreen;
+            case 16768685:
+                return b2_colorNavajoWhite;
+            case 10040012:
+                return b2_colorDarkOrchid;
+            case 11591910:
+                return b2_colorPowderBlue;
+            case 14596231:
+                return b2_colorBurlywood;
+            case 13808780:
+                return b2_colorTan;
+            case 3100495:
+                return b2_colorDarkSlateGray;
+            case 9055202:
+                return b2_colorBlueViolet;
+            case 12211667:
+                return b2_colorMediumOrchid;
+            case 1644912:
+                return b2_colorMidnightBlue;
+            case 16716947:
+                return b2_colorDeepPink;
+            case 8900331:
+                return b2_colorSkyBlue;
+            case 11584734:
+                return b2_colorLightSteelBlue;
+            case 15761536:
+                return b2_colorLightCoral;
+            case 16772748:
+                return b2_colorBox2DYellow;
+            case 3050327:
+                return b2_colorSeaGreen;
+            case 5597999:
+                return b2_colorDarkOliveGreen;
+            case 15787660:
+                return b2_colorKhaki;
+            case 8190976:
+                return b2_colorLawnGreen;
+            case 8900346:
+                return b2_colorLightSkyBlue;
+            case 8388352:
+                return b2_colorChartreuse;
+            case 65407:
+                return b2_colorSpringGreen;
+            case 128:
+                return b2_colorNavy;
+            case 8421376:
+                return b2_colorOlive;
+            case 8388608:
+                return b2_colorMaroon;
+            case 32896:
+                return b2_colorTeal;
+            case 11403055:
+                return b2_colorGreenYellow;
+            case 4772300:
+                return b2_colorMediumTurquoise;
+            case 16752762:
+                return b2_colorLightSalmon;
+            case 16416882:
+                return b2_colorSalmon;
+            case 6591981:
+                return b2_colorCornflowerBlue;
+            case 2142890:
+                return b2_colorLightSeaGreen;
+            case 139:
+                return b2_colorDarkBlue;
+            case 35723:
+                return b2_colorDarkCyan;
+            case 9109504:
+                return b2_colorDarkRed;
+            case 10506797:
+                return b2_colorSienna;
+            case 10824234:
+                return b2_colorBrown;
+            case 3190463:
+                return b2_colorBox2DBlue;
+            case 11674146:
+                return b2_colorFireBrick;
+            case 4251856:
+                return b2_colorTurquoise;
+            case 13458524:
+                return b2_colorIndianRed;
+            case 15308410:
+                return b2_colorDarkSalmon;
+            case 16032864:
+                return b2_colorSandyBrown;
+            case 8087790:
+                return b2_colorMediumSlateBlue;
+            case 9127187:
+                return b2_colorSaddleBrown;
+            case 64154:
+                return b2_colorMediumSpringGreen;
+            case 4286945:
+                return b2_colorRoyalBlue;
+            case 6970061:
+                return b2_colorSlateBlue;
+            case 10145074:
+                return b2_colorYellowGreen;
+            case 9226532:
+                return b2_colorBox2DGreen;
+            case 8388564:
+                return b2_colorAquamarine;
+            case 16744272:
+                return b2_colorCoral;
+            case 12092939:
+                return b2_colorDarkGoldenRod;
+            case 16737095:
+                return b2_colorTomato;
+            case 4734347:
+                return b2_colorDarkSlateBlue;
+            case 4915330:
+                return b2_colorIndigo;
+            case 13789470:
+                return b2_colorChocolate;
+            case 6737322:
+                return b2_colorMediumAquaMarine;
+            case 205:
+                return b2_colorMediumBlue;
+            case 52945:
+                return b2_colorDarkTurquoise;
+            case 12433259:
+                return b2_colorDarkKhaki;
+            case 14423100:
+                return b2_colorCrimson;
+            case 7372944:
+                return b2_colorSlateGray;
+            case 2003199:
+                return b2_colorDodgerBlue;
+            case 7833753:
+                return b2_colorLightSlateGray;
+            case 14430514:
+                return b2_colorBox2DRed;
+            case 13468991:
+                return b2_colorPeru;
+            case 4620980:
+                return b2_colorSteelBlue;
+            case 14329120:
+                return b2_colorGoldenRod;
+            case 6697881:
+                return b2_colorRebeccaPurple;
+            case 65535:
+                return b2_colorAqua_b2_colorCyan;
+            case 255:
+                return b2_colorBlue;
+            case 6266528:
+                return b2_colorCadetBlue;
+            case 16747520:
+                return b2_colorDarkOrange;
+            case 49151:
+                return b2_colorDeepSkyBlue;
+            case 16766720:
+                return b2_colorGold;
+            case 16776960:
+                return b2_colorYellow;
+            case 16753920:
+                return b2_colorOrange;
+            case 16729344:
+                return b2_colorOrangeRed;
+            case 16711680:
+                return b2_colorRed;
+            default:
+                throw new IllegalArgumentException("Index " + index + " does not exist.");
+        }
     }
 
     public static final class b2HexColorPointer extends EnumPointer<b2HexColor> {
@@ -182,21 +471,28 @@ public enum b2HexColor implements CEnum {
             super(pointer, freeOnGC);
         }
 
+        public b2HexColorPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
         public b2HexColorPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2HexColorPointer(int count, boolean freeOnGC, boolean guard) {
-            super(count, freeOnGC, guard);
+        public b2HexColorPointer(int count, boolean freeOnGC) {
+            super(count * __size, freeOnGC);
         }
 
-        public b2HexColor.b2HexColorPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2HexColor getEnumValue(int index) {
+            return getByIndex((int) getBufPtr().getUInt(index * __size));
         }
 
-        protected b2HexColor getEnum(int index) {
-            return getByIndex(index);
+        public void setEnumValue(b2HexColor value, int index) {
+            getBufPtr().setUInt(index * __size, value.getIndex());
+        }
+
+        public int getSize() {
+            return __size;
         }
     }
 }

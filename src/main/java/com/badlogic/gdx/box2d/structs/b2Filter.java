@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -38,7 +39,7 @@ public final class b2Filter extends Struct {
     }
 
     public b2Filter.b2FilterPointer asPointer() {
-        return new b2Filter.b2FilterPointer(getPointer(), getsGCFreed());
+        return new b2Filter.b2FilterPointer(getPointer(), false, this);
     }
 
     /**
@@ -56,7 +57,7 @@ public final class b2Filter extends Struct {
      * 	 @endcode
      */
     public long categoryBits() {
-        return (long) getValue(0);
+        return getBufPtr().getLong(0);
     }
 
     /**
@@ -74,7 +75,7 @@ public final class b2Filter extends Struct {
      * 	 @endcode
      */
     public void categoryBits(long categoryBits) {
-        setValue(categoryBits, 0);
+        getBufPtr().setLong(0, categoryBits);
     }
 
     /**
@@ -87,7 +88,7 @@ public final class b2Filter extends Struct {
      * 	 @endcode
      */
     public long maskBits() {
-        return (long) getValue(1);
+        return getBufPtr().getLong(8);
     }
 
     /**
@@ -100,7 +101,7 @@ public final class b2Filter extends Struct {
      * 	 @endcode
      */
     public void maskBits(long maskBits) {
-        setValue(maskBits, 1);
+        getBufPtr().setLong(8, maskBits);
     }
 
     /**
@@ -112,7 +113,7 @@ public final class b2Filter extends Struct {
      * 	 and apply that group index to all shapes on the ragdoll.
      */
     public int groupIndex() {
-        return (int) getValue(2);
+        return getBufPtr().getInt(16);
     }
 
     /**
@@ -124,7 +125,7 @@ public final class b2Filter extends Struct {
      * 	 and apply that group index to all shapes on the ragdoll.
      */
     public void groupIndex(int groupIndex) {
-        setValue(groupIndex, 2);
+        getBufPtr().setInt(16, groupIndex);
     }
 
     public static final class b2FilterPointer extends StackElementPointer<b2Filter> {
@@ -133,17 +134,21 @@ public final class b2Filter extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2FilterPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2FilterPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2FilterPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2FilterPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Filter.b2FilterPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2FilterPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -37,7 +38,7 @@ public final class b2Mat22 extends Struct {
     }
 
     public b2Mat22.b2Mat22Pointer asPointer() {
-        return new b2Mat22.b2Mat22Pointer(getPointer(), getsGCFreed());
+        return new b2Mat22.b2Mat22Pointer(getPointer(), false, this);
     }
 
     /**
@@ -47,7 +48,7 @@ public final class b2Mat22 extends Struct {
         return __cx;
     }
 
-    private static final int __cx_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __cx_offset = 0;
 
     private final b2Vec2 __cx = new b2Vec2(getPointer() + __cx_offset, false);
 
@@ -58,7 +59,7 @@ public final class b2Mat22 extends Struct {
         return __cy;
     }
 
-    private static final int __cy_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __cy_offset = 8;
 
     private final b2Vec2 __cy = new b2Vec2(getPointer() + __cy_offset, false);
 
@@ -68,17 +69,21 @@ public final class b2Mat22 extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2Mat22Pointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2Mat22Pointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2Mat22Pointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2Mat22Pointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Mat22.b2Mat22Pointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2Mat22Pointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

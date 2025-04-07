@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -37,7 +38,7 @@ public final class b2CastOutput extends Struct {
     }
 
     public b2CastOutput.b2CastOutputPointer asPointer() {
-        return new b2CastOutput.b2CastOutputPointer(getPointer(), getsGCFreed());
+        return new b2CastOutput.b2CastOutputPointer(getPointer(), false, this);
     }
 
     /**
@@ -47,7 +48,7 @@ public final class b2CastOutput extends Struct {
         return __normal;
     }
 
-    private static final int __normal_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __normal_offset = 0;
 
     private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
 
@@ -58,7 +59,7 @@ public final class b2CastOutput extends Struct {
         return __point;
     }
 
-    private static final int __point_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __point_offset = 8;
 
     private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
 
@@ -66,42 +67,42 @@ public final class b2CastOutput extends Struct {
      * The fraction of the input translation at collision
      */
     public float fraction() {
-        return (float) getValueFloat(2);
+        return getBufPtr().getFloat(16);
     }
 
     /**
      * The fraction of the input translation at collision
      */
     public void fraction(float fraction) {
-        setValue(fraction, 2);
+        getBufPtr().setFloat(16, fraction);
     }
 
     /**
      * The number of iterations used
      */
     public int iterations() {
-        return (int) getValue(3);
+        return getBufPtr().getInt(20);
     }
 
     /**
      * The number of iterations used
      */
     public void iterations(int iterations) {
-        setValue(iterations, 3);
+        getBufPtr().setInt(20, iterations);
     }
 
     /**
      * Did the cast hit?
      */
     public boolean hit() {
-        return getValue(4) != 0;
+        return getBufPtr().getBoolean(24);
     }
 
     /**
      * Did the cast hit?
      */
     public void hit(boolean hit) {
-        setValue(hit, 4);
+        getBufPtr().setBoolean(24, hit);
     }
 
     public static final class b2CastOutputPointer extends StackElementPointer<b2CastOutput> {
@@ -110,17 +111,21 @@ public final class b2CastOutput extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2CastOutputPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2CastOutputPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2CastOutputPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2CastOutputPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2CastOutput.b2CastOutputPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2CastOutputPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

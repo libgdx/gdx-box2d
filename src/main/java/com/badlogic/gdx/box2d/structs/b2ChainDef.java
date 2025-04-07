@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
@@ -53,77 +54,77 @@ public final class b2ChainDef extends Struct {
     }
 
     public b2ChainDef.b2ChainDefPointer asPointer() {
-        return new b2ChainDef.b2ChainDefPointer(getPointer(), getsGCFreed());
+        return new b2ChainDef.b2ChainDefPointer(getPointer(), false, this);
     }
 
     /**
      * Use this to store application specific shape data.
      */
     public VoidPointer userData() {
-        return new VoidPointer(getValue(0), false);
+        return new VoidPointer(getBufPtr().getNativePointer(0), false);
     }
 
     /**
      * Use this to store application specific shape data.
      */
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 0);
+        getBufPtr().setNativePointer(0, userData.getPointer());
     }
 
     /**
      * An array of at least 4 points. These are cloned and may be temporary.
      */
     public b2Vec2.b2Vec2Pointer points() {
-        return new b2Vec2.b2Vec2Pointer(getValue(1), false);
+        return new b2Vec2.b2Vec2Pointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false);
     }
 
     /**
      * An array of at least 4 points. These are cloned and may be temporary.
      */
     public void points(b2Vec2.b2Vec2Pointer points) {
-        setValue(points.getPointer(), 1);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, points.getPointer());
     }
 
     /**
      * The point count, must be 4 or more.
      */
     public int count() {
-        return (int) getValue(2);
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 8 : 16);
     }
 
     /**
      * The point count, must be 4 or more.
      */
     public void count(int count) {
-        setValue(count, 2);
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 8 : 16, count);
     }
 
     /**
      * The friction coefficient, usually in the range [0,1].
      */
     public float friction() {
-        return (float) getValueFloat(3);
+        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 12 : 20);
     }
 
     /**
      * The friction coefficient, usually in the range [0,1].
      */
     public void friction(float friction) {
-        setValue(friction, 3);
+        getBufPtr().setFloat(CHandler.IS_32_BIT ? 12 : 20, friction);
     }
 
     /**
      * The restitution (elasticity) usually in the range [0,1].
      */
     public float restitution() {
-        return (float) getValueFloat(4);
+        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 16 : 24);
     }
 
     /**
      * The restitution (elasticity) usually in the range [0,1].
      */
     public void restitution(float restitution) {
-        setValue(restitution, 4);
+        getBufPtr().setFloat(CHandler.IS_32_BIT ? 16 : 24, restitution);
     }
 
     /**
@@ -133,7 +134,7 @@ public final class b2ChainDef extends Struct {
         return __filter;
     }
 
-    private static final int __filter_offset = CHandler.getOffsetForField(__ffi_type, 5);
+    private static final int __filter_offset = CHandler.IS_32_BIT ? 24 : 32;
 
     private final b2Filter __filter = new b2Filter(getPointer() + __filter_offset, false);
 
@@ -141,56 +142,56 @@ public final class b2ChainDef extends Struct {
      * Custom debug draw color.
      */
     public long customColor() {
-        return (long) getValue(6);
+        return getBufPtr().getUInt(CHandler.IS_32_BIT ? 48 : 56);
     }
 
     /**
      * Custom debug draw color.
      */
     public void customColor(long customColor) {
-        setValue(customColor, 6);
+        getBufPtr().setUInt(CHandler.IS_32_BIT ? 48 : 56, customColor);
     }
 
     /**
      * Indicates a closed chain formed by connecting the first and last points
      */
     public boolean isLoop() {
-        return getValue(7) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 52 : 60);
     }
 
     /**
      * Indicates a closed chain formed by connecting the first and last points
      */
     public void isLoop(boolean isLoop) {
-        setValue(isLoop, 7);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 52 : 60, isLoop);
     }
 
     /**
      * Generate events when a sensor overlaps this chain
      */
     public boolean enableSensorEvents() {
-        return getValue(8) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 53 : 61);
     }
 
     /**
      * Generate events when a sensor overlaps this chain
      */
     public void enableSensorEvents(boolean enableSensorEvents) {
-        setValue(enableSensorEvents, 8);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 53 : 61, enableSensorEvents);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return (int) getValue(9);
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 56 : 64);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        setValue(internalValue, 9);
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 56 : 64, internalValue);
     }
 
     public static final class b2ChainDefPointer extends StackElementPointer<b2ChainDef> {
@@ -199,17 +200,21 @@ public final class b2ChainDef extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2ChainDefPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2ChainDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2ChainDefPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ChainDefPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2ChainDef.b2ChainDefPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ChainDefPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

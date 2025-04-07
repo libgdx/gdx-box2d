@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Transform;
@@ -38,7 +39,7 @@ public final class b2DistanceInput extends Struct {
     }
 
     public b2DistanceInput.b2DistanceInputPointer asPointer() {
-        return new b2DistanceInput.b2DistanceInputPointer(getPointer(), getsGCFreed());
+        return new b2DistanceInput.b2DistanceInputPointer(getPointer(), false, this);
     }
 
     /**
@@ -48,7 +49,7 @@ public final class b2DistanceInput extends Struct {
         return __proxyA;
     }
 
-    private static final int __proxyA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __proxyA_offset = 0;
 
     private final b2ShapeProxy __proxyA = new b2ShapeProxy(getPointer() + __proxyA_offset, false);
 
@@ -59,7 +60,7 @@ public final class b2DistanceInput extends Struct {
         return __proxyB;
     }
 
-    private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __proxyB_offset = 72;
 
     private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
@@ -70,7 +71,7 @@ public final class b2DistanceInput extends Struct {
         return __transformA;
     }
 
-    private static final int __transformA_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __transformA_offset = 144;
 
     private final b2Transform __transformA = new b2Transform(getPointer() + __transformA_offset, false);
 
@@ -81,7 +82,7 @@ public final class b2DistanceInput extends Struct {
         return __transformB;
     }
 
-    private static final int __transformB_offset = CHandler.getOffsetForField(__ffi_type, 3);
+    private static final int __transformB_offset = 160;
 
     private final b2Transform __transformB = new b2Transform(getPointer() + __transformB_offset, false);
 
@@ -89,14 +90,14 @@ public final class b2DistanceInput extends Struct {
      * Should the proxy radius be considered?
      */
     public boolean useRadii() {
-        return getValue(4) != 0;
+        return getBufPtr().getBoolean(176);
     }
 
     /**
      * Should the proxy radius be considered?
      */
     public void useRadii(boolean useRadii) {
-        setValue(useRadii, 4);
+        getBufPtr().setBoolean(176, useRadii);
     }
 
     public static final class b2DistanceInputPointer extends StackElementPointer<b2DistanceInput> {
@@ -105,17 +106,21 @@ public final class b2DistanceInput extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2DistanceInputPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2DistanceInputPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2DistanceInputPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2DistanceInputPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2DistanceInput.b2DistanceInputPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2DistanceInputPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

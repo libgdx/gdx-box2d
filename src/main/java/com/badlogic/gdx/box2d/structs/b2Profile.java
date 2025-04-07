@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -37,183 +38,183 @@ public final class b2Profile extends Struct {
     }
 
     public b2Profile.b2ProfilePointer asPointer() {
-        return new b2Profile.b2ProfilePointer(getPointer(), getsGCFreed());
+        return new b2Profile.b2ProfilePointer(getPointer(), false, this);
     }
 
     public float step() {
-        return (float) getValueFloat(0);
+        return getBufPtr().getFloat(0);
     }
 
     public void step(float step) {
-        setValue(step, 0);
+        getBufPtr().setFloat(0, step);
     }
 
     public float pairs() {
-        return (float) getValueFloat(1);
+        return getBufPtr().getFloat(4);
     }
 
     public void pairs(float pairs) {
-        setValue(pairs, 1);
+        getBufPtr().setFloat(4, pairs);
     }
 
     public float collide() {
-        return (float) getValueFloat(2);
+        return getBufPtr().getFloat(8);
     }
 
     public void collide(float collide) {
-        setValue(collide, 2);
+        getBufPtr().setFloat(8, collide);
     }
 
     public float solve() {
-        return (float) getValueFloat(3);
+        return getBufPtr().getFloat(12);
     }
 
     public void solve(float solve) {
-        setValue(solve, 3);
+        getBufPtr().setFloat(12, solve);
     }
 
     public float mergeIslands() {
-        return (float) getValueFloat(4);
+        return getBufPtr().getFloat(16);
     }
 
     public void mergeIslands(float mergeIslands) {
-        setValue(mergeIslands, 4);
+        getBufPtr().setFloat(16, mergeIslands);
     }
 
     public float prepareStages() {
-        return (float) getValueFloat(5);
+        return getBufPtr().getFloat(20);
     }
 
     public void prepareStages(float prepareStages) {
-        setValue(prepareStages, 5);
+        getBufPtr().setFloat(20, prepareStages);
     }
 
     public float solveConstraints() {
-        return (float) getValueFloat(6);
+        return getBufPtr().getFloat(24);
     }
 
     public void solveConstraints(float solveConstraints) {
-        setValue(solveConstraints, 6);
+        getBufPtr().setFloat(24, solveConstraints);
     }
 
     public float prepareConstraints() {
-        return (float) getValueFloat(7);
+        return getBufPtr().getFloat(28);
     }
 
     public void prepareConstraints(float prepareConstraints) {
-        setValue(prepareConstraints, 7);
+        getBufPtr().setFloat(28, prepareConstraints);
     }
 
     public float integrateVelocities() {
-        return (float) getValueFloat(8);
+        return getBufPtr().getFloat(32);
     }
 
     public void integrateVelocities(float integrateVelocities) {
-        setValue(integrateVelocities, 8);
+        getBufPtr().setFloat(32, integrateVelocities);
     }
 
     public float warmStart() {
-        return (float) getValueFloat(9);
+        return getBufPtr().getFloat(36);
     }
 
     public void warmStart(float warmStart) {
-        setValue(warmStart, 9);
+        getBufPtr().setFloat(36, warmStart);
     }
 
     public float solveImpulses() {
-        return (float) getValueFloat(10);
+        return getBufPtr().getFloat(40);
     }
 
     public void solveImpulses(float solveImpulses) {
-        setValue(solveImpulses, 10);
+        getBufPtr().setFloat(40, solveImpulses);
     }
 
     public float integratePositions() {
-        return (float) getValueFloat(11);
+        return getBufPtr().getFloat(44);
     }
 
     public void integratePositions(float integratePositions) {
-        setValue(integratePositions, 11);
+        getBufPtr().setFloat(44, integratePositions);
     }
 
     public float relaxImpulses() {
-        return (float) getValueFloat(12);
+        return getBufPtr().getFloat(48);
     }
 
     public void relaxImpulses(float relaxImpulses) {
-        setValue(relaxImpulses, 12);
+        getBufPtr().setFloat(48, relaxImpulses);
     }
 
     public float applyRestitution() {
-        return (float) getValueFloat(13);
+        return getBufPtr().getFloat(52);
     }
 
     public void applyRestitution(float applyRestitution) {
-        setValue(applyRestitution, 13);
+        getBufPtr().setFloat(52, applyRestitution);
     }
 
     public float storeImpulses() {
-        return (float) getValueFloat(14);
+        return getBufPtr().getFloat(56);
     }
 
     public void storeImpulses(float storeImpulses) {
-        setValue(storeImpulses, 14);
+        getBufPtr().setFloat(56, storeImpulses);
     }
 
     public float splitIslands() {
-        return (float) getValueFloat(15);
+        return getBufPtr().getFloat(60);
     }
 
     public void splitIslands(float splitIslands) {
-        setValue(splitIslands, 15);
+        getBufPtr().setFloat(60, splitIslands);
     }
 
     public float transforms() {
-        return (float) getValueFloat(16);
+        return getBufPtr().getFloat(64);
     }
 
     public void transforms(float transforms) {
-        setValue(transforms, 16);
+        getBufPtr().setFloat(64, transforms);
     }
 
     public float hitEvents() {
-        return (float) getValueFloat(17);
+        return getBufPtr().getFloat(68);
     }
 
     public void hitEvents(float hitEvents) {
-        setValue(hitEvents, 17);
+        getBufPtr().setFloat(68, hitEvents);
     }
 
     public float refit() {
-        return (float) getValueFloat(18);
+        return getBufPtr().getFloat(72);
     }
 
     public void refit(float refit) {
-        setValue(refit, 18);
+        getBufPtr().setFloat(72, refit);
     }
 
     public float bullets() {
-        return (float) getValueFloat(19);
+        return getBufPtr().getFloat(76);
     }
 
     public void bullets(float bullets) {
-        setValue(bullets, 19);
+        getBufPtr().setFloat(76, bullets);
     }
 
     public float sleepIslands() {
-        return (float) getValueFloat(20);
+        return getBufPtr().getFloat(80);
     }
 
     public void sleepIslands(float sleepIslands) {
-        setValue(sleepIslands, 20);
+        getBufPtr().setFloat(80, sleepIslands);
     }
 
     public float sensors() {
-        return (float) getValueFloat(21);
+        return getBufPtr().getFloat(84);
     }
 
     public void sensors(float sensors) {
-        setValue(sensors, 21);
+        getBufPtr().setFloat(84, sensors);
     }
 
     public static final class b2ProfilePointer extends StackElementPointer<b2Profile> {
@@ -222,17 +223,21 @@ public final class b2Profile extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2ProfilePointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2ProfilePointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2ProfilePointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ProfilePointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Profile.b2ProfilePointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ProfilePointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

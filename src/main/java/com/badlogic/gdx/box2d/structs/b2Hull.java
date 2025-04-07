@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -38,7 +39,7 @@ public final class b2Hull extends Struct {
     }
 
     public b2Hull.b2HullPointer asPointer() {
-        return new b2Hull.b2HullPointer(getPointer(), getsGCFreed());
+        return new b2Hull.b2HullPointer(getPointer(), false, this);
     }
 
     /**
@@ -48,22 +49,22 @@ public final class b2Hull extends Struct {
         return __points;
     }
 
-    private static final int __points_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __points_offset = 0;
 
-    private final b2Vec2.b2Vec2Pointer __points = new b2Vec2.b2Vec2Pointer(getPointer() + __points_offset, false).guardCount(8);
+    private final b2Vec2.b2Vec2Pointer __points = new b2Vec2.b2Vec2Pointer(getPointer() + __points_offset, false, 8);
 
     /**
      * The number of points
      */
     public int count() {
-        return (int) getValue(8);
+        return getBufPtr().getInt(64);
     }
 
     /**
      * The number of points
      */
     public void count(int count) {
-        setValue(count, 8);
+        getBufPtr().setInt(64, count);
     }
 
     public static final class b2HullPointer extends StackElementPointer<b2Hull> {
@@ -72,17 +73,21 @@ public final class b2Hull extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2HullPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2HullPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2HullPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2HullPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Hull.b2HullPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2HullPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

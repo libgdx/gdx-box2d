@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -37,35 +38,35 @@ public final class b2Rot extends Struct {
     }
 
     public b2Rot.b2RotPointer asPointer() {
-        return new b2Rot.b2RotPointer(getPointer(), getsGCFreed());
+        return new b2Rot.b2RotPointer(getPointer(), false, this);
     }
 
     /**
      * cosine and sine
      */
     public float c() {
-        return (float) getValueFloat(0);
+        return getBufPtr().getFloat(0);
     }
 
     /**
      * cosine and sine
      */
     public void c(float c) {
-        setValue(c, 0);
+        getBufPtr().setFloat(0, c);
     }
 
     /**
      * cosine and sine
      */
     public float s() {
-        return (float) getValueFloat(1);
+        return getBufPtr().getFloat(4);
     }
 
     /**
      * cosine and sine
      */
     public void s(float s) {
-        setValue(s, 1);
+        getBufPtr().setFloat(4, s);
     }
 
     public static final class b2RotPointer extends StackElementPointer<b2Rot> {
@@ -74,17 +75,21 @@ public final class b2Rot extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2RotPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2RotPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2RotPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2RotPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Rot.b2RotPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2RotPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

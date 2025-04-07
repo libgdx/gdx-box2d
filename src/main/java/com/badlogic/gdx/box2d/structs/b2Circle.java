@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -37,7 +38,7 @@ public final class b2Circle extends Struct {
     }
 
     public b2Circle.b2CirclePointer asPointer() {
-        return new b2Circle.b2CirclePointer(getPointer(), getsGCFreed());
+        return new b2Circle.b2CirclePointer(getPointer(), false, this);
     }
 
     /**
@@ -47,7 +48,7 @@ public final class b2Circle extends Struct {
         return __center;
     }
 
-    private static final int __center_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __center_offset = 0;
 
     private final b2Vec2 __center = new b2Vec2(getPointer() + __center_offset, false);
 
@@ -55,14 +56,14 @@ public final class b2Circle extends Struct {
      * The radius
      */
     public float radius() {
-        return (float) getValueFloat(1);
+        return getBufPtr().getFloat(8);
     }
 
     /**
      * The radius
      */
     public void radius(float radius) {
-        setValue(radius, 1);
+        getBufPtr().setFloat(8, radius);
     }
 
     public static final class b2CirclePointer extends StackElementPointer<b2Circle> {
@@ -71,17 +72,21 @@ public final class b2Circle extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2CirclePointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2CirclePointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2CirclePointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2CirclePointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Circle.b2CirclePointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2CirclePointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

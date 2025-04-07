@@ -103,7 +103,7 @@ public class Box2dWorldTaskSystem implements Disposable {
                     start = end;
                 }
 
-                VoidPointer taskIndex = new VoidPointer(taskCount + 1, false);
+                VoidPointer taskIndex = new VoidPointer((long) taskCount + 1, false);
                 taskCount++;
                 return taskIndex;
             } else {

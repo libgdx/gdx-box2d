@@ -5,7 +5,7 @@ import kotlin.io.path.createTempDirectory
 
 plugins {
     id("java-library")
-    id("com.badlogicgames.jnigen.jnigen-gradle") version "3.0.0"
+    id("com.badlogicgames.jnigen.jnigen-gradle") version "3.0.1-SNAPSHOT"
 }
 
 val isReleaseBuild: Boolean
@@ -189,6 +189,10 @@ jnigen {
     addMac(x64, x86)
 
     addAndroid {
+        // TODO: TEMP fix for compiling for x86, fix later
+        cFlags += arrayOf("-malign-double")
+        cppFlags += arrayOf("-malign-double")
+
         libraries = arrayOf()
         androidApplicationMk += arrayOf("APP_PLATFORM := android-21",
             "APP_STRIP_MODE := none",

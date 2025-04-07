@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 
@@ -40,7 +41,7 @@ public final class b2ContactEndTouchEvent extends Struct {
     }
 
     public b2ContactEndTouchEvent.b2ContactEndTouchEventPointer asPointer() {
-        return new b2ContactEndTouchEvent.b2ContactEndTouchEventPointer(getPointer(), getsGCFreed());
+        return new b2ContactEndTouchEvent.b2ContactEndTouchEventPointer(getPointer(), false, this);
     }
 
     /**
@@ -52,7 +53,7 @@ public final class b2ContactEndTouchEvent extends Struct {
         return __shapeIdA;
     }
 
-    private static final int __shapeIdA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __shapeIdA_offset = 0;
 
     private final b2ShapeId __shapeIdA = new b2ShapeId(getPointer() + __shapeIdA_offset, false);
 
@@ -65,7 +66,7 @@ public final class b2ContactEndTouchEvent extends Struct {
         return __shapeIdB;
     }
 
-    private static final int __shapeIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __shapeIdB_offset = 8;
 
     private final b2ShapeId __shapeIdB = new b2ShapeId(getPointer() + __shapeIdB_offset, false);
 
@@ -75,17 +76,21 @@ public final class b2ContactEndTouchEvent extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2ContactEndTouchEventPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2ContactEndTouchEventPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2ContactEndTouchEventPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ContactEndTouchEventPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2ContactEndTouchEvent.b2ContactEndTouchEventPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ContactEndTouchEventPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

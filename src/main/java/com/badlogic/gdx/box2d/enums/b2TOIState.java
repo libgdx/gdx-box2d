@@ -2,6 +2,7 @@ package com.badlogic.gdx.box2d.enums;
 
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
+import com.badlogic.gdx.jnigen.runtime.CHandler;
 
 /**
  * Describes the TOI output
@@ -9,6 +10,8 @@ import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 public enum b2TOIState implements CEnum {
 
     b2_toiStateUnknown(0), b2_toiStateFailed(1), b2_toiStateOverlapped(2), b2_toiStateHit(3), b2_toiStateSeparated(4);
+
+    private static final int __size = 4;
 
     private final int index;
 
@@ -20,11 +23,26 @@ public enum b2TOIState implements CEnum {
         return index;
     }
 
-    public static b2TOIState getByIndex(int index) {
-        return _values[index];
+    public int getSize() {
+        return __size;
     }
 
-    private final static b2TOIState[] _values = { b2_toiStateUnknown, b2_toiStateFailed, b2_toiStateOverlapped, b2_toiStateHit, b2_toiStateSeparated };
+    public static b2TOIState getByIndex(int index) {
+        switch(index) {
+            case 0:
+                return b2_toiStateUnknown;
+            case 1:
+                return b2_toiStateFailed;
+            case 2:
+                return b2_toiStateOverlapped;
+            case 3:
+                return b2_toiStateHit;
+            case 4:
+                return b2_toiStateSeparated;
+            default:
+                throw new IllegalArgumentException("Index " + index + " does not exist.");
+        }
+    }
 
     public static final class b2TOIStatePointer extends EnumPointer<b2TOIState> {
 
@@ -32,21 +50,28 @@ public enum b2TOIState implements CEnum {
             super(pointer, freeOnGC);
         }
 
+        public b2TOIStatePointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
         public b2TOIStatePointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2TOIStatePointer(int count, boolean freeOnGC, boolean guard) {
-            super(count, freeOnGC, guard);
+        public b2TOIStatePointer(int count, boolean freeOnGC) {
+            super(count * __size, freeOnGC);
         }
 
-        public b2TOIState.b2TOIStatePointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2TOIState getEnumValue(int index) {
+            return getByIndex((int) getBufPtr().getUInt(index * __size));
         }
 
-        protected b2TOIState getEnum(int index) {
-            return getByIndex(index);
+        public void setEnumValue(b2TOIState value, int index) {
+            getBufPtr().setUInt(index * __size, value.getIndex());
+        }
+
+        public int getSize() {
+            return __size;
         }
     }
 }

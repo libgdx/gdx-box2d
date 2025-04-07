@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Rot;
@@ -38,14 +39,14 @@ public final class b2Transform extends Struct {
     }
 
     public b2Transform.b2TransformPointer asPointer() {
-        return new b2Transform.b2TransformPointer(getPointer(), getsGCFreed());
+        return new b2Transform.b2TransformPointer(getPointer(), false, this);
     }
 
     public b2Vec2 p() {
         return __p;
     }
 
-    private static final int __p_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __p_offset = 0;
 
     private final b2Vec2 __p = new b2Vec2(getPointer() + __p_offset, false);
 
@@ -53,7 +54,7 @@ public final class b2Transform extends Struct {
         return __q;
     }
 
-    private static final int __q_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __q_offset = 8;
 
     private final b2Rot __q = new b2Rot(getPointer() + __q_offset, false);
 
@@ -63,17 +64,21 @@ public final class b2Transform extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2TransformPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2TransformPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2TransformPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2TransformPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Transform.b2TransformPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2TransformPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

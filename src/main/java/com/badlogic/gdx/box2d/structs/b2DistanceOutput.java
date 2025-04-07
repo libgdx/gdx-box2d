@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -37,7 +38,7 @@ public final class b2DistanceOutput extends Struct {
     }
 
     public b2DistanceOutput.b2DistanceOutputPointer asPointer() {
-        return new b2DistanceOutput.b2DistanceOutputPointer(getPointer(), getsGCFreed());
+        return new b2DistanceOutput.b2DistanceOutputPointer(getPointer(), false, this);
     }
 
     /**
@@ -47,7 +48,7 @@ public final class b2DistanceOutput extends Struct {
         return __pointA;
     }
 
-    private static final int __pointA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __pointA_offset = 0;
 
     private final b2Vec2 __pointA = new b2Vec2(getPointer() + __pointA_offset, false);
 
@@ -58,7 +59,7 @@ public final class b2DistanceOutput extends Struct {
         return __pointB;
     }
 
-    private static final int __pointB_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __pointB_offset = 8;
 
     private final b2Vec2 __pointB = new b2Vec2(getPointer() + __pointB_offset, false);
 
@@ -66,42 +67,42 @@ public final class b2DistanceOutput extends Struct {
      * The final distance, zero if overlapped
      */
     public float distance() {
-        return (float) getValueFloat(2);
+        return getBufPtr().getFloat(16);
     }
 
     /**
      * The final distance, zero if overlapped
      */
     public void distance(float distance) {
-        setValue(distance, 2);
+        getBufPtr().setFloat(16, distance);
     }
 
     /**
      * Number of GJK iterations used
      */
     public int iterations() {
-        return (int) getValue(3);
+        return getBufPtr().getInt(20);
     }
 
     /**
      * Number of GJK iterations used
      */
     public void iterations(int iterations) {
-        setValue(iterations, 3);
+        getBufPtr().setInt(20, iterations);
     }
 
     /**
      * The number of simplexes stored in the simplex array
      */
     public int simplexCount() {
-        return (int) getValue(4);
+        return getBufPtr().getInt(24);
     }
 
     /**
      * The number of simplexes stored in the simplex array
      */
     public void simplexCount(int simplexCount) {
-        setValue(simplexCount, 4);
+        getBufPtr().setInt(24, simplexCount);
     }
 
     public static final class b2DistanceOutputPointer extends StackElementPointer<b2DistanceOutput> {
@@ -110,17 +111,21 @@ public final class b2DistanceOutput extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2DistanceOutputPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2DistanceOutputPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2DistanceOutputPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2DistanceOutputPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2DistanceOutput.b2DistanceOutputPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2DistanceOutputPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

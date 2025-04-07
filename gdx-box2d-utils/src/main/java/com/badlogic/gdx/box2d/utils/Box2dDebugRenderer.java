@@ -8,8 +8,8 @@ import com.badlogic.gdx.box2d.structs.b2WorldId;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
-import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.integer.BytePointer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -141,7 +141,7 @@ public class Box2dDebugRenderer implements Disposable {
         renderer.circle(p.x(), p.y(), size);
     }
 
-    private void drawString(b2Vec2 p, CSizedIntPointer s, b2HexColor color, VoidPointer context) {
+    private void drawString(b2Vec2 p, BytePointer s, b2HexColor color, VoidPointer context) {
         // TODO: Implement
     }
 

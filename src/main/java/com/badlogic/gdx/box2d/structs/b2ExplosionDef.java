@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -39,21 +40,21 @@ public final class b2ExplosionDef extends Struct {
     }
 
     public b2ExplosionDef.b2ExplosionDefPointer asPointer() {
-        return new b2ExplosionDef.b2ExplosionDefPointer(getPointer(), getsGCFreed());
+        return new b2ExplosionDef.b2ExplosionDefPointer(getPointer(), false, this);
     }
 
     /**
      * Mask bits to filter shapes
      */
     public long maskBits() {
-        return (long) getValue(0);
+        return getBufPtr().getLong(0);
     }
 
     /**
      * Mask bits to filter shapes
      */
     public void maskBits(long maskBits) {
-        setValue(maskBits, 0);
+        getBufPtr().setLong(0, maskBits);
     }
 
     /**
@@ -63,7 +64,7 @@ public final class b2ExplosionDef extends Struct {
         return __position;
     }
 
-    private static final int __position_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __position_offset = 8;
 
     private final b2Vec2 __position = new b2Vec2(getPointer() + __position_offset, false);
 
@@ -71,28 +72,28 @@ public final class b2ExplosionDef extends Struct {
      * The radius of the explosion
      */
     public float radius() {
-        return (float) getValueFloat(2);
+        return getBufPtr().getFloat(16);
     }
 
     /**
      * The radius of the explosion
      */
     public void radius(float radius) {
-        setValue(radius, 2);
+        getBufPtr().setFloat(16, radius);
     }
 
     /**
      * The falloff distance beyond the radius. Impulse is reduced to zero at this distance.
      */
     public float falloff() {
-        return (float) getValueFloat(3);
+        return getBufPtr().getFloat(20);
     }
 
     /**
      * The falloff distance beyond the radius. Impulse is reduced to zero at this distance.
      */
     public void falloff(float falloff) {
-        setValue(falloff, 3);
+        getBufPtr().setFloat(20, falloff);
     }
 
     /**
@@ -101,7 +102,7 @@ public final class b2ExplosionDef extends Struct {
      * 	 may be negative for implosions.
      */
     public float impulsePerLength() {
-        return (float) getValueFloat(4);
+        return getBufPtr().getFloat(24);
     }
 
     /**
@@ -110,7 +111,7 @@ public final class b2ExplosionDef extends Struct {
      * 	 may be negative for implosions.
      */
     public void impulsePerLength(float impulsePerLength) {
-        setValue(impulsePerLength, 4);
+        getBufPtr().setFloat(24, impulsePerLength);
     }
 
     public static final class b2ExplosionDefPointer extends StackElementPointer<b2ExplosionDef> {
@@ -119,17 +120,21 @@ public final class b2ExplosionDef extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2ExplosionDefPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2ExplosionDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2ExplosionDefPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ExplosionDefPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2ExplosionDef.b2ExplosionDefPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ExplosionDefPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

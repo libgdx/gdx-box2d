@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -37,29 +38,29 @@ public final class b2CosSin extends Struct {
     }
 
     public b2CosSin.b2CosSinPointer asPointer() {
-        return new b2CosSin.b2CosSinPointer(getPointer(), getsGCFreed());
+        return new b2CosSin.b2CosSinPointer(getPointer(), false, this);
     }
 
     /**
      * cosine and sine
      */
     public float cosine() {
-        return (float) getValueFloat(0);
+        return getBufPtr().getFloat(0);
     }
 
     /**
      * cosine and sine
      */
     public void cosine(float cosine) {
-        setValue(cosine, 0);
+        getBufPtr().setFloat(0, cosine);
     }
 
     public float sine() {
-        return (float) getValueFloat(1);
+        return getBufPtr().getFloat(4);
     }
 
     public void sine(float sine) {
-        setValue(sine, 1);
+        getBufPtr().setFloat(4, sine);
     }
 
     public static final class b2CosSinPointer extends StackElementPointer<b2CosSin> {
@@ -68,17 +69,21 @@ public final class b2CosSin extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2CosSinPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2CosSinPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2CosSinPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2CosSinPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2CosSin.b2CosSinPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2CosSinPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

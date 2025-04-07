@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Rot;
@@ -40,7 +41,7 @@ public final class b2Sweep extends Struct {
     }
 
     public b2Sweep.b2SweepPointer asPointer() {
-        return new b2Sweep.b2SweepPointer(getPointer(), getsGCFreed());
+        return new b2Sweep.b2SweepPointer(getPointer(), false, this);
     }
 
     /**
@@ -50,7 +51,7 @@ public final class b2Sweep extends Struct {
         return __localCenter;
     }
 
-    private static final int __localCenter_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __localCenter_offset = 0;
 
     private final b2Vec2 __localCenter = new b2Vec2(getPointer() + __localCenter_offset, false);
 
@@ -61,7 +62,7 @@ public final class b2Sweep extends Struct {
         return __c1;
     }
 
-    private static final int __c1_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __c1_offset = 8;
 
     private final b2Vec2 __c1 = new b2Vec2(getPointer() + __c1_offset, false);
 
@@ -72,7 +73,7 @@ public final class b2Sweep extends Struct {
         return __c2;
     }
 
-    private static final int __c2_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __c2_offset = 16;
 
     private final b2Vec2 __c2 = new b2Vec2(getPointer() + __c2_offset, false);
 
@@ -83,7 +84,7 @@ public final class b2Sweep extends Struct {
         return __q1;
     }
 
-    private static final int __q1_offset = CHandler.getOffsetForField(__ffi_type, 3);
+    private static final int __q1_offset = 24;
 
     private final b2Rot __q1 = new b2Rot(getPointer() + __q1_offset, false);
 
@@ -94,7 +95,7 @@ public final class b2Sweep extends Struct {
         return __q2;
     }
 
-    private static final int __q2_offset = CHandler.getOffsetForField(__ffi_type, 4);
+    private static final int __q2_offset = 32;
 
     private final b2Rot __q2 = new b2Rot(getPointer() + __q2_offset, false);
 
@@ -104,17 +105,21 @@ public final class b2Sweep extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2SweepPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2SweepPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2SweepPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2SweepPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Sweep.b2SweepPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2SweepPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

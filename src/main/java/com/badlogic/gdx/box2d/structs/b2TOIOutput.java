@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.enums.b2TOIState;
 
@@ -37,35 +38,35 @@ public final class b2TOIOutput extends Struct {
     }
 
     public b2TOIOutput.b2TOIOutputPointer asPointer() {
-        return new b2TOIOutput.b2TOIOutputPointer(getPointer(), getsGCFreed());
+        return new b2TOIOutput.b2TOIOutputPointer(getPointer(), false, this);
     }
 
     /**
      * The type of result
      */
     public b2TOIState state() {
-        return b2TOIState.getByIndex((int) getValue(0));
+        return b2TOIState.getByIndex((int) getBufPtr().getUInt(0));
     }
 
     /**
      * The type of result
      */
     public void state(b2TOIState state) {
-        setValue(state.getIndex(), 0);
+        getBufPtr().setUInt(0, state.getIndex());
     }
 
     /**
      * The sweep time of the collision
      */
     public float fraction() {
-        return (float) getValueFloat(1);
+        return getBufPtr().getFloat(4);
     }
 
     /**
      * The sweep time of the collision
      */
     public void fraction(float fraction) {
-        setValue(fraction, 1);
+        getBufPtr().setFloat(4, fraction);
     }
 
     public static final class b2TOIOutputPointer extends StackElementPointer<b2TOIOutput> {
@@ -74,17 +75,21 @@ public final class b2TOIOutput extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2TOIOutputPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2TOIOutputPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2TOIOutputPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2TOIOutputPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2TOIOutput.b2TOIOutputPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2TOIOutputPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 
 public final class b2TreeNode extends Struct {
@@ -33,7 +34,7 @@ public final class b2TreeNode extends Struct {
     }
 
     public b2TreeNode.b2TreeNodePointer asPointer() {
-        return new b2TreeNode.b2TreeNodePointer(getPointer(), getsGCFreed());
+        return new b2TreeNode.b2TreeNodePointer(getPointer(), false, this);
     }
 
     public static final class b2TreeNodePointer extends StackElementPointer<b2TreeNode> {
@@ -42,17 +43,21 @@ public final class b2TreeNode extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2TreeNodePointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2TreeNodePointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2TreeNodePointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2TreeNodePointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2TreeNode.b2TreeNodePointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2TreeNodePointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

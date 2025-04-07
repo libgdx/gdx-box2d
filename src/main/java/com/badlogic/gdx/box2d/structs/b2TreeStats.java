@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -36,35 +37,35 @@ public final class b2TreeStats extends Struct {
     }
 
     public b2TreeStats.b2TreeStatsPointer asPointer() {
-        return new b2TreeStats.b2TreeStatsPointer(getPointer(), getsGCFreed());
+        return new b2TreeStats.b2TreeStatsPointer(getPointer(), false, this);
     }
 
     /**
      * Number of internal nodes visited during the query
      */
     public int nodeVisits() {
-        return (int) getValue(0);
+        return getBufPtr().getInt(0);
     }
 
     /**
      * Number of internal nodes visited during the query
      */
     public void nodeVisits(int nodeVisits) {
-        setValue(nodeVisits, 0);
+        getBufPtr().setInt(0, nodeVisits);
     }
 
     /**
      * Number of leaf nodes visited during the query
      */
     public int leafVisits() {
-        return (int) getValue(1);
+        return getBufPtr().getInt(4);
     }
 
     /**
      * Number of leaf nodes visited during the query
      */
     public void leafVisits(int leafVisits) {
-        setValue(leafVisits, 1);
+        getBufPtr().setInt(4, leafVisits);
     }
 
     public static final class b2TreeStatsPointer extends StackElementPointer<b2TreeStats> {
@@ -73,17 +74,21 @@ public final class b2TreeStats extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2TreeStatsPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2TreeStatsPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2TreeStatsPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2TreeStatsPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2TreeStats.b2TreeStatsPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2TreeStatsPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

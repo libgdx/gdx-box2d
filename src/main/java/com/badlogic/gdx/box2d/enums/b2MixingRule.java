@@ -2,6 +2,7 @@ package com.badlogic.gdx.box2d.enums;
 
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
+import com.badlogic.gdx.jnigen.runtime.CHandler;
 
 /**
  * Mixing rules for friction and restitution
@@ -9,6 +10,8 @@ import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 public enum b2MixingRule implements CEnum {
 
     b2_mixAverage(0), b2_mixGeometricMean(1), b2_mixMultiply(2), b2_mixMinimum(3), b2_mixMaximum(4);
+
+    private static final int __size = 4;
 
     private final int index;
 
@@ -20,11 +23,26 @@ public enum b2MixingRule implements CEnum {
         return index;
     }
 
-    public static b2MixingRule getByIndex(int index) {
-        return _values[index];
+    public int getSize() {
+        return __size;
     }
 
-    private final static b2MixingRule[] _values = { b2_mixAverage, b2_mixGeometricMean, b2_mixMultiply, b2_mixMinimum, b2_mixMaximum };
+    public static b2MixingRule getByIndex(int index) {
+        switch(index) {
+            case 0:
+                return b2_mixAverage;
+            case 1:
+                return b2_mixGeometricMean;
+            case 2:
+                return b2_mixMultiply;
+            case 3:
+                return b2_mixMinimum;
+            case 4:
+                return b2_mixMaximum;
+            default:
+                throw new IllegalArgumentException("Index " + index + " does not exist.");
+        }
+    }
 
     public static final class b2MixingRulePointer extends EnumPointer<b2MixingRule> {
 
@@ -32,21 +50,28 @@ public enum b2MixingRule implements CEnum {
             super(pointer, freeOnGC);
         }
 
+        public b2MixingRulePointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
         public b2MixingRulePointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2MixingRulePointer(int count, boolean freeOnGC, boolean guard) {
-            super(count, freeOnGC, guard);
+        public b2MixingRulePointer(int count, boolean freeOnGC) {
+            super(count * __size, freeOnGC);
         }
 
-        public b2MixingRule.b2MixingRulePointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2MixingRule getEnumValue(int index) {
+            return getByIndex((int) getBufPtr().getUInt(index * __size));
         }
 
-        protected b2MixingRule getEnum(int index) {
-            return getByIndex(index);
+        public void setEnumValue(b2MixingRule value, int index) {
+            getBufPtr().setUInt(index * __size, value.getIndex());
+        }
+
+        public int getSize() {
+            return __size;
         }
     }
 }

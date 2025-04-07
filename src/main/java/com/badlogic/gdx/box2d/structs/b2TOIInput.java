@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Sweep;
@@ -38,7 +39,7 @@ public final class b2TOIInput extends Struct {
     }
 
     public b2TOIInput.b2TOIInputPointer asPointer() {
-        return new b2TOIInput.b2TOIInputPointer(getPointer(), getsGCFreed());
+        return new b2TOIInput.b2TOIInputPointer(getPointer(), false, this);
     }
 
     /**
@@ -48,7 +49,7 @@ public final class b2TOIInput extends Struct {
         return __proxyA;
     }
 
-    private static final int __proxyA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __proxyA_offset = 0;
 
     private final b2ShapeProxy __proxyA = new b2ShapeProxy(getPointer() + __proxyA_offset, false);
 
@@ -59,7 +60,7 @@ public final class b2TOIInput extends Struct {
         return __proxyB;
     }
 
-    private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __proxyB_offset = 72;
 
     private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
@@ -70,7 +71,7 @@ public final class b2TOIInput extends Struct {
         return __sweepA;
     }
 
-    private static final int __sweepA_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __sweepA_offset = 144;
 
     private final b2Sweep __sweepA = new b2Sweep(getPointer() + __sweepA_offset, false);
 
@@ -81,7 +82,7 @@ public final class b2TOIInput extends Struct {
         return __sweepB;
     }
 
-    private static final int __sweepB_offset = CHandler.getOffsetForField(__ffi_type, 3);
+    private static final int __sweepB_offset = 184;
 
     private final b2Sweep __sweepB = new b2Sweep(getPointer() + __sweepB_offset, false);
 
@@ -89,14 +90,14 @@ public final class b2TOIInput extends Struct {
      * Defines the sweep interval [0, maxFraction]
      */
     public float maxFraction() {
-        return (float) getValueFloat(4);
+        return getBufPtr().getFloat(224);
     }
 
     /**
      * Defines the sweep interval [0, maxFraction]
      */
     public void maxFraction(float maxFraction) {
-        setValue(maxFraction, 4);
+        getBufPtr().setFloat(224, maxFraction);
     }
 
     public static final class b2TOIInputPointer extends StackElementPointer<b2TOIInput> {
@@ -105,17 +106,21 @@ public final class b2TOIInput extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2TOIInputPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2TOIInputPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2TOIInputPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2TOIInputPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2TOIInput.b2TOIInputPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2TOIInputPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ManifoldPoint;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
@@ -39,7 +40,7 @@ public final class b2Manifold extends Struct {
     }
 
     public b2Manifold.b2ManifoldPointer asPointer() {
-        return new b2Manifold.b2ManifoldPointer(getPointer(), getsGCFreed());
+        return new b2Manifold.b2ManifoldPointer(getPointer(), false, this);
     }
 
     /**
@@ -49,9 +50,9 @@ public final class b2Manifold extends Struct {
         return __points;
     }
 
-    private static final int __points_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __points_offset = 0;
 
-    private final b2ManifoldPoint.b2ManifoldPointPointer __points = new b2ManifoldPoint.b2ManifoldPointPointer(getPointer() + __points_offset, false).guardCount(2);
+    private final b2ManifoldPoint.b2ManifoldPointPointer __points = new b2ManifoldPoint.b2ManifoldPointPointer(getPointer() + __points_offset, false, 2);
 
     /**
      * The unit normal vector in world space, points from shape A to bodyB
@@ -60,7 +61,7 @@ public final class b2Manifold extends Struct {
         return __normal;
     }
 
-    private static final int __normal_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __normal_offset = 96;
 
     private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
 
@@ -68,14 +69,14 @@ public final class b2Manifold extends Struct {
      * The number of contacts points, will be 0, 1, or 2
      */
     public int pointCount() {
-        return (int) getValue(3);
+        return getBufPtr().getInt(104);
     }
 
     /**
      * The number of contacts points, will be 0, 1, or 2
      */
     public void pointCount(int pointCount) {
-        setValue(pointCount, 3);
+        getBufPtr().setInt(104, pointCount);
     }
 
     public static final class b2ManifoldPointer extends StackElementPointer<b2Manifold> {
@@ -84,17 +85,21 @@ public final class b2Manifold extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2ManifoldPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2ManifoldPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2ManifoldPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ManifoldPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Manifold.b2ManifoldPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ManifoldPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

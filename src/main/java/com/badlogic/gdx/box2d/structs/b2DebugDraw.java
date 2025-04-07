@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
 import com.badlogic.gdx.box2d.structs.b2AABB;
@@ -20,7 +21,7 @@ import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawSegment_In
 import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawTransform_Internal;
 import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawPoint_Internal;
 import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawString_Internal;
-import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.integer.BytePointer;
 
 /**
  * This struct holds callbacks you can implement to draw a Box2D world.
@@ -55,133 +56,133 @@ public final class b2DebugDraw extends Struct {
     }
 
     public b2DebugDraw.b2DebugDrawPointer asPointer() {
-        return new b2DebugDraw.b2DebugDrawPointer(getPointer(), getsGCFreed());
+        return new b2DebugDraw.b2DebugDrawPointer(getPointer(), false, this);
     }
 
     /**
      * Draw a closed polygon provided in CCW order.
      */
     public ClosureObject<DrawPolygon> DrawPolygon() {
-        return CHandler.getClosureObject(getValue(0), DrawPolygon_Internal::DrawPolygon_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(0), DrawPolygon_Internal::DrawPolygon_downcall);
     }
 
     /**
      * Draw a closed polygon provided in CCW order.
      */
     public void DrawPolygon(ClosureObject<DrawPolygon> DrawPolygon) {
-        setValue(DrawPolygon.getPointer(), 0);
+        getBufPtr().setNativePointer(0, DrawPolygon.getPointer());
     }
 
     /**
      * Draw a solid closed polygon provided in CCW order.
      */
     public ClosureObject<DrawSolidPolygon> DrawSolidPolygon() {
-        return CHandler.getClosureObject(getValue(1), DrawSolidPolygon_Internal::DrawSolidPolygon_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 4 : 8), DrawSolidPolygon_Internal::DrawSolidPolygon_downcall);
     }
 
     /**
      * Draw a solid closed polygon provided in CCW order.
      */
     public void DrawSolidPolygon(ClosureObject<DrawSolidPolygon> DrawSolidPolygon) {
-        setValue(DrawSolidPolygon.getPointer(), 1);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, DrawSolidPolygon.getPointer());
     }
 
     /**
      * Draw a circle.
      */
     public ClosureObject<DrawCircle> DrawCircle() {
-        return CHandler.getClosureObject(getValue(2), DrawCircle_Internal::DrawCircle_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 8 : 16), DrawCircle_Internal::DrawCircle_downcall);
     }
 
     /**
      * Draw a circle.
      */
     public void DrawCircle(ClosureObject<DrawCircle> DrawCircle) {
-        setValue(DrawCircle.getPointer(), 2);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, DrawCircle.getPointer());
     }
 
     /**
      * Draw a solid circle.
      */
     public ClosureObject<DrawSolidCircle> DrawSolidCircle() {
-        return CHandler.getClosureObject(getValue(3), DrawSolidCircle_Internal::DrawSolidCircle_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 12 : 24), DrawSolidCircle_Internal::DrawSolidCircle_downcall);
     }
 
     /**
      * Draw a solid circle.
      */
     public void DrawSolidCircle(ClosureObject<DrawSolidCircle> DrawSolidCircle) {
-        setValue(DrawSolidCircle.getPointer(), 3);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 24, DrawSolidCircle.getPointer());
     }
 
     /**
      * Draw a solid capsule.
      */
     public ClosureObject<DrawSolidCapsule> DrawSolidCapsule() {
-        return CHandler.getClosureObject(getValue(4), DrawSolidCapsule_Internal::DrawSolidCapsule_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 16 : 32), DrawSolidCapsule_Internal::DrawSolidCapsule_downcall);
     }
 
     /**
      * Draw a solid capsule.
      */
     public void DrawSolidCapsule(ClosureObject<DrawSolidCapsule> DrawSolidCapsule) {
-        setValue(DrawSolidCapsule.getPointer(), 4);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 32, DrawSolidCapsule.getPointer());
     }
 
     /**
      * Draw a line segment.
      */
     public ClosureObject<DrawSegment> DrawSegment() {
-        return CHandler.getClosureObject(getValue(5), DrawSegment_Internal::DrawSegment_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 20 : 40), DrawSegment_Internal::DrawSegment_downcall);
     }
 
     /**
      * Draw a line segment.
      */
     public void DrawSegment(ClosureObject<DrawSegment> DrawSegment) {
-        setValue(DrawSegment.getPointer(), 5);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 20 : 40, DrawSegment.getPointer());
     }
 
     /**
      * Draw a transform. Choose your own length scale.
      */
     public ClosureObject<DrawTransform> DrawTransform() {
-        return CHandler.getClosureObject(getValue(6), DrawTransform_Internal::DrawTransform_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 24 : 48), DrawTransform_Internal::DrawTransform_downcall);
     }
 
     /**
      * Draw a transform. Choose your own length scale.
      */
     public void DrawTransform(ClosureObject<DrawTransform> DrawTransform) {
-        setValue(DrawTransform.getPointer(), 6);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 24 : 48, DrawTransform.getPointer());
     }
 
     /**
      * Draw a point.
      */
     public ClosureObject<DrawPoint> DrawPoint() {
-        return CHandler.getClosureObject(getValue(7), DrawPoint_Internal::DrawPoint_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 28 : 56), DrawPoint_Internal::DrawPoint_downcall);
     }
 
     /**
      * Draw a point.
      */
     public void DrawPoint(ClosureObject<DrawPoint> DrawPoint) {
-        setValue(DrawPoint.getPointer(), 7);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 28 : 56, DrawPoint.getPointer());
     }
 
     /**
      * Draw a string in world space
      */
     public ClosureObject<DrawString> DrawString() {
-        return CHandler.getClosureObject(getValue(8), DrawString_Internal::DrawString_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 32 : 64), DrawString_Internal::DrawString_downcall);
     }
 
     /**
      * Draw a string in world space
      */
     public void DrawString(ClosureObject<DrawString> DrawString) {
-        setValue(DrawString.getPointer(), 8);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 32 : 64, DrawString.getPointer());
     }
 
     /**
@@ -191,7 +192,7 @@ public final class b2DebugDraw extends Struct {
         return __drawingBounds;
     }
 
-    private static final int __drawingBounds_offset = CHandler.getOffsetForField(__ffi_type, 9);
+    private static final int __drawingBounds_offset = CHandler.IS_32_BIT ? 36 : 72;
 
     private final b2AABB __drawingBounds = new b2AABB(getPointer() + __drawingBounds_offset, false);
 
@@ -199,182 +200,182 @@ public final class b2DebugDraw extends Struct {
      * Option to restrict drawing to a rectangular region. May suffer from unstable depth sorting.
      */
     public boolean useDrawingBounds() {
-        return getValue(10) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 52 : 88);
     }
 
     /**
      * Option to restrict drawing to a rectangular region. May suffer from unstable depth sorting.
      */
     public void useDrawingBounds(boolean useDrawingBounds) {
-        setValue(useDrawingBounds, 10);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 52 : 88, useDrawingBounds);
     }
 
     /**
      * Option to draw shapes
      */
     public boolean drawShapes() {
-        return getValue(11) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 53 : 89);
     }
 
     /**
      * Option to draw shapes
      */
     public void drawShapes(boolean drawShapes) {
-        setValue(drawShapes, 11);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 53 : 89, drawShapes);
     }
 
     /**
      * Option to draw joints
      */
     public boolean drawJoints() {
-        return getValue(12) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 54 : 90);
     }
 
     /**
      * Option to draw joints
      */
     public void drawJoints(boolean drawJoints) {
-        setValue(drawJoints, 12);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 54 : 90, drawJoints);
     }
 
     /**
      * Option to draw additional information for joints
      */
     public boolean drawJointExtras() {
-        return getValue(13) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 55 : 91);
     }
 
     /**
      * Option to draw additional information for joints
      */
     public void drawJointExtras(boolean drawJointExtras) {
-        setValue(drawJointExtras, 13);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 55 : 91, drawJointExtras);
     }
 
     /**
      * Option to draw the bounding boxes for shapes
      */
     public boolean drawAABBs() {
-        return getValue(14) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 56 : 92);
     }
 
     /**
      * Option to draw the bounding boxes for shapes
      */
     public void drawAABBs(boolean drawAABBs) {
-        setValue(drawAABBs, 14);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 56 : 92, drawAABBs);
     }
 
     /**
      * Option to draw the mass and center of mass of dynamic bodies
      */
     public boolean drawMass() {
-        return getValue(15) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 57 : 93);
     }
 
     /**
      * Option to draw the mass and center of mass of dynamic bodies
      */
     public void drawMass(boolean drawMass) {
-        setValue(drawMass, 15);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 57 : 93, drawMass);
     }
 
     /**
      * Option to draw body names
      */
     public boolean drawBodyNames() {
-        return getValue(16) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 58 : 94);
     }
 
     /**
      * Option to draw body names
      */
     public void drawBodyNames(boolean drawBodyNames) {
-        setValue(drawBodyNames, 16);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 58 : 94, drawBodyNames);
     }
 
     /**
      * Option to draw contact points
      */
     public boolean drawContacts() {
-        return getValue(17) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 59 : 95);
     }
 
     /**
      * Option to draw contact points
      */
     public void drawContacts(boolean drawContacts) {
-        setValue(drawContacts, 17);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 59 : 95, drawContacts);
     }
 
     /**
      * Option to visualize the graph coloring used for contacts and joints
      */
     public boolean drawGraphColors() {
-        return getValue(18) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 60 : 96);
     }
 
     /**
      * Option to visualize the graph coloring used for contacts and joints
      */
     public void drawGraphColors(boolean drawGraphColors) {
-        setValue(drawGraphColors, 18);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 60 : 96, drawGraphColors);
     }
 
     /**
      * Option to draw contact normals
      */
     public boolean drawContactNormals() {
-        return getValue(19) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 61 : 97);
     }
 
     /**
      * Option to draw contact normals
      */
     public void drawContactNormals(boolean drawContactNormals) {
-        setValue(drawContactNormals, 19);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 61 : 97, drawContactNormals);
     }
 
     /**
      * Option to draw contact normal impulses
      */
     public boolean drawContactImpulses() {
-        return getValue(20) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 62 : 98);
     }
 
     /**
      * Option to draw contact normal impulses
      */
     public void drawContactImpulses(boolean drawContactImpulses) {
-        setValue(drawContactImpulses, 20);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 62 : 98, drawContactImpulses);
     }
 
     /**
      * Option to draw contact friction impulses
      */
     public boolean drawFrictionImpulses() {
-        return getValue(21) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 63 : 99);
     }
 
     /**
      * Option to draw contact friction impulses
      */
     public void drawFrictionImpulses(boolean drawFrictionImpulses) {
-        setValue(drawFrictionImpulses, 21);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 63 : 99, drawFrictionImpulses);
     }
 
     /**
      * User context that is passed as an argument to drawing callback functions
      */
     public VoidPointer context() {
-        return new VoidPointer(getValue(22), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 64 : 104), false);
     }
 
     /**
      * User context that is passed as an argument to drawing callback functions
      */
     public void context(VoidPointer context) {
-        setValue(context.getPointer(), 22);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 64 : 104, context.getPointer());
     }
 
     public static final class b2DebugDrawPointer extends StackElementPointer<b2DebugDraw> {
@@ -383,17 +384,21 @@ public final class b2DebugDraw extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2DebugDrawPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2DebugDrawPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2DebugDrawPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2DebugDrawPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2DebugDraw.b2DebugDrawPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2DebugDrawPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {
@@ -474,6 +479,6 @@ public final class b2DebugDraw extends Struct {
         /**
          * Draw a string in world space
          */
-        void DrawString_call(b2Vec2 p, CSizedIntPointer s, b2HexColor color, VoidPointer context);
+        void DrawString_call(b2Vec2 p, BytePointer s, b2HexColor color, VoidPointer context);
     }
 }

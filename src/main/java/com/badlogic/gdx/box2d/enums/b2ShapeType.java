@@ -2,6 +2,7 @@ package com.badlogic.gdx.box2d.enums;
 
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
+import com.badlogic.gdx.jnigen.runtime.CHandler;
 
 /**
  * Shape type
@@ -34,6 +35,8 @@ public enum b2ShapeType implements CEnum {
      */
     b2_shapeTypeCount(5);
 
+    private static final int __size = 4;
+
     private final int index;
 
     b2ShapeType(int index) {
@@ -44,11 +47,28 @@ public enum b2ShapeType implements CEnum {
         return index;
     }
 
-    public static b2ShapeType getByIndex(int index) {
-        return _values[index];
+    public int getSize() {
+        return __size;
     }
 
-    private final static b2ShapeType[] _values = { b2_circleShape, b2_capsuleShape, b2_segmentShape, b2_polygonShape, b2_chainSegmentShape, b2_shapeTypeCount };
+    public static b2ShapeType getByIndex(int index) {
+        switch(index) {
+            case 0:
+                return b2_circleShape;
+            case 1:
+                return b2_capsuleShape;
+            case 2:
+                return b2_segmentShape;
+            case 3:
+                return b2_polygonShape;
+            case 4:
+                return b2_chainSegmentShape;
+            case 5:
+                return b2_shapeTypeCount;
+            default:
+                throw new IllegalArgumentException("Index " + index + " does not exist.");
+        }
+    }
 
     public static final class b2ShapeTypePointer extends EnumPointer<b2ShapeType> {
 
@@ -56,21 +76,28 @@ public enum b2ShapeType implements CEnum {
             super(pointer, freeOnGC);
         }
 
+        public b2ShapeTypePointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
         public b2ShapeTypePointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ShapeTypePointer(int count, boolean freeOnGC, boolean guard) {
-            super(count, freeOnGC, guard);
+        public b2ShapeTypePointer(int count, boolean freeOnGC) {
+            super(count * __size, freeOnGC);
         }
 
-        public b2ShapeType.b2ShapeTypePointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ShapeType getEnumValue(int index) {
+            return getByIndex((int) getBufPtr().getUInt(index * __size));
         }
 
-        protected b2ShapeType getEnum(int index) {
-            return getByIndex(index);
+        public void setEnumValue(b2ShapeType value, int index) {
+            getBufPtr().setUInt(index * __size, value.getIndex());
+        }
+
+        public int getSize() {
+            return __size;
         }
     }
 }

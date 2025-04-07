@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -37,7 +38,7 @@ public final class b2SimplexVertex extends Struct {
     }
 
     public b2SimplexVertex.b2SimplexVertexPointer asPointer() {
-        return new b2SimplexVertex.b2SimplexVertexPointer(getPointer(), getsGCFreed());
+        return new b2SimplexVertex.b2SimplexVertexPointer(getPointer(), false, this);
     }
 
     /**
@@ -47,7 +48,7 @@ public final class b2SimplexVertex extends Struct {
         return __wA;
     }
 
-    private static final int __wA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __wA_offset = 0;
 
     private final b2Vec2 __wA = new b2Vec2(getPointer() + __wA_offset, false);
 
@@ -58,7 +59,7 @@ public final class b2SimplexVertex extends Struct {
         return __wB;
     }
 
-    private static final int __wB_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __wB_offset = 8;
 
     private final b2Vec2 __wB = new b2Vec2(getPointer() + __wB_offset, false);
 
@@ -69,7 +70,7 @@ public final class b2SimplexVertex extends Struct {
         return __w;
     }
 
-    private static final int __w_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __w_offset = 16;
 
     private final b2Vec2 __w = new b2Vec2(getPointer() + __w_offset, false);
 
@@ -77,42 +78,42 @@ public final class b2SimplexVertex extends Struct {
      * barycentric coordinate for closest point
      */
     public float a() {
-        return (float) getValueFloat(3);
+        return getBufPtr().getFloat(24);
     }
 
     /**
      * barycentric coordinate for closest point
      */
     public void a(float a) {
-        setValue(a, 3);
+        getBufPtr().setFloat(24, a);
     }
 
     /**
      * wA index
      */
     public int indexA() {
-        return (int) getValue(4);
+        return getBufPtr().getInt(28);
     }
 
     /**
      * wA index
      */
     public void indexA(int indexA) {
-        setValue(indexA, 4);
+        getBufPtr().setInt(28, indexA);
     }
 
     /**
      * wB index
      */
     public int indexB() {
-        return (int) getValue(5);
+        return getBufPtr().getInt(32);
     }
 
     /**
      * wB index
      */
     public void indexB(int indexB) {
-        setValue(indexB, 5);
+        getBufPtr().setInt(32, indexB);
     }
 
     public static final class b2SimplexVertexPointer extends StackElementPointer<b2SimplexVertex> {
@@ -121,17 +122,21 @@ public final class b2SimplexVertex extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2SimplexVertexPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2SimplexVertexPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2SimplexVertexPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2SimplexVertexPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2SimplexVertex.b2SimplexVertexPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2SimplexVertexPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

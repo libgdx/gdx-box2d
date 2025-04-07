@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
@@ -45,7 +46,7 @@ public final class b2PrismaticJointDef extends Struct {
     }
 
     public b2PrismaticJointDef.b2PrismaticJointDefPointer asPointer() {
-        return new b2PrismaticJointDef.b2PrismaticJointDefPointer(getPointer(), getsGCFreed());
+        return new b2PrismaticJointDef.b2PrismaticJointDefPointer(getPointer(), false, this);
     }
 
     /**
@@ -55,7 +56,7 @@ public final class b2PrismaticJointDef extends Struct {
         return __bodyIdA;
     }
 
-    private static final int __bodyIdA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __bodyIdA_offset = 0;
 
     private final b2BodyId __bodyIdA = new b2BodyId(getPointer() + __bodyIdA_offset, false);
 
@@ -66,7 +67,7 @@ public final class b2PrismaticJointDef extends Struct {
         return __bodyIdB;
     }
 
-    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __bodyIdB_offset = 8;
 
     private final b2BodyId __bodyIdB = new b2BodyId(getPointer() + __bodyIdB_offset, false);
 
@@ -77,7 +78,7 @@ public final class b2PrismaticJointDef extends Struct {
         return __localAnchorA;
     }
 
-    private static final int __localAnchorA_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __localAnchorA_offset = 16;
 
     private final b2Vec2 __localAnchorA = new b2Vec2(getPointer() + __localAnchorA_offset, false);
 
@@ -88,7 +89,7 @@ public final class b2PrismaticJointDef extends Struct {
         return __localAnchorB;
     }
 
-    private static final int __localAnchorB_offset = CHandler.getOffsetForField(__ffi_type, 3);
+    private static final int __localAnchorB_offset = 24;
 
     private final b2Vec2 __localAnchorB = new b2Vec2(getPointer() + __localAnchorB_offset, false);
 
@@ -99,7 +100,7 @@ public final class b2PrismaticJointDef extends Struct {
         return __localAxisA;
     }
 
-    private static final int __localAxisA_offset = CHandler.getOffsetForField(__ffi_type, 4);
+    private static final int __localAxisA_offset = 32;
 
     private final b2Vec2 __localAxisA = new b2Vec2(getPointer() + __localAxisA_offset, false);
 
@@ -107,182 +108,182 @@ public final class b2PrismaticJointDef extends Struct {
      * The constrained angle between the bodies: bodyB_angle - bodyA_angle
      */
     public float referenceAngle() {
-        return (float) getValueFloat(5);
+        return getBufPtr().getFloat(40);
     }
 
     /**
      * The constrained angle between the bodies: bodyB_angle - bodyA_angle
      */
     public void referenceAngle(float referenceAngle) {
-        setValue(referenceAngle, 5);
+        getBufPtr().setFloat(40, referenceAngle);
     }
 
     /**
      * Enable a linear spring along the prismatic joint axis
      */
     public boolean enableSpring() {
-        return getValue(6) != 0;
+        return getBufPtr().getBoolean(44);
     }
 
     /**
      * Enable a linear spring along the prismatic joint axis
      */
     public void enableSpring(boolean enableSpring) {
-        setValue(enableSpring, 6);
+        getBufPtr().setBoolean(44, enableSpring);
     }
 
     /**
      * The spring stiffness Hertz, cycles per second
      */
     public float hertz() {
-        return (float) getValueFloat(7);
+        return getBufPtr().getFloat(48);
     }
 
     /**
      * The spring stiffness Hertz, cycles per second
      */
     public void hertz(float hertz) {
-        setValue(hertz, 7);
+        getBufPtr().setFloat(48, hertz);
     }
 
     /**
      * The spring damping ratio, non-dimensional
      */
     public float dampingRatio() {
-        return (float) getValueFloat(8);
+        return getBufPtr().getFloat(52);
     }
 
     /**
      * The spring damping ratio, non-dimensional
      */
     public void dampingRatio(float dampingRatio) {
-        setValue(dampingRatio, 8);
+        getBufPtr().setFloat(52, dampingRatio);
     }
 
     /**
      * Enable/disable the joint limit
      */
     public boolean enableLimit() {
-        return getValue(9) != 0;
+        return getBufPtr().getBoolean(56);
     }
 
     /**
      * Enable/disable the joint limit
      */
     public void enableLimit(boolean enableLimit) {
-        setValue(enableLimit, 9);
+        getBufPtr().setBoolean(56, enableLimit);
     }
 
     /**
      * The lower translation limit
      */
     public float lowerTranslation() {
-        return (float) getValueFloat(10);
+        return getBufPtr().getFloat(60);
     }
 
     /**
      * The lower translation limit
      */
     public void lowerTranslation(float lowerTranslation) {
-        setValue(lowerTranslation, 10);
+        getBufPtr().setFloat(60, lowerTranslation);
     }
 
     /**
      * The upper translation limit
      */
     public float upperTranslation() {
-        return (float) getValueFloat(11);
+        return getBufPtr().getFloat(64);
     }
 
     /**
      * The upper translation limit
      */
     public void upperTranslation(float upperTranslation) {
-        setValue(upperTranslation, 11);
+        getBufPtr().setFloat(64, upperTranslation);
     }
 
     /**
      * Enable/disable the joint motor
      */
     public boolean enableMotor() {
-        return getValue(12) != 0;
+        return getBufPtr().getBoolean(68);
     }
 
     /**
      * Enable/disable the joint motor
      */
     public void enableMotor(boolean enableMotor) {
-        setValue(enableMotor, 12);
+        getBufPtr().setBoolean(68, enableMotor);
     }
 
     /**
      * The maximum motor force, typically in newtons
      */
     public float maxMotorForce() {
-        return (float) getValueFloat(13);
+        return getBufPtr().getFloat(72);
     }
 
     /**
      * The maximum motor force, typically in newtons
      */
     public void maxMotorForce(float maxMotorForce) {
-        setValue(maxMotorForce, 13);
+        getBufPtr().setFloat(72, maxMotorForce);
     }
 
     /**
      * The desired motor speed, typically in meters per second
      */
     public float motorSpeed() {
-        return (float) getValueFloat(14);
+        return getBufPtr().getFloat(76);
     }
 
     /**
      * The desired motor speed, typically in meters per second
      */
     public void motorSpeed(float motorSpeed) {
-        setValue(motorSpeed, 14);
+        getBufPtr().setFloat(76, motorSpeed);
     }
 
     /**
      * Set this flag to true if the attached bodies should collide
      */
     public boolean collideConnected() {
-        return getValue(15) != 0;
+        return getBufPtr().getBoolean(80);
     }
 
     /**
      * Set this flag to true if the attached bodies should collide
      */
     public void collideConnected(boolean collideConnected) {
-        setValue(collideConnected, 15);
+        getBufPtr().setBoolean(80, collideConnected);
     }
 
     /**
      * User data pointer
      */
     public VoidPointer userData() {
-        return new VoidPointer(getValue(16), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 84 : 88), false);
     }
 
     /**
      * User data pointer
      */
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 16);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 84 : 88, userData.getPointer());
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return (int) getValue(17);
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 88 : 96);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        setValue(internalValue, 17);
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 88 : 96, internalValue);
     }
 
     public static final class b2PrismaticJointDefPointer extends StackElementPointer<b2PrismaticJointDef> {
@@ -291,17 +292,21 @@ public final class b2PrismaticJointDef extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2PrismaticJointDefPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2PrismaticJointDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2PrismaticJointDefPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2PrismaticJointDefPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2PrismaticJointDef.b2PrismaticJointDefPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2PrismaticJointDefPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

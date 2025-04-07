@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -39,21 +40,21 @@ public final class b2QueryFilter extends Struct {
     }
 
     public b2QueryFilter.b2QueryFilterPointer asPointer() {
-        return new b2QueryFilter.b2QueryFilterPointer(getPointer(), getsGCFreed());
+        return new b2QueryFilter.b2QueryFilterPointer(getPointer(), false, this);
     }
 
     /**
      * The collision category bits of this query. Normally you would just set one bit.
      */
     public long categoryBits() {
-        return (long) getValue(0);
+        return getBufPtr().getLong(0);
     }
 
     /**
      * The collision category bits of this query. Normally you would just set one bit.
      */
     public void categoryBits(long categoryBits) {
-        setValue(categoryBits, 0);
+        getBufPtr().setLong(0, categoryBits);
     }
 
     /**
@@ -61,7 +62,7 @@ public final class b2QueryFilter extends Struct {
      * 	 query would accept for collision.
      */
     public long maskBits() {
-        return (long) getValue(1);
+        return getBufPtr().getLong(8);
     }
 
     /**
@@ -69,7 +70,7 @@ public final class b2QueryFilter extends Struct {
      * 	 query would accept for collision.
      */
     public void maskBits(long maskBits) {
-        setValue(maskBits, 1);
+        getBufPtr().setLong(8, maskBits);
     }
 
     public static final class b2QueryFilterPointer extends StackElementPointer<b2QueryFilter> {
@@ -78,17 +79,21 @@ public final class b2QueryFilter extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2QueryFilterPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2QueryFilterPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2QueryFilterPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2QueryFilterPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2QueryFilter.b2QueryFilterPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2QueryFilterPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

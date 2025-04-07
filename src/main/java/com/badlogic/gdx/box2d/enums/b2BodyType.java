@@ -2,6 +2,7 @@ package com.badlogic.gdx.box2d.enums;
 
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
+import com.badlogic.gdx.jnigen.runtime.CHandler;
 
 /**
  * The body simulation type.
@@ -27,6 +28,8 @@ public enum b2BodyType implements CEnum {
      */
     b2_bodyTypeCount(3);
 
+    private static final int __size = 4;
+
     private final int index;
 
     b2BodyType(int index) {
@@ -37,11 +40,24 @@ public enum b2BodyType implements CEnum {
         return index;
     }
 
-    public static b2BodyType getByIndex(int index) {
-        return _values[index];
+    public int getSize() {
+        return __size;
     }
 
-    private final static b2BodyType[] _values = { b2_staticBody, b2_kinematicBody, b2_dynamicBody, b2_bodyTypeCount };
+    public static b2BodyType getByIndex(int index) {
+        switch(index) {
+            case 0:
+                return b2_staticBody;
+            case 1:
+                return b2_kinematicBody;
+            case 2:
+                return b2_dynamicBody;
+            case 3:
+                return b2_bodyTypeCount;
+            default:
+                throw new IllegalArgumentException("Index " + index + " does not exist.");
+        }
+    }
 
     public static final class b2BodyTypePointer extends EnumPointer<b2BodyType> {
 
@@ -49,21 +65,28 @@ public enum b2BodyType implements CEnum {
             super(pointer, freeOnGC);
         }
 
+        public b2BodyTypePointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
         public b2BodyTypePointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2BodyTypePointer(int count, boolean freeOnGC, boolean guard) {
-            super(count, freeOnGC, guard);
+        public b2BodyTypePointer(int count, boolean freeOnGC) {
+            super(count * __size, freeOnGC);
         }
 
-        public b2BodyType.b2BodyTypePointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2BodyType getEnumValue(int index) {
+            return getByIndex((int) getBufPtr().getUInt(index * __size));
         }
 
-        protected b2BodyType getEnum(int index) {
-            return getByIndex(index);
+        public void setEnumValue(b2BodyType value, int index) {
+            getBufPtr().setUInt(index * __size, value.getIndex());
+        }
+
+        public int getSize() {
+            return __size;
         }
     }
 }

@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2SimplexVertex;
 
@@ -37,7 +38,7 @@ public final class b2Simplex extends Struct {
     }
 
     public b2Simplex.b2SimplexPointer asPointer() {
-        return new b2Simplex.b2SimplexPointer(getPointer(), getsGCFreed());
+        return new b2Simplex.b2SimplexPointer(getPointer(), false, this);
     }
 
     /**
@@ -47,7 +48,7 @@ public final class b2Simplex extends Struct {
         return __v1;
     }
 
-    private static final int __v1_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __v1_offset = 0;
 
     private final b2SimplexVertex __v1 = new b2SimplexVertex(getPointer() + __v1_offset, false);
 
@@ -58,7 +59,7 @@ public final class b2Simplex extends Struct {
         return __v2;
     }
 
-    private static final int __v2_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __v2_offset = 36;
 
     private final b2SimplexVertex __v2 = new b2SimplexVertex(getPointer() + __v2_offset, false);
 
@@ -69,7 +70,7 @@ public final class b2Simplex extends Struct {
         return __v3;
     }
 
-    private static final int __v3_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __v3_offset = 72;
 
     private final b2SimplexVertex __v3 = new b2SimplexVertex(getPointer() + __v3_offset, false);
 
@@ -77,14 +78,14 @@ public final class b2Simplex extends Struct {
      * number of valid vertices
      */
     public int count() {
-        return (int) getValue(3);
+        return getBufPtr().getInt(108);
     }
 
     /**
      * number of valid vertices
      */
     public void count(int count) {
-        setValue(count, 3);
+        getBufPtr().setInt(108, count);
     }
 
     public static final class b2SimplexPointer extends StackElementPointer<b2Simplex> {
@@ -93,17 +94,21 @@ public final class b2Simplex extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2SimplexPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2SimplexPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2SimplexPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2SimplexPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Simplex.b2SimplexPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2SimplexPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

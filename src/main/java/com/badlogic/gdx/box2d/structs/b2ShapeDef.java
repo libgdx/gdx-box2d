@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.structs.b2Filter;
@@ -42,77 +43,77 @@ public final class b2ShapeDef extends Struct {
     }
 
     public b2ShapeDef.b2ShapeDefPointer asPointer() {
-        return new b2ShapeDef.b2ShapeDefPointer(getPointer(), getsGCFreed());
+        return new b2ShapeDef.b2ShapeDefPointer(getPointer(), false, this);
     }
 
     /**
      * Use this to store application specific shape data.
      */
     public VoidPointer userData() {
-        return new VoidPointer(getValue(0), false);
+        return new VoidPointer(getBufPtr().getNativePointer(0), false);
     }
 
     /**
      * Use this to store application specific shape data.
      */
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 0);
+        getBufPtr().setNativePointer(0, userData.getPointer());
     }
 
     /**
      * The Coulomb (dry) friction coefficient, usually in the range [0,1].
      */
     public float friction() {
-        return (float) getValueFloat(1);
+        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 4 : 8);
     }
 
     /**
      * The Coulomb (dry) friction coefficient, usually in the range [0,1].
      */
     public void friction(float friction) {
-        setValue(friction, 1);
+        getBufPtr().setFloat(CHandler.IS_32_BIT ? 4 : 8, friction);
     }
 
     /**
      * The restitution (bounce) usually in the range [0,1].
      */
     public float restitution() {
-        return (float) getValueFloat(2);
+        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 8 : 12);
     }
 
     /**
      * The restitution (bounce) usually in the range [0,1].
      */
     public void restitution(float restitution) {
-        setValue(restitution, 2);
+        getBufPtr().setFloat(CHandler.IS_32_BIT ? 8 : 12, restitution);
     }
 
     /**
      * The rolling resistance usually in the range [0,1].
      */
     public float rollingResistance() {
-        return (float) getValueFloat(3);
+        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 12 : 16);
     }
 
     /**
      * The rolling resistance usually in the range [0,1].
      */
     public void rollingResistance(float rollingResistance) {
-        setValue(rollingResistance, 3);
+        getBufPtr().setFloat(CHandler.IS_32_BIT ? 12 : 16, rollingResistance);
     }
 
     /**
      * The density, usually in kg/m^2.
      */
     public float density() {
-        return (float) getValueFloat(4);
+        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 16 : 20);
     }
 
     /**
      * The density, usually in kg/m^2.
      */
     public void density(float density) {
-        setValue(density, 4);
+        getBufPtr().setFloat(CHandler.IS_32_BIT ? 16 : 20, density);
     }
 
     /**
@@ -122,7 +123,7 @@ public final class b2ShapeDef extends Struct {
         return __filter;
     }
 
-    private static final int __filter_offset = CHandler.getOffsetForField(__ffi_type, 5);
+    private static final int __filter_offset = 24;
 
     private final b2Filter __filter = new b2Filter(getPointer() + __filter_offset, false);
 
@@ -130,14 +131,14 @@ public final class b2ShapeDef extends Struct {
      * Custom debug draw color.
      */
     public long customColor() {
-        return (long) getValue(6);
+        return getBufPtr().getUInt(48);
     }
 
     /**
      * Custom debug draw color.
      */
     public void customColor(long customColor) {
-        setValue(customColor, 6);
+        getBufPtr().setUInt(48, customColor);
     }
 
     /**
@@ -146,7 +147,7 @@ public final class b2ShapeDef extends Struct {
      * 	 Instead, use a ray or shape cast for those scenarios.
      */
     public boolean isSensor() {
-        return getValue(7) != 0;
+        return getBufPtr().getBoolean(52);
     }
 
     /**
@@ -155,35 +156,35 @@ public final class b2ShapeDef extends Struct {
      * 	 Instead, use a ray or shape cast for those scenarios.
      */
     public void isSensor(boolean isSensor) {
-        setValue(isSensor, 7);
+        getBufPtr().setBoolean(52, isSensor);
     }
 
     /**
      * Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
      */
     public boolean enableContactEvents() {
-        return getValue(8) != 0;
+        return getBufPtr().getBoolean(53);
     }
 
     /**
      * Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
      */
     public void enableContactEvents(boolean enableContactEvents) {
-        setValue(enableContactEvents, 8);
+        getBufPtr().setBoolean(53, enableContactEvents);
     }
 
     /**
      * Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
      */
     public boolean enableHitEvents() {
-        return getValue(9) != 0;
+        return getBufPtr().getBoolean(54);
     }
 
     /**
      * Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
      */
     public void enableHitEvents(boolean enableHitEvents) {
-        setValue(enableHitEvents, 9);
+        getBufPtr().setBoolean(54, enableHitEvents);
     }
 
     /**
@@ -191,7 +192,7 @@ public final class b2ShapeDef extends Struct {
      * 	 and must be carefully handled due to threading. Ignored for sensors.
      */
     public boolean enablePreSolveEvents() {
-        return getValue(10) != 0;
+        return getBufPtr().getBoolean(55);
     }
 
     /**
@@ -199,7 +200,7 @@ public final class b2ShapeDef extends Struct {
      * 	 and must be carefully handled due to threading. Ignored for sensors.
      */
     public void enablePreSolveEvents(boolean enablePreSolveEvents) {
-        setValue(enablePreSolveEvents, 10);
+        getBufPtr().setBoolean(55, enablePreSolveEvents);
     }
 
     /**
@@ -209,7 +210,7 @@ public final class b2ShapeDef extends Struct {
      * 	 This is implicitly always true for sensors, dynamic bodies, and kinematic bodies.
      */
     public boolean invokeContactCreation() {
-        return getValue(11) != 0;
+        return getBufPtr().getBoolean(56);
     }
 
     /**
@@ -219,35 +220,35 @@ public final class b2ShapeDef extends Struct {
      * 	 This is implicitly always true for sensors, dynamic bodies, and kinematic bodies.
      */
     public void invokeContactCreation(boolean invokeContactCreation) {
-        setValue(invokeContactCreation, 11);
+        getBufPtr().setBoolean(56, invokeContactCreation);
     }
 
     /**
      * Should the body update the mass properties when this shape is created. Default is true.
      */
     public boolean updateBodyMass() {
-        return getValue(12) != 0;
+        return getBufPtr().getBoolean(57);
     }
 
     /**
      * Should the body update the mass properties when this shape is created. Default is true.
      */
     public void updateBodyMass(boolean updateBodyMass) {
-        setValue(updateBodyMass, 12);
+        getBufPtr().setBoolean(57, updateBodyMass);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return (int) getValue(13);
+        return getBufPtr().getInt(60);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        setValue(internalValue, 13);
+        getBufPtr().setInt(60, internalValue);
     }
 
     public static final class b2ShapeDefPointer extends StackElementPointer<b2ShapeDef> {
@@ -256,17 +257,21 @@ public final class b2ShapeDef extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2ShapeDefPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2ShapeDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2ShapeDefPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ShapeDefPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2ShapeDef.b2ShapeDefPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ShapeDefPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

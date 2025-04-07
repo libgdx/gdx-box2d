@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -41,7 +42,7 @@ public final class b2ManifoldPoint extends Struct {
     }
 
     public b2ManifoldPoint.b2ManifoldPointPointer asPointer() {
-        return new b2ManifoldPoint.b2ManifoldPointPointer(getPointer(), getsGCFreed());
+        return new b2ManifoldPoint.b2ManifoldPointPointer(getPointer(), false, this);
     }
 
     /**
@@ -52,7 +53,7 @@ public final class b2ManifoldPoint extends Struct {
         return __point;
     }
 
-    private static final int __point_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __point_offset = 0;
 
     private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
 
@@ -64,7 +65,7 @@ public final class b2ManifoldPoint extends Struct {
         return __anchorA;
     }
 
-    private static final int __anchorA_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __anchorA_offset = 8;
 
     private final b2Vec2 __anchorA = new b2Vec2(getPointer() + __anchorA_offset, false);
 
@@ -76,7 +77,7 @@ public final class b2ManifoldPoint extends Struct {
         return __anchorB;
     }
 
-    private static final int __anchorB_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __anchorB_offset = 16;
 
     private final b2Vec2 __anchorB = new b2Vec2(getPointer() + __anchorB_offset, false);
 
@@ -84,42 +85,42 @@ public final class b2ManifoldPoint extends Struct {
      * The separation of the contact point, negative if penetrating
      */
     public float separation() {
-        return (float) getValueFloat(3);
+        return getBufPtr().getFloat(24);
     }
 
     /**
      * The separation of the contact point, negative if penetrating
      */
     public void separation(float separation) {
-        setValue(separation, 3);
+        getBufPtr().setFloat(24, separation);
     }
 
     /**
      * The impulse along the manifold normal vector.
      */
     public float normalImpulse() {
-        return (float) getValueFloat(4);
+        return getBufPtr().getFloat(28);
     }
 
     /**
      * The impulse along the manifold normal vector.
      */
     public void normalImpulse(float normalImpulse) {
-        setValue(normalImpulse, 4);
+        getBufPtr().setFloat(28, normalImpulse);
     }
 
     /**
      * The friction impulse
      */
     public float tangentImpulse() {
-        return (float) getValueFloat(5);
+        return getBufPtr().getFloat(32);
     }
 
     /**
      * The friction impulse
      */
     public void tangentImpulse(float tangentImpulse) {
-        setValue(tangentImpulse, 5);
+        getBufPtr().setFloat(32, tangentImpulse);
     }
 
     /**
@@ -127,7 +128,7 @@ public final class b2ManifoldPoint extends Struct {
      * 	 to identify speculative contact points that had an interaction in the time step.
      */
     public float maxNormalImpulse() {
-        return (float) getValueFloat(6);
+        return getBufPtr().getFloat(36);
     }
 
     /**
@@ -135,7 +136,7 @@ public final class b2ManifoldPoint extends Struct {
      * 	 to identify speculative contact points that had an interaction in the time step.
      */
     public void maxNormalImpulse(float maxNormalImpulse) {
-        setValue(maxNormalImpulse, 6);
+        getBufPtr().setFloat(36, maxNormalImpulse);
     }
 
     /**
@@ -143,7 +144,7 @@ public final class b2ManifoldPoint extends Struct {
      * 	 zero then there was no hit. Negative means shapes are approaching.
      */
     public float normalVelocity() {
-        return (float) getValueFloat(7);
+        return getBufPtr().getFloat(40);
     }
 
     /**
@@ -151,35 +152,35 @@ public final class b2ManifoldPoint extends Struct {
      * 	 zero then there was no hit. Negative means shapes are approaching.
      */
     public void normalVelocity(float normalVelocity) {
-        setValue(normalVelocity, 7);
+        getBufPtr().setFloat(40, normalVelocity);
     }
 
     /**
      * Uniquely identifies a contact point between two shapes
      */
     public char id() {
-        return (char) getValue(8);
+        return getBufPtr().getChar(44);
     }
 
     /**
      * Uniquely identifies a contact point between two shapes
      */
     public void id(char id) {
-        setValue(id, 8);
+        getBufPtr().setChar(44, id);
     }
 
     /**
      * Did this contact point exist the previous step?
      */
     public boolean persisted() {
-        return getValue(9) != 0;
+        return getBufPtr().getBoolean(46);
     }
 
     /**
      * Did this contact point exist the previous step?
      */
     public void persisted(boolean persisted) {
-        setValue(persisted, 9);
+        getBufPtr().setBoolean(46, persisted);
     }
 
     public static final class b2ManifoldPointPointer extends StackElementPointer<b2ManifoldPoint> {
@@ -188,17 +189,21 @@ public final class b2ManifoldPoint extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2ManifoldPointPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2ManifoldPointPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2ManifoldPointPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ManifoldPointPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2ManifoldPoint.b2ManifoldPointPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ManifoldPointPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

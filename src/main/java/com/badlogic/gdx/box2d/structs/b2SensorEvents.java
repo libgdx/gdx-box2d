@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2SensorBeginTouchEvent;
 import com.badlogic.gdx.box2d.structs.b2SensorEndTouchEvent;
@@ -40,63 +41,63 @@ public final class b2SensorEvents extends Struct {
     }
 
     public b2SensorEvents.b2SensorEventsPointer asPointer() {
-        return new b2SensorEvents.b2SensorEventsPointer(getPointer(), getsGCFreed());
+        return new b2SensorEvents.b2SensorEventsPointer(getPointer(), false, this);
     }
 
     /**
      * Array of sensor begin touch events
      */
     public b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer beginEvents() {
-        return new b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer(getValue(0), false);
+        return new b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer(getBufPtr().getNativePointer(0), false);
     }
 
     /**
      * Array of sensor begin touch events
      */
     public void beginEvents(b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer beginEvents) {
-        setValue(beginEvents.getPointer(), 0);
+        getBufPtr().setNativePointer(0, beginEvents.getPointer());
     }
 
     /**
      * Array of sensor end touch events
      */
     public b2SensorEndTouchEvent.b2SensorEndTouchEventPointer endEvents() {
-        return new b2SensorEndTouchEvent.b2SensorEndTouchEventPointer(getValue(1), false);
+        return new b2SensorEndTouchEvent.b2SensorEndTouchEventPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false);
     }
 
     /**
      * Array of sensor end touch events
      */
     public void endEvents(b2SensorEndTouchEvent.b2SensorEndTouchEventPointer endEvents) {
-        setValue(endEvents.getPointer(), 1);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, endEvents.getPointer());
     }
 
     /**
      * The number of begin touch events
      */
     public int beginCount() {
-        return (int) getValue(2);
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 8 : 16);
     }
 
     /**
      * The number of begin touch events
      */
     public void beginCount(int beginCount) {
-        setValue(beginCount, 2);
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 8 : 16, beginCount);
     }
 
     /**
      * The number of end touch events
      */
     public int endCount() {
-        return (int) getValue(3);
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 12 : 20);
     }
 
     /**
      * The number of end touch events
      */
     public void endCount(int endCount) {
-        setValue(endCount, 3);
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 12 : 20, endCount);
     }
 
     public static final class b2SensorEventsPointer extends StackElementPointer<b2SensorEvents> {
@@ -105,17 +106,21 @@ public final class b2SensorEvents extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2SensorEventsPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2SensorEventsPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2SensorEventsPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2SensorEventsPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2SensorEvents.b2SensorEventsPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2SensorEventsPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

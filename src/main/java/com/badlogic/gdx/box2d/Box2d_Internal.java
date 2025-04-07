@@ -1,8 +1,8 @@
 package com.badlogic.gdx.box2d;
 
-import com.badlogic.gdx.jnigen.runtime.ffi.JavaTypeWrapper;
 import com.badlogic.gdx.jnigen.runtime.c.CTypeInfo;
 import com.badlogic.gdx.jnigen.runtime.closure.Closure;
+import com.badlogic.gdx.jnigen.runtime.mem.BufferPtr;
 import com.badlogic.gdx.box2d.structs.b2DebugDraw.DrawPolygon;
 import com.badlogic.gdx.jnigen.runtime.ffi.ClosureEncoder;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
@@ -17,7 +17,7 @@ import com.badlogic.gdx.box2d.structs.b2DebugDraw.DrawSegment;
 import com.badlogic.gdx.box2d.structs.b2DebugDraw.DrawTransform;
 import com.badlogic.gdx.box2d.structs.b2DebugDraw.DrawPoint;
 import com.badlogic.gdx.box2d.structs.b2DebugDraw.DrawString;
-import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.integer.BytePointer;
 import com.badlogic.gdx.box2d.Box2d.b2OverlapResultFcn;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 import com.badlogic.gdx.box2d.Box2d.b2TreeQueryCallbackFcn;
@@ -231,7 +231,7 @@ public final class Box2d_Internal {
 
         public interface DrawPolygon_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(10), FFITypes.getCTypeInfo(-1) };
 
             void DrawPolygon_call(b2Vec2.b2Vec2Pointer vertices, int vertexCount, b2HexColor color, VoidPointer context);
 
@@ -239,18 +239,18 @@ public final class Box2d_Internal {
                 return __ffi_cache;
             }
 
-            default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-                DrawPolygon_call(new b2Vec2.b2Vec2Pointer(parameters[0].asLong(), false), (int) parameters[1].asLong(), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+            default void invoke(BufferPtr buf) {
+                DrawPolygon_call(new b2Vec2.b2Vec2Pointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
             }
 
             public static DrawPolygon DrawPolygon_downcall(long fnPtr) {
                 ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawPolygon_Internal.__ffi_cache);
                 return (vertices, vertexCount, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                    useEncoder.setValue(0, vertices);
-                    useEncoder.setValue(1, vertexCount);
-                    useEncoder.setValue(2, color);
-                    useEncoder.setValue(3, context);
+                    useEncoder.getBufPtr().setNativePointer(0, vertices.getPointer());
+                    useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, vertexCount);
+                    useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
                     useEncoder.invoke();
                 };
             }
@@ -258,7 +258,7 @@ public final class Box2d_Internal {
 
         public interface DrawSolidPolygon_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(69), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(69), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(10), FFITypes.getCTypeInfo(-1) };
 
             void DrawSolidPolygon_call(b2Transform transform, b2Vec2.b2Vec2Pointer vertices, int vertexCount, float radius, b2HexColor color, VoidPointer context);
 
@@ -266,20 +266,20 @@ public final class Box2d_Internal {
                 return __ffi_cache;
             }
 
-            default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-                DrawSolidPolygon_call(new b2Transform(parameters[0].asLong(), true), new b2Vec2.b2Vec2Pointer(parameters[1].asLong(), false), (int) parameters[2].asLong(), (float) parameters[3].asFloat(), b2HexColor.getByIndex((int) parameters[4].asLong()), new VoidPointer(parameters[5].asLong(), false));
+            default void invoke(BufferPtr buf) {
+                DrawSolidPolygon_call(new b2Transform(buf.getNativePointer(0), true), new b2Vec2.b2Vec2Pointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), buf.getInt(CHandler.IS_32_BIT ? 8 : 16), buf.getFloat(CHandler.IS_32_BIT ? 12 : 20), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 16 : 24)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 20 : 28), false));
             }
 
             public static DrawSolidPolygon DrawSolidPolygon_downcall(long fnPtr) {
                 ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidPolygon_Internal.__ffi_cache);
                 return (transform, vertices, vertexCount, radius, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                    useEncoder.setValue(0, transform);
-                    useEncoder.setValue(1, vertices);
-                    useEncoder.setValue(2, vertexCount);
-                    useEncoder.setValue(3, radius);
-                    useEncoder.setValue(4, color);
-                    useEncoder.setValue(5, context);
+                    useEncoder.getBufPtr().setNativePointer(0, transform.getPointer());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, vertices.getPointer());
+                    useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 8 : 16, vertexCount);
+                    useEncoder.getBufPtr().setFloat(CHandler.IS_32_BIT ? 12 : 20, radius);
+                    useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 16 : 24, color.getIndex());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 20 : 28, context.getPointer());
                     useEncoder.invoke();
                 };
             }
@@ -287,7 +287,7 @@ public final class Box2d_Internal {
 
         public interface DrawCircle_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(10), FFITypes.getCTypeInfo(-1) };
 
             void DrawCircle_call(b2Vec2 center, float radius, b2HexColor color, VoidPointer context);
 
@@ -295,18 +295,18 @@ public final class Box2d_Internal {
                 return __ffi_cache;
             }
 
-            default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-                DrawCircle_call(new b2Vec2(parameters[0].asLong(), true), (float) parameters[1].asFloat(), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+            default void invoke(BufferPtr buf) {
+                DrawCircle_call(new b2Vec2(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
             }
 
             public static DrawCircle DrawCircle_downcall(long fnPtr) {
                 ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawCircle_Internal.__ffi_cache);
                 return (center, radius, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                    useEncoder.setValue(0, center);
-                    useEncoder.setValue(1, radius);
-                    useEncoder.setValue(2, color);
-                    useEncoder.setValue(3, context);
+                    useEncoder.getBufPtr().setNativePointer(0, center.getPointer());
+                    useEncoder.getBufPtr().setFloat(CHandler.IS_32_BIT ? 4 : 8, radius);
+                    useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
                     useEncoder.invoke();
                 };
             }
@@ -314,7 +314,7 @@ public final class Box2d_Internal {
 
         public interface DrawSolidCircle_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(69), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(69), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(10), FFITypes.getCTypeInfo(-1) };
 
             void DrawSolidCircle_call(b2Transform transform, float radius, b2HexColor color, VoidPointer context);
 
@@ -322,18 +322,18 @@ public final class Box2d_Internal {
                 return __ffi_cache;
             }
 
-            default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-                DrawSolidCircle_call(new b2Transform(parameters[0].asLong(), true), (float) parameters[1].asFloat(), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+            default void invoke(BufferPtr buf) {
+                DrawSolidCircle_call(new b2Transform(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
             }
 
             public static DrawSolidCircle DrawSolidCircle_downcall(long fnPtr) {
                 ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidCircle_Internal.__ffi_cache);
                 return (transform, radius, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                    useEncoder.setValue(0, transform);
-                    useEncoder.setValue(1, radius);
-                    useEncoder.setValue(2, color);
-                    useEncoder.setValue(3, context);
+                    useEncoder.getBufPtr().setNativePointer(0, transform.getPointer());
+                    useEncoder.getBufPtr().setFloat(CHandler.IS_32_BIT ? 4 : 8, radius);
+                    useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
                     useEncoder.invoke();
                 };
             }
@@ -341,7 +341,7 @@ public final class Box2d_Internal {
 
         public interface DrawSolidCapsule_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(10), FFITypes.getCTypeInfo(-1) };
 
             void DrawSolidCapsule_call(b2Vec2 p1, b2Vec2 p2, float radius, b2HexColor color, VoidPointer context);
 
@@ -349,19 +349,19 @@ public final class Box2d_Internal {
                 return __ffi_cache;
             }
 
-            default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-                DrawSolidCapsule_call(new b2Vec2(parameters[0].asLong(), true), new b2Vec2(parameters[1].asLong(), true), (float) parameters[2].asFloat(), b2HexColor.getByIndex((int) parameters[3].asLong()), new VoidPointer(parameters[4].asLong(), false));
+            default void invoke(BufferPtr buf) {
+                DrawSolidCapsule_call(new b2Vec2(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), buf.getFloat(CHandler.IS_32_BIT ? 8 : 16), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 12 : 20)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 24), false));
             }
 
             public static DrawSolidCapsule DrawSolidCapsule_downcall(long fnPtr) {
                 ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidCapsule_Internal.__ffi_cache);
                 return (p1, p2, radius, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                    useEncoder.setValue(0, p1);
-                    useEncoder.setValue(1, p2);
-                    useEncoder.setValue(2, radius);
-                    useEncoder.setValue(3, color);
-                    useEncoder.setValue(4, context);
+                    useEncoder.getBufPtr().setNativePointer(0, p1.getPointer());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, p2.getPointer());
+                    useEncoder.getBufPtr().setFloat(CHandler.IS_32_BIT ? 8 : 16, radius);
+                    useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 12 : 20, color.getIndex());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 24, context.getPointer());
                     useEncoder.invoke();
                 };
             }
@@ -369,7 +369,7 @@ public final class Box2d_Internal {
 
         public interface DrawSegment_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(10), FFITypes.getCTypeInfo(-1) };
 
             void DrawSegment_call(b2Vec2 p1, b2Vec2 p2, b2HexColor color, VoidPointer context);
 
@@ -377,18 +377,18 @@ public final class Box2d_Internal {
                 return __ffi_cache;
             }
 
-            default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-                DrawSegment_call(new b2Vec2(parameters[0].asLong(), true), new b2Vec2(parameters[1].asLong(), true), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+            default void invoke(BufferPtr buf) {
+                DrawSegment_call(new b2Vec2(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 16)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 20), false));
             }
 
             public static DrawSegment DrawSegment_downcall(long fnPtr) {
                 ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSegment_Internal.__ffi_cache);
                 return (p1, p2, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                    useEncoder.setValue(0, p1);
-                    useEncoder.setValue(1, p2);
-                    useEncoder.setValue(2, color);
-                    useEncoder.setValue(3, context);
+                    useEncoder.getBufPtr().setNativePointer(0, p1.getPointer());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, p2.getPointer());
+                    useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 16, color.getIndex());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 20, context.getPointer());
                     useEncoder.invoke();
                 };
             }
@@ -404,16 +404,16 @@ public final class Box2d_Internal {
                 return __ffi_cache;
             }
 
-            default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-                DrawTransform_call(new b2Transform(parameters[0].asLong(), true), new VoidPointer(parameters[1].asLong(), false));
+            default void invoke(BufferPtr buf) {
+                DrawTransform_call(new b2Transform(buf.getNativePointer(0), true), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false));
             }
 
             public static DrawTransform DrawTransform_downcall(long fnPtr) {
                 ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawTransform_Internal.__ffi_cache);
                 return (transform, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                    useEncoder.setValue(0, transform);
-                    useEncoder.setValue(1, context);
+                    useEncoder.getBufPtr().setNativePointer(0, transform.getPointer());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, context.getPointer());
                     useEncoder.invoke();
                 };
             }
@@ -421,7 +421,7 @@ public final class Box2d_Internal {
 
         public interface DrawPoint_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(3), FFITypes.getCTypeInfo(10), FFITypes.getCTypeInfo(-1) };
 
             void DrawPoint_call(b2Vec2 p, float size, b2HexColor color, VoidPointer context);
 
@@ -429,18 +429,18 @@ public final class Box2d_Internal {
                 return __ffi_cache;
             }
 
-            default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-                DrawPoint_call(new b2Vec2(parameters[0].asLong(), true), (float) parameters[1].asFloat(), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+            default void invoke(BufferPtr buf) {
+                DrawPoint_call(new b2Vec2(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
             }
 
             public static DrawPoint DrawPoint_downcall(long fnPtr) {
                 ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawPoint_Internal.__ffi_cache);
                 return (p, size, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                    useEncoder.setValue(0, p);
-                    useEncoder.setValue(1, size);
-                    useEncoder.setValue(2, color);
-                    useEncoder.setValue(3, context);
+                    useEncoder.getBufPtr().setNativePointer(0, p.getPointer());
+                    useEncoder.getBufPtr().setFloat(CHandler.IS_32_BIT ? 4 : 8, size);
+                    useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
                     useEncoder.invoke();
                 };
             }
@@ -448,26 +448,26 @@ public final class Box2d_Internal {
 
         public interface DrawString_Internal extends Closure {
 
-            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1) };
+            CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(-2), FFITypes.getCTypeInfo(72), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(10), FFITypes.getCTypeInfo(-1) };
 
-            void DrawString_call(b2Vec2 p, CSizedIntPointer s, b2HexColor color, VoidPointer context);
+            void DrawString_call(b2Vec2 p, BytePointer s, b2HexColor color, VoidPointer context);
 
             default CTypeInfo[] functionSignature() {
                 return __ffi_cache;
             }
 
-            default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-                DrawString_call(new b2Vec2(parameters[0].asLong(), true), new CSizedIntPointer(parameters[1].asLong(), false, "const char"), b2HexColor.getByIndex((int) parameters[2].asLong()), new VoidPointer(parameters[3].asLong(), false));
+            default void invoke(BufferPtr buf) {
+                DrawString_call(new b2Vec2(buf.getNativePointer(0), true), new BytePointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 16)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 20), false));
             }
 
             public static DrawString DrawString_downcall(long fnPtr) {
                 ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawString_Internal.__ffi_cache);
                 return (p, s, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                    useEncoder.setValue(0, p);
-                    useEncoder.setValue(1, s);
-                    useEncoder.setValue(2, color);
-                    useEncoder.setValue(3, context);
+                    useEncoder.getBufPtr().setNativePointer(0, p.getPointer());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, s.getPointer());
+                    useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 16, color.getIndex());
+                    useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 20, context.getPointer());
                     useEncoder.invoke();
                 };
             }
@@ -496,19 +496,18 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            returnType.setValue(b2OverlapResultFcn_call(new b2ShapeId(parameters[0].asLong(), true), new VoidPointer(parameters[1].asLong(), false)));
+        default void invoke(BufferPtr buf) {
+            buf.setBoolean(0, b2OverlapResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false)));
         }
 
         public static b2OverlapResultFcn b2OverlapResultFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2OverlapResultFcn_Internal.__ffi_cache);
             return (shapeId, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, shapeId);
-                useEncoder.setValue(1, context);
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2OverlapResultFcn_Internal.__ffi_cache[0]);
-                returnConvert.setValue(useEncoder.invoke());
-                return returnConvert.asLong() != 0;
+                useEncoder.getBufPtr().setNativePointer(0, shapeId.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, context.getPointer());
+                useEncoder.invoke();
+                return useEncoder.getBufPtr().getBoolean(0);
             };
         }
     }
@@ -523,20 +522,19 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            returnType.setValue(b2TreeQueryCallbackFcn_call((int) parameters[0].asLong(), (int) parameters[1].asLong(), new VoidPointer(parameters[2].asLong(), false)));
+        default void invoke(BufferPtr buf) {
+            buf.setBoolean(0, b2TreeQueryCallbackFcn_call(buf.getInt(0), buf.getInt(4), new VoidPointer(buf.getNativePointer(8), false)));
         }
 
         public static b2TreeQueryCallbackFcn b2TreeQueryCallbackFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeQueryCallbackFcn_Internal.__ffi_cache);
             return (proxyId, userData, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, proxyId);
-                useEncoder.setValue(1, userData);
-                useEncoder.setValue(2, context);
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeQueryCallbackFcn_Internal.__ffi_cache[0]);
-                returnConvert.setValue(useEncoder.invoke());
-                return returnConvert.asLong() != 0;
+                useEncoder.getBufPtr().setInt(0, proxyId);
+                useEncoder.getBufPtr().setInt(4, userData);
+                useEncoder.getBufPtr().setNativePointer(8, context.getPointer());
+                useEncoder.invoke();
+                return useEncoder.getBufPtr().getBoolean(0);
             };
         }
     }
@@ -551,18 +549,18 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            b2TaskCallback_call((int) parameters[0].asLong(), (int) parameters[1].asLong(), (long) parameters[2].asLong(), new VoidPointer(parameters[3].asLong(), false));
+        default void invoke(BufferPtr buf) {
+            b2TaskCallback_call(buf.getInt(0), buf.getInt(4), buf.getUInt(8), new VoidPointer(buf.getNativePointer(12), false));
         }
 
         public static b2TaskCallback b2TaskCallback_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TaskCallback_Internal.__ffi_cache);
             return (startIndex, endIndex, workerIndex, taskContext) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, startIndex);
-                useEncoder.setValue(1, endIndex);
-                useEncoder.setValue(2, workerIndex);
-                useEncoder.setValue(3, taskContext);
+                useEncoder.getBufPtr().setInt(0, startIndex);
+                useEncoder.getBufPtr().setInt(4, endIndex);
+                useEncoder.getBufPtr().setUInt(8, workerIndex);
+                useEncoder.getBufPtr().setNativePointer(12, taskContext.getPointer());
                 useEncoder.invoke();
             };
         }
@@ -578,22 +576,21 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            returnType.setValue(b2EnqueueTaskCallback_call(CHandler.getClosureObject(parameters[0].asLong(), b2TaskCallback_Internal::b2TaskCallback_downcall), (int) parameters[1].asLong(), (int) parameters[2].asLong(), new VoidPointer(parameters[3].asLong(), false), new VoidPointer(parameters[4].asLong(), false)));
+        default void invoke(BufferPtr buf) {
+            buf.setNativePointer(0, b2EnqueueTaskCallback_call(CHandler.getClosureObject(buf.getNativePointer(0), b2TaskCallback_Internal::b2TaskCallback_downcall), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getInt(CHandler.IS_32_BIT ? 8 : 12), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 24), false)).getPointer());
         }
 
         public static b2EnqueueTaskCallback b2EnqueueTaskCallback_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2EnqueueTaskCallback_Internal.__ffi_cache);
             return (task, itemCount, minRange, taskContext, userContext) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, task);
-                useEncoder.setValue(1, itemCount);
-                useEncoder.setValue(2, minRange);
-                useEncoder.setValue(3, taskContext);
-                useEncoder.setValue(4, userContext);
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2EnqueueTaskCallback_Internal.__ffi_cache[0]);
-                returnConvert.setValue(useEncoder.invoke());
-                return new VoidPointer(returnConvert.asLong(), false);
+                useEncoder.getBufPtr().setNativePointer(0, task.getPointer());
+                useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, itemCount);
+                useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 8 : 12, minRange);
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, taskContext.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 24, userContext.getPointer());
+                useEncoder.invoke();
+                return new VoidPointer(useEncoder.getBufPtr().getNativePointer(0), false);
             };
         }
     }
@@ -608,22 +605,21 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            returnType.setValue(b2CastResultFcn_call(new b2ShapeId(parameters[0].asLong(), true), new b2Vec2(parameters[1].asLong(), true), new b2Vec2(parameters[2].asLong(), true), (float) parameters[3].asFloat(), new VoidPointer(parameters[4].asLong(), false)));
+        default void invoke(BufferPtr buf) {
+            buf.setFloat(0, b2CastResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), true), buf.getFloat(CHandler.IS_32_BIT ? 12 : 24), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 28), false)));
         }
 
         public static b2CastResultFcn b2CastResultFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2CastResultFcn_Internal.__ffi_cache);
             return (shapeId, point, normal, fraction, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, shapeId);
-                useEncoder.setValue(1, point);
-                useEncoder.setValue(2, normal);
-                useEncoder.setValue(3, fraction);
-                useEncoder.setValue(4, context);
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2CastResultFcn_Internal.__ffi_cache[0]);
-                returnConvert.setValue(useEncoder.invoke());
-                return (float) returnConvert.asFloat();
+                useEncoder.getBufPtr().setNativePointer(0, shapeId.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, point.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, normal.getPointer());
+                useEncoder.getBufPtr().setFloat(CHandler.IS_32_BIT ? 12 : 24, fraction);
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 28, context.getPointer());
+                useEncoder.invoke();
+                return useEncoder.getBufPtr().getFloat(0);
             };
         }
     }
@@ -638,21 +634,20 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            returnType.setValue(b2TreeShapeCastCallbackFcn_call(new b2ShapeCastInput.b2ShapeCastInputPointer(parameters[0].asLong(), false), (int) parameters[1].asLong(), (int) parameters[2].asLong(), new VoidPointer(parameters[3].asLong(), false)));
+        default void invoke(BufferPtr buf) {
+            buf.setFloat(0, b2TreeShapeCastCallbackFcn_call(new b2ShapeCastInput.b2ShapeCastInputPointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getInt(CHandler.IS_32_BIT ? 8 : 12), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false)));
         }
 
         public static b2TreeShapeCastCallbackFcn b2TreeShapeCastCallbackFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeShapeCastCallbackFcn_Internal.__ffi_cache);
             return (input, proxyId, userData, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, input);
-                useEncoder.setValue(1, proxyId);
-                useEncoder.setValue(2, userData);
-                useEncoder.setValue(3, context);
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeShapeCastCallbackFcn_Internal.__ffi_cache[0]);
-                returnConvert.setValue(useEncoder.invoke());
-                return (float) returnConvert.asFloat();
+                useEncoder.getBufPtr().setNativePointer(0, input.getPointer());
+                useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, proxyId);
+                useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 8 : 12, userData);
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
+                useEncoder.invoke();
+                return useEncoder.getBufPtr().getFloat(0);
             };
         }
     }
@@ -667,21 +662,20 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            returnType.setValue(b2PreSolveFcn_call(new b2ShapeId(parameters[0].asLong(), true), new b2ShapeId(parameters[1].asLong(), true), new b2Manifold.b2ManifoldPointer(parameters[2].asLong(), false), new VoidPointer(parameters[3].asLong(), false)));
+        default void invoke(BufferPtr buf) {
+            buf.setBoolean(0, b2PreSolveFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2ShapeId(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), new b2Manifold.b2ManifoldPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 24), false)));
         }
 
         public static b2PreSolveFcn b2PreSolveFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2PreSolveFcn_Internal.__ffi_cache);
             return (shapeIdA, shapeIdB, manifold, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, shapeIdA);
-                useEncoder.setValue(1, shapeIdB);
-                useEncoder.setValue(2, manifold);
-                useEncoder.setValue(3, context);
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2PreSolveFcn_Internal.__ffi_cache[0]);
-                returnConvert.setValue(useEncoder.invoke());
-                return returnConvert.asLong() != 0;
+                useEncoder.getBufPtr().setNativePointer(0, shapeIdA.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, shapeIdB.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, manifold.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 24, context.getPointer());
+                useEncoder.invoke();
+                return useEncoder.getBufPtr().getBoolean(0);
             };
         }
     }
@@ -696,19 +690,18 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            returnType.setValue(b2AllocFcn_call((long) parameters[0].asLong(), (int) parameters[1].asLong()));
+        default void invoke(BufferPtr buf) {
+            buf.setNativePointer(0, b2AllocFcn_call(buf.getUInt(0), buf.getInt(4)).getPointer());
         }
 
         public static b2AllocFcn b2AllocFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2AllocFcn_Internal.__ffi_cache);
             return (size, alignment) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, size);
-                useEncoder.setValue(1, alignment);
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2AllocFcn_Internal.__ffi_cache[0]);
-                returnConvert.setValue(useEncoder.invoke());
-                return new VoidPointer(returnConvert.asLong(), false);
+                useEncoder.getBufPtr().setUInt(0, size);
+                useEncoder.getBufPtr().setInt(4, alignment);
+                useEncoder.invoke();
+                return new VoidPointer(useEncoder.getBufPtr().getNativePointer(0), false);
             };
         }
     }
@@ -717,26 +710,25 @@ public final class Box2d_Internal {
 
         CTypeInfo[] __ffi_cache = new CTypeInfo[] { FFITypes.getCTypeInfo(4), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(-1), FFITypes.getCTypeInfo(4) };
 
-        int b2AssertFcn_call(CSizedIntPointer condition, CSizedIntPointer fileName, int lineNumber);
+        int b2AssertFcn_call(BytePointer condition, BytePointer fileName, int lineNumber);
 
         default CTypeInfo[] functionSignature() {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            returnType.setValue(b2AssertFcn_call(new CSizedIntPointer(parameters[0].asLong(), false, "const char"), new CSizedIntPointer(parameters[1].asLong(), false, "const char"), (int) parameters[2].asLong()));
+        default void invoke(BufferPtr buf) {
+            buf.setInt(0, b2AssertFcn_call(new BytePointer(buf.getNativePointer(0), false), new BytePointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), buf.getInt(CHandler.IS_32_BIT ? 8 : 16)));
         }
 
         public static b2AssertFcn b2AssertFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2AssertFcn_Internal.__ffi_cache);
             return (condition, fileName, lineNumber) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, condition);
-                useEncoder.setValue(1, fileName);
-                useEncoder.setValue(2, lineNumber);
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2AssertFcn_Internal.__ffi_cache[0]);
-                returnConvert.setValue(useEncoder.invoke());
-                return (int) returnConvert.asLong();
+                useEncoder.getBufPtr().setNativePointer(0, condition.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, fileName.getPointer());
+                useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 8 : 16, lineNumber);
+                useEncoder.invoke();
+                return useEncoder.getBufPtr().getInt(0);
             };
         }
     }
@@ -751,20 +743,19 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            returnType.setValue(b2CustomFilterFcn_call(new b2ShapeId(parameters[0].asLong(), true), new b2ShapeId(parameters[1].asLong(), true), new VoidPointer(parameters[2].asLong(), false)));
+        default void invoke(BufferPtr buf) {
+            buf.setBoolean(0, b2CustomFilterFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2ShapeId(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), false)));
         }
 
         public static b2CustomFilterFcn b2CustomFilterFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2CustomFilterFcn_Internal.__ffi_cache);
             return (shapeIdA, shapeIdB, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, shapeIdA);
-                useEncoder.setValue(1, shapeIdB);
-                useEncoder.setValue(2, context);
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2CustomFilterFcn_Internal.__ffi_cache[0]);
-                returnConvert.setValue(useEncoder.invoke());
-                return returnConvert.asLong() != 0;
+                useEncoder.getBufPtr().setNativePointer(0, shapeIdA.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, shapeIdB.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, context.getPointer());
+                useEncoder.invoke();
+                return useEncoder.getBufPtr().getBoolean(0);
             };
         }
     }
@@ -779,21 +770,20 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            returnType.setValue(b2TreeRayCastCallbackFcn_call(new b2RayCastInput.b2RayCastInputPointer(parameters[0].asLong(), false), (int) parameters[1].asLong(), (int) parameters[2].asLong(), new VoidPointer(parameters[3].asLong(), false)));
+        default void invoke(BufferPtr buf) {
+            buf.setFloat(0, b2TreeRayCastCallbackFcn_call(new b2RayCastInput.b2RayCastInputPointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getInt(CHandler.IS_32_BIT ? 8 : 12), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false)));
         }
 
         public static b2TreeRayCastCallbackFcn b2TreeRayCastCallbackFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeRayCastCallbackFcn_Internal.__ffi_cache);
             return (input, proxyId, userData, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, input);
-                useEncoder.setValue(1, proxyId);
-                useEncoder.setValue(2, userData);
-                useEncoder.setValue(3, context);
-                JavaTypeWrapper returnConvert = new JavaTypeWrapper(b2TreeRayCastCallbackFcn_Internal.__ffi_cache[0]);
-                returnConvert.setValue(useEncoder.invoke());
-                return (float) returnConvert.asFloat();
+                useEncoder.getBufPtr().setNativePointer(0, input.getPointer());
+                useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, proxyId);
+                useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 8 : 12, userData);
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
+                useEncoder.invoke();
+                return useEncoder.getBufPtr().getFloat(0);
             };
         }
     }
@@ -808,15 +798,15 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            b2FreeFcn_call(new VoidPointer(parameters[0].asLong(), false));
+        default void invoke(BufferPtr buf) {
+            b2FreeFcn_call(new VoidPointer(buf.getNativePointer(0), false));
         }
 
         public static b2FreeFcn b2FreeFcn_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2FreeFcn_Internal.__ffi_cache);
             return (mem) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, mem);
+                useEncoder.getBufPtr().setNativePointer(0, mem.getPointer());
                 useEncoder.invoke();
             };
         }
@@ -832,16 +822,16 @@ public final class Box2d_Internal {
             return __ffi_cache;
         }
 
-        default void invoke(JavaTypeWrapper[] parameters, JavaTypeWrapper returnType) {
-            b2FinishTaskCallback_call(new VoidPointer(parameters[0].asLong(), false), new VoidPointer(parameters[1].asLong(), false));
+        default void invoke(BufferPtr buf) {
+            b2FinishTaskCallback_call(new VoidPointer(buf.getNativePointer(0), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false));
         }
 
         public static b2FinishTaskCallback b2FinishTaskCallback_downcall(long fnPtr) {
             ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2FinishTaskCallback_Internal.__ffi_cache);
             return (userTask, userContext) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
-                useEncoder.setValue(0, userTask);
-                useEncoder.setValue(1, userContext);
+                useEncoder.getBufPtr().setNativePointer(0, userTask.getPointer());
+                useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, userContext.getPointer());
                 useEncoder.invoke();
             };
         }

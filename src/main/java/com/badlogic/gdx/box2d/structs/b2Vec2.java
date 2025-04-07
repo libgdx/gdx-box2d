@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -37,35 +38,35 @@ public final class b2Vec2 extends Struct {
     }
 
     public b2Vec2.b2Vec2Pointer asPointer() {
-        return new b2Vec2.b2Vec2Pointer(getPointer(), getsGCFreed());
+        return new b2Vec2.b2Vec2Pointer(getPointer(), false, this);
     }
 
     /**
      * coordinates
      */
     public float x() {
-        return (float) getValueFloat(0);
+        return getBufPtr().getFloat(0);
     }
 
     /**
      * coordinates
      */
     public void x(float x) {
-        setValue(x, 0);
+        getBufPtr().setFloat(0, x);
     }
 
     /**
      * coordinates
      */
     public float y() {
-        return (float) getValueFloat(1);
+        return getBufPtr().getFloat(4);
     }
 
     /**
      * coordinates
      */
     public void y(float y) {
-        setValue(y, 1);
+        getBufPtr().setFloat(4, y);
     }
 
     public static final class b2Vec2Pointer extends StackElementPointer<b2Vec2> {
@@ -74,17 +75,21 @@ public final class b2Vec2 extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2Vec2Pointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2Vec2Pointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2Vec2Pointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2Vec2Pointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Vec2.b2Vec2Pointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2Vec2Pointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

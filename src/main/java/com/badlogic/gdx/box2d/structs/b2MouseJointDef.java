@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
@@ -43,7 +44,7 @@ public final class b2MouseJointDef extends Struct {
     }
 
     public b2MouseJointDef.b2MouseJointDefPointer asPointer() {
-        return new b2MouseJointDef.b2MouseJointDefPointer(getPointer(), getsGCFreed());
+        return new b2MouseJointDef.b2MouseJointDefPointer(getPointer(), false, this);
     }
 
     /**
@@ -53,7 +54,7 @@ public final class b2MouseJointDef extends Struct {
         return __bodyIdA;
     }
 
-    private static final int __bodyIdA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __bodyIdA_offset = 0;
 
     private final b2BodyId __bodyIdA = new b2BodyId(getPointer() + __bodyIdA_offset, false);
 
@@ -64,7 +65,7 @@ public final class b2MouseJointDef extends Struct {
         return __bodyIdB;
     }
 
-    private static final int __bodyIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __bodyIdB_offset = 8;
 
     private final b2BodyId __bodyIdB = new b2BodyId(getPointer() + __bodyIdB_offset, false);
 
@@ -75,7 +76,7 @@ public final class b2MouseJointDef extends Struct {
         return __target;
     }
 
-    private static final int __target_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __target_offset = 16;
 
     private final b2Vec2 __target = new b2Vec2(getPointer() + __target_offset, false);
 
@@ -83,84 +84,84 @@ public final class b2MouseJointDef extends Struct {
      * Stiffness in hertz
      */
     public float hertz() {
-        return (float) getValueFloat(3);
+        return getBufPtr().getFloat(24);
     }
 
     /**
      * Stiffness in hertz
      */
     public void hertz(float hertz) {
-        setValue(hertz, 3);
+        getBufPtr().setFloat(24, hertz);
     }
 
     /**
      * Damping ratio, non-dimensional
      */
     public float dampingRatio() {
-        return (float) getValueFloat(4);
+        return getBufPtr().getFloat(28);
     }
 
     /**
      * Damping ratio, non-dimensional
      */
     public void dampingRatio(float dampingRatio) {
-        setValue(dampingRatio, 4);
+        getBufPtr().setFloat(28, dampingRatio);
     }
 
     /**
      * Maximum force, typically in newtons
      */
     public float maxForce() {
-        return (float) getValueFloat(5);
+        return getBufPtr().getFloat(32);
     }
 
     /**
      * Maximum force, typically in newtons
      */
     public void maxForce(float maxForce) {
-        setValue(maxForce, 5);
+        getBufPtr().setFloat(32, maxForce);
     }
 
     /**
      * Set this flag to true if the attached bodies should collide.
      */
     public boolean collideConnected() {
-        return getValue(6) != 0;
+        return getBufPtr().getBoolean(36);
     }
 
     /**
      * Set this flag to true if the attached bodies should collide.
      */
     public void collideConnected(boolean collideConnected) {
-        setValue(collideConnected, 6);
+        getBufPtr().setBoolean(36, collideConnected);
     }
 
     /**
      * User data pointer
      */
     public VoidPointer userData() {
-        return new VoidPointer(getValue(7), false);
+        return new VoidPointer(getBufPtr().getNativePointer(40), false);
     }
 
     /**
      * User data pointer
      */
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 7);
+        getBufPtr().setNativePointer(40, userData.getPointer());
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return (int) getValue(8);
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 44 : 48);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        setValue(internalValue, 8);
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 44 : 48, internalValue);
     }
 
     public static final class b2MouseJointDefPointer extends StackElementPointer<b2MouseJointDef> {
@@ -169,17 +170,21 @@ public final class b2MouseJointDef extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2MouseJointDefPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2MouseJointDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2MouseJointDefPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2MouseJointDefPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2MouseJointDef.b2MouseJointDefPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2MouseJointDefPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

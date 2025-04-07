@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
@@ -38,7 +39,7 @@ public final class b2ContactHitEvent extends Struct {
     }
 
     public b2ContactHitEvent.b2ContactHitEventPointer asPointer() {
-        return new b2ContactHitEvent.b2ContactHitEventPointer(getPointer(), getsGCFreed());
+        return new b2ContactHitEvent.b2ContactHitEventPointer(getPointer(), false, this);
     }
 
     /**
@@ -48,7 +49,7 @@ public final class b2ContactHitEvent extends Struct {
         return __shapeIdA;
     }
 
-    private static final int __shapeIdA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __shapeIdA_offset = 0;
 
     private final b2ShapeId __shapeIdA = new b2ShapeId(getPointer() + __shapeIdA_offset, false);
 
@@ -59,7 +60,7 @@ public final class b2ContactHitEvent extends Struct {
         return __shapeIdB;
     }
 
-    private static final int __shapeIdB_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __shapeIdB_offset = 8;
 
     private final b2ShapeId __shapeIdB = new b2ShapeId(getPointer() + __shapeIdB_offset, false);
 
@@ -70,7 +71,7 @@ public final class b2ContactHitEvent extends Struct {
         return __point;
     }
 
-    private static final int __point_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __point_offset = 16;
 
     private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
 
@@ -81,7 +82,7 @@ public final class b2ContactHitEvent extends Struct {
         return __normal;
     }
 
-    private static final int __normal_offset = CHandler.getOffsetForField(__ffi_type, 3);
+    private static final int __normal_offset = 24;
 
     private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
 
@@ -89,14 +90,14 @@ public final class b2ContactHitEvent extends Struct {
      * The speed the shapes are approaching. Always positive. Typically in meters per second.
      */
     public float approachSpeed() {
-        return (float) getValueFloat(4);
+        return getBufPtr().getFloat(32);
     }
 
     /**
      * The speed the shapes are approaching. Always positive. Typically in meters per second.
      */
     public void approachSpeed(float approachSpeed) {
-        setValue(approachSpeed, 4);
+        getBufPtr().setFloat(32, approachSpeed);
     }
 
     public static final class b2ContactHitEventPointer extends StackElementPointer<b2ContactHitEvent> {
@@ -105,17 +106,21 @@ public final class b2ContactHitEvent extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2ContactHitEventPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2ContactHitEventPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2ContactHitEventPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ContactHitEventPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2ContactHitEvent.b2ContactHitEventPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ContactHitEventPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.enums.b2MixingRule;
@@ -46,7 +47,7 @@ public final class b2WorldDef extends Struct {
     }
 
     public b2WorldDef.b2WorldDefPointer asPointer() {
-        return new b2WorldDef.b2WorldDefPointer(getPointer(), getsGCFreed());
+        return new b2WorldDef.b2WorldDefPointer(getPointer(), false, this);
     }
 
     /**
@@ -56,7 +57,7 @@ public final class b2WorldDef extends Struct {
         return __gravity;
     }
 
-    private static final int __gravity_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __gravity_offset = 0;
 
     private final b2Vec2 __gravity = new b2Vec2(getPointer() + __gravity_offset, false);
 
@@ -65,7 +66,7 @@ public final class b2WorldDef extends Struct {
      * 	 speed have restitution applied (will bounce).
      */
     public float restitutionThreshold() {
-        return (float) getValueFloat(1);
+        return getBufPtr().getFloat(8);
     }
 
     /**
@@ -73,35 +74,35 @@ public final class b2WorldDef extends Struct {
      * 	 speed have restitution applied (will bounce).
      */
     public void restitutionThreshold(float restitutionThreshold) {
-        setValue(restitutionThreshold, 1);
+        getBufPtr().setFloat(8, restitutionThreshold);
     }
 
     /**
      * Threshold speed for hit events. Usually meters per second.
      */
     public float hitEventThreshold() {
-        return (float) getValueFloat(2);
+        return getBufPtr().getFloat(12);
     }
 
     /**
      * Threshold speed for hit events. Usually meters per second.
      */
     public void hitEventThreshold(float hitEventThreshold) {
-        setValue(hitEventThreshold, 2);
+        getBufPtr().setFloat(12, hitEventThreshold);
     }
 
     /**
      * Contact stiffness. Cycles per second. Increasing this increases the speed of overlap recovery, but can introduce jitter.
      */
     public float contactHertz() {
-        return (float) getValueFloat(3);
+        return getBufPtr().getFloat(16);
     }
 
     /**
      * Contact stiffness. Cycles per second. Increasing this increases the speed of overlap recovery, but can introduce jitter.
      */
     public void contactHertz(float contactHertz) {
-        setValue(contactHertz, 3);
+        getBufPtr().setFloat(16, contactHertz);
     }
 
     /**
@@ -109,7 +110,7 @@ public final class b2WorldDef extends Struct {
      * 	 the trade-off that overlap resolution becomes more energetic.
      */
     public float contactDampingRatio() {
-        return (float) getValueFloat(4);
+        return getBufPtr().getFloat(20);
     }
 
     /**
@@ -117,7 +118,7 @@ public final class b2WorldDef extends Struct {
      * 	 the trade-off that overlap resolution becomes more energetic.
      */
     public void contactDampingRatio(float contactDampingRatio) {
-        setValue(contactDampingRatio, 4);
+        getBufPtr().setFloat(20, contactDampingRatio);
     }
 
     /**
@@ -126,7 +127,7 @@ public final class b2WorldDef extends Struct {
      * 	 decreasing the damping ratio.
      */
     public float contactPushMaxSpeed() {
-        return (float) getValueFloat(5);
+        return getBufPtr().getFloat(24);
     }
 
     /**
@@ -135,105 +136,105 @@ public final class b2WorldDef extends Struct {
      * 	 decreasing the damping ratio.
      */
     public void contactPushMaxSpeed(float contactPushMaxSpeed) {
-        setValue(contactPushMaxSpeed, 5);
+        getBufPtr().setFloat(24, contactPushMaxSpeed);
     }
 
     /**
      * Joint stiffness. Cycles per second.
      */
     public float jointHertz() {
-        return (float) getValueFloat(6);
+        return getBufPtr().getFloat(28);
     }
 
     /**
      * Joint stiffness. Cycles per second.
      */
     public void jointHertz(float jointHertz) {
-        setValue(jointHertz, 6);
+        getBufPtr().setFloat(28, jointHertz);
     }
 
     /**
      * Joint bounciness. Non-dimensional.
      */
     public float jointDampingRatio() {
-        return (float) getValueFloat(7);
+        return getBufPtr().getFloat(32);
     }
 
     /**
      * Joint bounciness. Non-dimensional.
      */
     public void jointDampingRatio(float jointDampingRatio) {
-        setValue(jointDampingRatio, 7);
+        getBufPtr().setFloat(32, jointDampingRatio);
     }
 
     /**
      * Maximum linear speed. Usually meters per second.
      */
     public float maximumLinearSpeed() {
-        return (float) getValueFloat(8);
+        return getBufPtr().getFloat(36);
     }
 
     /**
      * Maximum linear speed. Usually meters per second.
      */
     public void maximumLinearSpeed(float maximumLinearSpeed) {
-        setValue(maximumLinearSpeed, 8);
+        getBufPtr().setFloat(36, maximumLinearSpeed);
     }
 
     /**
      * Mixing rule for friction. Default is b2_mixGeometricMean.
      */
     public b2MixingRule frictionMixingRule() {
-        return b2MixingRule.getByIndex((int) getValue(9));
+        return b2MixingRule.getByIndex((int) getBufPtr().getUInt(40));
     }
 
     /**
      * Mixing rule for friction. Default is b2_mixGeometricMean.
      */
     public void frictionMixingRule(b2MixingRule frictionMixingRule) {
-        setValue(frictionMixingRule.getIndex(), 9);
+        getBufPtr().setUInt(40, frictionMixingRule.getIndex());
     }
 
     /**
      * Mixing rule for restitution. Default is b2_mixMaximum.
      */
     public b2MixingRule restitutionMixingRule() {
-        return b2MixingRule.getByIndex((int) getValue(10));
+        return b2MixingRule.getByIndex((int) getBufPtr().getUInt(44));
     }
 
     /**
      * Mixing rule for restitution. Default is b2_mixMaximum.
      */
     public void restitutionMixingRule(b2MixingRule restitutionMixingRule) {
-        setValue(restitutionMixingRule.getIndex(), 10);
+        getBufPtr().setUInt(44, restitutionMixingRule.getIndex());
     }
 
     /**
      * Can bodies go to sleep to improve performance
      */
     public boolean enableSleep() {
-        return getValue(11) != 0;
+        return getBufPtr().getBoolean(48);
     }
 
     /**
      * Can bodies go to sleep to improve performance
      */
     public void enableSleep(boolean enableSleep) {
-        setValue(enableSleep, 11);
+        getBufPtr().setBoolean(48, enableSleep);
     }
 
     /**
      * Enable continuous collision
      */
     public boolean enableContinuous() {
-        return getValue(12) != 0;
+        return getBufPtr().getBoolean(49);
     }
 
     /**
      * Enable continuous collision
      */
     public void enableContinuous(boolean enableContinuous) {
-        setValue(enableContinuous, 12);
+        getBufPtr().setBoolean(49, enableContinuous);
     }
 
     /**
@@ -246,7 +247,7 @@ public final class b2WorldDef extends Struct {
      * 	 task callbacks (enqueueTask and finishTask).
      */
     public int workerCount() {
-        return (int) getValue(13);
+        return getBufPtr().getInt(52);
     }
 
     /**
@@ -259,77 +260,77 @@ public final class b2WorldDef extends Struct {
      * 	 task callbacks (enqueueTask and finishTask).
      */
     public void workerCount(int workerCount) {
-        setValue(workerCount, 13);
+        getBufPtr().setInt(52, workerCount);
     }
 
     /**
      * Function to spawn tasks
      */
     public ClosureObject<b2EnqueueTaskCallback> enqueueTask() {
-        return CHandler.getClosureObject(getValue(14), b2EnqueueTaskCallback_Internal::b2EnqueueTaskCallback_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(56), b2EnqueueTaskCallback_Internal::b2EnqueueTaskCallback_downcall);
     }
 
     /**
      * Function to spawn tasks
      */
     public void enqueueTask(ClosureObject<b2EnqueueTaskCallback> enqueueTask) {
-        setValue(enqueueTask.getPointer(), 14);
+        getBufPtr().setNativePointer(56, enqueueTask.getPointer());
     }
 
     /**
      * Function to finish a task
      */
     public ClosureObject<b2FinishTaskCallback> finishTask() {
-        return CHandler.getClosureObject(getValue(15), b2FinishTaskCallback_Internal::b2FinishTaskCallback_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 60 : 64), b2FinishTaskCallback_Internal::b2FinishTaskCallback_downcall);
     }
 
     /**
      * Function to finish a task
      */
     public void finishTask(ClosureObject<b2FinishTaskCallback> finishTask) {
-        setValue(finishTask.getPointer(), 15);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 60 : 64, finishTask.getPointer());
     }
 
     /**
      * User context that is provided to enqueueTask and finishTask
      */
     public VoidPointer userTaskContext() {
-        return new VoidPointer(getValue(16), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 64 : 72), false);
     }
 
     /**
      * User context that is provided to enqueueTask and finishTask
      */
     public void userTaskContext(VoidPointer userTaskContext) {
-        setValue(userTaskContext.getPointer(), 16);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 64 : 72, userTaskContext.getPointer());
     }
 
     /**
      * User data
      */
     public VoidPointer userData() {
-        return new VoidPointer(getValue(17), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 68 : 80), false);
     }
 
     /**
      * User data
      */
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 17);
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 68 : 80, userData.getPointer());
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return (int) getValue(18);
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 72 : 88);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        setValue(internalValue, 18);
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 72 : 88, internalValue);
     }
 
     public static final class b2WorldDefPointer extends StackElementPointer<b2WorldDef> {
@@ -338,17 +339,21 @@ public final class b2WorldDef extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2WorldDefPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2WorldDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2WorldDefPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2WorldDefPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2WorldDef.b2WorldDefPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2WorldDefPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

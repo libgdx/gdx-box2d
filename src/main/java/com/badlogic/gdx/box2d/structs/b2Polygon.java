@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -42,7 +43,7 @@ public final class b2Polygon extends Struct {
     }
 
     public b2Polygon.b2PolygonPointer asPointer() {
-        return new b2Polygon.b2PolygonPointer(getPointer(), getsGCFreed());
+        return new b2Polygon.b2PolygonPointer(getPointer(), false, this);
     }
 
     /**
@@ -52,9 +53,9 @@ public final class b2Polygon extends Struct {
         return __vertices;
     }
 
-    private static final int __vertices_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __vertices_offset = 0;
 
-    private final b2Vec2.b2Vec2Pointer __vertices = new b2Vec2.b2Vec2Pointer(getPointer() + __vertices_offset, false).guardCount(8);
+    private final b2Vec2.b2Vec2Pointer __vertices = new b2Vec2.b2Vec2Pointer(getPointer() + __vertices_offset, false, 8);
 
     /**
      * The outward normal vectors of the polygon sides
@@ -63,9 +64,9 @@ public final class b2Polygon extends Struct {
         return __normals;
     }
 
-    private static final int __normals_offset = CHandler.getOffsetForField(__ffi_type, 8);
+    private static final int __normals_offset = 64;
 
-    private final b2Vec2.b2Vec2Pointer __normals = new b2Vec2.b2Vec2Pointer(getPointer() + __normals_offset, false).guardCount(8);
+    private final b2Vec2.b2Vec2Pointer __normals = new b2Vec2.b2Vec2Pointer(getPointer() + __normals_offset, false, 8);
 
     /**
      * The centroid of the polygon
@@ -74,7 +75,7 @@ public final class b2Polygon extends Struct {
         return __centroid;
     }
 
-    private static final int __centroid_offset = CHandler.getOffsetForField(__ffi_type, 16);
+    private static final int __centroid_offset = 128;
 
     private final b2Vec2 __centroid = new b2Vec2(getPointer() + __centroid_offset, false);
 
@@ -82,28 +83,28 @@ public final class b2Polygon extends Struct {
      * The external radius for rounded polygons
      */
     public float radius() {
-        return (float) getValueFloat(17);
+        return getBufPtr().getFloat(136);
     }
 
     /**
      * The external radius for rounded polygons
      */
     public void radius(float radius) {
-        setValue(radius, 17);
+        getBufPtr().setFloat(136, radius);
     }
 
     /**
      * The number of polygon vertices
      */
     public int count() {
-        return (int) getValue(18);
+        return getBufPtr().getInt(140);
     }
 
     /**
      * The number of polygon vertices
      */
     public void count(int count) {
-        setValue(count, 18);
+        getBufPtr().setInt(140, count);
     }
 
     public static final class b2PolygonPointer extends StackElementPointer<b2Polygon> {
@@ -112,17 +113,21 @@ public final class b2Polygon extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2PolygonPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2PolygonPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2PolygonPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2PolygonPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Polygon.b2PolygonPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2PolygonPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -37,7 +38,7 @@ public final class b2RayCastInput extends Struct {
     }
 
     public b2RayCastInput.b2RayCastInputPointer asPointer() {
-        return new b2RayCastInput.b2RayCastInputPointer(getPointer(), getsGCFreed());
+        return new b2RayCastInput.b2RayCastInputPointer(getPointer(), false, this);
     }
 
     /**
@@ -47,7 +48,7 @@ public final class b2RayCastInput extends Struct {
         return __origin;
     }
 
-    private static final int __origin_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __origin_offset = 0;
 
     private final b2Vec2 __origin = new b2Vec2(getPointer() + __origin_offset, false);
 
@@ -58,7 +59,7 @@ public final class b2RayCastInput extends Struct {
         return __translation;
     }
 
-    private static final int __translation_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __translation_offset = 8;
 
     private final b2Vec2 __translation = new b2Vec2(getPointer() + __translation_offset, false);
 
@@ -66,14 +67,14 @@ public final class b2RayCastInput extends Struct {
      * The maximum fraction of the translation to consider, typically 1
      */
     public float maxFraction() {
-        return (float) getValueFloat(2);
+        return getBufPtr().getFloat(16);
     }
 
     /**
      * The maximum fraction of the translation to consider, typically 1
      */
     public void maxFraction(float maxFraction) {
-        setValue(maxFraction, 2);
+        getBufPtr().setFloat(16, maxFraction);
     }
 
     public static final class b2RayCastInputPointer extends StackElementPointer<b2RayCastInput> {
@@ -82,17 +83,21 @@ public final class b2RayCastInput extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2RayCastInputPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2RayCastInputPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2RayCastInputPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2RayCastInputPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2RayCastInput.b2RayCastInputPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2RayCastInputPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

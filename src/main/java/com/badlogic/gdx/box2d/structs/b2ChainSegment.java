@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Segment;
@@ -40,7 +41,7 @@ public final class b2ChainSegment extends Struct {
     }
 
     public b2ChainSegment.b2ChainSegmentPointer asPointer() {
-        return new b2ChainSegment.b2ChainSegmentPointer(getPointer(), getsGCFreed());
+        return new b2ChainSegment.b2ChainSegmentPointer(getPointer(), false, this);
     }
 
     /**
@@ -50,7 +51,7 @@ public final class b2ChainSegment extends Struct {
         return __ghost1;
     }
 
-    private static final int __ghost1_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __ghost1_offset = 0;
 
     private final b2Vec2 __ghost1 = new b2Vec2(getPointer() + __ghost1_offset, false);
 
@@ -61,7 +62,7 @@ public final class b2ChainSegment extends Struct {
         return __segment;
     }
 
-    private static final int __segment_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __segment_offset = 8;
 
     private final b2Segment __segment = new b2Segment(getPointer() + __segment_offset, false);
 
@@ -72,7 +73,7 @@ public final class b2ChainSegment extends Struct {
         return __ghost2;
     }
 
-    private static final int __ghost2_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __ghost2_offset = 24;
 
     private final b2Vec2 __ghost2 = new b2Vec2(getPointer() + __ghost2_offset, false);
 
@@ -80,14 +81,14 @@ public final class b2ChainSegment extends Struct {
      * The owning chain shape index (internal usage only)
      */
     public int chainId() {
-        return (int) getValue(3);
+        return getBufPtr().getInt(32);
     }
 
     /**
      * The owning chain shape index (internal usage only)
      */
     public void chainId(int chainId) {
-        setValue(chainId, 3);
+        getBufPtr().setInt(32, chainId);
     }
 
     public static final class b2ChainSegmentPointer extends StackElementPointer<b2ChainSegment> {
@@ -96,17 +97,21 @@ public final class b2ChainSegment extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2ChainSegmentPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2ChainSegmentPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2ChainSegmentPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ChainSegmentPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2ChainSegment.b2ChainSegmentPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ChainSegmentPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

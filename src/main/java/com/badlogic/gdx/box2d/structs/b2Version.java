@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -37,49 +38,49 @@ public final class b2Version extends Struct {
     }
 
     public b2Version.b2VersionPointer asPointer() {
-        return new b2Version.b2VersionPointer(getPointer(), getsGCFreed());
+        return new b2Version.b2VersionPointer(getPointer(), false, this);
     }
 
     /**
      * Significant changes
      */
     public int major() {
-        return (int) getValue(0);
+        return getBufPtr().getInt(0);
     }
 
     /**
      * Significant changes
      */
     public void major(int major) {
-        setValue(major, 0);
+        getBufPtr().setInt(0, major);
     }
 
     /**
      * Incremental changes
      */
     public int minor() {
-        return (int) getValue(1);
+        return getBufPtr().getInt(4);
     }
 
     /**
      * Incremental changes
      */
     public void minor(int minor) {
-        setValue(minor, 1);
+        getBufPtr().setInt(4, minor);
     }
 
     /**
      * Bug fixes
      */
     public int revision() {
-        return (int) getValue(2);
+        return getBufPtr().getInt(8);
     }
 
     /**
      * Bug fixes
      */
     public void revision(int revision) {
-        setValue(revision, 2);
+        getBufPtr().setInt(8, revision);
     }
 
     public static final class b2VersionPointer extends StackElementPointer<b2Version> {
@@ -88,17 +89,21 @@ public final class b2Version extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2VersionPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2VersionPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2VersionPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2VersionPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Version.b2VersionPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2VersionPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

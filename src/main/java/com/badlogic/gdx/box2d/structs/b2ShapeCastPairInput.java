@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Transform;
@@ -39,7 +40,7 @@ public final class b2ShapeCastPairInput extends Struct {
     }
 
     public b2ShapeCastPairInput.b2ShapeCastPairInputPointer asPointer() {
-        return new b2ShapeCastPairInput.b2ShapeCastPairInputPointer(getPointer(), getsGCFreed());
+        return new b2ShapeCastPairInput.b2ShapeCastPairInputPointer(getPointer(), false, this);
     }
 
     /**
@@ -49,7 +50,7 @@ public final class b2ShapeCastPairInput extends Struct {
         return __proxyA;
     }
 
-    private static final int __proxyA_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __proxyA_offset = 0;
 
     private final b2ShapeProxy __proxyA = new b2ShapeProxy(getPointer() + __proxyA_offset, false);
 
@@ -60,7 +61,7 @@ public final class b2ShapeCastPairInput extends Struct {
         return __proxyB;
     }
 
-    private static final int __proxyB_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __proxyB_offset = 72;
 
     private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
 
@@ -71,7 +72,7 @@ public final class b2ShapeCastPairInput extends Struct {
         return __transformA;
     }
 
-    private static final int __transformA_offset = CHandler.getOffsetForField(__ffi_type, 2);
+    private static final int __transformA_offset = 144;
 
     private final b2Transform __transformA = new b2Transform(getPointer() + __transformA_offset, false);
 
@@ -82,7 +83,7 @@ public final class b2ShapeCastPairInput extends Struct {
         return __transformB;
     }
 
-    private static final int __transformB_offset = CHandler.getOffsetForField(__ffi_type, 3);
+    private static final int __transformB_offset = 160;
 
     private final b2Transform __transformB = new b2Transform(getPointer() + __transformB_offset, false);
 
@@ -93,7 +94,7 @@ public final class b2ShapeCastPairInput extends Struct {
         return __translationB;
     }
 
-    private static final int __translationB_offset = CHandler.getOffsetForField(__ffi_type, 4);
+    private static final int __translationB_offset = 176;
 
     private final b2Vec2 __translationB = new b2Vec2(getPointer() + __translationB_offset, false);
 
@@ -101,14 +102,14 @@ public final class b2ShapeCastPairInput extends Struct {
      * The fraction of the translation to consider, typically 1
      */
     public float maxFraction() {
-        return (float) getValueFloat(5);
+        return getBufPtr().getFloat(184);
     }
 
     /**
      * The fraction of the translation to consider, typically 1
      */
     public void maxFraction(float maxFraction) {
-        setValue(maxFraction, 5);
+        getBufPtr().setFloat(184, maxFraction);
     }
 
     public static final class b2ShapeCastPairInputPointer extends StackElementPointer<b2ShapeCastPairInput> {
@@ -117,17 +118,21 @@ public final class b2ShapeCastPairInput extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2ShapeCastPairInputPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2ShapeCastPairInputPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2ShapeCastPairInputPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2ShapeCastPairInputPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2ShapeCastPairInput.b2ShapeCastPairInputPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2ShapeCastPairInputPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

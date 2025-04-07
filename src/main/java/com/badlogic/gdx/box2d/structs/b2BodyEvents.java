@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyMoveEvent;
 
@@ -39,35 +40,35 @@ public final class b2BodyEvents extends Struct {
     }
 
     public b2BodyEvents.b2BodyEventsPointer asPointer() {
-        return new b2BodyEvents.b2BodyEventsPointer(getPointer(), getsGCFreed());
+        return new b2BodyEvents.b2BodyEventsPointer(getPointer(), false, this);
     }
 
     /**
      * Array of move events
      */
     public b2BodyMoveEvent.b2BodyMoveEventPointer moveEvents() {
-        return new b2BodyMoveEvent.b2BodyMoveEventPointer(getValue(0), false);
+        return new b2BodyMoveEvent.b2BodyMoveEventPointer(getBufPtr().getNativePointer(0), false);
     }
 
     /**
      * Array of move events
      */
     public void moveEvents(b2BodyMoveEvent.b2BodyMoveEventPointer moveEvents) {
-        setValue(moveEvents.getPointer(), 0);
+        getBufPtr().setNativePointer(0, moveEvents.getPointer());
     }
 
     /**
      * Number of move events
      */
     public int moveCount() {
-        return (int) getValue(1);
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 4 : 8);
     }
 
     /**
      * Number of move events
      */
     public void moveCount(int moveCount) {
-        setValue(moveCount, 1);
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, moveCount);
     }
 
     public static final class b2BodyEventsPointer extends StackElementPointer<b2BodyEvents> {
@@ -76,17 +77,21 @@ public final class b2BodyEvents extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2BodyEventsPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2BodyEventsPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2BodyEventsPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2BodyEventsPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2BodyEvents.b2BodyEventsPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2BodyEventsPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

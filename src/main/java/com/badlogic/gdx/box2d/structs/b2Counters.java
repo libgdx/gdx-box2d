@@ -3,8 +3,9 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
-import com.badlogic.gdx.jnigen.runtime.pointer.CSizedIntPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.integer.SIntPointer;
 
 /**
  * Counters that give details of the simulation size.
@@ -37,96 +38,96 @@ public final class b2Counters extends Struct {
     }
 
     public b2Counters.b2CountersPointer asPointer() {
-        return new b2Counters.b2CountersPointer(getPointer(), getsGCFreed());
+        return new b2Counters.b2CountersPointer(getPointer(), false, this);
     }
 
     public int bodyCount() {
-        return (int) getValue(0);
+        return getBufPtr().getInt(0);
     }
 
     public void bodyCount(int bodyCount) {
-        setValue(bodyCount, 0);
+        getBufPtr().setInt(0, bodyCount);
     }
 
     public int shapeCount() {
-        return (int) getValue(1);
+        return getBufPtr().getInt(4);
     }
 
     public void shapeCount(int shapeCount) {
-        setValue(shapeCount, 1);
+        getBufPtr().setInt(4, shapeCount);
     }
 
     public int contactCount() {
-        return (int) getValue(2);
+        return getBufPtr().getInt(8);
     }
 
     public void contactCount(int contactCount) {
-        setValue(contactCount, 2);
+        getBufPtr().setInt(8, contactCount);
     }
 
     public int jointCount() {
-        return (int) getValue(3);
+        return getBufPtr().getInt(12);
     }
 
     public void jointCount(int jointCount) {
-        setValue(jointCount, 3);
+        getBufPtr().setInt(12, jointCount);
     }
 
     public int islandCount() {
-        return (int) getValue(4);
+        return getBufPtr().getInt(16);
     }
 
     public void islandCount(int islandCount) {
-        setValue(islandCount, 4);
+        getBufPtr().setInt(16, islandCount);
     }
 
     public int stackUsed() {
-        return (int) getValue(5);
+        return getBufPtr().getInt(20);
     }
 
     public void stackUsed(int stackUsed) {
-        setValue(stackUsed, 5);
+        getBufPtr().setInt(20, stackUsed);
     }
 
     public int staticTreeHeight() {
-        return (int) getValue(6);
+        return getBufPtr().getInt(24);
     }
 
     public void staticTreeHeight(int staticTreeHeight) {
-        setValue(staticTreeHeight, 6);
+        getBufPtr().setInt(24, staticTreeHeight);
     }
 
     public int treeHeight() {
-        return (int) getValue(7);
+        return getBufPtr().getInt(28);
     }
 
     public void treeHeight(int treeHeight) {
-        setValue(treeHeight, 7);
+        getBufPtr().setInt(28, treeHeight);
     }
 
     public int byteCount() {
-        return (int) getValue(8);
+        return getBufPtr().getInt(32);
     }
 
     public void byteCount(int byteCount) {
-        setValue(byteCount, 8);
+        getBufPtr().setInt(32, byteCount);
     }
 
     public int taskCount() {
-        return (int) getValue(9);
+        return getBufPtr().getInt(36);
     }
 
     public void taskCount(int taskCount) {
-        setValue(taskCount, 9);
+        getBufPtr().setInt(36, taskCount);
     }
 
-    public CSizedIntPointer colorCounts() {
+    public SIntPointer colorCounts() {
         return __colorCounts;
     }
 
-    private static final int __colorCounts_offset = CHandler.getOffsetForField(__ffi_type, 10);
+    private static final int __colorCounts_offset = 40;
 
-    private final CSizedIntPointer __colorCounts = new CSizedIntPointer(getPointer() + __colorCounts_offset, false, "int").guardCount(12);
+    private final SIntPointer __colorCounts = new SIntPointer(getPointer() + __colorCounts_offset, false, 12);
 
     public static final class b2CountersPointer extends StackElementPointer<b2Counters> {
 
@@ -134,17 +135,21 @@ public final class b2Counters extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2CountersPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2CountersPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2CountersPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2CountersPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2Counters.b2CountersPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2CountersPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {

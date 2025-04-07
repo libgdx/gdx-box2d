@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.structs;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
+import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Transform;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
@@ -48,14 +49,14 @@ public final class b2BodyMoveEvent extends Struct {
     }
 
     public b2BodyMoveEvent.b2BodyMoveEventPointer asPointer() {
-        return new b2BodyMoveEvent.b2BodyMoveEventPointer(getPointer(), getsGCFreed());
+        return new b2BodyMoveEvent.b2BodyMoveEventPointer(getPointer(), false, this);
     }
 
     public b2Transform transform() {
         return __transform;
     }
 
-    private static final int __transform_offset = CHandler.getOffsetForField(__ffi_type, 0);
+    private static final int __transform_offset = 0;
 
     private final b2Transform __transform = new b2Transform(getPointer() + __transform_offset, false);
 
@@ -63,24 +64,24 @@ public final class b2BodyMoveEvent extends Struct {
         return __bodyId;
     }
 
-    private static final int __bodyId_offset = CHandler.getOffsetForField(__ffi_type, 1);
+    private static final int __bodyId_offset = 16;
 
     private final b2BodyId __bodyId = new b2BodyId(getPointer() + __bodyId_offset, false);
 
     public VoidPointer userData() {
-        return new VoidPointer(getValue(2), false);
+        return new VoidPointer(getBufPtr().getNativePointer(24), false);
     }
 
     public void userData(VoidPointer userData) {
-        setValue(userData.getPointer(), 2);
+        getBufPtr().setNativePointer(24, userData.getPointer());
     }
 
     public boolean fellAsleep() {
-        return getValue(3) != 0;
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 28 : 32);
     }
 
     public void fellAsleep(boolean fellAsleep) {
-        setValue(fellAsleep, 3);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 28 : 32, fellAsleep);
     }
 
     public static final class b2BodyMoveEventPointer extends StackElementPointer<b2BodyMoveEvent> {
@@ -89,17 +90,21 @@ public final class b2BodyMoveEvent extends Struct {
             super(pointer, freeOnGC);
         }
 
+        public b2BodyMoveEventPointer(long pointer, boolean freeOnGC, int capacity) {
+            super(pointer, freeOnGC, capacity * __size);
+        }
+
+        public b2BodyMoveEventPointer(long pointer, boolean freeOnGC, Pointing parent) {
+            super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
         public b2BodyMoveEventPointer() {
-            this(1, true, true);
+            this(1, true);
         }
 
-        public b2BodyMoveEventPointer(int count, boolean freeOnGC, boolean guard) {
-            super(__size, count, freeOnGC, guard);
-        }
-
-        public b2BodyMoveEvent.b2BodyMoveEventPointer guardCount(long count) {
-            super.guardCount(count);
-            return this;
+        public b2BodyMoveEventPointer(int count, boolean freeOnGC) {
+            super(__size, count, freeOnGC);
         }
 
         public int getSize() {
