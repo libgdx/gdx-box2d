@@ -5,7 +5,7 @@ import kotlin.io.path.createTempDirectory
 
 plugins {
     id("java-library")
-    id("com.badlogicgames.jnigen.jnigen-gradle") version "3.0.0-SNAPSHOT"
+    id("com.badlogicgames.jnigen.jnigen-gradle") version "3.0.0"
 }
 
 val isReleaseBuild: Boolean
@@ -155,7 +155,7 @@ tasks.create("build_windows") {
 }
 
 jnigen {
-    javaClass.superclass.getDeclaredField("sharedLibName").apply { isAccessible = true }.set(this, "gdx-box2d")
+    sharedLibName = "gdx-box2d"
     generator {
         outputPath = file("src/main/java")
         basePackage = "com.badlogic.gdx.box2d"
