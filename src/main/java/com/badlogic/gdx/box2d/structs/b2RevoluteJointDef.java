@@ -30,7 +30,7 @@ public final class b2RevoluteJointDef extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(51).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(55).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -171,28 +171,28 @@ public final class b2RevoluteJointDef extends Struct {
     }
 
     /**
-     * The lower angle for the joint limit in radians
+     * The lower angle for the joint limit in radians. Minimum of -0.95*pi radians.
      */
     public float lowerAngle() {
         return getBufPtr().getFloat(52);
     }
 
     /**
-     * The lower angle for the joint limit in radians
+     * The lower angle for the joint limit in radians. Minimum of -0.95*pi radians.
      */
     public void lowerAngle(float lowerAngle) {
         getBufPtr().setFloat(52, lowerAngle);
     }
 
     /**
-     * The upper angle for the joint limit in radians
+     * The upper angle for the joint limit in radians. Maximum of 0.95*pi radians.
      */
     public float upperAngle() {
         return getBufPtr().getFloat(56);
     }
 
     /**
-     * The upper angle for the joint limit in radians
+     * The upper angle for the joint limit in radians. Maximum of 0.95*pi radians.
      */
     public void upperAngle(float upperAngle) {
         getBufPtr().setFloat(56, upperAngle);

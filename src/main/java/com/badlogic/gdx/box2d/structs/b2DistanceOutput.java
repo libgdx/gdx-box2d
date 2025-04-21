@@ -17,7 +17,7 @@ public final class b2DistanceOutput extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(32).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(33).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -64,45 +64,56 @@ public final class b2DistanceOutput extends Struct {
     private final b2Vec2 __pointB = new b2Vec2(getPointer() + __pointB_offset, false);
 
     /**
+     * Normal vector that points from A to B
+     */
+    public b2Vec2 normal() {
+        return __normal;
+    }
+
+    private static final int __normal_offset = 16;
+
+    private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
+
+    /**
      * The final distance, zero if overlapped
      */
     public float distance() {
-        return getBufPtr().getFloat(16);
+        return getBufPtr().getFloat(24);
     }
 
     /**
      * The final distance, zero if overlapped
      */
     public void distance(float distance) {
-        getBufPtr().setFloat(16, distance);
+        getBufPtr().setFloat(24, distance);
     }
 
     /**
      * Number of GJK iterations used
      */
     public int iterations() {
-        return getBufPtr().getInt(20);
+        return getBufPtr().getInt(28);
     }
 
     /**
      * Number of GJK iterations used
      */
     public void iterations(int iterations) {
-        getBufPtr().setInt(20, iterations);
+        getBufPtr().setInt(28, iterations);
     }
 
     /**
      * The number of simplexes stored in the simplex array
      */
     public int simplexCount() {
-        return getBufPtr().getInt(24);
+        return getBufPtr().getInt(32);
     }
 
     /**
      * The number of simplexes stored in the simplex array
      */
     public void simplexCount(int simplexCount) {
-        getBufPtr().setInt(24, simplexCount);
+        getBufPtr().setInt(32, simplexCount);
     }
 
     public static final class b2DistanceOutputPointer extends StackElementPointer<b2DistanceOutput> {

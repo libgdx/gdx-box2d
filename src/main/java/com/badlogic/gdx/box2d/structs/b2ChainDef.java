@@ -7,13 +7,14 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
+import com.badlogic.gdx.box2d.structs.b2SurfaceMaterial;
 import com.badlogic.gdx.box2d.structs.b2Filter;
 
 /**
  * Used to create a chain of line segments. This is designed to eliminate ghost collisions with some limitations.
  * - chains are one-sided
  * - chains have no mass and should be used on static bodies
- * - chains have a counter-clockwise winding order
+ * - chains have a counter-clockwise winding order (normal points right of segment direction)
  * - chains are either a loop or open
  * - a chain must have at least 4 points
  * - the distance between any two points must be greater than B2_LINEAR_SLOP
@@ -100,31 +101,33 @@ public final class b2ChainDef extends Struct {
     }
 
     /**
-     * The friction coefficient, usually in the range [0,1].
+     * Surface materials for each segment. These are cloned.
      */
-    public float friction() {
-        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 12 : 20);
+    public b2SurfaceMaterial.b2SurfaceMaterialPointer materials() {
+        return new b2SurfaceMaterial.b2SurfaceMaterialPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 12 : 24), false);
     }
 
     /**
-     * The friction coefficient, usually in the range [0,1].
+     * Surface materials for each segment. These are cloned.
      */
-    public void friction(float friction) {
-        getBufPtr().setFloat(CHandler.IS_32_BIT ? 12 : 20, friction);
+    public void materials(b2SurfaceMaterial.b2SurfaceMaterialPointer materials) {
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 24, materials.getPointer());
     }
 
     /**
-     * The restitution (elasticity) usually in the range [0,1].
+     *  The material count. Must be 1 or count. This allows you to provide one
+     * 	 material for all segments or a unique material per segment.
      */
-    public float restitution() {
-        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 16 : 24);
+    public int materialCount() {
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 16 : 32);
     }
 
     /**
-     * The restitution (elasticity) usually in the range [0,1].
+     *  The material count. Must be 1 or count. This allows you to provide one
+     * 	 material for all segments or a unique material per segment.
      */
-    public void restitution(float restitution) {
-        getBufPtr().setFloat(CHandler.IS_32_BIT ? 16 : 24, restitution);
+    public void materialCount(int materialCount) {
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 16 : 32, materialCount);
     }
 
     /**
@@ -134,64 +137,50 @@ public final class b2ChainDef extends Struct {
         return __filter;
     }
 
-    private static final int __filter_offset = CHandler.IS_32_BIT ? 24 : 32;
+    private static final int __filter_offset = CHandler.IS_32_BIT ? 24 : 40;
 
     private final b2Filter __filter = new b2Filter(getPointer() + __filter_offset, false);
-
-    /**
-     * Custom debug draw color.
-     */
-    public long customColor() {
-        return getBufPtr().getUInt(CHandler.IS_32_BIT ? 48 : 56);
-    }
-
-    /**
-     * Custom debug draw color.
-     */
-    public void customColor(long customColor) {
-        getBufPtr().setUInt(CHandler.IS_32_BIT ? 48 : 56, customColor);
-    }
 
     /**
      * Indicates a closed chain formed by connecting the first and last points
      */
     public boolean isLoop() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 52 : 60);
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 48 : 64);
     }
 
     /**
      * Indicates a closed chain formed by connecting the first and last points
      */
     public void isLoop(boolean isLoop) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 52 : 60, isLoop);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 48 : 64, isLoop);
     }
 
     /**
-     * Generate events when a sensor overlaps this chain
+     * Enable sensors to detect this chain. False by default.
      */
     public boolean enableSensorEvents() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 53 : 61);
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 49 : 65);
     }
 
     /**
-     * Generate events when a sensor overlaps this chain
+     * Enable sensors to detect this chain. False by default.
      */
     public void enableSensorEvents(boolean enableSensorEvents) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 53 : 61, enableSensorEvents);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 49 : 65, enableSensorEvents);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 56 : 64);
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 52 : 68);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 56 : 64, internalValue);
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 52 : 68, internalValue);
     }
 
     public static final class b2ChainDefPointer extends StackElementPointer<b2ChainDef> {

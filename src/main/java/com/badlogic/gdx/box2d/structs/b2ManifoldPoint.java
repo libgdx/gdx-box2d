@@ -11,7 +11,7 @@ import com.badlogic.gdx.box2d.structs.b2Vec2;
  * A manifold point is a contact point belonging to a contact manifold.
  * It holds details related to the geometry and dynamics of the contact points.
  * Box2D uses speculative collision so some contact points may be separated.
- * You may use the maxNormalImpulse to determine if there was an interaction during
+ * You may use the totalNormalImpulse to determine if there was an interaction during
  * the time step.
  */
 public final class b2ManifoldPoint extends Struct {
@@ -21,7 +21,7 @@ public final class b2ManifoldPoint extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(39).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(41).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -124,19 +124,19 @@ public final class b2ManifoldPoint extends Struct {
     }
 
     /**
-     *  The maximum normal impulse applied during sub-stepping. This is important
+     *  The total normal impulse applied across sub-stepping and restitution. This is important
      * 	 to identify speculative contact points that had an interaction in the time step.
      */
-    public float maxNormalImpulse() {
+    public float totalNormalImpulse() {
         return getBufPtr().getFloat(36);
     }
 
     /**
-     *  The maximum normal impulse applied during sub-stepping. This is important
+     *  The total normal impulse applied across sub-stepping and restitution. This is important
      * 	 to identify speculative contact points that had an interaction in the time step.
      */
-    public void maxNormalImpulse(float maxNormalImpulse) {
-        getBufPtr().setFloat(36, maxNormalImpulse);
+    public void totalNormalImpulse(float totalNormalImpulse) {
+        getBufPtr().setFloat(36, totalNormalImpulse);
     }
 
     /**

@@ -49,7 +49,7 @@ public class Box2dDebugRendererTest extends ApplicationAdapter {
         b2Polygon roundedBox = b2MakeRoundedBox(0.45f, 0.45f, 0.05f);
         b2ShapeDef roundedSd = b2DefaultShapeDef();
         roundedSd.density(1.0f);
-        roundedSd.friction(0.3f);
+        roundedSd.material().friction(0.3f);
 
         float offset = 0.2f;
         float dx = 5.0f;

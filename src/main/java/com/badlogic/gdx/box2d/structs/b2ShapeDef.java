@@ -6,6 +6,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
+import com.badlogic.gdx.box2d.structs.b2SurfaceMaterial;
 import com.badlogic.gdx.box2d.structs.b2Filter;
 
 /**
@@ -22,7 +23,7 @@ public final class b2ShapeDef extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(60).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(64).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -61,59 +62,32 @@ public final class b2ShapeDef extends Struct {
     }
 
     /**
-     * The Coulomb (dry) friction coefficient, usually in the range [0,1].
+     * The surface material for this shape.
      */
-    public float friction() {
-        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 4 : 8);
+    public b2SurfaceMaterial material() {
+        return __material;
     }
 
-    /**
-     * The Coulomb (dry) friction coefficient, usually in the range [0,1].
-     */
-    public void friction(float friction) {
-        getBufPtr().setFloat(CHandler.IS_32_BIT ? 4 : 8, friction);
-    }
+    private static final int __material_offset = CHandler.IS_32_BIT ? 4 : 8;
+
+    private final b2SurfaceMaterial __material = new b2SurfaceMaterial(getPointer() + __material_offset, false);
 
     /**
-     * The restitution (bounce) usually in the range [0,1].
-     */
-    public float restitution() {
-        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 8 : 12);
-    }
-
-    /**
-     * The restitution (bounce) usually in the range [0,1].
-     */
-    public void restitution(float restitution) {
-        getBufPtr().setFloat(CHandler.IS_32_BIT ? 8 : 12, restitution);
-    }
-
-    /**
-     * The rolling resistance usually in the range [0,1].
-     */
-    public float rollingResistance() {
-        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 12 : 16);
-    }
-
-    /**
-     * The rolling resistance usually in the range [0,1].
-     */
-    public void rollingResistance(float rollingResistance) {
-        getBufPtr().setFloat(CHandler.IS_32_BIT ? 12 : 16, rollingResistance);
-    }
-
-    /**
-     * The density, usually in kg/m^2.
+     *  The density, usually in kg/m^2.
+     * 	 This is not part of the surface material because this is for the interior, which may have
+     * 	 other considerations, such as being hollow. For example a wood barrel may be hollow or full of water.
      */
     public float density() {
-        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 16 : 20);
+        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 28 : 32);
     }
 
     /**
-     * The density, usually in kg/m^2.
+     *  The density, usually in kg/m^2.
+     * 	 This is not part of the surface material because this is for the interior, which may have
+     * 	 other considerations, such as being hollow. For example a wood barrel may be hollow or full of water.
      */
     public void density(float density) {
-        getBufPtr().setFloat(CHandler.IS_32_BIT ? 16 : 20, density);
+        getBufPtr().setFloat(CHandler.IS_32_BIT ? 28 : 32, density);
     }
 
     /**
@@ -123,68 +97,72 @@ public final class b2ShapeDef extends Struct {
         return __filter;
     }
 
-    private static final int __filter_offset = 24;
+    private static final int __filter_offset = CHandler.IS_32_BIT ? 32 : 40;
 
     private final b2Filter __filter = new b2Filter(getPointer() + __filter_offset, false);
 
     /**
-     * Custom debug draw color.
-     */
-    public long customColor() {
-        return getBufPtr().getUInt(48);
-    }
-
-    /**
-     * Custom debug draw color.
-     */
-    public void customColor(long customColor) {
-        getBufPtr().setUInt(48, customColor);
-    }
-
-    /**
      *  A sensor shape generates overlap events but never generates a collision response.
-     * 	 Sensors do not collide with other sensors and do not have continuous collision.
-     * 	 Instead, use a ray or shape cast for those scenarios.
+     * 	 Sensors do not have continuous collision. Instead, use a ray or shape cast for those scenarios.
+     * 	 Sensors still contribute to the body mass if they have non-zero density.
+     * 	 @note Sensor events are disabled by default.
+     * 	 @see enableSensorEvents
      */
     public boolean isSensor() {
-        return getBufPtr().getBoolean(52);
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 56 : 64);
     }
 
     /**
      *  A sensor shape generates overlap events but never generates a collision response.
-     * 	 Sensors do not collide with other sensors and do not have continuous collision.
-     * 	 Instead, use a ray or shape cast for those scenarios.
+     * 	 Sensors do not have continuous collision. Instead, use a ray or shape cast for those scenarios.
+     * 	 Sensors still contribute to the body mass if they have non-zero density.
+     * 	 @note Sensor events are disabled by default.
+     * 	 @see enableSensorEvents
      */
     public void isSensor(boolean isSensor) {
-        getBufPtr().setBoolean(52, isSensor);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 56 : 64, isSensor);
     }
 
     /**
-     * Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
+     * Enable sensor events for this shape. This applies to sensors and non-sensors. False by default, even for sensors.
+     */
+    public boolean enableSensorEvents() {
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 57 : 65);
+    }
+
+    /**
+     * Enable sensor events for this shape. This applies to sensors and non-sensors. False by default, even for sensors.
+     */
+    public void enableSensorEvents(boolean enableSensorEvents) {
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 57 : 65, enableSensorEvents);
+    }
+
+    /**
+     * Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors. False by default.
      */
     public boolean enableContactEvents() {
-        return getBufPtr().getBoolean(53);
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 58 : 66);
     }
 
     /**
-     * Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
+     * Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors. False by default.
      */
     public void enableContactEvents(boolean enableContactEvents) {
-        getBufPtr().setBoolean(53, enableContactEvents);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 58 : 66, enableContactEvents);
     }
 
     /**
-     * Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
+     * Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors. False by default.
      */
     public boolean enableHitEvents() {
-        return getBufPtr().getBoolean(54);
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 59 : 67);
     }
 
     /**
-     * Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors.
+     * Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors. False by default.
      */
     public void enableHitEvents(boolean enableHitEvents) {
-        getBufPtr().setBoolean(54, enableHitEvents);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 59 : 67, enableHitEvents);
     }
 
     /**
@@ -192,7 +170,7 @@ public final class b2ShapeDef extends Struct {
      * 	 and must be carefully handled due to threading. Ignored for sensors.
      */
     public boolean enablePreSolveEvents() {
-        return getBufPtr().getBoolean(55);
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 60 : 68);
     }
 
     /**
@@ -200,55 +178,53 @@ public final class b2ShapeDef extends Struct {
      * 	 and must be carefully handled due to threading. Ignored for sensors.
      */
     public void enablePreSolveEvents(boolean enablePreSolveEvents) {
-        getBufPtr().setBoolean(55, enablePreSolveEvents);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 60 : 68, enablePreSolveEvents);
     }
 
     /**
-     *  Normally shapes on static bodies don't invoke contact creation when they are added to the world. This overrides
-     * 	 that behavior and causes contact creation. This significantly slows down static body creation which can be important
-     * 	 when there are many static shapes.
-     * 	 This is implicitly always true for sensors, dynamic bodies, and kinematic bodies.
+     *  When shapes are created they will scan the environment for collision the next time step. This can significantly slow down
+     * 	 static body creation when there are many static shapes.
+     * 	 This is flag is ignored for dynamic and kinematic shapes which always invoke contact creation.
      */
     public boolean invokeContactCreation() {
-        return getBufPtr().getBoolean(56);
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 61 : 69);
     }
 
     /**
-     *  Normally shapes on static bodies don't invoke contact creation when they are added to the world. This overrides
-     * 	 that behavior and causes contact creation. This significantly slows down static body creation which can be important
-     * 	 when there are many static shapes.
-     * 	 This is implicitly always true for sensors, dynamic bodies, and kinematic bodies.
+     *  When shapes are created they will scan the environment for collision the next time step. This can significantly slow down
+     * 	 static body creation when there are many static shapes.
+     * 	 This is flag is ignored for dynamic and kinematic shapes which always invoke contact creation.
      */
     public void invokeContactCreation(boolean invokeContactCreation) {
-        getBufPtr().setBoolean(56, invokeContactCreation);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 61 : 69, invokeContactCreation);
     }
 
     /**
      * Should the body update the mass properties when this shape is created. Default is true.
      */
     public boolean updateBodyMass() {
-        return getBufPtr().getBoolean(57);
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 62 : 70);
     }
 
     /**
      * Should the body update the mass properties when this shape is created. Default is true.
      */
     public void updateBodyMass(boolean updateBodyMass) {
-        getBufPtr().setBoolean(57, updateBodyMass);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 62 : 70, updateBodyMass);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(60);
+        return getBufPtr().getInt(CHandler.IS_32_BIT ? 64 : 72);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(60, internalValue);
+        getBufPtr().setInt(CHandler.IS_32_BIT ? 64 : 72, internalValue);
     }
 
     public static final class b2ShapeDefPointer extends StackElementPointer<b2ShapeDef> {

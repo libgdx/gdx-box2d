@@ -1,7 +1,7 @@
 ## gdx-box2d
 
-This project contains java bindings for the v3 release of [Box2D](https://github.com/erincatto/box2d).  
-The project is build from commit [c7ce16a072173c3c19e8107838b90b419456459d](https://github.com/erincatto/box2d/tree/c7ce16a072173c3c19e8107838b90b419456459d).
+This project contains java bindings for the v3.1 release of [Box2D](https://github.com/erincatto/box2d).  
+The project is build from commit [0f2b0246f39594e93fcc8dde0fe0bb1b20b403f9](https://github.com/erincatto/box2d/tree/0f2b0246f39594e93fcc8dde0fe0bb1b20b403f9).
 
 > [!CAUTION]
 > The API is considered incubating and may change at any point.

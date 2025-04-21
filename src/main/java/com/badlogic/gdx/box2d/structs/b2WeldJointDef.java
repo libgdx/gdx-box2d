@@ -24,7 +24,7 @@ public final class b2WeldJointDef extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(74).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(79).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -93,14 +93,16 @@ public final class b2WeldJointDef extends Struct {
     private final b2Vec2 __localAnchorB = new b2Vec2(getPointer() + __localAnchorB_offset, false);
 
     /**
-     * The bodyB angle minus bodyA angle in the reference state (radians)
+     *  The bodyB angle minus bodyA angle in the reference state (radians)
+     * 	 todo maybe make this a b2Rot
      */
     public float referenceAngle() {
         return getBufPtr().getFloat(32);
     }
 
     /**
-     * The bodyB angle minus bodyA angle in the reference state (radians)
+     *  The bodyB angle minus bodyA angle in the reference state (radians)
+     * 	 todo maybe make this a b2Rot
      */
     public void referenceAngle(float referenceAngle) {
         getBufPtr().setFloat(32, referenceAngle);

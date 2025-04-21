@@ -14,9 +14,9 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 public enum b2JointType implements CEnum {
 
     b2_distanceJoint(0),
-    b2_motorJoint(1),
-    b2_mouseJoint(2),
-    b2_nullJoint(3),
+    b2_filterJoint(1),
+    b2_motorJoint(2),
+    b2_mouseJoint(3),
     b2_prismaticJoint(4),
     b2_revoluteJoint(5),
     b2_weldJoint(6),
@@ -43,11 +43,11 @@ public enum b2JointType implements CEnum {
             case 0:
                 return b2_distanceJoint;
             case 1:
-                return b2_motorJoint;
+                return b2_filterJoint;
             case 2:
-                return b2_mouseJoint;
+                return b2_motorJoint;
             case 3:
-                return b2_nullJoint;
+                return b2_mouseJoint;
             case 4:
                 return b2_prismaticJoint;
             case 5:

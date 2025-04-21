@@ -19,7 +19,7 @@ public final class b2ShapeCastPairInput extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(59).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(63).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -110,6 +110,20 @@ public final class b2ShapeCastPairInput extends Struct {
      */
     public void maxFraction(float maxFraction) {
         getBufPtr().setFloat(184, maxFraction);
+    }
+
+    /**
+     * Allows shapes with a radius to move slightly closer if already touching
+     */
+    public boolean canEncroach() {
+        return getBufPtr().getBoolean(188);
+    }
+
+    /**
+     * Allows shapes with a radius to move slightly closer if already touching
+     */
+    public void canEncroach(boolean canEncroach) {
+        getBufPtr().setBoolean(188, canEncroach);
     }
 
     public static final class b2ShapeCastPairInputPointer extends StackElementPointer<b2ShapeCastPairInput> {

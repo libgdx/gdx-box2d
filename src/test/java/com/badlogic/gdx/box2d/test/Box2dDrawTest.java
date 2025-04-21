@@ -43,7 +43,7 @@ public class Box2dDrawTest {
         b2Polygon box = b2MakeRoundedBox(0.45f, 0.45f, 0.05f);
         b2ShapeDef sd = b2DefaultShapeDef();
         sd.density(1.0f);
-        sd.friction(0.3f);
+        sd.material().friction(0.3f);
 
         float offset = 0.2f;
         float dx = 5.0f;
@@ -78,9 +78,9 @@ public class Box2dDrawTest {
         canvas.createBufferStrategy(2);
 
         b2DebugDraw draw = b2DefaultDebugDraw();
-        draw.drawAABBs(true);
+        draw.drawBounds(true);
 
-        draw.DrawPolygon(ClosureObject.fromClosure((vertices, vertexCount, color, context) -> {
+        draw.DrawPolygonFcn(ClosureObject.fromClosure((vertices, vertexCount, color, context) -> {
             BufferStrategy bs = canvas.getBufferStrategy();
             Graphics g = bs.getDrawGraphics();
 

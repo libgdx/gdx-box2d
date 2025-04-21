@@ -26,15 +26,15 @@ public class Box2dDebugRenderer implements Disposable {
         renderer = new ShapeRenderer();
         renderer.setAutoShapeType(true);
         b2DebugDraw = b2DefaultDebugDraw();
-        b2DebugDraw.DrawPolygon(ClosureObject.fromClosure(this::drawPolygon));
-        b2DebugDraw.DrawSolidPolygon(ClosureObject.fromClosure(this::drawSolidPolygon));
-        b2DebugDraw.DrawCircle(ClosureObject.fromClosure(this::drawCircle));
-        b2DebugDraw.DrawSolidCircle(ClosureObject.fromClosure(this::drawSolidCircle));
-        b2DebugDraw.DrawSolidCapsule(ClosureObject.fromClosure(this::drawSolidCapsule));
-        b2DebugDraw.DrawSegment(ClosureObject.fromClosure(this::drawSegment));
-        b2DebugDraw.DrawTransform(ClosureObject.fromClosure(this::drawTransform));
-        b2DebugDraw.DrawPoint(ClosureObject.fromClosure(this::drawPoint));
-        b2DebugDraw.DrawString(ClosureObject.fromClosure(this::drawString));
+        b2DebugDraw.DrawPolygonFcn(ClosureObject.fromClosure(this::drawPolygon));
+        b2DebugDraw.DrawSolidPolygonFcn(ClosureObject.fromClosure(this::drawSolidPolygon));
+        b2DebugDraw.DrawCircleFcn(ClosureObject.fromClosure(this::drawCircle));
+        b2DebugDraw.DrawSolidCircleFcn(ClosureObject.fromClosure(this::drawSolidCircle));
+        b2DebugDraw.DrawSolidCapsuleFcn(ClosureObject.fromClosure(this::drawSolidCapsule));
+        b2DebugDraw.DrawSegmentFcn(ClosureObject.fromClosure(this::drawSegment));
+        b2DebugDraw.DrawTransformFcn(ClosureObject.fromClosure(this::drawTransform));
+        b2DebugDraw.DrawPointFcn(ClosureObject.fromClosure(this::drawPoint));
+        b2DebugDraw.DrawStringFcn(ClosureObject.fromClosure(this::drawString));
     }
 
     /** This assumes that the projection matrix has already been set. */
@@ -151,15 +151,15 @@ public class Box2dDebugRenderer implements Disposable {
 
     public void dispose () {
         renderer.dispose();
-        b2DebugDraw.DrawPolygon().free();
-        b2DebugDraw.DrawSolidPolygon().free();
-        b2DebugDraw.DrawCircle().free();
-        b2DebugDraw.DrawSolidCircle().free();
-        b2DebugDraw.DrawSolidCapsule().free();
-        b2DebugDraw.DrawSegment().free();
-        b2DebugDraw.DrawTransform().free();
-        b2DebugDraw.DrawPoint().free();
-        b2DebugDraw.DrawString().free();
+        b2DebugDraw.DrawPolygonFcn().free();
+        b2DebugDraw.DrawSolidPolygonFcn().free();
+        b2DebugDraw.DrawCircleFcn().free();
+        b2DebugDraw.DrawSolidCircleFcn().free();
+        b2DebugDraw.DrawSolidCapsuleFcn().free();
+        b2DebugDraw.DrawSegmentFcn().free();
+        b2DebugDraw.DrawTransformFcn().free();
+        b2DebugDraw.DrawPointFcn().free();
+        b2DebugDraw.DrawStringFcn().free();
     }
 }
 

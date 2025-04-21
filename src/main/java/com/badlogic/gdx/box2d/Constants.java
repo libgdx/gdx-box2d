@@ -2,7 +2,7 @@ package com.badlogic.gdx.box2d;
 
 public final class Constants {
 
-    public static final byte B2_DEFAULT_CATEGORY_BITS = 0x0001;
+    public static final byte B2_DEFAULT_CATEGORY_BITS = 1;
 
     public static final byte B2_ENABLE_ASSERT = 1;
 

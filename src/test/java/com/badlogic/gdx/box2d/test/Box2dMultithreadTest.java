@@ -113,7 +113,7 @@ public class Box2dMultithreadTest {
         b2Polygon box = b2MakeRoundedBox(0.45f, 0.45f, 0.05f);
         b2ShapeDef sd = b2DefaultShapeDef();
         sd.density(1.0f);
-        sd.friction(0.3f);
+        sd.material().friction(0.3f);
 
         float offset = 0.2f;
         float dx = 5.0f;

@@ -9,26 +9,26 @@ import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
- * A null joint is used to disable collision between two specific bodies.
+ * A filter joint is used to disable collision between two specific bodies.
  *
- * @ingroup null_joint
+ * @ingroup filter_joint
  */
-public final class b2NullJointDef extends Struct {
+public final class b2FilterJointDef extends Struct {
 
     private final static int __size;
 
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(44).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(37).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
-    public b2NullJointDef(long pointer, boolean freeOnGC) {
+    public b2FilterJointDef(long pointer, boolean freeOnGC) {
         super(pointer, freeOnGC);
     }
 
-    public b2NullJointDef() {
+    public b2FilterJointDef() {
         super(__size);
     }
 
@@ -40,8 +40,8 @@ public final class b2NullJointDef extends Struct {
         return __ffi_type;
     }
 
-    public b2NullJointDef.b2NullJointDefPointer asPointer() {
-        return new b2NullJointDef.b2NullJointDefPointer(getPointer(), false, this);
+    public b2FilterJointDef.b2FilterJointDefPointer asPointer() {
+        return new b2FilterJointDef.b2FilterJointDefPointer(getPointer(), false, this);
     }
 
     /**
@@ -94,26 +94,26 @@ public final class b2NullJointDef extends Struct {
         getBufPtr().setInt(CHandler.IS_32_BIT ? 20 : 24, internalValue);
     }
 
-    public static final class b2NullJointDefPointer extends StackElementPointer<b2NullJointDef> {
+    public static final class b2FilterJointDefPointer extends StackElementPointer<b2FilterJointDef> {
 
-        public b2NullJointDefPointer(long pointer, boolean freeOnGC) {
+        public b2FilterJointDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);
         }
 
-        public b2NullJointDefPointer(long pointer, boolean freeOnGC, int capacity) {
+        public b2FilterJointDefPointer(long pointer, boolean freeOnGC, int capacity) {
             super(pointer, freeOnGC, capacity * __size);
         }
 
-        public b2NullJointDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
+        public b2FilterJointDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
             setParent(parent);
         }
 
-        public b2NullJointDefPointer() {
+        public b2FilterJointDefPointer() {
             this(1, true);
         }
 
-        public b2NullJointDefPointer(int count, boolean freeOnGC) {
+        public b2FilterJointDefPointer(int count, boolean freeOnGC) {
             super(__size, count, freeOnGC);
         }
 
@@ -121,8 +121,8 @@ public final class b2NullJointDef extends Struct {
             return __size;
         }
 
-        protected b2NullJointDef createStackElement(long ptr, boolean freeOnGC) {
-            return new b2NullJointDef(ptr, freeOnGC);
+        protected b2FilterJointDef createStackElement(long ptr, boolean freeOnGC) {
+            return new b2FilterJointDef(ptr, freeOnGC);
         }
     }
 }

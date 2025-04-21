@@ -9,18 +9,18 @@ import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
 import com.badlogic.gdx.box2d.structs.b2AABB;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.jnigen.runtime.closure.Closure;
-import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawPolygon_Internal;
+import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawPolygonFcn_Internal;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.enums.b2HexColor;
-import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawSolidPolygon_Internal;
+import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawSolidPolygonFcn_Internal;
 import com.badlogic.gdx.box2d.structs.b2Transform;
-import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawCircle_Internal;
-import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawSolidCircle_Internal;
-import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawSolidCapsule_Internal;
-import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawSegment_Internal;
-import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawTransform_Internal;
-import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawPoint_Internal;
-import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawString_Internal;
+import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawCircleFcn_Internal;
+import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawSolidCircleFcn_Internal;
+import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawSolidCapsuleFcn_Internal;
+import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawSegmentFcn_Internal;
+import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawTransformFcn_Internal;
+import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawPointFcn_Internal;
+import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawStringFcn_Internal;
 import com.badlogic.gdx.jnigen.runtime.pointer.integer.BytePointer;
 
 /**
@@ -35,7 +35,7 @@ public final class b2DebugDraw extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(29).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(30).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -62,127 +62,127 @@ public final class b2DebugDraw extends Struct {
     /**
      * Draw a closed polygon provided in CCW order.
      */
-    public ClosureObject<DrawPolygon> DrawPolygon() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(0), DrawPolygon_Internal::DrawPolygon_downcall);
+    public ClosureObject<DrawPolygonFcn> DrawPolygonFcn() {
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(0), DrawPolygonFcn_Internal::DrawPolygonFcn_downcall);
     }
 
     /**
      * Draw a closed polygon provided in CCW order.
      */
-    public void DrawPolygon(ClosureObject<DrawPolygon> DrawPolygon) {
-        getBufPtr().setNativePointer(0, DrawPolygon.getPointer());
+    public void DrawPolygonFcn(ClosureObject<DrawPolygonFcn> DrawPolygonFcn) {
+        getBufPtr().setNativePointer(0, DrawPolygonFcn.getPointer());
     }
 
     /**
      * Draw a solid closed polygon provided in CCW order.
      */
-    public ClosureObject<DrawSolidPolygon> DrawSolidPolygon() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 4 : 8), DrawSolidPolygon_Internal::DrawSolidPolygon_downcall);
+    public ClosureObject<DrawSolidPolygonFcn> DrawSolidPolygonFcn() {
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 4 : 8), DrawSolidPolygonFcn_Internal::DrawSolidPolygonFcn_downcall);
     }
 
     /**
      * Draw a solid closed polygon provided in CCW order.
      */
-    public void DrawSolidPolygon(ClosureObject<DrawSolidPolygon> DrawSolidPolygon) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, DrawSolidPolygon.getPointer());
+    public void DrawSolidPolygonFcn(ClosureObject<DrawSolidPolygonFcn> DrawSolidPolygonFcn) {
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, DrawSolidPolygonFcn.getPointer());
     }
 
     /**
      * Draw a circle.
      */
-    public ClosureObject<DrawCircle> DrawCircle() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 8 : 16), DrawCircle_Internal::DrawCircle_downcall);
+    public ClosureObject<DrawCircleFcn> DrawCircleFcn() {
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 8 : 16), DrawCircleFcn_Internal::DrawCircleFcn_downcall);
     }
 
     /**
      * Draw a circle.
      */
-    public void DrawCircle(ClosureObject<DrawCircle> DrawCircle) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, DrawCircle.getPointer());
+    public void DrawCircleFcn(ClosureObject<DrawCircleFcn> DrawCircleFcn) {
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, DrawCircleFcn.getPointer());
     }
 
     /**
      * Draw a solid circle.
      */
-    public ClosureObject<DrawSolidCircle> DrawSolidCircle() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 12 : 24), DrawSolidCircle_Internal::DrawSolidCircle_downcall);
+    public ClosureObject<DrawSolidCircleFcn> DrawSolidCircleFcn() {
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 12 : 24), DrawSolidCircleFcn_Internal::DrawSolidCircleFcn_downcall);
     }
 
     /**
      * Draw a solid circle.
      */
-    public void DrawSolidCircle(ClosureObject<DrawSolidCircle> DrawSolidCircle) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 24, DrawSolidCircle.getPointer());
+    public void DrawSolidCircleFcn(ClosureObject<DrawSolidCircleFcn> DrawSolidCircleFcn) {
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 24, DrawSolidCircleFcn.getPointer());
     }
 
     /**
      * Draw a solid capsule.
      */
-    public ClosureObject<DrawSolidCapsule> DrawSolidCapsule() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 16 : 32), DrawSolidCapsule_Internal::DrawSolidCapsule_downcall);
+    public ClosureObject<DrawSolidCapsuleFcn> DrawSolidCapsuleFcn() {
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 16 : 32), DrawSolidCapsuleFcn_Internal::DrawSolidCapsuleFcn_downcall);
     }
 
     /**
      * Draw a solid capsule.
      */
-    public void DrawSolidCapsule(ClosureObject<DrawSolidCapsule> DrawSolidCapsule) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 32, DrawSolidCapsule.getPointer());
+    public void DrawSolidCapsuleFcn(ClosureObject<DrawSolidCapsuleFcn> DrawSolidCapsuleFcn) {
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 32, DrawSolidCapsuleFcn.getPointer());
     }
 
     /**
      * Draw a line segment.
      */
-    public ClosureObject<DrawSegment> DrawSegment() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 20 : 40), DrawSegment_Internal::DrawSegment_downcall);
+    public ClosureObject<DrawSegmentFcn> DrawSegmentFcn() {
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 20 : 40), DrawSegmentFcn_Internal::DrawSegmentFcn_downcall);
     }
 
     /**
      * Draw a line segment.
      */
-    public void DrawSegment(ClosureObject<DrawSegment> DrawSegment) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 20 : 40, DrawSegment.getPointer());
+    public void DrawSegmentFcn(ClosureObject<DrawSegmentFcn> DrawSegmentFcn) {
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 20 : 40, DrawSegmentFcn.getPointer());
     }
 
     /**
      * Draw a transform. Choose your own length scale.
      */
-    public ClosureObject<DrawTransform> DrawTransform() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 24 : 48), DrawTransform_Internal::DrawTransform_downcall);
+    public ClosureObject<DrawTransformFcn> DrawTransformFcn() {
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 24 : 48), DrawTransformFcn_Internal::DrawTransformFcn_downcall);
     }
 
     /**
      * Draw a transform. Choose your own length scale.
      */
-    public void DrawTransform(ClosureObject<DrawTransform> DrawTransform) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 24 : 48, DrawTransform.getPointer());
+    public void DrawTransformFcn(ClosureObject<DrawTransformFcn> DrawTransformFcn) {
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 24 : 48, DrawTransformFcn.getPointer());
     }
 
     /**
      * Draw a point.
      */
-    public ClosureObject<DrawPoint> DrawPoint() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 28 : 56), DrawPoint_Internal::DrawPoint_downcall);
+    public ClosureObject<DrawPointFcn> DrawPointFcn() {
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 28 : 56), DrawPointFcn_Internal::DrawPointFcn_downcall);
     }
 
     /**
      * Draw a point.
      */
-    public void DrawPoint(ClosureObject<DrawPoint> DrawPoint) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 28 : 56, DrawPoint.getPointer());
+    public void DrawPointFcn(ClosureObject<DrawPointFcn> DrawPointFcn) {
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 28 : 56, DrawPointFcn.getPointer());
     }
 
     /**
      * Draw a string in world space
      */
-    public ClosureObject<DrawString> DrawString() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 32 : 64), DrawString_Internal::DrawString_downcall);
+    public ClosureObject<DrawStringFcn> DrawStringFcn() {
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 32 : 64), DrawStringFcn_Internal::DrawStringFcn_downcall);
     }
 
     /**
      * Draw a string in world space
      */
-    public void DrawString(ClosureObject<DrawString> DrawString) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 32 : 64, DrawString.getPointer());
+    public void DrawStringFcn(ClosureObject<DrawStringFcn> DrawStringFcn) {
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 32 : 64, DrawStringFcn.getPointer());
     }
 
     /**
@@ -255,15 +255,15 @@ public final class b2DebugDraw extends Struct {
     /**
      * Option to draw the bounding boxes for shapes
      */
-    public boolean drawAABBs() {
+    public boolean drawBounds() {
         return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 56 : 92);
     }
 
     /**
      * Option to draw the bounding boxes for shapes
      */
-    public void drawAABBs(boolean drawAABBs) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 56 : 92, drawAABBs);
+    public void drawBounds(boolean drawBounds) {
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 56 : 92, drawBounds);
     }
 
     /**
@@ -351,31 +351,59 @@ public final class b2DebugDraw extends Struct {
     }
 
     /**
+     * Option to draw contact feature ids
+     */
+    public boolean drawContactFeatures() {
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 63 : 99);
+    }
+
+    /**
+     * Option to draw contact feature ids
+     */
+    public void drawContactFeatures(boolean drawContactFeatures) {
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 63 : 99, drawContactFeatures);
+    }
+
+    /**
      * Option to draw contact friction impulses
      */
     public boolean drawFrictionImpulses() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 63 : 99);
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 64 : 100);
     }
 
     /**
      * Option to draw contact friction impulses
      */
     public void drawFrictionImpulses(boolean drawFrictionImpulses) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 63 : 99, drawFrictionImpulses);
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 64 : 100, drawFrictionImpulses);
+    }
+
+    /**
+     * Option to draw islands as bounding boxes
+     */
+    public boolean drawIslands() {
+        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 65 : 101);
+    }
+
+    /**
+     * Option to draw islands as bounding boxes
+     */
+    public void drawIslands(boolean drawIslands) {
+        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 65 : 101, drawIslands);
     }
 
     /**
      * User context that is passed as an argument to drawing callback functions
      */
     public VoidPointer context() {
-        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 64 : 104), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 68 : 104), false);
     }
 
     /**
      * User context that is passed as an argument to drawing callback functions
      */
     public void context(VoidPointer context) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 64 : 104, context.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 68 : 104, context.getPointer());
     }
 
     public static final class b2DebugDrawPointer extends StackElementPointer<b2DebugDraw> {
@@ -410,75 +438,75 @@ public final class b2DebugDraw extends Struct {
         }
     }
 
-    public interface DrawPolygon extends Closure, DrawPolygon_Internal {
+    public interface DrawPolygonFcn extends Closure, DrawPolygonFcn_Internal {
 
         /**
          * Draw a closed polygon provided in CCW order.
          */
-        void DrawPolygon_call(b2Vec2.b2Vec2Pointer vertices, int vertexCount, b2HexColor color, VoidPointer context);
+        void DrawPolygonFcn_call(b2Vec2.b2Vec2Pointer vertices, int vertexCount, b2HexColor color, VoidPointer context);
     }
 
-    public interface DrawSolidPolygon extends Closure, DrawSolidPolygon_Internal {
+    public interface DrawSolidPolygonFcn extends Closure, DrawSolidPolygonFcn_Internal {
 
         /**
          * Draw a solid closed polygon provided in CCW order.
          */
-        void DrawSolidPolygon_call(b2Transform transform, b2Vec2.b2Vec2Pointer vertices, int vertexCount, float radius, b2HexColor color, VoidPointer context);
+        void DrawSolidPolygonFcn_call(b2Transform transform, b2Vec2.b2Vec2Pointer vertices, int vertexCount, float radius, b2HexColor color, VoidPointer context);
     }
 
-    public interface DrawCircle extends Closure, DrawCircle_Internal {
+    public interface DrawCircleFcn extends Closure, DrawCircleFcn_Internal {
 
         /**
          * Draw a circle.
          */
-        void DrawCircle_call(b2Vec2 center, float radius, b2HexColor color, VoidPointer context);
+        void DrawCircleFcn_call(b2Vec2 center, float radius, b2HexColor color, VoidPointer context);
     }
 
-    public interface DrawSolidCircle extends Closure, DrawSolidCircle_Internal {
+    public interface DrawSolidCircleFcn extends Closure, DrawSolidCircleFcn_Internal {
 
         /**
          * Draw a solid circle.
          */
-        void DrawSolidCircle_call(b2Transform transform, float radius, b2HexColor color, VoidPointer context);
+        void DrawSolidCircleFcn_call(b2Transform transform, float radius, b2HexColor color, VoidPointer context);
     }
 
-    public interface DrawSolidCapsule extends Closure, DrawSolidCapsule_Internal {
+    public interface DrawSolidCapsuleFcn extends Closure, DrawSolidCapsuleFcn_Internal {
 
         /**
          * Draw a solid capsule.
          */
-        void DrawSolidCapsule_call(b2Vec2 p1, b2Vec2 p2, float radius, b2HexColor color, VoidPointer context);
+        void DrawSolidCapsuleFcn_call(b2Vec2 p1, b2Vec2 p2, float radius, b2HexColor color, VoidPointer context);
     }
 
-    public interface DrawSegment extends Closure, DrawSegment_Internal {
+    public interface DrawSegmentFcn extends Closure, DrawSegmentFcn_Internal {
 
         /**
          * Draw a line segment.
          */
-        void DrawSegment_call(b2Vec2 p1, b2Vec2 p2, b2HexColor color, VoidPointer context);
+        void DrawSegmentFcn_call(b2Vec2 p1, b2Vec2 p2, b2HexColor color, VoidPointer context);
     }
 
-    public interface DrawTransform extends Closure, DrawTransform_Internal {
+    public interface DrawTransformFcn extends Closure, DrawTransformFcn_Internal {
 
         /**
          * Draw a transform. Choose your own length scale.
          */
-        void DrawTransform_call(b2Transform transform, VoidPointer context);
+        void DrawTransformFcn_call(b2Transform transform, VoidPointer context);
     }
 
-    public interface DrawPoint extends Closure, DrawPoint_Internal {
+    public interface DrawPointFcn extends Closure, DrawPointFcn_Internal {
 
         /**
          * Draw a point.
          */
-        void DrawPoint_call(b2Vec2 p, float size, b2HexColor color, VoidPointer context);
+        void DrawPointFcn_call(b2Vec2 p, float size, b2HexColor color, VoidPointer context);
     }
 
-    public interface DrawString extends Closure, DrawString_Internal {
+    public interface DrawStringFcn extends Closure, DrawStringFcn_Internal {
 
         /**
          * Draw a string in world space
          */
-        void DrawString_call(b2Vec2 p, BytePointer s, b2HexColor color, VoidPointer context);
+        void DrawStringFcn_call(b2Vec2 p, BytePointer s, b2HexColor color, VoidPointer context);
     }
 }

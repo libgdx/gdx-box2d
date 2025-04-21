@@ -5,6 +5,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.box2d.FFITypes;
+import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
 /**
@@ -19,7 +20,7 @@ public final class b2ShapeCastInput extends Struct {
     private final static long __ffi_type;
 
     static {
-        __ffi_type = FFITypes.getCTypeInfo(58).getFfiType();
+        __ffi_type = FFITypes.getCTypeInfo(62).getFfiType();
         __size = CHandler.getSizeFromFFIType(__ffi_type);
     }
 
@@ -44,43 +45,15 @@ public final class b2ShapeCastInput extends Struct {
     }
 
     /**
-     * A point cloud to cast
+     * A generic shape
      */
-    public b2Vec2.b2Vec2Pointer points() {
-        return __points;
+    public b2ShapeProxy proxy() {
+        return __proxy;
     }
 
-    private static final int __points_offset = 0;
+    private static final int __proxy_offset = 0;
 
-    private final b2Vec2.b2Vec2Pointer __points = new b2Vec2.b2Vec2Pointer(getPointer() + __points_offset, false, 8);
-
-    /**
-     * The number of points
-     */
-    public int count() {
-        return getBufPtr().getInt(64);
-    }
-
-    /**
-     * The number of points
-     */
-    public void count(int count) {
-        getBufPtr().setInt(64, count);
-    }
-
-    /**
-     * The radius around the point cloud
-     */
-    public float radius() {
-        return getBufPtr().getFloat(68);
-    }
-
-    /**
-     * The radius around the point cloud
-     */
-    public void radius(float radius) {
-        getBufPtr().setFloat(68, radius);
-    }
+    private final b2ShapeProxy __proxy = new b2ShapeProxy(getPointer() + __proxy_offset, false);
 
     /**
      * The translation of the shape cast
@@ -105,6 +78,20 @@ public final class b2ShapeCastInput extends Struct {
      */
     public void maxFraction(float maxFraction) {
         getBufPtr().setFloat(80, maxFraction);
+    }
+
+    /**
+     * Allow shape cast to encroach when initially touching. This only works if the radius is greater than zero.
+     */
+    public boolean canEncroach() {
+        return getBufPtr().getBoolean(84);
+    }
+
+    /**
+     * Allow shape cast to encroach when initially touching. This only works if the radius is greater than zero.
+     */
+    public void canEncroach(boolean canEncroach) {
+        getBufPtr().setBoolean(84, canEncroach);
     }
 
     public static final class b2ShapeCastInputPointer extends StackElementPointer<b2ShapeCastInput> {

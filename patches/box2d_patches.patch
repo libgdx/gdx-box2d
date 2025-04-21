@@ -7,7 +7,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 
 +option(BOX2D_ENABLE_ASSERTIONS "Enable Assertions" ON)
 +
- option(BOX2D_ENABLE_SIMD "Enable SIMD math (faster)" ON)
+ option(BOX2D_DISABLE_SIMD "Disable SIMD math (slower)" OFF)
 
  if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
 diff --git a/include/box2d/base.h b/include/box2d/base.h
