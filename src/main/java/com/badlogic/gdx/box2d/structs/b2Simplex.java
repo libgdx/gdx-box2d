@@ -25,6 +25,11 @@ public final class b2Simplex extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Simplex(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Simplex() {
         super(__size);
     }
@@ -38,41 +43,113 @@ public final class b2Simplex extends Struct {
     }
 
     public b2Simplex.b2SimplexPointer asPointer() {
-        return new b2Simplex.b2SimplexPointer(getPointer(), false, this);
+        return new b2Simplex.b2SimplexPointer(getPointer(), false, 1, this);
     }
 
     /**
      * vertices
      */
     public b2SimplexVertex v1() {
-        return __v1;
+        return new b2SimplexVertex(getPointer(), false);
     }
 
-    private static final int __v1_offset = 0;
+    /**
+     * vertices
+     */
+    public void v1(b2SimplexVertex toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 36, this);
+    }
 
-    private final b2SimplexVertex __v1 = new b2SimplexVertex(getPointer() + __v1_offset, false);
+    /**
+     * vertices
+     */
+    public b2SimplexVertex getV1() {
+        return new b2SimplexVertex(getBufPtr().duplicate(0, 36), true);
+    }
+
+    /**
+     * vertices
+     */
+    public void getV1(b2SimplexVertex toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 36);
+    }
+
+    /**
+     * vertices
+     */
+    public void setV1(b2SimplexVertex toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 36);
+    }
 
     /**
      * vertices
      */
     public b2SimplexVertex v2() {
-        return __v2;
+        return new b2SimplexVertex(getPointer() + (36), false);
     }
 
-    private static final int __v2_offset = 36;
+    /**
+     * vertices
+     */
+    public void v2(b2SimplexVertex toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (36), 36, this);
+    }
 
-    private final b2SimplexVertex __v2 = new b2SimplexVertex(getPointer() + __v2_offset, false);
+    /**
+     * vertices
+     */
+    public b2SimplexVertex getV2() {
+        return new b2SimplexVertex(getBufPtr().duplicate(36, 36), true);
+    }
+
+    /**
+     * vertices
+     */
+    public void getV2(b2SimplexVertex toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 36, 36);
+    }
+
+    /**
+     * vertices
+     */
+    public void setV2(b2SimplexVertex toCopyFrom) {
+        getBufPtr().copyFrom(36, toCopyFrom.getBufPtr(), 0, 36);
+    }
 
     /**
      * vertices
      */
     public b2SimplexVertex v3() {
-        return __v3;
+        return new b2SimplexVertex(getPointer() + (72), false);
     }
 
-    private static final int __v3_offset = 72;
+    /**
+     * vertices
+     */
+    public void v3(b2SimplexVertex toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (72), 36, this);
+    }
 
-    private final b2SimplexVertex __v3 = new b2SimplexVertex(getPointer() + __v3_offset, false);
+    /**
+     * vertices
+     */
+    public b2SimplexVertex getV3() {
+        return new b2SimplexVertex(getBufPtr().duplicate(72, 36), true);
+    }
+
+    /**
+     * vertices
+     */
+    public void getV3(b2SimplexVertex toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 72, 36);
+    }
+
+    /**
+     * vertices
+     */
+    public void setV3(b2SimplexVertex toCopyFrom) {
+        getBufPtr().copyFrom(72, toCopyFrom.getBufPtr(), 0, 36);
+    }
 
     /**
      * number of valid vertices
@@ -100,6 +177,11 @@ public final class b2Simplex extends Struct {
 
         public b2SimplexPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2SimplexPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

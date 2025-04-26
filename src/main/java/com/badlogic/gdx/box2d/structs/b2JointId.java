@@ -24,6 +24,11 @@ public final class b2JointId extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2JointId(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2JointId() {
         super(__size);
     }
@@ -37,7 +42,7 @@ public final class b2JointId extends Struct {
     }
 
     public b2JointId.b2JointIdPointer asPointer() {
-        return new b2JointId.b2JointIdPointer(getPointer(), false, this);
+        return new b2JointId.b2JointIdPointer(getPointer(), false, 1, this);
     }
 
     public int index1() {
@@ -76,6 +81,11 @@ public final class b2JointId extends Struct {
 
         public b2JointIdPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2JointIdPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

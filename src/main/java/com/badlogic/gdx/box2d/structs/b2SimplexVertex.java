@@ -25,6 +25,11 @@ public final class b2SimplexVertex extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2SimplexVertex(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2SimplexVertex() {
         super(__size);
     }
@@ -38,41 +43,113 @@ public final class b2SimplexVertex extends Struct {
     }
 
     public b2SimplexVertex.b2SimplexVertexPointer asPointer() {
-        return new b2SimplexVertex.b2SimplexVertexPointer(getPointer(), false, this);
+        return new b2SimplexVertex.b2SimplexVertexPointer(getPointer(), false, 1, this);
     }
 
     /**
      * support point in proxyA
      */
     public b2Vec2 wA() {
-        return __wA;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __wA_offset = 0;
+    /**
+     * support point in proxyA
+     */
+    public void wA(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __wA = new b2Vec2(getPointer() + __wA_offset, false);
+    /**
+     * support point in proxyA
+     */
+    public b2Vec2 getWA() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * support point in proxyA
+     */
+    public void getWA(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * support point in proxyA
+     */
+    public void setWA(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * support point in proxyB
      */
     public b2Vec2 wB() {
-        return __wB;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __wB_offset = 8;
+    /**
+     * support point in proxyB
+     */
+    public void wB(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __wB = new b2Vec2(getPointer() + __wB_offset, false);
+    /**
+     * support point in proxyB
+     */
+    public b2Vec2 getWB() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * support point in proxyB
+     */
+    public void getWB(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * support point in proxyB
+     */
+    public void setWB(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * wB - wA
      */
     public b2Vec2 w() {
-        return __w;
+        return new b2Vec2(getPointer() + (16), false);
     }
 
-    private static final int __w_offset = 16;
+    /**
+     * wB - wA
+     */
+    public void w(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (16), 8, this);
+    }
 
-    private final b2Vec2 __w = new b2Vec2(getPointer() + __w_offset, false);
+    /**
+     * wB - wA
+     */
+    public b2Vec2 getW() {
+        return new b2Vec2(getBufPtr().duplicate(16, 8), true);
+    }
+
+    /**
+     * wB - wA
+     */
+    public void getW(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 8);
+    }
+
+    /**
+     * wB - wA
+     */
+    public void setW(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * barycentric coordinate for closest point
@@ -128,6 +205,11 @@ public final class b2SimplexVertex extends Struct {
 
         public b2SimplexVertexPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2SimplexVertexPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

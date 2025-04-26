@@ -28,6 +28,11 @@ public final class b2SensorEvents extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2SensorEvents(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2SensorEvents() {
         super(__size);
     }
@@ -41,7 +46,7 @@ public final class b2SensorEvents extends Struct {
     }
 
     public b2SensorEvents.b2SensorEventsPointer asPointer() {
-        return new b2SensorEvents.b2SensorEventsPointer(getPointer(), false, this);
+        return new b2SensorEvents.b2SensorEventsPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -112,6 +117,11 @@ public final class b2SensorEvents extends Struct {
 
         public b2SensorEventsPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2SensorEventsPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

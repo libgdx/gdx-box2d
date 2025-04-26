@@ -37,6 +37,11 @@ public final class b2WorldDef extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2WorldDef(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2WorldDef() {
         super(__size);
     }
@@ -50,19 +55,43 @@ public final class b2WorldDef extends Struct {
     }
 
     public b2WorldDef.b2WorldDefPointer asPointer() {
-        return new b2WorldDef.b2WorldDefPointer(getPointer(), false, this);
+        return new b2WorldDef.b2WorldDefPointer(getPointer(), false, 1, this);
     }
 
     /**
      * Gravity vector. Box2D has no up-vector defined.
      */
     public b2Vec2 gravity() {
-        return __gravity;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __gravity_offset = 0;
+    /**
+     * Gravity vector. Box2D has no up-vector defined.
+     */
+    public void gravity(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __gravity = new b2Vec2(getPointer() + __gravity_offset, false);
+    /**
+     * Gravity vector. Box2D has no up-vector defined.
+     */
+    public b2Vec2 getGravity() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * Gravity vector. Box2D has no up-vector defined.
+     */
+    public void getGravity(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * Gravity vector. Box2D has no up-vector defined.
+     */
+    public void setGravity(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      *  Restitution speed threshold, usually in m/s. Collisions above this
@@ -348,6 +377,11 @@ public final class b2WorldDef extends Struct {
 
         public b2WorldDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2WorldDefPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

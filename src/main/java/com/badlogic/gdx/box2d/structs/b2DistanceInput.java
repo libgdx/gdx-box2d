@@ -26,6 +26,11 @@ public final class b2DistanceInput extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2DistanceInput(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2DistanceInput() {
         super(__size);
     }
@@ -39,52 +44,148 @@ public final class b2DistanceInput extends Struct {
     }
 
     public b2DistanceInput.b2DistanceInputPointer asPointer() {
-        return new b2DistanceInput.b2DistanceInputPointer(getPointer(), false, this);
+        return new b2DistanceInput.b2DistanceInputPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The proxy for shape A
      */
     public b2ShapeProxy proxyA() {
-        return __proxyA;
+        return new b2ShapeProxy(getPointer(), false);
     }
 
-    private static final int __proxyA_offset = 0;
+    /**
+     * The proxy for shape A
+     */
+    public void proxyA(b2ShapeProxy toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 72, this);
+    }
 
-    private final b2ShapeProxy __proxyA = new b2ShapeProxy(getPointer() + __proxyA_offset, false);
+    /**
+     * The proxy for shape A
+     */
+    public b2ShapeProxy getProxyA() {
+        return new b2ShapeProxy(getBufPtr().duplicate(0, 72), true);
+    }
+
+    /**
+     * The proxy for shape A
+     */
+    public void getProxyA(b2ShapeProxy toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 72);
+    }
+
+    /**
+     * The proxy for shape A
+     */
+    public void setProxyA(b2ShapeProxy toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 72);
+    }
 
     /**
      * The proxy for shape B
      */
     public b2ShapeProxy proxyB() {
-        return __proxyB;
+        return new b2ShapeProxy(getPointer() + (72), false);
     }
 
-    private static final int __proxyB_offset = 72;
+    /**
+     * The proxy for shape B
+     */
+    public void proxyB(b2ShapeProxy toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (72), 72, this);
+    }
 
-    private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
+    /**
+     * The proxy for shape B
+     */
+    public b2ShapeProxy getProxyB() {
+        return new b2ShapeProxy(getBufPtr().duplicate(72, 72), true);
+    }
+
+    /**
+     * The proxy for shape B
+     */
+    public void getProxyB(b2ShapeProxy toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 72, 72);
+    }
+
+    /**
+     * The proxy for shape B
+     */
+    public void setProxyB(b2ShapeProxy toCopyFrom) {
+        getBufPtr().copyFrom(72, toCopyFrom.getBufPtr(), 0, 72);
+    }
 
     /**
      * The world transform for shape A
      */
     public b2Transform transformA() {
-        return __transformA;
+        return new b2Transform(getPointer() + (144), false);
     }
 
-    private static final int __transformA_offset = 144;
+    /**
+     * The world transform for shape A
+     */
+    public void transformA(b2Transform toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (144), 16, this);
+    }
 
-    private final b2Transform __transformA = new b2Transform(getPointer() + __transformA_offset, false);
+    /**
+     * The world transform for shape A
+     */
+    public b2Transform getTransformA() {
+        return new b2Transform(getBufPtr().duplicate(144, 16), true);
+    }
+
+    /**
+     * The world transform for shape A
+     */
+    public void getTransformA(b2Transform toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 144, 16);
+    }
+
+    /**
+     * The world transform for shape A
+     */
+    public void setTransformA(b2Transform toCopyFrom) {
+        getBufPtr().copyFrom(144, toCopyFrom.getBufPtr(), 0, 16);
+    }
 
     /**
      * The world transform for shape B
      */
     public b2Transform transformB() {
-        return __transformB;
+        return new b2Transform(getPointer() + (160), false);
     }
 
-    private static final int __transformB_offset = 160;
+    /**
+     * The world transform for shape B
+     */
+    public void transformB(b2Transform toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (160), 16, this);
+    }
 
-    private final b2Transform __transformB = new b2Transform(getPointer() + __transformB_offset, false);
+    /**
+     * The world transform for shape B
+     */
+    public b2Transform getTransformB() {
+        return new b2Transform(getBufPtr().duplicate(160, 16), true);
+    }
+
+    /**
+     * The world transform for shape B
+     */
+    public void getTransformB(b2Transform toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 160, 16);
+    }
+
+    /**
+     * The world transform for shape B
+     */
+    public void setTransformB(b2Transform toCopyFrom) {
+        getBufPtr().copyFrom(160, toCopyFrom.getBufPtr(), 0, 16);
+    }
 
     /**
      * Should the proxy radius be considered?
@@ -112,6 +213,11 @@ public final class b2DistanceInput extends Struct {
 
         public b2DistanceInputPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2DistanceInputPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

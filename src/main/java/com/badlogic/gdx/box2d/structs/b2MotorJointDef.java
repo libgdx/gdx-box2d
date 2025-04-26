@@ -30,6 +30,11 @@ public final class b2MotorJointDef extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2MotorJointDef(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2MotorJointDef() {
         super(__size);
     }
@@ -43,41 +48,113 @@ public final class b2MotorJointDef extends Struct {
     }
 
     public b2MotorJointDef.b2MotorJointDefPointer asPointer() {
-        return new b2MotorJointDef.b2MotorJointDefPointer(getPointer(), false, this);
+        return new b2MotorJointDef.b2MotorJointDefPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The first attached body
      */
     public b2BodyId bodyIdA() {
-        return __bodyIdA;
+        return new b2BodyId(getPointer(), false);
     }
 
-    private static final int __bodyIdA_offset = 0;
+    /**
+     * The first attached body
+     */
+    public void bodyIdA(b2BodyId toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2BodyId __bodyIdA = new b2BodyId(getPointer() + __bodyIdA_offset, false);
+    /**
+     * The first attached body
+     */
+    public b2BodyId getBodyIdA() {
+        return new b2BodyId(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * The first attached body
+     */
+    public void getBodyIdA(b2BodyId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * The first attached body
+     */
+    public void setBodyIdA(b2BodyId toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The second attached body
      */
     public b2BodyId bodyIdB() {
-        return __bodyIdB;
+        return new b2BodyId(getPointer() + (8), false);
     }
 
-    private static final int __bodyIdB_offset = 8;
+    /**
+     * The second attached body
+     */
+    public void bodyIdB(b2BodyId toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2BodyId __bodyIdB = new b2BodyId(getPointer() + __bodyIdB_offset, false);
+    /**
+     * The second attached body
+     */
+    public b2BodyId getBodyIdB() {
+        return new b2BodyId(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * The second attached body
+     */
+    public void getBodyIdB(b2BodyId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * The second attached body
+     */
+    public void setBodyIdB(b2BodyId toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Position of bodyB minus the position of bodyA, in bodyA's frame
      */
     public b2Vec2 linearOffset() {
-        return __linearOffset;
+        return new b2Vec2(getPointer() + (16), false);
     }
 
-    private static final int __linearOffset_offset = 16;
+    /**
+     * Position of bodyB minus the position of bodyA, in bodyA's frame
+     */
+    public void linearOffset(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (16), 8, this);
+    }
 
-    private final b2Vec2 __linearOffset = new b2Vec2(getPointer() + __linearOffset_offset, false);
+    /**
+     * Position of bodyB minus the position of bodyA, in bodyA's frame
+     */
+    public b2Vec2 getLinearOffset() {
+        return new b2Vec2(getBufPtr().duplicate(16, 8), true);
+    }
+
+    /**
+     * Position of bodyB minus the position of bodyA, in bodyA's frame
+     */
+    public void getLinearOffset(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 8);
+    }
+
+    /**
+     * Position of bodyB minus the position of bodyA, in bodyA's frame
+     */
+    public void setLinearOffset(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The bodyB angle minus bodyA angle in radians
@@ -189,6 +266,11 @@ public final class b2MotorJointDef extends Struct {
 
         public b2MotorJointDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2MotorJointDefPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

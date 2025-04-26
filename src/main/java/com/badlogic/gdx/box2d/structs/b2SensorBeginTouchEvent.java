@@ -25,6 +25,11 @@ public final class b2SensorBeginTouchEvent extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2SensorBeginTouchEvent(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2SensorBeginTouchEvent() {
         super(__size);
     }
@@ -38,30 +43,78 @@ public final class b2SensorBeginTouchEvent extends Struct {
     }
 
     public b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer asPointer() {
-        return new b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer(getPointer(), false, this);
+        return new b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The id of the sensor shape
      */
     public b2ShapeId sensorShapeId() {
-        return __sensorShapeId;
+        return new b2ShapeId(getPointer(), false);
     }
 
-    private static final int __sensorShapeId_offset = 0;
+    /**
+     * The id of the sensor shape
+     */
+    public void sensorShapeId(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2ShapeId __sensorShapeId = new b2ShapeId(getPointer() + __sensorShapeId_offset, false);
+    /**
+     * The id of the sensor shape
+     */
+    public b2ShapeId getSensorShapeId() {
+        return new b2ShapeId(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * The id of the sensor shape
+     */
+    public void getSensorShapeId(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * The id of the sensor shape
+     */
+    public void setSensorShapeId(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The id of the dynamic shape that began touching the sensor shape
      */
     public b2ShapeId visitorShapeId() {
-        return __visitorShapeId;
+        return new b2ShapeId(getPointer() + (8), false);
     }
 
-    private static final int __visitorShapeId_offset = 8;
+    /**
+     * The id of the dynamic shape that began touching the sensor shape
+     */
+    public void visitorShapeId(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2ShapeId __visitorShapeId = new b2ShapeId(getPointer() + __visitorShapeId_offset, false);
+    /**
+     * The id of the dynamic shape that began touching the sensor shape
+     */
+    public b2ShapeId getVisitorShapeId() {
+        return new b2ShapeId(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * The id of the dynamic shape that began touching the sensor shape
+     */
+    public void getVisitorShapeId(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * The id of the dynamic shape that began touching the sensor shape
+     */
+    public void setVisitorShapeId(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public static final class b2SensorBeginTouchEventPointer extends StackElementPointer<b2SensorBeginTouchEvent> {
 
@@ -75,6 +128,11 @@ public final class b2SensorBeginTouchEvent extends Struct {
 
         public b2SensorBeginTouchEventPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2SensorBeginTouchEventPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

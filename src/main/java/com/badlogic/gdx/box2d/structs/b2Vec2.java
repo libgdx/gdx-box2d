@@ -25,6 +25,11 @@ public final class b2Vec2 extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Vec2(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Vec2() {
         super(__size);
     }
@@ -38,7 +43,7 @@ public final class b2Vec2 extends Struct {
     }
 
     public b2Vec2.b2Vec2Pointer asPointer() {
-        return new b2Vec2.b2Vec2Pointer(getPointer(), false, this);
+        return new b2Vec2.b2Vec2Pointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -81,6 +86,11 @@ public final class b2Vec2 extends Struct {
 
         public b2Vec2Pointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2Vec2Pointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

@@ -25,6 +25,11 @@ public final class b2CosSin extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2CosSin(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2CosSin() {
         super(__size);
     }
@@ -38,7 +43,7 @@ public final class b2CosSin extends Struct {
     }
 
     public b2CosSin.b2CosSinPointer asPointer() {
-        return new b2CosSin.b2CosSinPointer(getPointer(), false, this);
+        return new b2CosSin.b2CosSinPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -75,6 +80,11 @@ public final class b2CosSin extends Struct {
 
         public b2CosSinPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2CosSinPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

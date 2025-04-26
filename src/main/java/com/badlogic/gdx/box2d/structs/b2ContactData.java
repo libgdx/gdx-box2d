@@ -28,6 +28,11 @@ public final class b2ContactData extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ContactData(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ContactData() {
         super(__size);
     }
@@ -41,32 +46,68 @@ public final class b2ContactData extends Struct {
     }
 
     public b2ContactData.b2ContactDataPointer asPointer() {
-        return new b2ContactData.b2ContactDataPointer(getPointer(), false, this);
+        return new b2ContactData.b2ContactDataPointer(getPointer(), false, 1, this);
     }
 
     public b2ShapeId shapeIdA() {
-        return __shapeIdA;
+        return new b2ShapeId(getPointer(), false);
     }
 
-    private static final int __shapeIdA_offset = 0;
+    public void shapeIdA(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2ShapeId __shapeIdA = new b2ShapeId(getPointer() + __shapeIdA_offset, false);
+    public b2ShapeId getShapeIdA() {
+        return new b2ShapeId(getBufPtr().duplicate(0, 8), true);
+    }
+
+    public void getShapeIdA(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    public void setShapeIdA(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public b2ShapeId shapeIdB() {
-        return __shapeIdB;
+        return new b2ShapeId(getPointer() + (8), false);
     }
 
-    private static final int __shapeIdB_offset = 8;
+    public void shapeIdB(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2ShapeId __shapeIdB = new b2ShapeId(getPointer() + __shapeIdB_offset, false);
+    public b2ShapeId getShapeIdB() {
+        return new b2ShapeId(getBufPtr().duplicate(8, 8), true);
+    }
+
+    public void getShapeIdB(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    public void setShapeIdB(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public b2Manifold manifold() {
-        return __manifold;
+        return new b2Manifold(getPointer() + (16), false);
     }
 
-    private static final int __manifold_offset = 16;
+    public void manifold(b2Manifold toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (16), 112, this);
+    }
 
-    private final b2Manifold __manifold = new b2Manifold(getPointer() + __manifold_offset, false);
+    public b2Manifold getManifold() {
+        return new b2Manifold(getBufPtr().duplicate(16, 112), true);
+    }
+
+    public void getManifold(b2Manifold toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 112);
+    }
+
+    public void setManifold(b2Manifold toCopyFrom) {
+        getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 112);
+    }
 
     public static final class b2ContactDataPointer extends StackElementPointer<b2ContactData> {
 
@@ -80,6 +121,11 @@ public final class b2ContactData extends Struct {
 
         public b2ContactDataPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ContactDataPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

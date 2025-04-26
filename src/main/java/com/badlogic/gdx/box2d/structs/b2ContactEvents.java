@@ -29,6 +29,11 @@ public final class b2ContactEvents extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ContactEvents(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ContactEvents() {
         super(__size);
     }
@@ -42,7 +47,7 @@ public final class b2ContactEvents extends Struct {
     }
 
     public b2ContactEvents.b2ContactEventsPointer asPointer() {
-        return new b2ContactEvents.b2ContactEventsPointer(getPointer(), false, this);
+        return new b2ContactEvents.b2ContactEventsPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -141,6 +146,11 @@ public final class b2ContactEvents extends Struct {
 
         public b2ContactEventsPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ContactEventsPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

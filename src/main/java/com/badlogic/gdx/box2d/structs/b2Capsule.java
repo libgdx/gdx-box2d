@@ -26,6 +26,11 @@ public final class b2Capsule extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Capsule(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Capsule() {
         super(__size);
     }
@@ -39,30 +44,78 @@ public final class b2Capsule extends Struct {
     }
 
     public b2Capsule.b2CapsulePointer asPointer() {
-        return new b2Capsule.b2CapsulePointer(getPointer(), false, this);
+        return new b2Capsule.b2CapsulePointer(getPointer(), false, 1, this);
     }
 
     /**
      * Local center of the first semicircle
      */
     public b2Vec2 center1() {
-        return __center1;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __center1_offset = 0;
+    /**
+     * Local center of the first semicircle
+     */
+    public void center1(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __center1 = new b2Vec2(getPointer() + __center1_offset, false);
+    /**
+     * Local center of the first semicircle
+     */
+    public b2Vec2 getCenter1() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * Local center of the first semicircle
+     */
+    public void getCenter1(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * Local center of the first semicircle
+     */
+    public void setCenter1(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Local center of the second semicircle
      */
     public b2Vec2 center2() {
-        return __center2;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __center2_offset = 8;
+    /**
+     * Local center of the second semicircle
+     */
+    public void center2(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __center2 = new b2Vec2(getPointer() + __center2_offset, false);
+    /**
+     * Local center of the second semicircle
+     */
+    public b2Vec2 getCenter2() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * Local center of the second semicircle
+     */
+    public void getCenter2(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * Local center of the second semicircle
+     */
+    public void setCenter2(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The radius of the semicircles
@@ -90,6 +143,11 @@ public final class b2Capsule extends Struct {
 
         public b2CapsulePointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2CapsulePointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

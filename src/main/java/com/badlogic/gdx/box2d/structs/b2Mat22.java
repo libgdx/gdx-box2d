@@ -25,6 +25,11 @@ public final class b2Mat22 extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Mat22(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Mat22() {
         super(__size);
     }
@@ -38,30 +43,78 @@ public final class b2Mat22 extends Struct {
     }
 
     public b2Mat22.b2Mat22Pointer asPointer() {
-        return new b2Mat22.b2Mat22Pointer(getPointer(), false, this);
+        return new b2Mat22.b2Mat22Pointer(getPointer(), false, 1, this);
     }
 
     /**
      * columns
      */
     public b2Vec2 cx() {
-        return __cx;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __cx_offset = 0;
+    /**
+     * columns
+     */
+    public void cx(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __cx = new b2Vec2(getPointer() + __cx_offset, false);
+    /**
+     * columns
+     */
+    public b2Vec2 getCx() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * columns
+     */
+    public void getCx(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * columns
+     */
+    public void setCx(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * columns
      */
     public b2Vec2 cy() {
-        return __cy;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __cy_offset = 8;
+    /**
+     * columns
+     */
+    public void cy(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __cy = new b2Vec2(getPointer() + __cy_offset, false);
+    /**
+     * columns
+     */
+    public b2Vec2 getCy() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * columns
+     */
+    public void getCy(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * columns
+     */
+    public void setCy(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public static final class b2Mat22Pointer extends StackElementPointer<b2Mat22> {
 
@@ -75,6 +128,11 @@ public final class b2Mat22 extends Struct {
 
         public b2Mat22Pointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2Mat22Pointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

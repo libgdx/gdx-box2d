@@ -28,6 +28,11 @@ public final class b2SensorEndTouchEvent extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2SensorEndTouchEvent(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2SensorEndTouchEvent() {
         super(__size);
     }
@@ -41,7 +46,7 @@ public final class b2SensorEndTouchEvent extends Struct {
     }
 
     public b2SensorEndTouchEvent.b2SensorEndTouchEventPointer asPointer() {
-        return new b2SensorEndTouchEvent.b2SensorEndTouchEventPointer(getPointer(), false, this);
+        return new b2SensorEndTouchEvent.b2SensorEndTouchEventPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -50,12 +55,44 @@ public final class b2SensorEndTouchEvent extends Struct {
      * 		@see b2Shape_IsValid
      */
     public b2ShapeId sensorShapeId() {
-        return __sensorShapeId;
+        return new b2ShapeId(getPointer(), false);
     }
 
-    private static final int __sensorShapeId_offset = 0;
+    /**
+     *  The id of the sensor shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void sensorShapeId(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2ShapeId __sensorShapeId = new b2ShapeId(getPointer() + __sensorShapeId_offset, false);
+    /**
+     *  The id of the sensor shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public b2ShapeId getSensorShapeId() {
+        return new b2ShapeId(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     *  The id of the sensor shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void getSensorShapeId(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     *  The id of the sensor shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void setSensorShapeId(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      *  The id of the dynamic shape that stopped touching the sensor shape
@@ -63,12 +100,44 @@ public final class b2SensorEndTouchEvent extends Struct {
      * 		@see b2Shape_IsValid
      */
     public b2ShapeId visitorShapeId() {
-        return __visitorShapeId;
+        return new b2ShapeId(getPointer() + (8), false);
     }
 
-    private static final int __visitorShapeId_offset = 8;
+    /**
+     *  The id of the dynamic shape that stopped touching the sensor shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void visitorShapeId(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2ShapeId __visitorShapeId = new b2ShapeId(getPointer() + __visitorShapeId_offset, false);
+    /**
+     *  The id of the dynamic shape that stopped touching the sensor shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public b2ShapeId getVisitorShapeId() {
+        return new b2ShapeId(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     *  The id of the dynamic shape that stopped touching the sensor shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void getVisitorShapeId(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     *  The id of the dynamic shape that stopped touching the sensor shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void setVisitorShapeId(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public static final class b2SensorEndTouchEventPointer extends StackElementPointer<b2SensorEndTouchEvent> {
 
@@ -82,6 +151,11 @@ public final class b2SensorEndTouchEvent extends Struct {
 
         public b2SensorEndTouchEventPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2SensorEndTouchEventPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

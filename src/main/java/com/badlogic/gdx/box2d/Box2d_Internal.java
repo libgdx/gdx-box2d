@@ -3,8 +3,10 @@ package com.badlogic.gdx.box2d;
 import com.badlogic.gdx.jnigen.runtime.c.CTypeInfo;
 import com.badlogic.gdx.jnigen.runtime.closure.Closure;
 import com.badlogic.gdx.jnigen.runtime.mem.BufferPtr;
+import com.badlogic.gdx.jnigen.runtime.closure.PointingPoolManager;
 import com.badlogic.gdx.box2d.structs.b2DebugDraw.DrawPolygonFcn;
 import com.badlogic.gdx.jnigen.runtime.ffi.ClosureEncoder;
+import com.badlogic.gdx.jnigen.runtime.closure.CClosureObject;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.enums.b2HexColor;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
@@ -262,16 +264,20 @@ public final class Box2d_Internal {
                 DrawPolygonFcn_call(new b2Vec2.b2Vec2Pointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
             }
 
-            public static DrawPolygonFcn DrawPolygonFcn_downcall(long fnPtr) {
-                ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawPolygonFcn_Internal.__ffi_cache);
-                return (vertices, vertexCount, color, context) -> {
+            default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+                DrawPolygonFcn_call(manager.getPointing(b2Vec2.b2Vec2Pointer.class, buf.getNativePointer(0)), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16)));
+            }
+
+            public static CClosureObject<DrawPolygonFcn> DrawPolygonFcn_downcall(long fnPtr) {
+                ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+                return new CClosureObject<>((vertices, vertexCount, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                     useEncoder.getBufPtr().setNativePointer(0, vertices.getPointer());
                     useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, vertexCount);
                     useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
                     useEncoder.invoke();
-                };
+                }, fnPtr, encoder);
             }
         }
 
@@ -289,9 +295,13 @@ public final class Box2d_Internal {
                 DrawSolidPolygonFcn_call(new b2Transform(buf.getNativePointer(0), true), new b2Vec2.b2Vec2Pointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), buf.getInt(CHandler.IS_32_BIT ? 8 : 16), buf.getFloat(CHandler.IS_32_BIT ? 12 : 20), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 16 : 24)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 20 : 28), false));
             }
 
-            public static DrawSolidPolygonFcn DrawSolidPolygonFcn_downcall(long fnPtr) {
-                ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidPolygonFcn_Internal.__ffi_cache);
-                return (transform, vertices, vertexCount, radius, color, context) -> {
+            default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+                DrawSolidPolygonFcn_call(manager.getPointing(b2Transform.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.b2Vec2Pointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), buf.getInt(CHandler.IS_32_BIT ? 8 : 16), buf.getFloat(CHandler.IS_32_BIT ? 12 : 20), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 16 : 24)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 20 : 28)));
+            }
+
+            public static CClosureObject<DrawSolidPolygonFcn> DrawSolidPolygonFcn_downcall(long fnPtr) {
+                ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+                return new CClosureObject<>((transform, vertices, vertexCount, radius, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                     useEncoder.getBufPtr().setNativePointer(0, transform.getPointer());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, vertices.getPointer());
@@ -300,7 +310,7 @@ public final class Box2d_Internal {
                     useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 16 : 24, color.getIndex());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 20 : 28, context.getPointer());
                     useEncoder.invoke();
-                };
+                }, fnPtr, encoder);
             }
         }
 
@@ -318,16 +328,20 @@ public final class Box2d_Internal {
                 DrawCircleFcn_call(new b2Vec2(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
             }
 
-            public static DrawCircleFcn DrawCircleFcn_downcall(long fnPtr) {
-                ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawCircleFcn_Internal.__ffi_cache);
-                return (center, radius, color, context) -> {
+            default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+                DrawCircleFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16)));
+            }
+
+            public static CClosureObject<DrawCircleFcn> DrawCircleFcn_downcall(long fnPtr) {
+                ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+                return new CClosureObject<>((center, radius, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                     useEncoder.getBufPtr().setNativePointer(0, center.getPointer());
                     useEncoder.getBufPtr().setFloat(CHandler.IS_32_BIT ? 4 : 8, radius);
                     useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
                     useEncoder.invoke();
-                };
+                }, fnPtr, encoder);
             }
         }
 
@@ -345,16 +359,20 @@ public final class Box2d_Internal {
                 DrawSolidCircleFcn_call(new b2Transform(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
             }
 
-            public static DrawSolidCircleFcn DrawSolidCircleFcn_downcall(long fnPtr) {
-                ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidCircleFcn_Internal.__ffi_cache);
-                return (transform, radius, color, context) -> {
+            default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+                DrawSolidCircleFcn_call(manager.getPointing(b2Transform.class, buf.getNativePointer(0)), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16)));
+            }
+
+            public static CClosureObject<DrawSolidCircleFcn> DrawSolidCircleFcn_downcall(long fnPtr) {
+                ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+                return new CClosureObject<>((transform, radius, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                     useEncoder.getBufPtr().setNativePointer(0, transform.getPointer());
                     useEncoder.getBufPtr().setFloat(CHandler.IS_32_BIT ? 4 : 8, radius);
                     useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
                     useEncoder.invoke();
-                };
+                }, fnPtr, encoder);
             }
         }
 
@@ -372,9 +390,13 @@ public final class Box2d_Internal {
                 DrawSolidCapsuleFcn_call(new b2Vec2(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), buf.getFloat(CHandler.IS_32_BIT ? 8 : 16), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 12 : 20)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 24), false));
             }
 
-            public static DrawSolidCapsuleFcn DrawSolidCapsuleFcn_downcall(long fnPtr) {
-                ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSolidCapsuleFcn_Internal.__ffi_cache);
-                return (p1, p2, radius, color, context) -> {
+            default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+                DrawSolidCapsuleFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), buf.getFloat(CHandler.IS_32_BIT ? 8 : 16), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 12 : 20)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 24)));
+            }
+
+            public static CClosureObject<DrawSolidCapsuleFcn> DrawSolidCapsuleFcn_downcall(long fnPtr) {
+                ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+                return new CClosureObject<>((p1, p2, radius, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                     useEncoder.getBufPtr().setNativePointer(0, p1.getPointer());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, p2.getPointer());
@@ -382,7 +404,7 @@ public final class Box2d_Internal {
                     useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 12 : 20, color.getIndex());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 24, context.getPointer());
                     useEncoder.invoke();
-                };
+                }, fnPtr, encoder);
             }
         }
 
@@ -400,16 +422,20 @@ public final class Box2d_Internal {
                 DrawSegmentFcn_call(new b2Vec2(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 16)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 20), false));
             }
 
-            public static DrawSegmentFcn DrawSegmentFcn_downcall(long fnPtr) {
-                ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawSegmentFcn_Internal.__ffi_cache);
-                return (p1, p2, color, context) -> {
+            default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+                DrawSegmentFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 16)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 20)));
+            }
+
+            public static CClosureObject<DrawSegmentFcn> DrawSegmentFcn_downcall(long fnPtr) {
+                ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+                return new CClosureObject<>((p1, p2, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                     useEncoder.getBufPtr().setNativePointer(0, p1.getPointer());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, p2.getPointer());
                     useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 16, color.getIndex());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 20, context.getPointer());
                     useEncoder.invoke();
-                };
+                }, fnPtr, encoder);
             }
         }
 
@@ -427,14 +453,18 @@ public final class Box2d_Internal {
                 DrawTransformFcn_call(new b2Transform(buf.getNativePointer(0), true), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false));
             }
 
-            public static DrawTransformFcn DrawTransformFcn_downcall(long fnPtr) {
-                ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawTransformFcn_Internal.__ffi_cache);
-                return (transform, context) -> {
+            default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+                DrawTransformFcn_call(manager.getPointing(b2Transform.class, buf.getNativePointer(0)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)));
+            }
+
+            public static CClosureObject<DrawTransformFcn> DrawTransformFcn_downcall(long fnPtr) {
+                ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+                return new CClosureObject<>((transform, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                     useEncoder.getBufPtr().setNativePointer(0, transform.getPointer());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, context.getPointer());
                     useEncoder.invoke();
-                };
+                }, fnPtr, encoder);
             }
         }
 
@@ -452,16 +482,20 @@ public final class Box2d_Internal {
                 DrawPointFcn_call(new b2Vec2(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
             }
 
-            public static DrawPointFcn DrawPointFcn_downcall(long fnPtr) {
-                ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawPointFcn_Internal.__ffi_cache);
-                return (p, size, color, context) -> {
+            default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+                DrawPointFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16)));
+            }
+
+            public static CClosureObject<DrawPointFcn> DrawPointFcn_downcall(long fnPtr) {
+                ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+                return new CClosureObject<>((p, size, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                     useEncoder.getBufPtr().setNativePointer(0, p.getPointer());
                     useEncoder.getBufPtr().setFloat(CHandler.IS_32_BIT ? 4 : 8, size);
                     useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
                     useEncoder.invoke();
-                };
+                }, fnPtr, encoder);
             }
         }
 
@@ -479,16 +513,20 @@ public final class Box2d_Internal {
                 DrawStringFcn_call(new b2Vec2(buf.getNativePointer(0), true), new BytePointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 16)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 20), false));
             }
 
-            public static DrawStringFcn DrawStringFcn_downcall(long fnPtr) {
-                ClosureEncoder encoder = new ClosureEncoder(fnPtr, DrawStringFcn_Internal.__ffi_cache);
-                return (p, s, color, context) -> {
+            default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+                DrawStringFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), manager.getPointing(BytePointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 16)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 20)));
+            }
+
+            public static CClosureObject<DrawStringFcn> DrawStringFcn_downcall(long fnPtr) {
+                ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+                return new CClosureObject<>((p, s, color, context) -> {
                     ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                     useEncoder.getBufPtr().setNativePointer(0, p.getPointer());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, s.getPointer());
                     useEncoder.getBufPtr().setUInt(CHandler.IS_32_BIT ? 8 : 16, color.getIndex());
                     useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 20, context.getPointer());
                     useEncoder.invoke();
-                };
+                }, fnPtr, encoder);
             }
         }
     }
@@ -519,15 +557,19 @@ public final class Box2d_Internal {
             buf.setBoolean(0, b2OverlapResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false)));
         }
 
-        public static b2OverlapResultFcn b2OverlapResultFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2OverlapResultFcn_Internal.__ffi_cache);
-            return (shapeId, context) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setBoolean(0, b2OverlapResultFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8))));
+        }
+
+        public static CClosureObject<b2OverlapResultFcn> b2OverlapResultFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((shapeId, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, shapeId.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, context.getPointer());
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getBoolean(0);
-            };
+                return useEncoder.getBufPtr().getBoolean(CHandler.IS_32_BIT ? 8 : 16);
+            }, fnPtr, encoder);
         }
     }
 
@@ -545,16 +587,20 @@ public final class Box2d_Internal {
             buf.setBoolean(0, b2TreeQueryCallbackFcn_call(buf.getInt(0), buf.getLong(4), new VoidPointer(buf.getNativePointer(12), false)));
         }
 
-        public static b2TreeQueryCallbackFcn b2TreeQueryCallbackFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeQueryCallbackFcn_Internal.__ffi_cache);
-            return (proxyId, userData, context) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setBoolean(0, b2TreeQueryCallbackFcn_call(buf.getInt(0), buf.getLong(4), manager.getPointing(VoidPointer.class, buf.getNativePointer(12))));
+        }
+
+        public static CClosureObject<b2TreeQueryCallbackFcn> b2TreeQueryCallbackFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((proxyId, userData, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setInt(0, proxyId);
                 useEncoder.getBufPtr().setLong(4, userData);
                 useEncoder.getBufPtr().setNativePointer(12, context.getPointer());
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getBoolean(0);
-            };
+                return useEncoder.getBufPtr().getBoolean(CHandler.IS_32_BIT ? 16 : 20);
+            }, fnPtr, encoder);
         }
     }
 
@@ -572,16 +618,20 @@ public final class Box2d_Internal {
             b2TaskCallback_call(buf.getInt(0), buf.getInt(4), buf.getUInt(8), new VoidPointer(buf.getNativePointer(12), false));
         }
 
-        public static b2TaskCallback b2TaskCallback_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TaskCallback_Internal.__ffi_cache);
-            return (startIndex, endIndex, workerIndex, taskContext) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            b2TaskCallback_call(buf.getInt(0), buf.getInt(4), buf.getUInt(8), manager.getPointing(VoidPointer.class, buf.getNativePointer(12)));
+        }
+
+        public static CClosureObject<b2TaskCallback> b2TaskCallback_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((startIndex, endIndex, workerIndex, taskContext) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setInt(0, startIndex);
                 useEncoder.getBufPtr().setInt(4, endIndex);
                 useEncoder.getBufPtr().setUInt(8, workerIndex);
                 useEncoder.getBufPtr().setNativePointer(12, taskContext.getPointer());
                 useEncoder.invoke();
-            };
+            }, fnPtr, encoder);
         }
     }
 
@@ -599,9 +649,13 @@ public final class Box2d_Internal {
             buf.setNativePointer(0, b2EnqueueTaskCallback_call(CHandler.getClosureObject(buf.getNativePointer(0), b2TaskCallback_Internal::b2TaskCallback_downcall), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getInt(CHandler.IS_32_BIT ? 8 : 12), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 24), false)).getPointer());
         }
 
-        public static b2EnqueueTaskCallback b2EnqueueTaskCallback_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2EnqueueTaskCallback_Internal.__ffi_cache);
-            return (task, itemCount, minRange, taskContext, userContext) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setNativePointer(0, b2EnqueueTaskCallback_call(CHandler.getClosureObject(buf.getNativePointer(0), b2TaskCallback_Internal::b2TaskCallback_downcall), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getInt(CHandler.IS_32_BIT ? 8 : 12), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 24))).getPointer());
+        }
+
+        public static CClosureObject<b2EnqueueTaskCallback> b2EnqueueTaskCallback_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((task, itemCount, minRange, taskContext, userContext) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, task.getPointer());
                 useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, itemCount);
@@ -609,8 +663,8 @@ public final class Box2d_Internal {
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 16, taskContext.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 24, userContext.getPointer());
                 useEncoder.invoke();
-                return new VoidPointer(useEncoder.getBufPtr().getNativePointer(0), false);
-            };
+                return new VoidPointer(useEncoder.getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 20 : 32), false);
+            }, fnPtr, encoder);
         }
     }
 
@@ -628,17 +682,21 @@ public final class Box2d_Internal {
             buf.setFloat(0, b2RestitutionCallback_call(buf.getFloat(0), buf.getInt(4), buf.getFloat(8), buf.getInt(12)));
         }
 
-        public static b2RestitutionCallback b2RestitutionCallback_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2RestitutionCallback_Internal.__ffi_cache);
-            return (restitutionA, userMaterialIdA, restitutionB, userMaterialIdB) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setFloat(0, b2RestitutionCallback_call(buf.getFloat(0), buf.getInt(4), buf.getFloat(8), buf.getInt(12)));
+        }
+
+        public static CClosureObject<b2RestitutionCallback> b2RestitutionCallback_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((restitutionA, userMaterialIdA, restitutionB, userMaterialIdB) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setFloat(0, restitutionA);
                 useEncoder.getBufPtr().setInt(4, userMaterialIdA);
                 useEncoder.getBufPtr().setFloat(8, restitutionB);
                 useEncoder.getBufPtr().setInt(12, userMaterialIdB);
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getFloat(0);
-            };
+                return useEncoder.getBufPtr().getFloat(16);
+            }, fnPtr, encoder);
         }
     }
 
@@ -656,17 +714,21 @@ public final class Box2d_Internal {
             buf.setFloat(0, b2FrictionCallback_call(buf.getFloat(0), buf.getInt(4), buf.getFloat(8), buf.getInt(12)));
         }
 
-        public static b2FrictionCallback b2FrictionCallback_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2FrictionCallback_Internal.__ffi_cache);
-            return (frictionA, userMaterialIdA, frictionB, userMaterialIdB) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setFloat(0, b2FrictionCallback_call(buf.getFloat(0), buf.getInt(4), buf.getFloat(8), buf.getInt(12)));
+        }
+
+        public static CClosureObject<b2FrictionCallback> b2FrictionCallback_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((frictionA, userMaterialIdA, frictionB, userMaterialIdB) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setFloat(0, frictionA);
                 useEncoder.getBufPtr().setInt(4, userMaterialIdA);
                 useEncoder.getBufPtr().setFloat(8, frictionB);
                 useEncoder.getBufPtr().setInt(12, userMaterialIdB);
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getFloat(0);
-            };
+                return useEncoder.getBufPtr().getFloat(16);
+            }, fnPtr, encoder);
         }
     }
 
@@ -684,9 +746,13 @@ public final class Box2d_Internal {
             buf.setFloat(0, b2CastResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), true), buf.getFloat(CHandler.IS_32_BIT ? 12 : 24), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 28), false)));
         }
 
-        public static b2CastResultFcn b2CastResultFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2CastResultFcn_Internal.__ffi_cache);
-            return (shapeId, point, normal, fraction, context) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setFloat(0, b2CastResultFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16)), buf.getFloat(CHandler.IS_32_BIT ? 12 : 24), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 28))));
+        }
+
+        public static CClosureObject<b2CastResultFcn> b2CastResultFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((shapeId, point, normal, fraction, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, shapeId.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, point.getPointer());
@@ -694,8 +760,8 @@ public final class Box2d_Internal {
                 useEncoder.getBufPtr().setFloat(CHandler.IS_32_BIT ? 12 : 24, fraction);
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 28, context.getPointer());
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getFloat(0);
-            };
+                return useEncoder.getBufPtr().getFloat(CHandler.IS_32_BIT ? 20 : 36);
+            }, fnPtr, encoder);
         }
     }
 
@@ -713,17 +779,21 @@ public final class Box2d_Internal {
             buf.setFloat(0, b2TreeShapeCastCallbackFcn_call(new b2ShapeCastInput.b2ShapeCastInputPointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getLong(CHandler.IS_32_BIT ? 8 : 12), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 20), false)));
         }
 
-        public static b2TreeShapeCastCallbackFcn b2TreeShapeCastCallbackFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeShapeCastCallbackFcn_Internal.__ffi_cache);
-            return (input, proxyId, userData, context) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setFloat(0, b2TreeShapeCastCallbackFcn_call(manager.getPointing(b2ShapeCastInput.b2ShapeCastInputPointer.class, buf.getNativePointer(0)), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getLong(CHandler.IS_32_BIT ? 8 : 12), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 20))));
+        }
+
+        public static CClosureObject<b2TreeShapeCastCallbackFcn> b2TreeShapeCastCallbackFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((input, proxyId, userData, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, input.getPointer());
                 useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, proxyId);
                 useEncoder.getBufPtr().setLong(CHandler.IS_32_BIT ? 8 : 12, userData);
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 20, context.getPointer());
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getFloat(0);
-            };
+                return useEncoder.getBufPtr().getFloat(CHandler.IS_32_BIT ? 20 : 28);
+            }, fnPtr, encoder);
         }
     }
 
@@ -741,17 +811,21 @@ public final class Box2d_Internal {
             buf.setBoolean(0, b2PreSolveFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2ShapeId(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), new b2Manifold.b2ManifoldPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 24), false)));
         }
 
-        public static b2PreSolveFcn b2PreSolveFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2PreSolveFcn_Internal.__ffi_cache);
-            return (shapeIdA, shapeIdB, manifold, context) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setBoolean(0, b2PreSolveFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2ShapeId.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), manager.getPointing(b2Manifold.b2ManifoldPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 24))));
+        }
+
+        public static CClosureObject<b2PreSolveFcn> b2PreSolveFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((shapeIdA, shapeIdB, manifold, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, shapeIdA.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, shapeIdB.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, manifold.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 24, context.getPointer());
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getBoolean(0);
-            };
+                return useEncoder.getBufPtr().getBoolean(CHandler.IS_32_BIT ? 16 : 32);
+            }, fnPtr, encoder);
         }
     }
 
@@ -769,15 +843,19 @@ public final class Box2d_Internal {
             buf.setNativePointer(0, b2AllocFcn_call(buf.getUInt(0), buf.getInt(4)).getPointer());
         }
 
-        public static b2AllocFcn b2AllocFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2AllocFcn_Internal.__ffi_cache);
-            return (size, alignment) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setNativePointer(0, b2AllocFcn_call(buf.getUInt(0), buf.getInt(4)).getPointer());
+        }
+
+        public static CClosureObject<b2AllocFcn> b2AllocFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((size, alignment) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setUInt(0, size);
                 useEncoder.getBufPtr().setInt(4, alignment);
                 useEncoder.invoke();
-                return new VoidPointer(useEncoder.getBufPtr().getNativePointer(0), false);
-            };
+                return new VoidPointer(useEncoder.getBufPtr().getNativePointer(8), false);
+            }, fnPtr, encoder);
         }
     }
 
@@ -795,16 +873,20 @@ public final class Box2d_Internal {
             buf.setInt(0, b2AssertFcn_call(new BytePointer(buf.getNativePointer(0), false), new BytePointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), buf.getInt(CHandler.IS_32_BIT ? 8 : 16)));
         }
 
-        public static b2AssertFcn b2AssertFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2AssertFcn_Internal.__ffi_cache);
-            return (condition, fileName, lineNumber) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setInt(0, b2AssertFcn_call(manager.getPointing(BytePointer.class, buf.getNativePointer(0)), manager.getPointing(BytePointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), buf.getInt(CHandler.IS_32_BIT ? 8 : 16)));
+        }
+
+        public static CClosureObject<b2AssertFcn> b2AssertFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((condition, fileName, lineNumber) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, condition.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, fileName.getPointer());
                 useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 8 : 16, lineNumber);
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getInt(0);
-            };
+                return useEncoder.getBufPtr().getInt(CHandler.IS_32_BIT ? 12 : 20);
+            }, fnPtr, encoder);
         }
     }
 
@@ -822,16 +904,20 @@ public final class Box2d_Internal {
             buf.setBoolean(0, b2CustomFilterFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2ShapeId(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), false)));
         }
 
-        public static b2CustomFilterFcn b2CustomFilterFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2CustomFilterFcn_Internal.__ffi_cache);
-            return (shapeIdA, shapeIdB, context) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setBoolean(0, b2CustomFilterFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2ShapeId.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16))));
+        }
+
+        public static CClosureObject<b2CustomFilterFcn> b2CustomFilterFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((shapeIdA, shapeIdB, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, shapeIdA.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, shapeIdB.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, context.getPointer());
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getBoolean(0);
-            };
+                return useEncoder.getBufPtr().getBoolean(CHandler.IS_32_BIT ? 12 : 24);
+            }, fnPtr, encoder);
         }
     }
 
@@ -849,16 +935,20 @@ public final class Box2d_Internal {
             buf.setBoolean(0, b2PlaneResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2PlaneResult.b2PlaneResultPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), false)));
         }
 
-        public static b2PlaneResultFcn b2PlaneResultFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2PlaneResultFcn_Internal.__ffi_cache);
-            return (shapeId, plane, context) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setBoolean(0, b2PlaneResultFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2PlaneResult.b2PlaneResultPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16))));
+        }
+
+        public static CClosureObject<b2PlaneResultFcn> b2PlaneResultFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((shapeId, plane, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, shapeId.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, plane.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, context.getPointer());
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getBoolean(0);
-            };
+                return useEncoder.getBufPtr().getBoolean(CHandler.IS_32_BIT ? 12 : 24);
+            }, fnPtr, encoder);
         }
     }
 
@@ -876,17 +966,21 @@ public final class Box2d_Internal {
             buf.setFloat(0, b2TreeRayCastCallbackFcn_call(new b2RayCastInput.b2RayCastInputPointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getLong(CHandler.IS_32_BIT ? 8 : 12), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 20), false)));
         }
 
-        public static b2TreeRayCastCallbackFcn b2TreeRayCastCallbackFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2TreeRayCastCallbackFcn_Internal.__ffi_cache);
-            return (input, proxyId, userData, context) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            buf.setFloat(0, b2TreeRayCastCallbackFcn_call(manager.getPointing(b2RayCastInput.b2RayCastInputPointer.class, buf.getNativePointer(0)), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getLong(CHandler.IS_32_BIT ? 8 : 12), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 20))));
+        }
+
+        public static CClosureObject<b2TreeRayCastCallbackFcn> b2TreeRayCastCallbackFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((input, proxyId, userData, context) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, input.getPointer());
                 useEncoder.getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, proxyId);
                 useEncoder.getBufPtr().setLong(CHandler.IS_32_BIT ? 8 : 12, userData);
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 20, context.getPointer());
                 useEncoder.invoke();
-                return useEncoder.getBufPtr().getFloat(0);
-            };
+                return useEncoder.getBufPtr().getFloat(CHandler.IS_32_BIT ? 20 : 28);
+            }, fnPtr, encoder);
         }
     }
 
@@ -904,13 +998,17 @@ public final class Box2d_Internal {
             b2FreeFcn_call(new VoidPointer(buf.getNativePointer(0), false));
         }
 
-        public static b2FreeFcn b2FreeFcn_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2FreeFcn_Internal.__ffi_cache);
-            return (mem) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            b2FreeFcn_call(manager.getPointing(VoidPointer.class, buf.getNativePointer(0)));
+        }
+
+        public static CClosureObject<b2FreeFcn> b2FreeFcn_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((mem) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, mem.getPointer());
                 useEncoder.invoke();
-            };
+            }, fnPtr, encoder);
         }
     }
 
@@ -928,14 +1026,18 @@ public final class Box2d_Internal {
             b2FinishTaskCallback_call(new VoidPointer(buf.getNativePointer(0), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false));
         }
 
-        public static b2FinishTaskCallback b2FinishTaskCallback_downcall(long fnPtr) {
-            ClosureEncoder encoder = new ClosureEncoder(fnPtr, b2FinishTaskCallback_Internal.__ffi_cache);
-            return (userTask, userContext) -> {
+        default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
+            b2FinishTaskCallback_call(manager.getPointing(VoidPointer.class, buf.getNativePointer(0)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)));
+        }
+
+        public static CClosureObject<b2FinishTaskCallback> b2FinishTaskCallback_downcall(long fnPtr) {
+            ClosureEncoder encoder = new ClosureEncoder(fnPtr, __ffi_cache);
+            return new CClosureObject<>((userTask, userContext) -> {
                 ClosureEncoder useEncoder = encoder.lockOrDuplicate();
                 useEncoder.getBufPtr().setNativePointer(0, userTask.getPointer());
                 useEncoder.getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, userContext.getPointer());
                 useEncoder.invoke();
-            };
+            }, fnPtr, encoder);
         }
     }
 }

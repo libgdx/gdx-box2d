@@ -21,6 +21,11 @@ public final class b2TreeNode extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2TreeNode(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2TreeNode() {
         super(__size);
     }
@@ -34,7 +39,7 @@ public final class b2TreeNode extends Struct {
     }
 
     public b2TreeNode.b2TreeNodePointer asPointer() {
-        return new b2TreeNode.b2TreeNodePointer(getPointer(), false, this);
+        return new b2TreeNode.b2TreeNodePointer(getPointer(), false, 1, this);
     }
 
     public static final class b2TreeNodePointer extends StackElementPointer<b2TreeNode> {
@@ -49,6 +54,11 @@ public final class b2TreeNode extends Struct {
 
         public b2TreeNodePointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2TreeNodePointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

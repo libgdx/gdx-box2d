@@ -28,6 +28,11 @@ public final class b2ShapeCastInput extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ShapeCastInput(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ShapeCastInput() {
         super(__size);
     }
@@ -41,30 +46,78 @@ public final class b2ShapeCastInput extends Struct {
     }
 
     public b2ShapeCastInput.b2ShapeCastInputPointer asPointer() {
-        return new b2ShapeCastInput.b2ShapeCastInputPointer(getPointer(), false, this);
+        return new b2ShapeCastInput.b2ShapeCastInputPointer(getPointer(), false, 1, this);
     }
 
     /**
      * A generic shape
      */
     public b2ShapeProxy proxy() {
-        return __proxy;
+        return new b2ShapeProxy(getPointer(), false);
     }
 
-    private static final int __proxy_offset = 0;
+    /**
+     * A generic shape
+     */
+    public void proxy(b2ShapeProxy toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 72, this);
+    }
 
-    private final b2ShapeProxy __proxy = new b2ShapeProxy(getPointer() + __proxy_offset, false);
+    /**
+     * A generic shape
+     */
+    public b2ShapeProxy getProxy() {
+        return new b2ShapeProxy(getBufPtr().duplicate(0, 72), true);
+    }
+
+    /**
+     * A generic shape
+     */
+    public void getProxy(b2ShapeProxy toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 72);
+    }
+
+    /**
+     * A generic shape
+     */
+    public void setProxy(b2ShapeProxy toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 72);
+    }
 
     /**
      * The translation of the shape cast
      */
     public b2Vec2 translation() {
-        return __translation;
+        return new b2Vec2(getPointer() + (72), false);
     }
 
-    private static final int __translation_offset = 72;
+    /**
+     * The translation of the shape cast
+     */
+    public void translation(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (72), 8, this);
+    }
 
-    private final b2Vec2 __translation = new b2Vec2(getPointer() + __translation_offset, false);
+    /**
+     * The translation of the shape cast
+     */
+    public b2Vec2 getTranslation() {
+        return new b2Vec2(getBufPtr().duplicate(72, 8), true);
+    }
+
+    /**
+     * The translation of the shape cast
+     */
+    public void getTranslation(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 72, 8);
+    }
+
+    /**
+     * The translation of the shape cast
+     */
+    public void setTranslation(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(72, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The maximum fraction of the translation to consider, typically 1
@@ -106,6 +159,11 @@ public final class b2ShapeCastInput extends Struct {
 
         public b2ShapeCastInputPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ShapeCastInputPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

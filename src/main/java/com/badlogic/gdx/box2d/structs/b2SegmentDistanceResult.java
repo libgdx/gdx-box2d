@@ -25,6 +25,11 @@ public final class b2SegmentDistanceResult extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2SegmentDistanceResult(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2SegmentDistanceResult() {
         super(__size);
     }
@@ -38,30 +43,78 @@ public final class b2SegmentDistanceResult extends Struct {
     }
 
     public b2SegmentDistanceResult.b2SegmentDistanceResultPointer asPointer() {
-        return new b2SegmentDistanceResult.b2SegmentDistanceResultPointer(getPointer(), false, this);
+        return new b2SegmentDistanceResult.b2SegmentDistanceResultPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The closest point on the first segment
      */
     public b2Vec2 closest1() {
-        return __closest1;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __closest1_offset = 0;
+    /**
+     * The closest point on the first segment
+     */
+    public void closest1(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __closest1 = new b2Vec2(getPointer() + __closest1_offset, false);
+    /**
+     * The closest point on the first segment
+     */
+    public b2Vec2 getClosest1() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * The closest point on the first segment
+     */
+    public void getClosest1(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * The closest point on the first segment
+     */
+    public void setClosest1(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The closest point on the second segment
      */
     public b2Vec2 closest2() {
-        return __closest2;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __closest2_offset = 8;
+    /**
+     * The closest point on the second segment
+     */
+    public void closest2(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __closest2 = new b2Vec2(getPointer() + __closest2_offset, false);
+    /**
+     * The closest point on the second segment
+     */
+    public b2Vec2 getClosest2() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * The closest point on the second segment
+     */
+    public void getClosest2(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * The closest point on the second segment
+     */
+    public void setClosest2(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The barycentric coordinate on the first segment
@@ -117,6 +170,11 @@ public final class b2SegmentDistanceResult extends Struct {
 
         public b2SegmentDistanceResultPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2SegmentDistanceResultPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

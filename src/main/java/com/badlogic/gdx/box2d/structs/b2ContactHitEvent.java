@@ -26,6 +26,11 @@ public final class b2ContactHitEvent extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ContactHitEvent(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ContactHitEvent() {
         super(__size);
     }
@@ -39,52 +44,148 @@ public final class b2ContactHitEvent extends Struct {
     }
 
     public b2ContactHitEvent.b2ContactHitEventPointer asPointer() {
-        return new b2ContactHitEvent.b2ContactHitEventPointer(getPointer(), false, this);
+        return new b2ContactHitEvent.b2ContactHitEventPointer(getPointer(), false, 1, this);
     }
 
     /**
      * Id of the first shape
      */
     public b2ShapeId shapeIdA() {
-        return __shapeIdA;
+        return new b2ShapeId(getPointer(), false);
     }
 
-    private static final int __shapeIdA_offset = 0;
+    /**
+     * Id of the first shape
+     */
+    public void shapeIdA(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2ShapeId __shapeIdA = new b2ShapeId(getPointer() + __shapeIdA_offset, false);
+    /**
+     * Id of the first shape
+     */
+    public b2ShapeId getShapeIdA() {
+        return new b2ShapeId(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * Id of the first shape
+     */
+    public void getShapeIdA(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * Id of the first shape
+     */
+    public void setShapeIdA(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Id of the second shape
      */
     public b2ShapeId shapeIdB() {
-        return __shapeIdB;
+        return new b2ShapeId(getPointer() + (8), false);
     }
 
-    private static final int __shapeIdB_offset = 8;
+    /**
+     * Id of the second shape
+     */
+    public void shapeIdB(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2ShapeId __shapeIdB = new b2ShapeId(getPointer() + __shapeIdB_offset, false);
+    /**
+     * Id of the second shape
+     */
+    public b2ShapeId getShapeIdB() {
+        return new b2ShapeId(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * Id of the second shape
+     */
+    public void getShapeIdB(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * Id of the second shape
+     */
+    public void setShapeIdB(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Point where the shapes hit
      */
     public b2Vec2 point() {
-        return __point;
+        return new b2Vec2(getPointer() + (16), false);
     }
 
-    private static final int __point_offset = 16;
+    /**
+     * Point where the shapes hit
+     */
+    public void point(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (16), 8, this);
+    }
 
-    private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
+    /**
+     * Point where the shapes hit
+     */
+    public b2Vec2 getPoint() {
+        return new b2Vec2(getBufPtr().duplicate(16, 8), true);
+    }
+
+    /**
+     * Point where the shapes hit
+     */
+    public void getPoint(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 8);
+    }
+
+    /**
+     * Point where the shapes hit
+     */
+    public void setPoint(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Normal vector pointing from shape A to shape B
      */
     public b2Vec2 normal() {
-        return __normal;
+        return new b2Vec2(getPointer() + (24), false);
     }
 
-    private static final int __normal_offset = 24;
+    /**
+     * Normal vector pointing from shape A to shape B
+     */
+    public void normal(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (24), 8, this);
+    }
 
-    private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
+    /**
+     * Normal vector pointing from shape A to shape B
+     */
+    public b2Vec2 getNormal() {
+        return new b2Vec2(getBufPtr().duplicate(24, 8), true);
+    }
+
+    /**
+     * Normal vector pointing from shape A to shape B
+     */
+    public void getNormal(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 24, 8);
+    }
+
+    /**
+     * Normal vector pointing from shape A to shape B
+     */
+    public void setNormal(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(24, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The speed the shapes are approaching. Always positive. Typically in meters per second.
@@ -112,6 +213,11 @@ public final class b2ContactHitEvent extends Struct {
 
         public b2ContactHitEventPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ContactHitEventPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

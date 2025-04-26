@@ -22,7 +22,7 @@ public class Box2dWorldTaskSystemTest {
         Box2dWorldTaskSystem multiThreader = null;
         if (workerCount > 1) {
             Thread currentThread = Thread.currentThread();
-            multiThreader = Box2dWorldTaskSystem.createForWorld(worldDef, workerCount, currentThread::interrupt);
+            multiThreader = Box2dWorldTaskSystem.createForWorld(worldDef, workerCount, currentThread::interrupt, true);
         }
 
         b2WorldId worldId = b2CreateWorld(worldDef.asPointer());

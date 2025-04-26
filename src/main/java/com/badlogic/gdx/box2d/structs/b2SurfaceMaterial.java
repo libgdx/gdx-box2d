@@ -25,6 +25,11 @@ public final class b2SurfaceMaterial extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2SurfaceMaterial(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2SurfaceMaterial() {
         super(__size);
     }
@@ -38,7 +43,7 @@ public final class b2SurfaceMaterial extends Struct {
     }
 
     public b2SurfaceMaterial.b2SurfaceMaterialPointer asPointer() {
-        return new b2SurfaceMaterial.b2SurfaceMaterialPointer(getPointer(), false, this);
+        return new b2SurfaceMaterial.b2SurfaceMaterialPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -141,6 +146,11 @@ public final class b2SurfaceMaterial extends Struct {
 
         public b2SurfaceMaterialPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2SurfaceMaterialPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

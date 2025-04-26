@@ -24,6 +24,11 @@ public final class b2TreeStats extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2TreeStats(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2TreeStats() {
         super(__size);
     }
@@ -37,7 +42,7 @@ public final class b2TreeStats extends Struct {
     }
 
     public b2TreeStats.b2TreeStatsPointer asPointer() {
-        return new b2TreeStats.b2TreeStatsPointer(getPointer(), false, this);
+        return new b2TreeStats.b2TreeStatsPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -80,6 +85,11 @@ public final class b2TreeStats extends Struct {
 
         public b2TreeStatsPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2TreeStatsPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

@@ -3,13 +3,14 @@ package com.badlogic.gdx.box2d.utils;
 import com.badlogic.gdx.box2d.Box2d;
 import com.badlogic.gdx.box2d.structs.b2WorldDef;
 import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
+import com.badlogic.gdx.jnigen.runtime.closure.PointingPoolManager;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.utils.Disposable;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
  * This class implements a basic TaskSystem in java, for multithreading of a box2d world.
@@ -28,9 +29,13 @@ public class Box2dWorldTaskSystem implements Disposable {
     private final AtomicInteger aliveWorkers;
     private final Box2dWorldTaskSystemDeathHandler deathHandler;
     private final BlockingQueue<Box2dTaskChunk> taskChunks;
-    private final CountDownLatch[] countDownLatches = new CountDownLatch[MAX_TASKS];
+    private final Box2dCountdown[] countDownLatches = new Box2dCountdown[MAX_TASKS];
     private final ClosureObject<Box2d.b2EnqueueTaskCallback> enqueueTaskCallback;
     private final ClosureObject<Box2d.b2FinishTaskCallback> finishTaskCallback;
+    private final PointingPoolManager poolManager = new PointingPoolManager(2);
+    private final ArrayBlockingQueue<Box2dTaskChunk> chunkPool;
+    private final VoidPointer TASK_INDEX_WRAPPER = new VoidPointer(0L, false);
+    private final boolean poolingEnabled;
 
     private int taskCount = 0;
     private boolean running = true;
@@ -43,22 +48,30 @@ public class Box2dWorldTaskSystem implements Disposable {
      * @param worldDef The world to configure
      * @param numWorkers The amount of worker
      * @param deathHandler Handler for when the task system dies. see {@link Box2dWorldTaskSystemDeathHandler}
+     * @param enablePooling Whether the TaskSystem should avoid per-frame allocation
      * @return The created {@link Box2dWorldTaskSystem}
      */
-    public static Box2dWorldTaskSystem createForWorld(b2WorldDef worldDef, int numWorkers, Box2dWorldTaskSystemDeathHandler deathHandler) {
-        Box2dWorldTaskSystem multiThreader = new Box2dWorldTaskSystem(numWorkers, deathHandler);
+    public static Box2dWorldTaskSystem createForWorld(b2WorldDef worldDef, int numWorkers, Box2dWorldTaskSystemDeathHandler deathHandler, boolean enablePooling) {
+        Box2dWorldTaskSystem multiThreader = new Box2dWorldTaskSystem(numWorkers, deathHandler, enablePooling);
         multiThreader.configureForWorld(worldDef);
         return multiThreader;
     }
 
-    private Box2dWorldTaskSystem(int numWorkers, Box2dWorldTaskSystemDeathHandler deathHandler) {
+    private Box2dWorldTaskSystem(int numWorkers, Box2dWorldTaskSystemDeathHandler deathHandler, boolean enablePooling) {
         if (numWorkers <= 1)
             throw new IllegalArgumentException("Number of workers must be greater than 1");
+
+        this.poolingEnabled = enablePooling;
         this.numWorkers = numWorkers;
         this.workers = new Thread[numWorkers];
         this.taskChunks = new ArrayBlockingQueue<>(MAX_TASKS * numWorkers);
+        this.chunkPool = new ArrayBlockingQueue<>(MAX_TASKS * numWorkers);
         this.aliveWorkers = new AtomicInteger(numWorkers);
         this.deathHandler = deathHandler;
+
+        for (int i = 0; i < MAX_TASKS; i++) {
+            countDownLatches[i] = new Box2dCountdown();
+        }
 
         for (int i = 0; i < numWorkers; i++) {
             final int workerId = i;
@@ -69,6 +82,8 @@ public class Box2dWorldTaskSystem implements Disposable {
                            Box2dTaskChunk task = taskChunks.take();
                            task.execute(workerId);
                            countDownLatches[task.taskIndex].countDown();
+                           if (poolingEnabled)
+                               chunkPool.offer(task);
                        } catch (InterruptedException e) {
                            break;
                        }
@@ -90,22 +105,26 @@ public class Box2dWorldTaskSystem implements Disposable {
                 int baseItemsPerTask = itemCount / numTasks;
                 int remainingItems = itemCount % numTasks;
 
-                countDownLatches[taskCount] = new CountDownLatch(numTasks);
+                countDownLatches[taskCount].setCount(numTasks);
 
                 int start = 0;
                 for (int i = 0; i < numTasks; i++) {
                     int itemsInThisTask = baseItemsPerTask + (i < remainingItems ? 1 : 0);
                     int end = start + itemsInThisTask;
 
-                    Box2dTaskChunk box2DTaskChunk = new Box2dTaskChunk(taskCount, task, start, end, taskContext);
+                    Box2dTaskChunk box2DTaskChunk = poolingEnabled ? chunkPool.poll() : new Box2dTaskChunk();
+                    if (box2DTaskChunk == null)
+                        box2DTaskChunk = new Box2dTaskChunk();
+
+                    box2DTaskChunk.setData(taskCount, task, start, end, taskContext.getPointer());
                     if (!taskChunks.offer(box2DTaskChunk))
                         throw new IllegalStateException("Task queue is full - impossible");
                     start = end;
                 }
 
-                VoidPointer taskIndex = new VoidPointer((long) taskCount + 1, false);
+                TASK_INDEX_WRAPPER.setPointer(taskCount + 1);
                 taskCount++;
-                return taskIndex;
+                return TASK_INDEX_WRAPPER;
             } else {
                 task.getClosure().b2TaskCallback_call(0, itemCount, 0, taskContext);
                 return VoidPointer.NULL;
@@ -119,11 +138,16 @@ public class Box2dWorldTaskSystem implements Disposable {
             int taskId = (int) userTask.getPointer() - 1;
             try {
                 countDownLatches[taskId].await();
-                countDownLatches[taskId] = null;
             } catch (InterruptedException e) {
                 throw new Box2dWorldTaskSystemInterruptException(e);
             }
         });
+
+        if (poolingEnabled) {
+            poolManager.addPool(VoidPointer::new, 2);
+            enqueueTaskCallback.setPoolManager(poolManager);
+            finishTaskCallback.setPoolManager(poolManager);
+        }
     }
 
     private void onThreadDies() {
@@ -166,18 +190,18 @@ public class Box2dWorldTaskSystem implements Disposable {
     }
 
     private static class Box2dTaskChunk {
-        private final int taskIndex;
-        private final ClosureObject<Box2d.b2TaskCallback> task;
-        private final int start;
-        private final int end;
-        private final VoidPointer taskContext;
+        private int taskIndex;
+        private ClosureObject<Box2d.b2TaskCallback> task;
+        private int start;
+        private int end;
+        private final VoidPointer taskContext = new VoidPointer(0L, false);
 
-        public Box2dTaskChunk(int taskIndex, ClosureObject<Box2d.b2TaskCallback> task, int start, int end, VoidPointer taskContext) {
+        public void setData(int taskIndex, ClosureObject<Box2d.b2TaskCallback> task, int start, int end, long taskContext) {
             this.taskIndex = taskIndex;
             this.task = task;
             this.start = start;
             this.end = end;
-            this.taskContext = taskContext;
+            this.taskContext.setPointer(taskContext);
         }
 
         public void execute(int workerId) {
@@ -204,5 +228,42 @@ public class Box2dWorldTaskSystem implements Disposable {
          * The exception that made the worker thread crash can be seen over the {@link Thread#setDefaultUncaughtExceptionHandler}}
          */
         void taskSystemDied();
+    }
+
+    private static class Box2dCountdown extends AbstractQueuedSynchronizer {
+
+        private Box2dCountdown() {
+            setState(0);
+        }
+
+        public void setCount(int count) {
+            setState(count);
+        }
+
+        public void await() throws InterruptedException {
+            acquireSharedInterruptibly(1);
+        }
+
+        public void countDown() {
+            releaseShared(1);
+        }
+
+        @Override
+        protected int tryAcquireShared(int acquires) {
+            return (getState() == 0) ? 1 : -1;
+        }
+
+        @Override
+        protected boolean tryReleaseShared(int releases) {
+            // Decrement count; signal when transition to zero
+            for (;;) {
+                int c = getState();
+                if (c == 0)
+                    return false;
+                int nextc = c - 1;
+                if (compareAndSetState(c, nextc))
+                    return nextc == 0;
+            }
+        }
     }
 }

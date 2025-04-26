@@ -27,6 +27,11 @@ public final class b2Manifold extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Manifold(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Manifold() {
         super(__size);
     }
@@ -40,19 +45,43 @@ public final class b2Manifold extends Struct {
     }
 
     public b2Manifold.b2ManifoldPointer asPointer() {
-        return new b2Manifold.b2ManifoldPointer(getPointer(), false, this);
+        return new b2Manifold.b2ManifoldPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The unit normal vector in world space, points from shape A to bodyB
      */
     public b2Vec2 normal() {
-        return __normal;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __normal_offset = 0;
+    /**
+     * The unit normal vector in world space, points from shape A to bodyB
+     */
+    public void normal(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
+    /**
+     * The unit normal vector in world space, points from shape A to bodyB
+     */
+    public b2Vec2 getNormal() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * The unit normal vector in world space, points from shape A to bodyB
+     */
+    public void getNormal(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * The unit normal vector in world space, points from shape A to bodyB
+     */
+    public void setNormal(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Angular impulse applied for rolling resistance. N * m * s = kg * m^2 / s
@@ -72,12 +101,36 @@ public final class b2Manifold extends Struct {
      * The manifold points, up to two are possible in 2D
      */
     public b2ManifoldPoint.b2ManifoldPointPointer points() {
-        return __points;
+        return new b2ManifoldPoint.b2ManifoldPointPointer(getPointer() + (12), false, 2);
     }
 
-    private static final int __points_offset = 12;
+    /**
+     * The manifold points, up to two are possible in 2D
+     */
+    public void points(b2ManifoldPoint.b2ManifoldPointPointer toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (12), 96, this);
+    }
 
-    private final b2ManifoldPoint.b2ManifoldPointPointer __points = new b2ManifoldPoint.b2ManifoldPointPointer(getPointer() + __points_offset, false, 2);
+    /**
+     * The manifold points, up to two are possible in 2D
+     */
+    public b2ManifoldPoint.b2ManifoldPointPointer getPoints() {
+        return new b2ManifoldPoint.b2ManifoldPointPointer(getBufPtr().duplicate(12, 96), false, 2);
+    }
+
+    /**
+     * The manifold points, up to two are possible in 2D
+     */
+    public void getPoints(b2ManifoldPoint.b2ManifoldPointPointer toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 12, 96);
+    }
+
+    /**
+     * The manifold points, up to two are possible in 2D
+     */
+    public void setPoints(b2ManifoldPoint.b2ManifoldPointPointer toCopyFrom) {
+        getBufPtr().copyFrom(12, toCopyFrom.getBufPtr(), 0, 96);
+    }
 
     /**
      * The number of contacts points, will be 0, 1, or 2
@@ -105,6 +158,11 @@ public final class b2Manifold extends Struct {
 
         public b2ManifoldPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ManifoldPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

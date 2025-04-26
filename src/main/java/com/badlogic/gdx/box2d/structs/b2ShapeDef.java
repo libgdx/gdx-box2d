@@ -31,6 +31,11 @@ public final class b2ShapeDef extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ShapeDef(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ShapeDef() {
         super(__size);
     }
@@ -44,7 +49,7 @@ public final class b2ShapeDef extends Struct {
     }
 
     public b2ShapeDef.b2ShapeDefPointer asPointer() {
-        return new b2ShapeDef.b2ShapeDefPointer(getPointer(), false, this);
+        return new b2ShapeDef.b2ShapeDefPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -65,12 +70,36 @@ public final class b2ShapeDef extends Struct {
      * The surface material for this shape.
      */
     public b2SurfaceMaterial material() {
-        return __material;
+        return new b2SurfaceMaterial(getPointer() + (CHandler.IS_32_BIT ? 4 : 8), false);
     }
 
-    private static final int __material_offset = CHandler.IS_32_BIT ? 4 : 8;
+    /**
+     * The surface material for this shape.
+     */
+    public void material(b2SurfaceMaterial toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (CHandler.IS_32_BIT ? 4 : 8), 24, this);
+    }
 
-    private final b2SurfaceMaterial __material = new b2SurfaceMaterial(getPointer() + __material_offset, false);
+    /**
+     * The surface material for this shape.
+     */
+    public b2SurfaceMaterial getMaterial() {
+        return new b2SurfaceMaterial(getBufPtr().duplicate(CHandler.IS_32_BIT ? 4 : 8, 24), true);
+    }
+
+    /**
+     * The surface material for this shape.
+     */
+    public void getMaterial(b2SurfaceMaterial toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), CHandler.IS_32_BIT ? 4 : 8, 24);
+    }
+
+    /**
+     * The surface material for this shape.
+     */
+    public void setMaterial(b2SurfaceMaterial toCopyFrom) {
+        getBufPtr().copyFrom(CHandler.IS_32_BIT ? 4 : 8, toCopyFrom.getBufPtr(), 0, 24);
+    }
 
     /**
      *  The density, usually in kg/m^2.
@@ -94,12 +123,36 @@ public final class b2ShapeDef extends Struct {
      * Collision filtering data.
      */
     public b2Filter filter() {
-        return __filter;
+        return new b2Filter(getPointer() + (CHandler.IS_32_BIT ? 32 : 40), false);
     }
 
-    private static final int __filter_offset = CHandler.IS_32_BIT ? 32 : 40;
+    /**
+     * Collision filtering data.
+     */
+    public void filter(b2Filter toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (CHandler.IS_32_BIT ? 32 : 40), 24, this);
+    }
 
-    private final b2Filter __filter = new b2Filter(getPointer() + __filter_offset, false);
+    /**
+     * Collision filtering data.
+     */
+    public b2Filter getFilter() {
+        return new b2Filter(getBufPtr().duplicate(CHandler.IS_32_BIT ? 32 : 40, 24), true);
+    }
+
+    /**
+     * Collision filtering data.
+     */
+    public void getFilter(b2Filter toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), CHandler.IS_32_BIT ? 32 : 40, 24);
+    }
+
+    /**
+     * Collision filtering data.
+     */
+    public void setFilter(b2Filter toCopyFrom) {
+        getBufPtr().copyFrom(CHandler.IS_32_BIT ? 32 : 40, toCopyFrom.getBufPtr(), 0, 24);
+    }
 
     /**
      *  A sensor shape generates overlap events but never generates a collision response.
@@ -239,6 +292,11 @@ public final class b2ShapeDef extends Struct {
 
         public b2ShapeDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ShapeDefPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

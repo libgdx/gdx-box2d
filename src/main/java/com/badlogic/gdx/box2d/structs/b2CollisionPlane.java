@@ -26,6 +26,11 @@ public final class b2CollisionPlane extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2CollisionPlane(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2CollisionPlane() {
         super(__size);
     }
@@ -39,19 +44,43 @@ public final class b2CollisionPlane extends Struct {
     }
 
     public b2CollisionPlane.b2CollisionPlanePointer asPointer() {
-        return new b2CollisionPlane.b2CollisionPlanePointer(getPointer(), false, this);
+        return new b2CollisionPlane.b2CollisionPlanePointer(getPointer(), false, 1, this);
     }
 
     /**
      * The collision plane between the mover and some shape
      */
     public b2Plane plane() {
-        return __plane;
+        return new b2Plane(getPointer(), false);
     }
 
-    private static final int __plane_offset = 0;
+    /**
+     * The collision plane between the mover and some shape
+     */
+    public void plane(b2Plane toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 12, this);
+    }
 
-    private final b2Plane __plane = new b2Plane(getPointer() + __plane_offset, false);
+    /**
+     * The collision plane between the mover and some shape
+     */
+    public b2Plane getPlane() {
+        return new b2Plane(getBufPtr().duplicate(0, 12), true);
+    }
+
+    /**
+     * The collision plane between the mover and some shape
+     */
+    public void getPlane(b2Plane toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 12);
+    }
+
+    /**
+     * The collision plane between the mover and some shape
+     */
+    public void setPlane(b2Plane toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 12);
+    }
 
     /**
      *  Setting this to FLT_MAX makes the plane as rigid as possible. Lower values can
@@ -109,6 +138,11 @@ public final class b2CollisionPlane extends Struct {
 
         public b2CollisionPlanePointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2CollisionPlanePointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

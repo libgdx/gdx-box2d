@@ -24,6 +24,11 @@ public final class b2ShapeId extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ShapeId(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ShapeId() {
         super(__size);
     }
@@ -37,7 +42,7 @@ public final class b2ShapeId extends Struct {
     }
 
     public b2ShapeId.b2ShapeIdPointer asPointer() {
-        return new b2ShapeId.b2ShapeIdPointer(getPointer(), false, this);
+        return new b2ShapeId.b2ShapeIdPointer(getPointer(), false, 1, this);
     }
 
     public int index1() {
@@ -76,6 +81,11 @@ public final class b2ShapeId extends Struct {
 
         public b2ShapeIdPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ShapeIdPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

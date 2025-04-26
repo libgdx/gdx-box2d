@@ -1,13 +1,12 @@
 package com.badlogic.gdx.box2d.utils;
 
 import com.badlogic.gdx.box2d.enums.b2HexColor;
-import com.badlogic.gdx.box2d.structs.b2DebugDraw;
-import com.badlogic.gdx.box2d.structs.b2Transform;
-import com.badlogic.gdx.box2d.structs.b2Vec2;
-import com.badlogic.gdx.box2d.structs.b2WorldId;
+import com.badlogic.gdx.box2d.structs.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.jnigen.runtime.closure.Closure;
 import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
+import com.badlogic.gdx.jnigen.runtime.closure.PointingPoolManager;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.integer.BytePointer;
 import com.badlogic.gdx.math.Matrix4;
@@ -18,23 +17,40 @@ import static com.badlogic.gdx.box2d.Box2d.b2World_Draw;
 
 public class Box2dDebugRenderer implements Disposable {
 
+    private static final b2Vec2 TEMP_VEC_PTR = new b2Vec2(0L, false);
+    private static final b2Rot TEMP_ROT_PTR = new b2Rot(0L, false);
+
     private final ShapeRenderer renderer;
 
     private final b2DebugDraw b2DebugDraw;
+    private final PointingPoolManager pointingPoolManager;
 
     public Box2dDebugRenderer () {
+        pointingPoolManager = new PointingPoolManager(5);
+        pointingPoolManager.addPool(b2Vec2.b2Vec2Pointer::new, 5);
+        pointingPoolManager.addPool(VoidPointer::new, 5);
+        pointingPoolManager.addPool(b2Transform::new, 5);
+        pointingPoolManager.addPool(b2Vec2::new, 5);
+        pointingPoolManager.addPool(BytePointer::new, 5);
+
         renderer = new ShapeRenderer();
         renderer.setAutoShapeType(true);
         b2DebugDraw = b2DefaultDebugDraw();
-        b2DebugDraw.DrawPolygonFcn(ClosureObject.fromClosure(this::drawPolygon));
-        b2DebugDraw.DrawSolidPolygonFcn(ClosureObject.fromClosure(this::drawSolidPolygon));
-        b2DebugDraw.DrawCircleFcn(ClosureObject.fromClosure(this::drawCircle));
-        b2DebugDraw.DrawSolidCircleFcn(ClosureObject.fromClosure(this::drawSolidCircle));
-        b2DebugDraw.DrawSolidCapsuleFcn(ClosureObject.fromClosure(this::drawSolidCapsule));
-        b2DebugDraw.DrawSegmentFcn(ClosureObject.fromClosure(this::drawSegment));
-        b2DebugDraw.DrawTransformFcn(ClosureObject.fromClosure(this::drawTransform));
-        b2DebugDraw.DrawPointFcn(ClosureObject.fromClosure(this::drawPoint));
-        b2DebugDraw.DrawStringFcn(ClosureObject.fromClosure(this::drawString));
+        b2DebugDraw.DrawPolygonFcn(createPooledClosure(this::drawPolygon));
+        b2DebugDraw.DrawSolidPolygonFcn(createPooledClosure(this::drawSolidPolygon));
+        b2DebugDraw.DrawCircleFcn(createPooledClosure(this::drawCircle));
+        b2DebugDraw.DrawSolidCircleFcn(createPooledClosure(this::drawSolidCircle));
+        b2DebugDraw.DrawSolidCapsuleFcn(createPooledClosure(this::drawSolidCapsule));
+        b2DebugDraw.DrawSegmentFcn(createPooledClosure(this::drawSegment));
+        b2DebugDraw.DrawTransformFcn(createPooledClosure(this::drawTransform));
+        b2DebugDraw.DrawPointFcn(createPooledClosure(this::drawPoint));
+        b2DebugDraw.DrawStringFcn(createPooledClosure(this::drawString));
+    }
+
+    private <T extends Closure> ClosureObject<T> createPooledClosure(T closure) {
+        ClosureObject<T> closureObject = ClosureObject.fromClosure(closure);
+        closureObject.setPoolManager(pointingPoolManager);
+        return closureObject;
     }
 
     /** This assumes that the projection matrix has already been set. */
@@ -49,9 +65,9 @@ public class Box2dDebugRenderer implements Disposable {
 
         float[] verticesArray = new float[vertexCount * 2];
         for (int i = 0; i < vertexCount; i++) {
-            b2Vec2 vec2 = vertices.asStackElement(i);
-            verticesArray[i * 2] = vec2.x();
-            verticesArray[i * 2 + 1] = vec2.y();
+            vertices.asStackElement(i, TEMP_VEC_PTR);
+            verticesArray[i * 2] = TEMP_VEC_PTR.x();
+            verticesArray[i * 2 + 1] = TEMP_VEC_PTR.y();
         }
         renderer.set(ShapeRenderer.ShapeType.Line);
         Box2dUtils.box2dColorToGDXColor(renderer.getColor(), color);
@@ -62,15 +78,18 @@ public class Box2dDebugRenderer implements Disposable {
         float[] verticesArray = new float[vertexCount * 2];
 
         for (int i = 0; i < vertexCount; i++) {
-            b2Vec2 vertex = vertices.asStackElement(i);
-            
-            float vx = vertex.x();
-            float vy = vertex.y();
+            vertices.asStackElement(i, TEMP_VEC_PTR);
 
-            float px = transform.p().x();
-            float py = transform.p().y();
-            float cos = transform.q().c();
-            float sin = transform.q().s();
+            float vx = TEMP_VEC_PTR.x();
+            float vy = TEMP_VEC_PTR.y();
+
+            transform.p(TEMP_VEC_PTR);
+            float px = TEMP_VEC_PTR.x();
+            float py = TEMP_VEC_PTR.y();
+
+            transform.q(TEMP_ROT_PTR);
+            float cos = TEMP_ROT_PTR.c();
+            float sin = TEMP_ROT_PTR.s();
 
             float x = px + cos * vx - sin * vy;
             float y = py + sin * vx + cos * vy;
@@ -100,7 +119,8 @@ public class Box2dDebugRenderer implements Disposable {
     private void drawSolidCircle(b2Transform transform, float radius, b2HexColor color, VoidPointer context) {
         renderer.set(ShapeRenderer.ShapeType.Filled);
         Box2dUtils.box2dColorToGDXColor(renderer.getColor(), color);
-        renderer.circle(transform.p().x(), transform.p().y(), radius);
+        transform.p(TEMP_VEC_PTR);
+        renderer.circle(TEMP_VEC_PTR.x(), TEMP_VEC_PTR.y(), radius);
     }
 
     private void drawSolidCapsule(b2Vec2 p1, b2Vec2 p2, float radius, b2HexColor color, VoidPointer context) {
@@ -115,11 +135,13 @@ public class Box2dDebugRenderer implements Disposable {
 
     private void drawTransform(b2Transform transform, VoidPointer context) {
         float axisScale = 0.4f;
-        
-        float px = transform.p().x();
-        float py = transform.p().y();
-        float cos = transform.q().c();
-        float sin = transform.q().s();
+
+        transform.p(TEMP_VEC_PTR);
+        transform.q(TEMP_ROT_PTR);
+        float px = TEMP_VEC_PTR.x();
+        float py = TEMP_VEC_PTR.y();
+        float cos = TEMP_ROT_PTR.c();
+        float sin = TEMP_ROT_PTR.s();
         
         renderer.set(ShapeRenderer.ShapeType.Line);
         renderer.setColor(Color.RED);

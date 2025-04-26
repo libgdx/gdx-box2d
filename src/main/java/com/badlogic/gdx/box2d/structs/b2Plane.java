@@ -25,6 +25,11 @@ public final class b2Plane extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Plane(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Plane() {
         super(__size);
     }
@@ -38,16 +43,28 @@ public final class b2Plane extends Struct {
     }
 
     public b2Plane.b2PlanePointer asPointer() {
-        return new b2Plane.b2PlanePointer(getPointer(), false, this);
+        return new b2Plane.b2PlanePointer(getPointer(), false, 1, this);
     }
 
     public b2Vec2 normal() {
-        return __normal;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __normal_offset = 0;
+    public void normal(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
+    public b2Vec2 getNormal() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    public void getNormal(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    public void setNormal(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public float offset() {
         return getBufPtr().getFloat(8);
@@ -69,6 +86,11 @@ public final class b2Plane extends Struct {
 
         public b2PlanePointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2PlanePointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

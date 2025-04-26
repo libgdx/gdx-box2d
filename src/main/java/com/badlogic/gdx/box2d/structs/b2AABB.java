@@ -25,6 +25,11 @@ public final class b2AABB extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2AABB(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2AABB() {
         super(__size);
     }
@@ -38,24 +43,48 @@ public final class b2AABB extends Struct {
     }
 
     public b2AABB.b2AABBPointer asPointer() {
-        return new b2AABB.b2AABBPointer(getPointer(), false, this);
+        return new b2AABB.b2AABBPointer(getPointer(), false, 1, this);
     }
 
     public b2Vec2 lowerBound() {
-        return __lowerBound;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __lowerBound_offset = 0;
+    public void lowerBound(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __lowerBound = new b2Vec2(getPointer() + __lowerBound_offset, false);
+    public b2Vec2 getLowerBound() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    public void getLowerBound(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    public void setLowerBound(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public b2Vec2 upperBound() {
-        return __upperBound;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __upperBound_offset = 8;
+    public void upperBound(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __upperBound = new b2Vec2(getPointer() + __upperBound_offset, false);
+    public b2Vec2 getUpperBound() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    public void getUpperBound(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    public void setUpperBound(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public static final class b2AABBPointer extends StackElementPointer<b2AABB> {
 
@@ -69,6 +98,11 @@ public final class b2AABB extends Struct {
 
         public b2AABBPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2AABBPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

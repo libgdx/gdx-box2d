@@ -25,6 +25,11 @@ public final class b2PlaneResult extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2PlaneResult(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2PlaneResult() {
         super(__size);
     }
@@ -38,19 +43,43 @@ public final class b2PlaneResult extends Struct {
     }
 
     public b2PlaneResult.b2PlaneResultPointer asPointer() {
-        return new b2PlaneResult.b2PlaneResultPointer(getPointer(), false, this);
+        return new b2PlaneResult.b2PlaneResultPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The collision plane between the mover and a convex shape
      */
     public b2Plane plane() {
-        return __plane;
+        return new b2Plane(getPointer(), false);
     }
 
-    private static final int __plane_offset = 0;
+    /**
+     * The collision plane between the mover and a convex shape
+     */
+    public void plane(b2Plane toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 12, this);
+    }
 
-    private final b2Plane __plane = new b2Plane(getPointer() + __plane_offset, false);
+    /**
+     * The collision plane between the mover and a convex shape
+     */
+    public b2Plane getPlane() {
+        return new b2Plane(getBufPtr().duplicate(0, 12), true);
+    }
+
+    /**
+     * The collision plane between the mover and a convex shape
+     */
+    public void getPlane(b2Plane toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 12);
+    }
+
+    /**
+     * The collision plane between the mover and a convex shape
+     */
+    public void setPlane(b2Plane toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 12);
+    }
 
     /**
      * Did the collision register a hit? If not this plane should be ignored.
@@ -78,6 +107,11 @@ public final class b2PlaneResult extends Struct {
 
         public b2PlaneResultPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2PlaneResultPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

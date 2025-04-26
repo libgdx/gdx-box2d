@@ -28,6 +28,11 @@ public final class b2Sweep extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Sweep(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Sweep() {
         super(__size);
     }
@@ -41,63 +46,183 @@ public final class b2Sweep extends Struct {
     }
 
     public b2Sweep.b2SweepPointer asPointer() {
-        return new b2Sweep.b2SweepPointer(getPointer(), false, this);
+        return new b2Sweep.b2SweepPointer(getPointer(), false, 1, this);
     }
 
     /**
      * Local center of mass position
      */
     public b2Vec2 localCenter() {
-        return __localCenter;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __localCenter_offset = 0;
+    /**
+     * Local center of mass position
+     */
+    public void localCenter(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __localCenter = new b2Vec2(getPointer() + __localCenter_offset, false);
+    /**
+     * Local center of mass position
+     */
+    public b2Vec2 getLocalCenter() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * Local center of mass position
+     */
+    public void getLocalCenter(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * Local center of mass position
+     */
+    public void setLocalCenter(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Starting center of mass world position
      */
     public b2Vec2 c1() {
-        return __c1;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __c1_offset = 8;
+    /**
+     * Starting center of mass world position
+     */
+    public void c1(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __c1 = new b2Vec2(getPointer() + __c1_offset, false);
+    /**
+     * Starting center of mass world position
+     */
+    public b2Vec2 getC1() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * Starting center of mass world position
+     */
+    public void getC1(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * Starting center of mass world position
+     */
+    public void setC1(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Ending center of mass world position
      */
     public b2Vec2 c2() {
-        return __c2;
+        return new b2Vec2(getPointer() + (16), false);
     }
 
-    private static final int __c2_offset = 16;
+    /**
+     * Ending center of mass world position
+     */
+    public void c2(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (16), 8, this);
+    }
 
-    private final b2Vec2 __c2 = new b2Vec2(getPointer() + __c2_offset, false);
+    /**
+     * Ending center of mass world position
+     */
+    public b2Vec2 getC2() {
+        return new b2Vec2(getBufPtr().duplicate(16, 8), true);
+    }
+
+    /**
+     * Ending center of mass world position
+     */
+    public void getC2(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 8);
+    }
+
+    /**
+     * Ending center of mass world position
+     */
+    public void setC2(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Starting world rotation
      */
     public b2Rot q1() {
-        return __q1;
+        return new b2Rot(getPointer() + (24), false);
     }
 
-    private static final int __q1_offset = 24;
+    /**
+     * Starting world rotation
+     */
+    public void q1(b2Rot toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (24), 8, this);
+    }
 
-    private final b2Rot __q1 = new b2Rot(getPointer() + __q1_offset, false);
+    /**
+     * Starting world rotation
+     */
+    public b2Rot getQ1() {
+        return new b2Rot(getBufPtr().duplicate(24, 8), true);
+    }
+
+    /**
+     * Starting world rotation
+     */
+    public void getQ1(b2Rot toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 24, 8);
+    }
+
+    /**
+     * Starting world rotation
+     */
+    public void setQ1(b2Rot toCopyFrom) {
+        getBufPtr().copyFrom(24, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Ending world rotation
      */
     public b2Rot q2() {
-        return __q2;
+        return new b2Rot(getPointer() + (32), false);
     }
 
-    private static final int __q2_offset = 32;
+    /**
+     * Ending world rotation
+     */
+    public void q2(b2Rot toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (32), 8, this);
+    }
 
-    private final b2Rot __q2 = new b2Rot(getPointer() + __q2_offset, false);
+    /**
+     * Ending world rotation
+     */
+    public b2Rot getQ2() {
+        return new b2Rot(getBufPtr().duplicate(32, 8), true);
+    }
+
+    /**
+     * Ending world rotation
+     */
+    public void getQ2(b2Rot toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 32, 8);
+    }
+
+    /**
+     * Ending world rotation
+     */
+    public void setQ2(b2Rot toCopyFrom) {
+        getBufPtr().copyFrom(32, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public static final class b2SweepPointer extends StackElementPointer<b2Sweep> {
 
@@ -111,6 +236,11 @@ public final class b2Sweep extends Struct {
 
         public b2SweepPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2SweepPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

@@ -26,6 +26,11 @@ public final class b2TOIInput extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2TOIInput(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2TOIInput() {
         super(__size);
     }
@@ -39,52 +44,148 @@ public final class b2TOIInput extends Struct {
     }
 
     public b2TOIInput.b2TOIInputPointer asPointer() {
-        return new b2TOIInput.b2TOIInputPointer(getPointer(), false, this);
+        return new b2TOIInput.b2TOIInputPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The proxy for shape A
      */
     public b2ShapeProxy proxyA() {
-        return __proxyA;
+        return new b2ShapeProxy(getPointer(), false);
     }
 
-    private static final int __proxyA_offset = 0;
+    /**
+     * The proxy for shape A
+     */
+    public void proxyA(b2ShapeProxy toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 72, this);
+    }
 
-    private final b2ShapeProxy __proxyA = new b2ShapeProxy(getPointer() + __proxyA_offset, false);
+    /**
+     * The proxy for shape A
+     */
+    public b2ShapeProxy getProxyA() {
+        return new b2ShapeProxy(getBufPtr().duplicate(0, 72), true);
+    }
+
+    /**
+     * The proxy for shape A
+     */
+    public void getProxyA(b2ShapeProxy toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 72);
+    }
+
+    /**
+     * The proxy for shape A
+     */
+    public void setProxyA(b2ShapeProxy toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 72);
+    }
 
     /**
      * The proxy for shape B
      */
     public b2ShapeProxy proxyB() {
-        return __proxyB;
+        return new b2ShapeProxy(getPointer() + (72), false);
     }
 
-    private static final int __proxyB_offset = 72;
+    /**
+     * The proxy for shape B
+     */
+    public void proxyB(b2ShapeProxy toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (72), 72, this);
+    }
 
-    private final b2ShapeProxy __proxyB = new b2ShapeProxy(getPointer() + __proxyB_offset, false);
+    /**
+     * The proxy for shape B
+     */
+    public b2ShapeProxy getProxyB() {
+        return new b2ShapeProxy(getBufPtr().duplicate(72, 72), true);
+    }
+
+    /**
+     * The proxy for shape B
+     */
+    public void getProxyB(b2ShapeProxy toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 72, 72);
+    }
+
+    /**
+     * The proxy for shape B
+     */
+    public void setProxyB(b2ShapeProxy toCopyFrom) {
+        getBufPtr().copyFrom(72, toCopyFrom.getBufPtr(), 0, 72);
+    }
 
     /**
      * The movement of shape A
      */
     public b2Sweep sweepA() {
-        return __sweepA;
+        return new b2Sweep(getPointer() + (144), false);
     }
 
-    private static final int __sweepA_offset = 144;
+    /**
+     * The movement of shape A
+     */
+    public void sweepA(b2Sweep toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (144), 40, this);
+    }
 
-    private final b2Sweep __sweepA = new b2Sweep(getPointer() + __sweepA_offset, false);
+    /**
+     * The movement of shape A
+     */
+    public b2Sweep getSweepA() {
+        return new b2Sweep(getBufPtr().duplicate(144, 40), true);
+    }
+
+    /**
+     * The movement of shape A
+     */
+    public void getSweepA(b2Sweep toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 144, 40);
+    }
+
+    /**
+     * The movement of shape A
+     */
+    public void setSweepA(b2Sweep toCopyFrom) {
+        getBufPtr().copyFrom(144, toCopyFrom.getBufPtr(), 0, 40);
+    }
 
     /**
      * The movement of shape B
      */
     public b2Sweep sweepB() {
-        return __sweepB;
+        return new b2Sweep(getPointer() + (184), false);
     }
 
-    private static final int __sweepB_offset = 184;
+    /**
+     * The movement of shape B
+     */
+    public void sweepB(b2Sweep toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (184), 40, this);
+    }
 
-    private final b2Sweep __sweepB = new b2Sweep(getPointer() + __sweepB_offset, false);
+    /**
+     * The movement of shape B
+     */
+    public b2Sweep getSweepB() {
+        return new b2Sweep(getBufPtr().duplicate(184, 40), true);
+    }
+
+    /**
+     * The movement of shape B
+     */
+    public void getSweepB(b2Sweep toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 184, 40);
+    }
+
+    /**
+     * The movement of shape B
+     */
+    public void setSweepB(b2Sweep toCopyFrom) {
+        getBufPtr().copyFrom(184, toCopyFrom.getBufPtr(), 0, 40);
+    }
 
     /**
      * Defines the sweep interval [0, maxFraction]
@@ -112,6 +213,11 @@ public final class b2TOIInput extends Struct {
 
         public b2TOIInputPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2TOIInputPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

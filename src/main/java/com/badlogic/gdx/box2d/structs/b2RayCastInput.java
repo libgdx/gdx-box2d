@@ -25,6 +25,11 @@ public final class b2RayCastInput extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2RayCastInput(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2RayCastInput() {
         super(__size);
     }
@@ -38,30 +43,78 @@ public final class b2RayCastInput extends Struct {
     }
 
     public b2RayCastInput.b2RayCastInputPointer asPointer() {
-        return new b2RayCastInput.b2RayCastInputPointer(getPointer(), false, this);
+        return new b2RayCastInput.b2RayCastInputPointer(getPointer(), false, 1, this);
     }
 
     /**
      * Start point of the ray cast
      */
     public b2Vec2 origin() {
-        return __origin;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __origin_offset = 0;
+    /**
+     * Start point of the ray cast
+     */
+    public void origin(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __origin = new b2Vec2(getPointer() + __origin_offset, false);
+    /**
+     * Start point of the ray cast
+     */
+    public b2Vec2 getOrigin() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * Start point of the ray cast
+     */
+    public void getOrigin(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * Start point of the ray cast
+     */
+    public void setOrigin(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Translation of the ray cast
      */
     public b2Vec2 translation() {
-        return __translation;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __translation_offset = 8;
+    /**
+     * Translation of the ray cast
+     */
+    public void translation(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __translation = new b2Vec2(getPointer() + __translation_offset, false);
+    /**
+     * Translation of the ray cast
+     */
+    public b2Vec2 getTranslation() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * Translation of the ray cast
+     */
+    public void getTranslation(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * Translation of the ray cast
+     */
+    public void setTranslation(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The maximum fraction of the translation to consider, typically 1
@@ -89,6 +142,11 @@ public final class b2RayCastInput extends Struct {
 
         public b2RayCastInputPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2RayCastInputPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

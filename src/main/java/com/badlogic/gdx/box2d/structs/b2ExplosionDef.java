@@ -27,6 +27,11 @@ public final class b2ExplosionDef extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ExplosionDef(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ExplosionDef() {
         super(__size);
     }
@@ -40,7 +45,7 @@ public final class b2ExplosionDef extends Struct {
     }
 
     public b2ExplosionDef.b2ExplosionDefPointer asPointer() {
-        return new b2ExplosionDef.b2ExplosionDefPointer(getPointer(), false, this);
+        return new b2ExplosionDef.b2ExplosionDefPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -61,12 +66,36 @@ public final class b2ExplosionDef extends Struct {
      * The center of the explosion in world space
      */
     public b2Vec2 position() {
-        return __position;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __position_offset = 8;
+    /**
+     * The center of the explosion in world space
+     */
+    public void position(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __position = new b2Vec2(getPointer() + __position_offset, false);
+    /**
+     * The center of the explosion in world space
+     */
+    public b2Vec2 getPosition() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * The center of the explosion in world space
+     */
+    public void getPosition(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * The center of the explosion in world space
+     */
+    public void setPosition(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The radius of the explosion
@@ -126,6 +155,11 @@ public final class b2ExplosionDef extends Struct {
 
         public b2ExplosionDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ExplosionDefPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

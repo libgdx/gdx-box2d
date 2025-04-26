@@ -25,6 +25,11 @@ public final class b2DistanceOutput extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2DistanceOutput(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2DistanceOutput() {
         super(__size);
     }
@@ -38,41 +43,113 @@ public final class b2DistanceOutput extends Struct {
     }
 
     public b2DistanceOutput.b2DistanceOutputPointer asPointer() {
-        return new b2DistanceOutput.b2DistanceOutputPointer(getPointer(), false, this);
+        return new b2DistanceOutput.b2DistanceOutputPointer(getPointer(), false, 1, this);
     }
 
     /**
      * Closest point on shapeA
      */
     public b2Vec2 pointA() {
-        return __pointA;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __pointA_offset = 0;
+    /**
+     * Closest point on shapeA
+     */
+    public void pointA(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __pointA = new b2Vec2(getPointer() + __pointA_offset, false);
+    /**
+     * Closest point on shapeA
+     */
+    public b2Vec2 getPointA() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * Closest point on shapeA
+     */
+    public void getPointA(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * Closest point on shapeA
+     */
+    public void setPointA(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Closest point on shapeB
      */
     public b2Vec2 pointB() {
-        return __pointB;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __pointB_offset = 8;
+    /**
+     * Closest point on shapeB
+     */
+    public void pointB(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __pointB = new b2Vec2(getPointer() + __pointB_offset, false);
+    /**
+     * Closest point on shapeB
+     */
+    public b2Vec2 getPointB() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * Closest point on shapeB
+     */
+    public void getPointB(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * Closest point on shapeB
+     */
+    public void setPointB(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Normal vector that points from A to B
      */
     public b2Vec2 normal() {
-        return __normal;
+        return new b2Vec2(getPointer() + (16), false);
     }
 
-    private static final int __normal_offset = 16;
+    /**
+     * Normal vector that points from A to B
+     */
+    public void normal(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (16), 8, this);
+    }
 
-    private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
+    /**
+     * Normal vector that points from A to B
+     */
+    public b2Vec2 getNormal() {
+        return new b2Vec2(getBufPtr().duplicate(16, 8), true);
+    }
+
+    /**
+     * Normal vector that points from A to B
+     */
+    public void getNormal(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 8);
+    }
+
+    /**
+     * Normal vector that points from A to B
+     */
+    public void setNormal(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The final distance, zero if overlapped
@@ -128,6 +205,11 @@ public final class b2DistanceOutput extends Struct {
 
         public b2DistanceOutputPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2DistanceOutputPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

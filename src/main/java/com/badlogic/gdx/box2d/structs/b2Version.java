@@ -25,6 +25,11 @@ public final class b2Version extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Version(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Version() {
         super(__size);
     }
@@ -38,7 +43,7 @@ public final class b2Version extends Struct {
     }
 
     public b2Version.b2VersionPointer asPointer() {
-        return new b2Version.b2VersionPointer(getPointer(), false, this);
+        return new b2Version.b2VersionPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -95,6 +100,11 @@ public final class b2Version extends Struct {
 
         public b2VersionPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2VersionPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

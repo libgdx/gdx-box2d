@@ -25,6 +25,11 @@ public final class b2PlaneSolverResult extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2PlaneSolverResult(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2PlaneSolverResult() {
         super(__size);
     }
@@ -38,19 +43,43 @@ public final class b2PlaneSolverResult extends Struct {
     }
 
     public b2PlaneSolverResult.b2PlaneSolverResultPointer asPointer() {
-        return new b2PlaneSolverResult.b2PlaneSolverResultPointer(getPointer(), false, this);
+        return new b2PlaneSolverResult.b2PlaneSolverResultPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The final position of the mover
      */
     public b2Vec2 position() {
-        return __position;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __position_offset = 0;
+    /**
+     * The final position of the mover
+     */
+    public void position(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __position = new b2Vec2(getPointer() + __position_offset, false);
+    /**
+     * The final position of the mover
+     */
+    public b2Vec2 getPosition() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * The final position of the mover
+     */
+    public void getPosition(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * The final position of the mover
+     */
+    public void setPosition(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The number of iterations used by the plane solver. For diagnostics.
@@ -78,6 +107,11 @@ public final class b2PlaneSolverResult extends Struct {
 
         public b2PlaneSolverResultPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2PlaneSolverResultPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

@@ -29,6 +29,11 @@ public final class b2DynamicTree extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2DynamicTree(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2DynamicTree() {
         super(__size);
     }
@@ -42,7 +47,7 @@ public final class b2DynamicTree extends Struct {
     }
 
     public b2DynamicTree.b2DynamicTreePointer asPointer() {
-        return new b2DynamicTree.b2DynamicTreePointer(getPointer(), false, this);
+        return new b2DynamicTree.b2DynamicTreePointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -211,6 +216,11 @@ public final class b2DynamicTree extends Struct {
 
         public b2DynamicTreePointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2DynamicTreePointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

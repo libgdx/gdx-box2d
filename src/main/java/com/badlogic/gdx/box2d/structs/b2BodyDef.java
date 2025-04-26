@@ -33,6 +33,11 @@ public final class b2BodyDef extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2BodyDef(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2BodyDef() {
         super(__size);
     }
@@ -46,7 +51,7 @@ public final class b2BodyDef extends Struct {
     }
 
     public b2BodyDef.b2BodyDefPointer asPointer() {
-        return new b2BodyDef.b2BodyDefPointer(getPointer(), false, this);
+        return new b2BodyDef.b2BodyDefPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -69,34 +74,114 @@ public final class b2BodyDef extends Struct {
      * 	 if the body is moved after shapes have been added.
      */
     public b2Vec2 position() {
-        return __position;
+        return new b2Vec2(getPointer() + (4), false);
     }
 
-    private static final int __position_offset = 4;
+    /**
+     *  The initial world position of the body. Bodies should be created with the desired position.
+     * 	 @note Creating bodies at the origin and then moving them nearly doubles the cost of body creation, especially
+     * 	 if the body is moved after shapes have been added.
+     */
+    public void position(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (4), 8, this);
+    }
 
-    private final b2Vec2 __position = new b2Vec2(getPointer() + __position_offset, false);
+    /**
+     *  The initial world position of the body. Bodies should be created with the desired position.
+     * 	 @note Creating bodies at the origin and then moving them nearly doubles the cost of body creation, especially
+     * 	 if the body is moved after shapes have been added.
+     */
+    public b2Vec2 getPosition() {
+        return new b2Vec2(getBufPtr().duplicate(4, 8), true);
+    }
+
+    /**
+     *  The initial world position of the body. Bodies should be created with the desired position.
+     * 	 @note Creating bodies at the origin and then moving them nearly doubles the cost of body creation, especially
+     * 	 if the body is moved after shapes have been added.
+     */
+    public void getPosition(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 4, 8);
+    }
+
+    /**
+     *  The initial world position of the body. Bodies should be created with the desired position.
+     * 	 @note Creating bodies at the origin and then moving them nearly doubles the cost of body creation, especially
+     * 	 if the body is moved after shapes have been added.
+     */
+    public void setPosition(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(4, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The initial world rotation of the body. Use b2MakeRot() if you have an angle.
      */
     public b2Rot rotation() {
-        return __rotation;
+        return new b2Rot(getPointer() + (12), false);
     }
 
-    private static final int __rotation_offset = 12;
+    /**
+     * The initial world rotation of the body. Use b2MakeRot() if you have an angle.
+     */
+    public void rotation(b2Rot toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (12), 8, this);
+    }
 
-    private final b2Rot __rotation = new b2Rot(getPointer() + __rotation_offset, false);
+    /**
+     * The initial world rotation of the body. Use b2MakeRot() if you have an angle.
+     */
+    public b2Rot getRotation() {
+        return new b2Rot(getBufPtr().duplicate(12, 8), true);
+    }
+
+    /**
+     * The initial world rotation of the body. Use b2MakeRot() if you have an angle.
+     */
+    public void getRotation(b2Rot toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 12, 8);
+    }
+
+    /**
+     * The initial world rotation of the body. Use b2MakeRot() if you have an angle.
+     */
+    public void setRotation(b2Rot toCopyFrom) {
+        getBufPtr().copyFrom(12, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The initial linear velocity of the body's origin. Usually in meters per second.
      */
     public b2Vec2 linearVelocity() {
-        return __linearVelocity;
+        return new b2Vec2(getPointer() + (20), false);
     }
 
-    private static final int __linearVelocity_offset = 20;
+    /**
+     * The initial linear velocity of the body's origin. Usually in meters per second.
+     */
+    public void linearVelocity(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (20), 8, this);
+    }
 
-    private final b2Vec2 __linearVelocity = new b2Vec2(getPointer() + __linearVelocity_offset, false);
+    /**
+     * The initial linear velocity of the body's origin. Usually in meters per second.
+     */
+    public b2Vec2 getLinearVelocity() {
+        return new b2Vec2(getBufPtr().duplicate(20, 8), true);
+    }
+
+    /**
+     * The initial linear velocity of the body's origin. Usually in meters per second.
+     */
+    public void getLinearVelocity(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 20, 8);
+    }
+
+    /**
+     * The initial linear velocity of the body's origin. Usually in meters per second.
+     */
+    public void setLinearVelocity(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(20, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The initial angular velocity of the body. Radians per second.
@@ -328,6 +413,11 @@ public final class b2BodyDef extends Struct {
 
         public b2BodyDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2BodyDefPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

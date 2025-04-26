@@ -24,6 +24,11 @@ public final class b2BodyId extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2BodyId(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2BodyId() {
         super(__size);
     }
@@ -37,7 +42,7 @@ public final class b2BodyId extends Struct {
     }
 
     public b2BodyId.b2BodyIdPointer asPointer() {
-        return new b2BodyId.b2BodyIdPointer(getPointer(), false, this);
+        return new b2BodyId.b2BodyIdPointer(getPointer(), false, 1, this);
     }
 
     public int index1() {
@@ -76,6 +81,11 @@ public final class b2BodyId extends Struct {
 
         public b2BodyIdPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2BodyIdPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

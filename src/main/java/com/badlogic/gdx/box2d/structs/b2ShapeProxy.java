@@ -26,6 +26,11 @@ public final class b2ShapeProxy extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ShapeProxy(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ShapeProxy() {
         super(__size);
     }
@@ -39,19 +44,43 @@ public final class b2ShapeProxy extends Struct {
     }
 
     public b2ShapeProxy.b2ShapeProxyPointer asPointer() {
-        return new b2ShapeProxy.b2ShapeProxyPointer(getPointer(), false, this);
+        return new b2ShapeProxy.b2ShapeProxyPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The point cloud
      */
     public b2Vec2.b2Vec2Pointer points() {
-        return __points;
+        return new b2Vec2.b2Vec2Pointer(getPointer(), false, 8);
     }
 
-    private static final int __points_offset = 0;
+    /**
+     * The point cloud
+     */
+    public void points(b2Vec2.b2Vec2Pointer toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 64, this);
+    }
 
-    private final b2Vec2.b2Vec2Pointer __points = new b2Vec2.b2Vec2Pointer(getPointer() + __points_offset, false, 8);
+    /**
+     * The point cloud
+     */
+    public b2Vec2.b2Vec2Pointer getPoints() {
+        return new b2Vec2.b2Vec2Pointer(getBufPtr().duplicate(0, 64), false, 8);
+    }
+
+    /**
+     * The point cloud
+     */
+    public void getPoints(b2Vec2.b2Vec2Pointer toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 64);
+    }
+
+    /**
+     * The point cloud
+     */
+    public void setPoints(b2Vec2.b2Vec2Pointer toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 64);
+    }
 
     /**
      * The number of points. Must be greater than 0.
@@ -93,6 +122,11 @@ public final class b2ShapeProxy extends Struct {
 
         public b2ShapeProxyPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ShapeProxyPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

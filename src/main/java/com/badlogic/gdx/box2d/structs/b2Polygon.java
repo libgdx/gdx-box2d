@@ -30,6 +30,11 @@ public final class b2Polygon extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Polygon(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Polygon() {
         super(__size);
     }
@@ -43,41 +48,113 @@ public final class b2Polygon extends Struct {
     }
 
     public b2Polygon.b2PolygonPointer asPointer() {
-        return new b2Polygon.b2PolygonPointer(getPointer(), false, this);
+        return new b2Polygon.b2PolygonPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The polygon vertices
      */
     public b2Vec2.b2Vec2Pointer vertices() {
-        return __vertices;
+        return new b2Vec2.b2Vec2Pointer(getPointer(), false, 8);
     }
 
-    private static final int __vertices_offset = 0;
+    /**
+     * The polygon vertices
+     */
+    public void vertices(b2Vec2.b2Vec2Pointer toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 64, this);
+    }
 
-    private final b2Vec2.b2Vec2Pointer __vertices = new b2Vec2.b2Vec2Pointer(getPointer() + __vertices_offset, false, 8);
+    /**
+     * The polygon vertices
+     */
+    public b2Vec2.b2Vec2Pointer getVertices() {
+        return new b2Vec2.b2Vec2Pointer(getBufPtr().duplicate(0, 64), false, 8);
+    }
+
+    /**
+     * The polygon vertices
+     */
+    public void getVertices(b2Vec2.b2Vec2Pointer toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 64);
+    }
+
+    /**
+     * The polygon vertices
+     */
+    public void setVertices(b2Vec2.b2Vec2Pointer toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 64);
+    }
 
     /**
      * The outward normal vectors of the polygon sides
      */
     public b2Vec2.b2Vec2Pointer normals() {
-        return __normals;
+        return new b2Vec2.b2Vec2Pointer(getPointer() + (64), false, 8);
     }
 
-    private static final int __normals_offset = 64;
+    /**
+     * The outward normal vectors of the polygon sides
+     */
+    public void normals(b2Vec2.b2Vec2Pointer toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (64), 64, this);
+    }
 
-    private final b2Vec2.b2Vec2Pointer __normals = new b2Vec2.b2Vec2Pointer(getPointer() + __normals_offset, false, 8);
+    /**
+     * The outward normal vectors of the polygon sides
+     */
+    public b2Vec2.b2Vec2Pointer getNormals() {
+        return new b2Vec2.b2Vec2Pointer(getBufPtr().duplicate(64, 64), false, 8);
+    }
+
+    /**
+     * The outward normal vectors of the polygon sides
+     */
+    public void getNormals(b2Vec2.b2Vec2Pointer toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 64, 64);
+    }
+
+    /**
+     * The outward normal vectors of the polygon sides
+     */
+    public void setNormals(b2Vec2.b2Vec2Pointer toCopyFrom) {
+        getBufPtr().copyFrom(64, toCopyFrom.getBufPtr(), 0, 64);
+    }
 
     /**
      * The centroid of the polygon
      */
     public b2Vec2 centroid() {
-        return __centroid;
+        return new b2Vec2(getPointer() + (128), false);
     }
 
-    private static final int __centroid_offset = 128;
+    /**
+     * The centroid of the polygon
+     */
+    public void centroid(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (128), 8, this);
+    }
 
-    private final b2Vec2 __centroid = new b2Vec2(getPointer() + __centroid_offset, false);
+    /**
+     * The centroid of the polygon
+     */
+    public b2Vec2 getCentroid() {
+        return new b2Vec2(getBufPtr().duplicate(128, 8), true);
+    }
+
+    /**
+     * The centroid of the polygon
+     */
+    public void getCentroid(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 128, 8);
+    }
+
+    /**
+     * The centroid of the polygon
+     */
+    public void setCentroid(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(128, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The external radius for rounded polygons
@@ -119,6 +196,11 @@ public final class b2Polygon extends Struct {
 
         public b2PolygonPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2PolygonPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

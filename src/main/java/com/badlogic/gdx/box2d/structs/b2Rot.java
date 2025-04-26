@@ -25,6 +25,11 @@ public final class b2Rot extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Rot(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Rot() {
         super(__size);
     }
@@ -38,7 +43,7 @@ public final class b2Rot extends Struct {
     }
 
     public b2Rot.b2RotPointer asPointer() {
-        return new b2Rot.b2RotPointer(getPointer(), false, this);
+        return new b2Rot.b2RotPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -81,6 +86,11 @@ public final class b2Rot extends Struct {
 
         public b2RotPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2RotPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

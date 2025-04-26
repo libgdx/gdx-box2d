@@ -25,6 +25,11 @@ public final class b2MassData extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2MassData(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2MassData() {
         super(__size);
     }
@@ -38,7 +43,7 @@ public final class b2MassData extends Struct {
     }
 
     public b2MassData.b2MassDataPointer asPointer() {
-        return new b2MassData.b2MassDataPointer(getPointer(), false, this);
+        return new b2MassData.b2MassDataPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -59,12 +64,36 @@ public final class b2MassData extends Struct {
      * The position of the shape's centroid relative to the shape's origin.
      */
     public b2Vec2 center() {
-        return __center;
+        return new b2Vec2(getPointer() + (4), false);
     }
 
-    private static final int __center_offset = 4;
+    /**
+     * The position of the shape's centroid relative to the shape's origin.
+     */
+    public void center(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (4), 8, this);
+    }
 
-    private final b2Vec2 __center = new b2Vec2(getPointer() + __center_offset, false);
+    /**
+     * The position of the shape's centroid relative to the shape's origin.
+     */
+    public b2Vec2 getCenter() {
+        return new b2Vec2(getBufPtr().duplicate(4, 8), true);
+    }
+
+    /**
+     * The position of the shape's centroid relative to the shape's origin.
+     */
+    public void getCenter(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 4, 8);
+    }
+
+    /**
+     * The position of the shape's centroid relative to the shape's origin.
+     */
+    public void setCenter(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(4, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The rotational inertia of the shape about the local origin.
@@ -92,6 +121,11 @@ public final class b2MassData extends Struct {
 
         public b2MassDataPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2MassDataPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

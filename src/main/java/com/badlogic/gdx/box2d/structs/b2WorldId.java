@@ -24,6 +24,11 @@ public final class b2WorldId extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2WorldId(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2WorldId() {
         super(__size);
     }
@@ -37,7 +42,7 @@ public final class b2WorldId extends Struct {
     }
 
     public b2WorldId.b2WorldIdPointer asPointer() {
-        return new b2WorldId.b2WorldIdPointer(getPointer(), false, this);
+        return new b2WorldId.b2WorldIdPointer(getPointer(), false, 1, this);
     }
 
     public char index1() {
@@ -68,6 +73,11 @@ public final class b2WorldId extends Struct {
 
         public b2WorldIdPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2WorldIdPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

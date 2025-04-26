@@ -25,6 +25,11 @@ public final class b2CastOutput extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2CastOutput(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2CastOutput() {
         super(__size);
     }
@@ -38,30 +43,78 @@ public final class b2CastOutput extends Struct {
     }
 
     public b2CastOutput.b2CastOutputPointer asPointer() {
-        return new b2CastOutput.b2CastOutputPointer(getPointer(), false, this);
+        return new b2CastOutput.b2CastOutputPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The surface normal at the hit point
      */
     public b2Vec2 normal() {
-        return __normal;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __normal_offset = 0;
+    /**
+     * The surface normal at the hit point
+     */
+    public void normal(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
+    /**
+     * The surface normal at the hit point
+     */
+    public b2Vec2 getNormal() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * The surface normal at the hit point
+     */
+    public void getNormal(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * The surface normal at the hit point
+     */
+    public void setNormal(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The surface hit point
      */
     public b2Vec2 point() {
-        return __point;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __point_offset = 8;
+    /**
+     * The surface hit point
+     */
+    public void point(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
+    /**
+     * The surface hit point
+     */
+    public b2Vec2 getPoint() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * The surface hit point
+     */
+    public void getPoint(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * The surface hit point
+     */
+    public void setPoint(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The fraction of the input translation at collision
@@ -117,6 +170,11 @@ public final class b2CastOutput extends Struct {
 
         public b2CastOutputPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2CastOutputPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

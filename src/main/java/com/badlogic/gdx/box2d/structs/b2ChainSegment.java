@@ -28,6 +28,11 @@ public final class b2ChainSegment extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ChainSegment(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ChainSegment() {
         super(__size);
     }
@@ -41,41 +46,113 @@ public final class b2ChainSegment extends Struct {
     }
 
     public b2ChainSegment.b2ChainSegmentPointer asPointer() {
-        return new b2ChainSegment.b2ChainSegmentPointer(getPointer(), false, this);
+        return new b2ChainSegment.b2ChainSegmentPointer(getPointer(), false, 1, this);
     }
 
     /**
      * The tail ghost vertex
      */
     public b2Vec2 ghost1() {
-        return __ghost1;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __ghost1_offset = 0;
+    /**
+     * The tail ghost vertex
+     */
+    public void ghost1(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __ghost1 = new b2Vec2(getPointer() + __ghost1_offset, false);
+    /**
+     * The tail ghost vertex
+     */
+    public b2Vec2 getGhost1() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * The tail ghost vertex
+     */
+    public void getGhost1(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * The tail ghost vertex
+     */
+    public void setGhost1(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The line segment
      */
     public b2Segment segment() {
-        return __segment;
+        return new b2Segment(getPointer() + (8), false);
     }
 
-    private static final int __segment_offset = 8;
+    /**
+     * The line segment
+     */
+    public void segment(b2Segment toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 16, this);
+    }
 
-    private final b2Segment __segment = new b2Segment(getPointer() + __segment_offset, false);
+    /**
+     * The line segment
+     */
+    public b2Segment getSegment() {
+        return new b2Segment(getBufPtr().duplicate(8, 16), true);
+    }
+
+    /**
+     * The line segment
+     */
+    public void getSegment(b2Segment toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 16);
+    }
+
+    /**
+     * The line segment
+     */
+    public void setSegment(b2Segment toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 16);
+    }
 
     /**
      * The head ghost vertex
      */
     public b2Vec2 ghost2() {
-        return __ghost2;
+        return new b2Vec2(getPointer() + (24), false);
     }
 
-    private static final int __ghost2_offset = 24;
+    /**
+     * The head ghost vertex
+     */
+    public void ghost2(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (24), 8, this);
+    }
 
-    private final b2Vec2 __ghost2 = new b2Vec2(getPointer() + __ghost2_offset, false);
+    /**
+     * The head ghost vertex
+     */
+    public b2Vec2 getGhost2() {
+        return new b2Vec2(getBufPtr().duplicate(24, 8), true);
+    }
+
+    /**
+     * The head ghost vertex
+     */
+    public void getGhost2(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 24, 8);
+    }
+
+    /**
+     * The head ghost vertex
+     */
+    public void setGhost2(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(24, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The owning chain shape index (internal usage only)
@@ -103,6 +180,11 @@ public final class b2ChainSegment extends Struct {
 
         public b2ChainSegmentPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ChainSegmentPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

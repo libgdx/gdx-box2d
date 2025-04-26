@@ -26,6 +26,11 @@ public final class b2ContactBeginTouchEvent extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ContactBeginTouchEvent(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ContactBeginTouchEvent() {
         super(__size);
     }
@@ -39,42 +44,118 @@ public final class b2ContactBeginTouchEvent extends Struct {
     }
 
     public b2ContactBeginTouchEvent.b2ContactBeginTouchEventPointer asPointer() {
-        return new b2ContactBeginTouchEvent.b2ContactBeginTouchEventPointer(getPointer(), false, this);
+        return new b2ContactBeginTouchEvent.b2ContactBeginTouchEventPointer(getPointer(), false, 1, this);
     }
 
     /**
      * Id of the first shape
      */
     public b2ShapeId shapeIdA() {
-        return __shapeIdA;
+        return new b2ShapeId(getPointer(), false);
     }
 
-    private static final int __shapeIdA_offset = 0;
+    /**
+     * Id of the first shape
+     */
+    public void shapeIdA(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2ShapeId __shapeIdA = new b2ShapeId(getPointer() + __shapeIdA_offset, false);
+    /**
+     * Id of the first shape
+     */
+    public b2ShapeId getShapeIdA() {
+        return new b2ShapeId(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * Id of the first shape
+     */
+    public void getShapeIdA(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * Id of the first shape
+     */
+    public void setShapeIdA(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * Id of the second shape
      */
     public b2ShapeId shapeIdB() {
-        return __shapeIdB;
+        return new b2ShapeId(getPointer() + (8), false);
     }
 
-    private static final int __shapeIdB_offset = 8;
+    /**
+     * Id of the second shape
+     */
+    public void shapeIdB(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2ShapeId __shapeIdB = new b2ShapeId(getPointer() + __shapeIdB_offset, false);
+    /**
+     * Id of the second shape
+     */
+    public b2ShapeId getShapeIdB() {
+        return new b2ShapeId(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     * Id of the second shape
+     */
+    public void getShapeIdB(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     * Id of the second shape
+     */
+    public void setShapeIdB(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      *  The initial contact manifold. This is recorded before the solver is called,
      * 	 so all the impulses will be zero.
      */
     public b2Manifold manifold() {
-        return __manifold;
+        return new b2Manifold(getPointer() + (16), false);
     }
 
-    private static final int __manifold_offset = 16;
+    /**
+     *  The initial contact manifold. This is recorded before the solver is called,
+     * 	 so all the impulses will be zero.
+     */
+    public void manifold(b2Manifold toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (16), 112, this);
+    }
 
-    private final b2Manifold __manifold = new b2Manifold(getPointer() + __manifold_offset, false);
+    /**
+     *  The initial contact manifold. This is recorded before the solver is called,
+     * 	 so all the impulses will be zero.
+     */
+    public b2Manifold getManifold() {
+        return new b2Manifold(getBufPtr().duplicate(16, 112), true);
+    }
+
+    /**
+     *  The initial contact manifold. This is recorded before the solver is called,
+     * 	 so all the impulses will be zero.
+     */
+    public void getManifold(b2Manifold toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 112);
+    }
+
+    /**
+     *  The initial contact manifold. This is recorded before the solver is called,
+     * 	 so all the impulses will be zero.
+     */
+    public void setManifold(b2Manifold toCopyFrom) {
+        getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 112);
+    }
 
     public static final class b2ContactBeginTouchEventPointer extends StackElementPointer<b2ContactBeginTouchEvent> {
 
@@ -88,6 +169,11 @@ public final class b2ContactBeginTouchEvent extends Struct {
 
         public b2ContactBeginTouchEventPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ContactBeginTouchEventPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

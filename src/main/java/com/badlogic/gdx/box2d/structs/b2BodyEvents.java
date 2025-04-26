@@ -27,6 +27,11 @@ public final class b2BodyEvents extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2BodyEvents(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2BodyEvents() {
         super(__size);
     }
@@ -40,7 +45,7 @@ public final class b2BodyEvents extends Struct {
     }
 
     public b2BodyEvents.b2BodyEventsPointer asPointer() {
-        return new b2BodyEvents.b2BodyEventsPointer(getPointer(), false, this);
+        return new b2BodyEvents.b2BodyEventsPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -83,6 +88,11 @@ public final class b2BodyEvents extends Struct {
 
         public b2BodyEventsPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2BodyEventsPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

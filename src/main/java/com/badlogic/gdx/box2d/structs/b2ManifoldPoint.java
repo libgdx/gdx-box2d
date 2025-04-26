@@ -29,6 +29,11 @@ public final class b2ManifoldPoint extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ManifoldPoint(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ManifoldPoint() {
         super(__size);
     }
@@ -42,7 +47,7 @@ public final class b2ManifoldPoint extends Struct {
     }
 
     public b2ManifoldPoint.b2ManifoldPointPointer asPointer() {
-        return new b2ManifoldPoint.b2ManifoldPointPointer(getPointer(), false, this);
+        return new b2ManifoldPoint.b2ManifoldPointPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -50,36 +55,120 @@ public final class b2ManifoldPoint extends Struct {
      * 	 @note Should only be used for debugging.
      */
     public b2Vec2 point() {
-        return __point;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __point_offset = 0;
+    /**
+     *  Location of the contact point in world space. Subject to precision loss at large coordinates.
+     * 	 @note Should only be used for debugging.
+     */
+    public void point(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
+    /**
+     *  Location of the contact point in world space. Subject to precision loss at large coordinates.
+     * 	 @note Should only be used for debugging.
+     */
+    public b2Vec2 getPoint() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     *  Location of the contact point in world space. Subject to precision loss at large coordinates.
+     * 	 @note Should only be used for debugging.
+     */
+    public void getPoint(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     *  Location of the contact point in world space. Subject to precision loss at large coordinates.
+     * 	 @note Should only be used for debugging.
+     */
+    public void setPoint(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      *  Location of the contact point relative to shapeA's origin in world space
      * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
      */
     public b2Vec2 anchorA() {
-        return __anchorA;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __anchorA_offset = 8;
+    /**
+     *  Location of the contact point relative to shapeA's origin in world space
+     * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
+     */
+    public void anchorA(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __anchorA = new b2Vec2(getPointer() + __anchorA_offset, false);
+    /**
+     *  Location of the contact point relative to shapeA's origin in world space
+     * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
+     */
+    public b2Vec2 getAnchorA() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     *  Location of the contact point relative to shapeA's origin in world space
+     * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
+     */
+    public void getAnchorA(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     *  Location of the contact point relative to shapeA's origin in world space
+     * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
+     */
+    public void setAnchorA(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      *  Location of the contact point relative to shapeB's origin in world space
      * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
      */
     public b2Vec2 anchorB() {
-        return __anchorB;
+        return new b2Vec2(getPointer() + (16), false);
     }
 
-    private static final int __anchorB_offset = 16;
+    /**
+     *  Location of the contact point relative to shapeB's origin in world space
+     * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
+     */
+    public void anchorB(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (16), 8, this);
+    }
 
-    private final b2Vec2 __anchorB = new b2Vec2(getPointer() + __anchorB_offset, false);
+    /**
+     *  Location of the contact point relative to shapeB's origin in world space
+     * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
+     */
+    public b2Vec2 getAnchorB() {
+        return new b2Vec2(getBufPtr().duplicate(16, 8), true);
+    }
+
+    /**
+     *  Location of the contact point relative to shapeB's origin in world space
+     * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
+     */
+    public void getAnchorB(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 8);
+    }
+
+    /**
+     *  Location of the contact point relative to shapeB's origin in world space
+     * 	 @note When used internally to the Box2D solver, this is relative to the body center of mass.
+     */
+    public void setAnchorB(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The separation of the contact point, negative if penetrating
@@ -195,6 +284,11 @@ public final class b2ManifoldPoint extends Struct {
 
         public b2ManifoldPointPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ManifoldPointPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

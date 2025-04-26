@@ -26,6 +26,11 @@ public final class b2Filter extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Filter(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Filter() {
         super(__size);
     }
@@ -39,7 +44,7 @@ public final class b2Filter extends Struct {
     }
 
     public b2Filter.b2FilterPointer asPointer() {
-        return new b2Filter.b2FilterPointer(getPointer(), false, this);
+        return new b2Filter.b2FilterPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -140,6 +145,11 @@ public final class b2Filter extends Struct {
 
         public b2FilterPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2FilterPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

@@ -25,6 +25,11 @@ public final class b2Circle extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Circle(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Circle() {
         super(__size);
     }
@@ -38,19 +43,43 @@ public final class b2Circle extends Struct {
     }
 
     public b2Circle.b2CirclePointer asPointer() {
-        return new b2Circle.b2CirclePointer(getPointer(), false, this);
+        return new b2Circle.b2CirclePointer(getPointer(), false, 1, this);
     }
 
     /**
      * The local center
      */
     public b2Vec2 center() {
-        return __center;
+        return new b2Vec2(getPointer(), false);
     }
 
-    private static final int __center_offset = 0;
+    /**
+     * The local center
+     */
+    public void center(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2Vec2 __center = new b2Vec2(getPointer() + __center_offset, false);
+    /**
+     * The local center
+     */
+    public b2Vec2 getCenter() {
+        return new b2Vec2(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     * The local center
+     */
+    public void getCenter(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     * The local center
+     */
+    public void setCenter(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      * The radius
@@ -78,6 +107,11 @@ public final class b2Circle extends Struct {
 
         public b2CirclePointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2CirclePointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

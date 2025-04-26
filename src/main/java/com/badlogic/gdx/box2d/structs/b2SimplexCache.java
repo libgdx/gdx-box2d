@@ -28,6 +28,11 @@ public final class b2SimplexCache extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2SimplexCache(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2SimplexCache() {
         super(__size);
     }
@@ -41,7 +46,7 @@ public final class b2SimplexCache extends Struct {
     }
 
     public b2SimplexCache.b2SimplexCachePointer asPointer() {
-        return new b2SimplexCache.b2SimplexCachePointer(getPointer(), false, this);
+        return new b2SimplexCache.b2SimplexCachePointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -62,23 +67,71 @@ public final class b2SimplexCache extends Struct {
      * The cached simplex indices on shape A
      */
     public UBytePointer indexA() {
-        return __indexA;
+        return new UBytePointer(getPointer() + (2), false, 3);
     }
 
-    private static final int __indexA_offset = 2;
+    /**
+     * The cached simplex indices on shape A
+     */
+    public void indexA(UBytePointer toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (2), 3, this);
+    }
 
-    private final UBytePointer __indexA = new UBytePointer(getPointer() + __indexA_offset, false, 3);
+    /**
+     * The cached simplex indices on shape A
+     */
+    public UBytePointer getIndexA() {
+        return new UBytePointer(getBufPtr().duplicate(2, 3), false, 3);
+    }
+
+    /**
+     * The cached simplex indices on shape A
+     */
+    public void getIndexA(UBytePointer toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 2, 3);
+    }
+
+    /**
+     * The cached simplex indices on shape A
+     */
+    public void setIndexA(UBytePointer toCopyFrom) {
+        getBufPtr().copyFrom(2, toCopyFrom.getBufPtr(), 0, 3);
+    }
 
     /**
      * The cached simplex indices on shape B
      */
     public UBytePointer indexB() {
-        return __indexB;
+        return new UBytePointer(getPointer() + (5), false, 3);
     }
 
-    private static final int __indexB_offset = 5;
+    /**
+     * The cached simplex indices on shape B
+     */
+    public void indexB(UBytePointer toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (5), 3, this);
+    }
 
-    private final UBytePointer __indexB = new UBytePointer(getPointer() + __indexB_offset, false, 3);
+    /**
+     * The cached simplex indices on shape B
+     */
+    public UBytePointer getIndexB() {
+        return new UBytePointer(getBufPtr().duplicate(5, 3), false, 3);
+    }
+
+    /**
+     * The cached simplex indices on shape B
+     */
+    public void getIndexB(UBytePointer toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 5, 3);
+    }
+
+    /**
+     * The cached simplex indices on shape B
+     */
+    public void setIndexB(UBytePointer toCopyFrom) {
+        getBufPtr().copyFrom(5, toCopyFrom.getBufPtr(), 0, 3);
+    }
 
     public static final class b2SimplexCachePointer extends StackElementPointer<b2SimplexCache> {
 
@@ -92,6 +145,11 @@ public final class b2SimplexCache extends Struct {
 
         public b2SimplexCachePointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2SimplexCachePointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

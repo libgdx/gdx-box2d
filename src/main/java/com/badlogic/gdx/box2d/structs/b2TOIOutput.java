@@ -25,6 +25,11 @@ public final class b2TOIOutput extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2TOIOutput(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2TOIOutput() {
         super(__size);
     }
@@ -38,7 +43,7 @@ public final class b2TOIOutput extends Struct {
     }
 
     public b2TOIOutput.b2TOIOutputPointer asPointer() {
-        return new b2TOIOutput.b2TOIOutputPointer(getPointer(), false, this);
+        return new b2TOIOutput.b2TOIOutputPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -81,6 +86,11 @@ public final class b2TOIOutput extends Struct {
 
         public b2TOIOutputPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2TOIOutputPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

@@ -27,6 +27,11 @@ public final class b2RayResult extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2RayResult(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2RayResult() {
         super(__size);
     }
@@ -40,32 +45,68 @@ public final class b2RayResult extends Struct {
     }
 
     public b2RayResult.b2RayResultPointer asPointer() {
-        return new b2RayResult.b2RayResultPointer(getPointer(), false, this);
+        return new b2RayResult.b2RayResultPointer(getPointer(), false, 1, this);
     }
 
     public b2ShapeId shapeId() {
-        return __shapeId;
+        return new b2ShapeId(getPointer(), false);
     }
 
-    private static final int __shapeId_offset = 0;
+    public void shapeId(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2ShapeId __shapeId = new b2ShapeId(getPointer() + __shapeId_offset, false);
+    public b2ShapeId getShapeId() {
+        return new b2ShapeId(getBufPtr().duplicate(0, 8), true);
+    }
+
+    public void getShapeId(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    public void setShapeId(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public b2Vec2 point() {
-        return __point;
+        return new b2Vec2(getPointer() + (8), false);
     }
 
-    private static final int __point_offset = 8;
+    public void point(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2Vec2 __point = new b2Vec2(getPointer() + __point_offset, false);
+    public b2Vec2 getPoint() {
+        return new b2Vec2(getBufPtr().duplicate(8, 8), true);
+    }
+
+    public void getPoint(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    public void setPoint(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public b2Vec2 normal() {
-        return __normal;
+        return new b2Vec2(getPointer() + (16), false);
     }
 
-    private static final int __normal_offset = 16;
+    public void normal(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (16), 8, this);
+    }
 
-    private final b2Vec2 __normal = new b2Vec2(getPointer() + __normal_offset, false);
+    public b2Vec2 getNormal() {
+        return new b2Vec2(getBufPtr().duplicate(16, 8), true);
+    }
+
+    public void getNormal(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 8);
+    }
+
+    public void setNormal(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public float fraction() {
         return getBufPtr().getFloat(24);
@@ -111,6 +152,11 @@ public final class b2RayResult extends Struct {
 
         public b2RayResultPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2RayResultPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

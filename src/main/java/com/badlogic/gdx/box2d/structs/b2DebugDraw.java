@@ -43,6 +43,11 @@ public final class b2DebugDraw extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2DebugDraw(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2DebugDraw() {
         super(__size);
     }
@@ -56,7 +61,7 @@ public final class b2DebugDraw extends Struct {
     }
 
     public b2DebugDraw.b2DebugDrawPointer asPointer() {
-        return new b2DebugDraw.b2DebugDrawPointer(getPointer(), false, this);
+        return new b2DebugDraw.b2DebugDrawPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -189,12 +194,36 @@ public final class b2DebugDraw extends Struct {
      * Bounds to use if restricting drawing to a rectangular region
      */
     public b2AABB drawingBounds() {
-        return __drawingBounds;
+        return new b2AABB(getPointer() + (CHandler.IS_32_BIT ? 36 : 72), false);
     }
 
-    private static final int __drawingBounds_offset = CHandler.IS_32_BIT ? 36 : 72;
+    /**
+     * Bounds to use if restricting drawing to a rectangular region
+     */
+    public void drawingBounds(b2AABB toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (CHandler.IS_32_BIT ? 36 : 72), 16, this);
+    }
 
-    private final b2AABB __drawingBounds = new b2AABB(getPointer() + __drawingBounds_offset, false);
+    /**
+     * Bounds to use if restricting drawing to a rectangular region
+     */
+    public b2AABB getDrawingBounds() {
+        return new b2AABB(getBufPtr().duplicate(CHandler.IS_32_BIT ? 36 : 72, 16), true);
+    }
+
+    /**
+     * Bounds to use if restricting drawing to a rectangular region
+     */
+    public void getDrawingBounds(b2AABB toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), CHandler.IS_32_BIT ? 36 : 72, 16);
+    }
+
+    /**
+     * Bounds to use if restricting drawing to a rectangular region
+     */
+    public void setDrawingBounds(b2AABB toCopyFrom) {
+        getBufPtr().copyFrom(CHandler.IS_32_BIT ? 36 : 72, toCopyFrom.getBufPtr(), 0, 16);
+    }
 
     /**
      * Option to restrict drawing to a rectangular region. May suffer from unstable depth sorting.
@@ -418,6 +447,11 @@ public final class b2DebugDraw extends Struct {
 
         public b2DebugDrawPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2DebugDrawPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

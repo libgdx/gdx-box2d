@@ -42,6 +42,11 @@ public final class b2ChainDef extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ChainDef(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ChainDef() {
         super(__size);
     }
@@ -55,7 +60,7 @@ public final class b2ChainDef extends Struct {
     }
 
     public b2ChainDef.b2ChainDefPointer asPointer() {
-        return new b2ChainDef.b2ChainDefPointer(getPointer(), false, this);
+        return new b2ChainDef.b2ChainDefPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -134,12 +139,36 @@ public final class b2ChainDef extends Struct {
      * Contact filtering data.
      */
     public b2Filter filter() {
-        return __filter;
+        return new b2Filter(getPointer() + (CHandler.IS_32_BIT ? 24 : 40), false);
     }
 
-    private static final int __filter_offset = CHandler.IS_32_BIT ? 24 : 40;
+    /**
+     * Contact filtering data.
+     */
+    public void filter(b2Filter toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (CHandler.IS_32_BIT ? 24 : 40), 24, this);
+    }
 
-    private final b2Filter __filter = new b2Filter(getPointer() + __filter_offset, false);
+    /**
+     * Contact filtering data.
+     */
+    public b2Filter getFilter() {
+        return new b2Filter(getBufPtr().duplicate(CHandler.IS_32_BIT ? 24 : 40, 24), true);
+    }
+
+    /**
+     * Contact filtering data.
+     */
+    public void getFilter(b2Filter toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), CHandler.IS_32_BIT ? 24 : 40, 24);
+    }
+
+    /**
+     * Contact filtering data.
+     */
+    public void setFilter(b2Filter toCopyFrom) {
+        getBufPtr().copyFrom(CHandler.IS_32_BIT ? 24 : 40, toCopyFrom.getBufPtr(), 0, 24);
+    }
 
     /**
      * Indicates a closed chain formed by connecting the first and last points
@@ -195,6 +224,11 @@ public final class b2ChainDef extends Struct {
 
         public b2ChainDefPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ChainDefPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

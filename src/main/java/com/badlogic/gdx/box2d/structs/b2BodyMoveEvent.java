@@ -36,6 +36,11 @@ public final class b2BodyMoveEvent extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2BodyMoveEvent(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2BodyMoveEvent() {
         super(__size);
     }
@@ -49,24 +54,48 @@ public final class b2BodyMoveEvent extends Struct {
     }
 
     public b2BodyMoveEvent.b2BodyMoveEventPointer asPointer() {
-        return new b2BodyMoveEvent.b2BodyMoveEventPointer(getPointer(), false, this);
+        return new b2BodyMoveEvent.b2BodyMoveEventPointer(getPointer(), false, 1, this);
     }
 
     public b2Transform transform() {
-        return __transform;
+        return new b2Transform(getPointer(), false);
     }
 
-    private static final int __transform_offset = 0;
+    public void transform(b2Transform toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 16, this);
+    }
 
-    private final b2Transform __transform = new b2Transform(getPointer() + __transform_offset, false);
+    public b2Transform getTransform() {
+        return new b2Transform(getBufPtr().duplicate(0, 16), true);
+    }
+
+    public void getTransform(b2Transform toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 16);
+    }
+
+    public void setTransform(b2Transform toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 16);
+    }
 
     public b2BodyId bodyId() {
-        return __bodyId;
+        return new b2BodyId(getPointer() + (16), false);
     }
 
-    private static final int __bodyId_offset = 16;
+    public void bodyId(b2BodyId toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (16), 8, this);
+    }
 
-    private final b2BodyId __bodyId = new b2BodyId(getPointer() + __bodyId_offset, false);
+    public b2BodyId getBodyId() {
+        return new b2BodyId(getBufPtr().duplicate(16, 8), true);
+    }
+
+    public void getBodyId(b2BodyId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 8);
+    }
+
+    public void setBodyId(b2BodyId toCopyFrom) {
+        getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public VoidPointer userData() {
         return new VoidPointer(getBufPtr().getNativePointer(24), false);
@@ -96,6 +125,11 @@ public final class b2BodyMoveEvent extends Struct {
 
         public b2BodyMoveEventPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2BodyMoveEventPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

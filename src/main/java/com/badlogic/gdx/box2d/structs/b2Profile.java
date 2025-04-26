@@ -25,6 +25,11 @@ public final class b2Profile extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Profile(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Profile() {
         super(__size);
     }
@@ -38,7 +43,7 @@ public final class b2Profile extends Struct {
     }
 
     public b2Profile.b2ProfilePointer asPointer() {
-        return new b2Profile.b2ProfilePointer(getPointer(), false, this);
+        return new b2Profile.b2ProfilePointer(getPointer(), false, 1, this);
     }
 
     public float step() {
@@ -229,6 +234,11 @@ public final class b2Profile extends Struct {
 
         public b2ProfilePointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ProfilePointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

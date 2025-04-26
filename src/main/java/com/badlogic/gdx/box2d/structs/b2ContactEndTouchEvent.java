@@ -28,6 +28,11 @@ public final class b2ContactEndTouchEvent extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ContactEndTouchEvent(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ContactEndTouchEvent() {
         super(__size);
     }
@@ -41,7 +46,7 @@ public final class b2ContactEndTouchEvent extends Struct {
     }
 
     public b2ContactEndTouchEvent.b2ContactEndTouchEventPointer asPointer() {
-        return new b2ContactEndTouchEvent.b2ContactEndTouchEventPointer(getPointer(), false, this);
+        return new b2ContactEndTouchEvent.b2ContactEndTouchEventPointer(getPointer(), false, 1, this);
     }
 
     /**
@@ -50,12 +55,44 @@ public final class b2ContactEndTouchEvent extends Struct {
      * 		@see b2Shape_IsValid
      */
     public b2ShapeId shapeIdA() {
-        return __shapeIdA;
+        return new b2ShapeId(getPointer(), false);
     }
 
-    private static final int __shapeIdA_offset = 0;
+    /**
+     *  Id of the first shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void shapeIdA(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer(), 8, this);
+    }
 
-    private final b2ShapeId __shapeIdA = new b2ShapeId(getPointer() + __shapeIdA_offset, false);
+    /**
+     *  Id of the first shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public b2ShapeId getShapeIdA() {
+        return new b2ShapeId(getBufPtr().duplicate(0, 8), true);
+    }
+
+    /**
+     *  Id of the first shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void getShapeIdA(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
+    }
+
+    /**
+     *  Id of the first shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void setShapeIdA(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     /**
      *  Id of the second shape
@@ -63,12 +100,44 @@ public final class b2ContactEndTouchEvent extends Struct {
      * 		@see b2Shape_IsValid
      */
     public b2ShapeId shapeIdB() {
-        return __shapeIdB;
+        return new b2ShapeId(getPointer() + (8), false);
     }
 
-    private static final int __shapeIdB_offset = 8;
+    /**
+     *  Id of the second shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void shapeIdB(b2ShapeId toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (8), 8, this);
+    }
 
-    private final b2ShapeId __shapeIdB = new b2ShapeId(getPointer() + __shapeIdB_offset, false);
+    /**
+     *  Id of the second shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public b2ShapeId getShapeIdB() {
+        return new b2ShapeId(getBufPtr().duplicate(8, 8), true);
+    }
+
+    /**
+     *  Id of the second shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void getShapeIdB(b2ShapeId toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 8, 8);
+    }
+
+    /**
+     *  Id of the second shape
+     * 		@warning this shape may have been destroyed
+     * 		@see b2Shape_IsValid
+     */
+    public void setShapeIdB(b2ShapeId toCopyFrom) {
+        getBufPtr().copyFrom(8, toCopyFrom.getBufPtr(), 0, 8);
+    }
 
     public static final class b2ContactEndTouchEventPointer extends StackElementPointer<b2ContactEndTouchEvent> {
 
@@ -82,6 +151,11 @@ public final class b2ContactEndTouchEvent extends Struct {
 
         public b2ContactEndTouchEventPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ContactEndTouchEventPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

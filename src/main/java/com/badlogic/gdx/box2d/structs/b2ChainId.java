@@ -24,6 +24,11 @@ public final class b2ChainId extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2ChainId(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2ChainId() {
         super(__size);
     }
@@ -37,7 +42,7 @@ public final class b2ChainId extends Struct {
     }
 
     public b2ChainId.b2ChainIdPointer asPointer() {
-        return new b2ChainId.b2ChainIdPointer(getPointer(), false, this);
+        return new b2ChainId.b2ChainIdPointer(getPointer(), false, 1, this);
     }
 
     public int index1() {
@@ -76,6 +81,11 @@ public final class b2ChainId extends Struct {
 
         public b2ChainIdPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2ChainIdPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 

@@ -25,6 +25,11 @@ public final class b2Counters extends Struct {
         super(pointer, freeOnGC);
     }
 
+    public b2Counters(long pointer, boolean freeOnGC, Pointing parent) {
+        super(pointer, freeOnGC);
+        setParent(parent);
+    }
+
     public b2Counters() {
         super(__size);
     }
@@ -38,7 +43,7 @@ public final class b2Counters extends Struct {
     }
 
     public b2Counters.b2CountersPointer asPointer() {
-        return new b2Counters.b2CountersPointer(getPointer(), false, this);
+        return new b2Counters.b2CountersPointer(getPointer(), false, 1, this);
     }
 
     public int bodyCount() {
@@ -122,12 +127,24 @@ public final class b2Counters extends Struct {
     }
 
     public SIntPointer colorCounts() {
-        return __colorCounts;
+        return new SIntPointer(getPointer() + (40), false, 12);
     }
 
-    private static final int __colorCounts_offset = 40;
+    public void colorCounts(SIntPointer toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (40), 48, this);
+    }
 
-    private final SIntPointer __colorCounts = new SIntPointer(getPointer() + __colorCounts_offset, false, 12);
+    public SIntPointer getColorCounts() {
+        return new SIntPointer(getBufPtr().duplicate(40, 48), false, 12);
+    }
+
+    public void getColorCounts(SIntPointer toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 40, 48);
+    }
+
+    public void setColorCounts(SIntPointer toCopyFrom) {
+        getBufPtr().copyFrom(40, toCopyFrom.getBufPtr(), 0, 48);
+    }
 
     public static final class b2CountersPointer extends StackElementPointer<b2Counters> {
 
@@ -141,6 +158,11 @@ public final class b2Counters extends Struct {
 
         public b2CountersPointer(long pointer, boolean freeOnGC, Pointing parent) {
             super(pointer, freeOnGC);
+            setParent(parent);
+        }
+
+        public b2CountersPointer(long pointer, boolean freeOnGC, int capacity, Pointing parent) {
+            super(pointer, freeOnGC, capacity * __size);
             setParent(parent);
         }
 
