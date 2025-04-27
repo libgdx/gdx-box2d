@@ -74,9 +74,5 @@ public enum b2TOIState implements CEnum {
         public void setEnumValue(b2TOIState value, int index) {
             getBufPtr().setUInt(index * __size, value.getIndex());
         }
-
-        public int getSize() {
-            return __size;
-        }
     }
 }

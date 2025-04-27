@@ -495,9 +495,5 @@ public enum b2HexColor implements CEnum {
         public void setEnumValue(b2HexColor value, int index) {
             getBufPtr().setUInt(index * __size, value.getIndex());
         }
-
-        public int getSize() {
-            return __size;
-        }
     }
 }

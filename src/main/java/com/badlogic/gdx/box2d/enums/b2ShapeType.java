@@ -100,9 +100,5 @@ public enum b2ShapeType implements CEnum {
         public void setEnumValue(b2ShapeType value, int index) {
             getBufPtr().setUInt(index * __size, value.getIndex());
         }
-
-        public int getSize() {
-            return __size;
-        }
     }
 }

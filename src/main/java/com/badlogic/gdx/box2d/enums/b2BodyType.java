@@ -89,9 +89,5 @@ public enum b2BodyType implements CEnum {
         public void setEnumValue(b2BodyType value, int index) {
             getBufPtr().setUInt(index * __size, value.getIndex());
         }
-
-        public int getSize() {
-            return __size;
-        }
     }
 }

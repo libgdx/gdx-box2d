@@ -91,9 +91,5 @@ public enum b2JointType implements CEnum {
         public void setEnumValue(b2JointType value, int index) {
             getBufPtr().setUInt(index * __size, value.getIndex());
         }
-
-        public int getSize() {
-            return __size;
-        }
     }
 }

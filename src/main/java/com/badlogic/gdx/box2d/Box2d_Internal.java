@@ -5,7 +5,7 @@ import com.badlogic.gdx.jnigen.runtime.closure.Closure;
 import com.badlogic.gdx.jnigen.runtime.mem.BufferPtr;
 import com.badlogic.gdx.jnigen.runtime.closure.PointingPoolManager;
 import com.badlogic.gdx.box2d.structs.b2DebugDraw.DrawPolygonFcn;
-import com.badlogic.gdx.jnigen.runtime.ffi.ClosureEncoder;
+import com.badlogic.gdx.jnigen.runtime.closure.ClosureEncoder;
 import com.badlogic.gdx.jnigen.runtime.closure.CClosureObject;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.enums.b2HexColor;
