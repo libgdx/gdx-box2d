@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2TreeNode;
 import com.badlogic.gdx.jnigen.runtime.pointer.integer.SIntPointer;
@@ -50,6 +51,10 @@ public final class b2DynamicTree extends Struct {
         return new b2DynamicTree.b2DynamicTreePointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2DynamicTree.b2DynamicTreePointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * The tree nodes
      */
@@ -68,143 +73,147 @@ public final class b2DynamicTree extends Struct {
      * The root index
      */
     public int root() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 4 : 8);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 8 : 4);
     }
 
     /**
      * The root index
      */
     public void root(int root) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, root);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 8 : 4, root);
     }
 
     /**
      * The number of nodes
      */
     public int nodeCount() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 8 : 12);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 12 : 8);
     }
 
     /**
      * The number of nodes
      */
     public void nodeCount(int nodeCount) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 8 : 12, nodeCount);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 12 : 8, nodeCount);
     }
 
     /**
      * The allocated node space
      */
     public int nodeCapacity() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 12 : 16);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 16 : 12);
     }
 
     /**
      * The allocated node space
      */
     public void nodeCapacity(int nodeCapacity) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 12 : 16, nodeCapacity);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 16 : 12, nodeCapacity);
     }
 
     /**
      * Node free list
      */
     public int freeList() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 16 : 20);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 20 : 16);
     }
 
     /**
      * Node free list
      */
     public void freeList(int freeList) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 16 : 20, freeList);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 20 : 16, freeList);
     }
 
     /**
      * Number of proxies created
      */
     public int proxyCount() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 20 : 24);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 24 : 20);
     }
 
     /**
      * Number of proxies created
      */
     public void proxyCount(int proxyCount) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 20 : 24, proxyCount);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 24 : 20, proxyCount);
     }
 
     /**
      * Leaf indices for rebuild
      */
     public SIntPointer leafIndices() {
-        return new SIntPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 24 : 32), false);
+        return new SIntPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 32 : 24), false);
     }
 
     /**
      * Leaf indices for rebuild
      */
     public void leafIndices(SIntPointer leafIndices) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 24 : 32, leafIndices.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 32 : 24, leafIndices.getPointer());
     }
 
     /**
      * Leaf bounding boxes for rebuild
      */
     public b2AABB.b2AABBPointer leafBoxes() {
-        return new b2AABB.b2AABBPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 28 : 40), false);
+        return new b2AABB.b2AABBPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 40 : 28), false);
     }
 
     /**
      * Leaf bounding boxes for rebuild
      */
     public void leafBoxes(b2AABB.b2AABBPointer leafBoxes) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 28 : 40, leafBoxes.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 40 : 28, leafBoxes.getPointer());
     }
 
     /**
      * Leaf bounding box centers for rebuild
      */
     public b2Vec2.b2Vec2Pointer leafCenters() {
-        return new b2Vec2.b2Vec2Pointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 32 : 48), false);
+        return new b2Vec2.b2Vec2Pointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 48 : 32), false);
     }
 
     /**
      * Leaf bounding box centers for rebuild
      */
     public void leafCenters(b2Vec2.b2Vec2Pointer leafCenters) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 32 : 48, leafCenters.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 48 : 32, leafCenters.getPointer());
     }
 
     /**
      * Bins for sorting during rebuild
      */
     public SIntPointer binIndices() {
-        return new SIntPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 36 : 56), false);
+        return new SIntPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 56 : 36), false);
     }
 
     /**
      * Bins for sorting during rebuild
      */
     public void binIndices(SIntPointer binIndices) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 36 : 56, binIndices.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 56 : 36, binIndices.getPointer());
     }
 
     /**
      * Allocated space for rebuilding
      */
     public int rebuildCapacity() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 40 : 64);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 64 : 40);
     }
 
     /**
      * Allocated space for rebuilding
      */
     public void rebuildCapacity(int rebuildCapacity) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 40 : 64, rebuildCapacity);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 64 : 40, rebuildCapacity);
     }
 
     public static final class b2DynamicTreePointer extends StackElementPointer<b2DynamicTree> {
+
+        public b2DynamicTreePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2DynamicTreePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

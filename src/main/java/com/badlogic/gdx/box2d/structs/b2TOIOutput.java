@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.enums.b2TOIState;
 
@@ -46,6 +47,10 @@ public final class b2TOIOutput extends Struct {
         return new b2TOIOutput.b2TOIOutputPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2TOIOutput.b2TOIOutputPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * The type of result
      */
@@ -75,6 +80,10 @@ public final class b2TOIOutput extends Struct {
     }
 
     public static final class b2TOIOutputPointer extends StackElementPointer<b2TOIOutput> {
+
+        public b2TOIOutputPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2TOIOutputPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

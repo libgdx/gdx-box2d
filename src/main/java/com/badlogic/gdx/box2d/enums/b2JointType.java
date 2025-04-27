@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.enums;
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * Joint type enumeration
@@ -62,6 +63,10 @@ public enum b2JointType implements CEnum {
     }
 
     public static final class b2JointTypePointer extends EnumPointer<b2JointType> {
+
+        public b2JointTypePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2JointTypePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

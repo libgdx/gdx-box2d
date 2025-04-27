@@ -4,10 +4,10 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.closure.ClosureObject;
 import com.badlogic.gdx.box2d.structs.b2AABB;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.jnigen.runtime.closure.Closure;
 import com.badlogic.gdx.box2d.Box2d_Internal.b2DebugDraw_Internal.DrawPolygonFcn_Internal;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
@@ -64,6 +64,10 @@ public final class b2DebugDraw extends Struct {
         return new b2DebugDraw.b2DebugDrawPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2DebugDraw.b2DebugDrawPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * Draw a closed polygon provided in CCW order.
      */
@@ -82,360 +86,364 @@ public final class b2DebugDraw extends Struct {
      * Draw a solid closed polygon provided in CCW order.
      */
     public ClosureObject<DrawSolidPolygonFcn> DrawSolidPolygonFcn() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 4 : 8), DrawSolidPolygonFcn_Internal::DrawSolidPolygonFcn_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 8 : 4), DrawSolidPolygonFcn_Internal::DrawSolidPolygonFcn_downcall);
     }
 
     /**
      * Draw a solid closed polygon provided in CCW order.
      */
     public void DrawSolidPolygonFcn(ClosureObject<DrawSolidPolygonFcn> DrawSolidPolygonFcn) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, DrawSolidPolygonFcn.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 8 : 4, DrawSolidPolygonFcn.getPointer());
     }
 
     /**
      * Draw a circle.
      */
     public ClosureObject<DrawCircleFcn> DrawCircleFcn() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 8 : 16), DrawCircleFcn_Internal::DrawCircleFcn_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 16 : 8), DrawCircleFcn_Internal::DrawCircleFcn_downcall);
     }
 
     /**
      * Draw a circle.
      */
     public void DrawCircleFcn(ClosureObject<DrawCircleFcn> DrawCircleFcn) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, DrawCircleFcn.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 16 : 8, DrawCircleFcn.getPointer());
     }
 
     /**
      * Draw a solid circle.
      */
     public ClosureObject<DrawSolidCircleFcn> DrawSolidCircleFcn() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 12 : 24), DrawSolidCircleFcn_Internal::DrawSolidCircleFcn_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 24 : 12), DrawSolidCircleFcn_Internal::DrawSolidCircleFcn_downcall);
     }
 
     /**
      * Draw a solid circle.
      */
     public void DrawSolidCircleFcn(ClosureObject<DrawSolidCircleFcn> DrawSolidCircleFcn) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 12 : 24, DrawSolidCircleFcn.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 24 : 12, DrawSolidCircleFcn.getPointer());
     }
 
     /**
      * Draw a solid capsule.
      */
     public ClosureObject<DrawSolidCapsuleFcn> DrawSolidCapsuleFcn() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 16 : 32), DrawSolidCapsuleFcn_Internal::DrawSolidCapsuleFcn_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 32 : 16), DrawSolidCapsuleFcn_Internal::DrawSolidCapsuleFcn_downcall);
     }
 
     /**
      * Draw a solid capsule.
      */
     public void DrawSolidCapsuleFcn(ClosureObject<DrawSolidCapsuleFcn> DrawSolidCapsuleFcn) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 16 : 32, DrawSolidCapsuleFcn.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 32 : 16, DrawSolidCapsuleFcn.getPointer());
     }
 
     /**
      * Draw a line segment.
      */
     public ClosureObject<DrawSegmentFcn> DrawSegmentFcn() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 20 : 40), DrawSegmentFcn_Internal::DrawSegmentFcn_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 40 : 20), DrawSegmentFcn_Internal::DrawSegmentFcn_downcall);
     }
 
     /**
      * Draw a line segment.
      */
     public void DrawSegmentFcn(ClosureObject<DrawSegmentFcn> DrawSegmentFcn) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 20 : 40, DrawSegmentFcn.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 40 : 20, DrawSegmentFcn.getPointer());
     }
 
     /**
      * Draw a transform. Choose your own length scale.
      */
     public ClosureObject<DrawTransformFcn> DrawTransformFcn() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 24 : 48), DrawTransformFcn_Internal::DrawTransformFcn_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 48 : 24), DrawTransformFcn_Internal::DrawTransformFcn_downcall);
     }
 
     /**
      * Draw a transform. Choose your own length scale.
      */
     public void DrawTransformFcn(ClosureObject<DrawTransformFcn> DrawTransformFcn) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 24 : 48, DrawTransformFcn.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 48 : 24, DrawTransformFcn.getPointer());
     }
 
     /**
      * Draw a point.
      */
     public ClosureObject<DrawPointFcn> DrawPointFcn() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 28 : 56), DrawPointFcn_Internal::DrawPointFcn_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 56 : 28), DrawPointFcn_Internal::DrawPointFcn_downcall);
     }
 
     /**
      * Draw a point.
      */
     public void DrawPointFcn(ClosureObject<DrawPointFcn> DrawPointFcn) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 28 : 56, DrawPointFcn.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 56 : 28, DrawPointFcn.getPointer());
     }
 
     /**
      * Draw a string in world space
      */
     public ClosureObject<DrawStringFcn> DrawStringFcn() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 32 : 64), DrawStringFcn_Internal::DrawStringFcn_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 64 : 32), DrawStringFcn_Internal::DrawStringFcn_downcall);
     }
 
     /**
      * Draw a string in world space
      */
     public void DrawStringFcn(ClosureObject<DrawStringFcn> DrawStringFcn) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 32 : 64, DrawStringFcn.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 64 : 32, DrawStringFcn.getPointer());
     }
 
     /**
      * Bounds to use if restricting drawing to a rectangular region
      */
     public b2AABB drawingBounds() {
-        return new b2AABB(getPointer() + (CHandler.IS_32_BIT ? 36 : 72), false);
+        return new b2AABB(getPointer() + (CHandler.IS_64_BIT ? 72 : 36), false);
     }
 
     /**
      * Bounds to use if restricting drawing to a rectangular region
      */
     public void drawingBounds(b2AABB toSetPtr) {
-        toSetPtr.setPointer(getPointer() + (CHandler.IS_32_BIT ? 36 : 72), 16, this);
+        toSetPtr.setPointer(getPointer() + (CHandler.IS_64_BIT ? 72 : 36), 16, this);
     }
 
     /**
      * Bounds to use if restricting drawing to a rectangular region
      */
     public b2AABB getDrawingBounds() {
-        return new b2AABB(getBufPtr().duplicate(CHandler.IS_32_BIT ? 36 : 72, 16), true);
+        return new b2AABB(getBufPtr().duplicate(CHandler.IS_64_BIT ? 72 : 36, 16), true);
     }
 
     /**
      * Bounds to use if restricting drawing to a rectangular region
      */
     public void getDrawingBounds(b2AABB toCopyTo) {
-        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), CHandler.IS_32_BIT ? 36 : 72, 16);
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), CHandler.IS_64_BIT ? 72 : 36, 16);
     }
 
     /**
      * Bounds to use if restricting drawing to a rectangular region
      */
     public void setDrawingBounds(b2AABB toCopyFrom) {
-        getBufPtr().copyFrom(CHandler.IS_32_BIT ? 36 : 72, toCopyFrom.getBufPtr(), 0, 16);
+        getBufPtr().copyFrom(CHandler.IS_64_BIT ? 72 : 36, toCopyFrom.getBufPtr(), 0, 16);
     }
 
     /**
      * Option to restrict drawing to a rectangular region. May suffer from unstable depth sorting.
      */
     public boolean useDrawingBounds() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 52 : 88);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 88 : 52);
     }
 
     /**
      * Option to restrict drawing to a rectangular region. May suffer from unstable depth sorting.
      */
     public void useDrawingBounds(boolean useDrawingBounds) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 52 : 88, useDrawingBounds);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 88 : 52, useDrawingBounds);
     }
 
     /**
      * Option to draw shapes
      */
     public boolean drawShapes() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 53 : 89);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 89 : 53);
     }
 
     /**
      * Option to draw shapes
      */
     public void drawShapes(boolean drawShapes) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 53 : 89, drawShapes);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 89 : 53, drawShapes);
     }
 
     /**
      * Option to draw joints
      */
     public boolean drawJoints() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 54 : 90);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 90 : 54);
     }
 
     /**
      * Option to draw joints
      */
     public void drawJoints(boolean drawJoints) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 54 : 90, drawJoints);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 90 : 54, drawJoints);
     }
 
     /**
      * Option to draw additional information for joints
      */
     public boolean drawJointExtras() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 55 : 91);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 91 : 55);
     }
 
     /**
      * Option to draw additional information for joints
      */
     public void drawJointExtras(boolean drawJointExtras) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 55 : 91, drawJointExtras);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 91 : 55, drawJointExtras);
     }
 
     /**
      * Option to draw the bounding boxes for shapes
      */
     public boolean drawBounds() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 56 : 92);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 92 : 56);
     }
 
     /**
      * Option to draw the bounding boxes for shapes
      */
     public void drawBounds(boolean drawBounds) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 56 : 92, drawBounds);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 92 : 56, drawBounds);
     }
 
     /**
      * Option to draw the mass and center of mass of dynamic bodies
      */
     public boolean drawMass() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 57 : 93);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 93 : 57);
     }
 
     /**
      * Option to draw the mass and center of mass of dynamic bodies
      */
     public void drawMass(boolean drawMass) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 57 : 93, drawMass);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 93 : 57, drawMass);
     }
 
     /**
      * Option to draw body names
      */
     public boolean drawBodyNames() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 58 : 94);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 94 : 58);
     }
 
     /**
      * Option to draw body names
      */
     public void drawBodyNames(boolean drawBodyNames) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 58 : 94, drawBodyNames);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 94 : 58, drawBodyNames);
     }
 
     /**
      * Option to draw contact points
      */
     public boolean drawContacts() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 59 : 95);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 95 : 59);
     }
 
     /**
      * Option to draw contact points
      */
     public void drawContacts(boolean drawContacts) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 59 : 95, drawContacts);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 95 : 59, drawContacts);
     }
 
     /**
      * Option to visualize the graph coloring used for contacts and joints
      */
     public boolean drawGraphColors() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 60 : 96);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 96 : 60);
     }
 
     /**
      * Option to visualize the graph coloring used for contacts and joints
      */
     public void drawGraphColors(boolean drawGraphColors) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 60 : 96, drawGraphColors);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 96 : 60, drawGraphColors);
     }
 
     /**
      * Option to draw contact normals
      */
     public boolean drawContactNormals() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 61 : 97);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 97 : 61);
     }
 
     /**
      * Option to draw contact normals
      */
     public void drawContactNormals(boolean drawContactNormals) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 61 : 97, drawContactNormals);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 97 : 61, drawContactNormals);
     }
 
     /**
      * Option to draw contact normal impulses
      */
     public boolean drawContactImpulses() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 62 : 98);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 98 : 62);
     }
 
     /**
      * Option to draw contact normal impulses
      */
     public void drawContactImpulses(boolean drawContactImpulses) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 62 : 98, drawContactImpulses);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 98 : 62, drawContactImpulses);
     }
 
     /**
      * Option to draw contact feature ids
      */
     public boolean drawContactFeatures() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 63 : 99);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 99 : 63);
     }
 
     /**
      * Option to draw contact feature ids
      */
     public void drawContactFeatures(boolean drawContactFeatures) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 63 : 99, drawContactFeatures);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 99 : 63, drawContactFeatures);
     }
 
     /**
      * Option to draw contact friction impulses
      */
     public boolean drawFrictionImpulses() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 64 : 100);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 100 : 64);
     }
 
     /**
      * Option to draw contact friction impulses
      */
     public void drawFrictionImpulses(boolean drawFrictionImpulses) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 64 : 100, drawFrictionImpulses);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 100 : 64, drawFrictionImpulses);
     }
 
     /**
      * Option to draw islands as bounding boxes
      */
     public boolean drawIslands() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 65 : 101);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 101 : 65);
     }
 
     /**
      * Option to draw islands as bounding boxes
      */
     public void drawIslands(boolean drawIslands) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 65 : 101, drawIslands);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 101 : 65, drawIslands);
     }
 
     /**
      * User context that is passed as an argument to drawing callback functions
      */
     public VoidPointer context() {
-        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 68 : 104), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 104 : 68), false);
     }
 
     /**
      * User context that is passed as an argument to drawing callback functions
      */
     public void context(VoidPointer context) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 68 : 104, context.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 104 : 68, context.getPointer());
     }
 
     public static final class b2DebugDrawPointer extends StackElementPointer<b2DebugDraw> {
+
+        public b2DebugDrawPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2DebugDrawPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

@@ -4,10 +4,10 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * A mouse joint is used to make a point on a body track a specified world point.
@@ -50,6 +50,10 @@ public final class b2MouseJointDef extends Struct {
 
     public b2MouseJointDef.b2MouseJointDefPointer asPointer() {
         return new b2MouseJointDef.b2MouseJointDefPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2MouseJointDef.b2MouseJointDefPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -231,17 +235,21 @@ public final class b2MouseJointDef extends Struct {
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 44 : 48);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 48 : 44);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 44 : 48, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 48 : 44, internalValue);
     }
 
     public static final class b2MouseJointDefPointer extends StackElementPointer<b2MouseJointDef> {
+
+        public b2MouseJointDefPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2MouseJointDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

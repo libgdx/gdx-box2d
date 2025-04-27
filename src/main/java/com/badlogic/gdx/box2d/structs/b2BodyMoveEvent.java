@@ -4,10 +4,10 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Transform;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * Body move events triggered when a body moves.
@@ -55,6 +55,10 @@ public final class b2BodyMoveEvent extends Struct {
 
     public b2BodyMoveEvent.b2BodyMoveEventPointer asPointer() {
         return new b2BodyMoveEvent.b2BodyMoveEventPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2BodyMoveEvent.b2BodyMoveEventPointer ptr) {
+        ptr.setPointer(this);
     }
 
     public b2Transform transform() {
@@ -106,14 +110,18 @@ public final class b2BodyMoveEvent extends Struct {
     }
 
     public boolean fellAsleep() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 28 : 32);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 32 : 28);
     }
 
     public void fellAsleep(boolean fellAsleep) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 28 : 32, fellAsleep);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 32 : 28, fellAsleep);
     }
 
     public static final class b2BodyMoveEventPointer extends StackElementPointer<b2BodyMoveEvent> {
+
+        public b2BodyMoveEventPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2BodyMoveEventPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.enums;
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * The body simulation type.
@@ -60,6 +61,10 @@ public enum b2BodyType implements CEnum {
     }
 
     public static final class b2BodyTypePointer extends EnumPointer<b2BodyType> {
+
+        public b2BodyTypePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2BodyTypePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

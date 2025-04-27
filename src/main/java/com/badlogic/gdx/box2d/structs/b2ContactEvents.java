@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ContactBeginTouchEvent;
 import com.badlogic.gdx.box2d.structs.b2ContactEndTouchEvent;
@@ -50,6 +51,10 @@ public final class b2ContactEvents extends Struct {
         return new b2ContactEvents.b2ContactEventsPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2ContactEvents.b2ContactEventsPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * Array of begin touch events
      */
@@ -68,73 +73,77 @@ public final class b2ContactEvents extends Struct {
      * Array of end touch events
      */
     public b2ContactEndTouchEvent.b2ContactEndTouchEventPointer endEvents() {
-        return new b2ContactEndTouchEvent.b2ContactEndTouchEventPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false);
+        return new b2ContactEndTouchEvent.b2ContactEndTouchEventPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 8 : 4), false);
     }
 
     /**
      * Array of end touch events
      */
     public void endEvents(b2ContactEndTouchEvent.b2ContactEndTouchEventPointer endEvents) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, endEvents.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 8 : 4, endEvents.getPointer());
     }
 
     /**
      * Array of hit events
      */
     public b2ContactHitEvent.b2ContactHitEventPointer hitEvents() {
-        return new b2ContactHitEvent.b2ContactHitEventPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 8 : 16), false);
+        return new b2ContactHitEvent.b2ContactHitEventPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 16 : 8), false);
     }
 
     /**
      * Array of hit events
      */
     public void hitEvents(b2ContactHitEvent.b2ContactHitEventPointer hitEvents) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 8 : 16, hitEvents.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 16 : 8, hitEvents.getPointer());
     }
 
     /**
      * Number of begin touch events
      */
     public int beginCount() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 12 : 24);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 24 : 12);
     }
 
     /**
      * Number of begin touch events
      */
     public void beginCount(int beginCount) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 12 : 24, beginCount);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 24 : 12, beginCount);
     }
 
     /**
      * Number of end touch events
      */
     public int endCount() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 16 : 28);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 28 : 16);
     }
 
     /**
      * Number of end touch events
      */
     public void endCount(int endCount) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 16 : 28, endCount);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 28 : 16, endCount);
     }
 
     /**
      * Number of hit events
      */
     public int hitCount() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 20 : 32);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 32 : 20);
     }
 
     /**
      * Number of hit events
      */
     public void hitCount(int hitCount) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 20 : 32, hitCount);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 32 : 20, hitCount);
     }
 
     public static final class b2ContactEventsPointer extends StackElementPointer<b2ContactEvents> {
+
+        public b2ContactEventsPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2ContactEventsPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

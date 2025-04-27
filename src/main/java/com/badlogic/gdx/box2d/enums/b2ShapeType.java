@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.enums;
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * Shape type
@@ -71,6 +72,10 @@ public enum b2ShapeType implements CEnum {
     }
 
     public static final class b2ShapeTypePointer extends EnumPointer<b2ShapeType> {
+
+        public b2ShapeTypePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2ShapeTypePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

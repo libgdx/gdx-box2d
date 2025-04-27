@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -45,6 +46,10 @@ public final class b2Filter extends Struct {
 
     public b2Filter.b2FilterPointer asPointer() {
         return new b2Filter.b2FilterPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2Filter.b2FilterPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -134,6 +139,10 @@ public final class b2Filter extends Struct {
     }
 
     public static final class b2FilterPointer extends StackElementPointer<b2Filter> {
+
+        public b2FilterPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2FilterPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -44,6 +45,10 @@ public final class b2Circle extends Struct {
 
     public b2Circle.b2CirclePointer asPointer() {
         return new b2Circle.b2CirclePointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2Circle.b2CirclePointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -96,6 +101,10 @@ public final class b2Circle extends Struct {
     }
 
     public static final class b2CirclePointer extends StackElementPointer<b2Circle> {
+
+        public b2CirclePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2CirclePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

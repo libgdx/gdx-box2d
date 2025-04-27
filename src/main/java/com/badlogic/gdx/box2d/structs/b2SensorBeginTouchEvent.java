@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 
@@ -44,6 +45,10 @@ public final class b2SensorBeginTouchEvent extends Struct {
 
     public b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer asPointer() {
         return new b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2SensorBeginTouchEvent.b2SensorBeginTouchEventPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -117,6 +122,10 @@ public final class b2SensorBeginTouchEvent extends Struct {
     }
 
     public static final class b2SensorBeginTouchEventPointer extends StackElementPointer<b2SensorBeginTouchEvent> {
+
+        public b2SensorBeginTouchEventPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2SensorBeginTouchEventPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

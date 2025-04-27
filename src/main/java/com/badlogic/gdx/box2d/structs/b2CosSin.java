@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -46,6 +47,10 @@ public final class b2CosSin extends Struct {
         return new b2CosSin.b2CosSinPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2CosSin.b2CosSinPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * cosine and sine
      */
@@ -69,6 +74,10 @@ public final class b2CosSin extends Struct {
     }
 
     public static final class b2CosSinPointer extends StackElementPointer<b2CosSin> {
+
+        public b2CosSinPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2CosSinPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

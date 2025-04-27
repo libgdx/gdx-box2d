@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -45,6 +46,10 @@ public final class b2BodyId extends Struct {
         return new b2BodyId.b2BodyIdPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2BodyId.b2BodyIdPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     public int index1() {
         return getBufPtr().getInt(0);
     }
@@ -70,6 +75,10 @@ public final class b2BodyId extends Struct {
     }
 
     public static final class b2BodyIdPointer extends StackElementPointer<b2BodyId> {
+
+        public b2BodyIdPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2BodyIdPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

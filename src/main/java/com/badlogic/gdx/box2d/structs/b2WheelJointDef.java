@@ -4,10 +4,10 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * Wheel joint definition
@@ -52,6 +52,10 @@ public final class b2WheelJointDef extends Struct {
 
     public b2WheelJointDef.b2WheelJointDefPointer asPointer() {
         return new b2WheelJointDef.b2WheelJointDefPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2WheelJointDef.b2WheelJointDefPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -387,17 +391,21 @@ public final class b2WheelJointDef extends Struct {
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 84 : 88);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 88 : 84);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 84 : 88, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 88 : 84, internalValue);
     }
 
     public static final class b2WheelJointDefPointer extends StackElementPointer<b2WheelJointDef> {
+
+        public b2WheelJointDefPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2WheelJointDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

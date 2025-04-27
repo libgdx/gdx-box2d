@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
 public final class b2TreeNode extends Struct {
@@ -42,7 +43,15 @@ public final class b2TreeNode extends Struct {
         return new b2TreeNode.b2TreeNodePointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2TreeNode.b2TreeNodePointer ptr) {
+        ptr.setPointer(this);
+    }
+
     public static final class b2TreeNodePointer extends StackElementPointer<b2TreeNode> {
+
+        public b2TreeNodePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2TreeNodePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

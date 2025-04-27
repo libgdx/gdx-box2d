@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.enums;
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * Describes the TOI output
@@ -45,6 +46,10 @@ public enum b2TOIState implements CEnum {
     }
 
     public static final class b2TOIStatePointer extends EnumPointer<b2TOIState> {
+
+        public b2TOIStatePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2TOIStatePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

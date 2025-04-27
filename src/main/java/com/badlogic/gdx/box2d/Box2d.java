@@ -172,6 +172,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Version(b2GetVersion_internal(0), true);
     }
 
+    /**
+     * Get the current version of Box2D
+     */
+    public static void b2GetVersion(b2Version _retPar) {
+        b2GetVersion_internal(_retPar.getPointer());
+    }
+
     public static native long b2GetVersion_internal(long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Version* _ret = (b2Version*) (_retPar == 0 ? malloc(sizeof(b2Version)) : (void*)_retPar);
@@ -180,13 +187,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the current version of Box2D
-     */
-    public static void b2GetVersion(b2Version _retPar) {
-        b2GetVersion_internal(_retPar.getPointer());
-    }
 
     public static int b2InternalAssertFcn(BytePointer condition, BytePointer fileName, int lineNumber) {
         return b2InternalAssertFcn_internal(condition.getPointer(), fileName.getPointer(), lineNumber);
@@ -415,6 +415,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2CosSin(b2ComputeCosSin_internal(radians, 0), true);
     }
 
+    /**
+     * Compute the cosine and sine of an angle in radians. Implemented
+     * for cross-platform determinism.
+     */
+    public static void b2ComputeCosSin(float radians, b2CosSin _retPar) {
+        b2ComputeCosSin_internal(radians, _retPar.getPointer());
+    }
+
     public static native long b2ComputeCosSin_internal(float radians, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2CosSin* _ret = (b2CosSin*) (_retPar == 0 ? malloc(sizeof(b2CosSin)) : (void*)_retPar);
@@ -423,14 +431,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Compute the cosine and sine of an angle in radians. Implemented
-     * for cross-platform determinism.
-     */
-    public static void b2ComputeCosSin(float radians, b2CosSin _retPar) {
-        b2ComputeCosSin_internal(radians, _retPar.getPointer());
-    }
 
     /**
      * Vector dot product
@@ -467,6 +467,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2CrossVS_internal(v.getPointer(), s, 0), true);
     }
 
+    /**
+     * Perform the cross product on a vector and a scalar. In 2D this produces a vector.
+     */
+    public static void b2CrossVS(b2Vec2 v, float s, b2Vec2 _retPar) {
+        b2CrossVS_internal(v.getPointer(), s, _retPar.getPointer());
+    }
+
     public static native long b2CrossVS_internal(long v, float s, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -477,17 +484,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Perform the cross product on a vector and a scalar. In 2D this produces a vector.
+     * Perform the cross product on a scalar and a vector. In 2D this produces a vector.
      */
-    public static void b2CrossVS(b2Vec2 v, float s, b2Vec2 _retPar) {
-        b2CrossVS_internal(v.getPointer(), s, _retPar.getPointer());
+    public static b2Vec2 b2CrossSV(float s, b2Vec2 v) {
+        return new b2Vec2(b2CrossSV_internal(s, v.getPointer(), 0), true);
     }
 
     /**
      * Perform the cross product on a scalar and a vector. In 2D this produces a vector.
      */
-    public static b2Vec2 b2CrossSV(float s, b2Vec2 v) {
-        return new b2Vec2(b2CrossSV_internal(s, v.getPointer(), 0), true);
+    public static void b2CrossSV(float s, b2Vec2 v, b2Vec2 _retPar) {
+        b2CrossSV_internal(s, v.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CrossSV_internal(float s, long v, long _retPar);/*
@@ -500,17 +507,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Perform the cross product on a scalar and a vector. In 2D this produces a vector.
+     * Get a left pointing perpendicular vector. Equivalent to b2CrossSV(1.0f, v)
      */
-    public static void b2CrossSV(float s, b2Vec2 v, b2Vec2 _retPar) {
-        b2CrossSV_internal(s, v.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2LeftPerp(b2Vec2 v) {
+        return new b2Vec2(b2LeftPerp_internal(v.getPointer(), 0), true);
     }
 
     /**
      * Get a left pointing perpendicular vector. Equivalent to b2CrossSV(1.0f, v)
      */
-    public static b2Vec2 b2LeftPerp(b2Vec2 v) {
-        return new b2Vec2(b2LeftPerp_internal(v.getPointer(), 0), true);
+    public static void b2LeftPerp(b2Vec2 v, b2Vec2 _retPar) {
+        b2LeftPerp_internal(v.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2LeftPerp_internal(long v, long _retPar);/*
@@ -523,17 +530,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get a left pointing perpendicular vector. Equivalent to b2CrossSV(1.0f, v)
+     * Get a right pointing perpendicular vector. Equivalent to b2CrossVS(v, 1.0f)
      */
-    public static void b2LeftPerp(b2Vec2 v, b2Vec2 _retPar) {
-        b2LeftPerp_internal(v.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2RightPerp(b2Vec2 v) {
+        return new b2Vec2(b2RightPerp_internal(v.getPointer(), 0), true);
     }
 
     /**
      * Get a right pointing perpendicular vector. Equivalent to b2CrossVS(v, 1.0f)
      */
-    public static b2Vec2 b2RightPerp(b2Vec2 v) {
-        return new b2Vec2(b2RightPerp_internal(v.getPointer(), 0), true);
+    public static void b2RightPerp(b2Vec2 v, b2Vec2 _retPar) {
+        b2RightPerp_internal(v.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2RightPerp_internal(long v, long _retPar);/*
@@ -546,17 +553,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get a right pointing perpendicular vector. Equivalent to b2CrossVS(v, 1.0f)
+     * Vector addition
      */
-    public static void b2RightPerp(b2Vec2 v, b2Vec2 _retPar) {
-        b2RightPerp_internal(v.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Add(b2Vec2 a, b2Vec2 b) {
+        return new b2Vec2(b2Add_internal(a.getPointer(), b.getPointer(), 0), true);
     }
 
     /**
      * Vector addition
      */
-    public static b2Vec2 b2Add(b2Vec2 a, b2Vec2 b) {
-        return new b2Vec2(b2Add_internal(a.getPointer(), b.getPointer(), 0), true);
+    public static void b2Add(b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
+        b2Add_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Add_internal(long a, long b, long _retPar);/*
@@ -569,17 +576,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Vector addition
+     * Vector subtraction
      */
-    public static void b2Add(b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
-        b2Add_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Sub(b2Vec2 a, b2Vec2 b) {
+        return new b2Vec2(b2Sub_internal(a.getPointer(), b.getPointer(), 0), true);
     }
 
     /**
      * Vector subtraction
      */
-    public static b2Vec2 b2Sub(b2Vec2 a, b2Vec2 b) {
-        return new b2Vec2(b2Sub_internal(a.getPointer(), b.getPointer(), 0), true);
+    public static void b2Sub(b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
+        b2Sub_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Sub_internal(long a, long b, long _retPar);/*
@@ -592,17 +599,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Vector subtraction
+     * Vector negation
      */
-    public static void b2Sub(b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
-        b2Sub_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Neg(b2Vec2 a) {
+        return new b2Vec2(b2Neg_internal(a.getPointer(), 0), true);
     }
 
     /**
      * Vector negation
      */
-    public static b2Vec2 b2Neg(b2Vec2 a) {
-        return new b2Vec2(b2Neg_internal(a.getPointer(), 0), true);
+    public static void b2Neg(b2Vec2 a, b2Vec2 _retPar) {
+        b2Neg_internal(a.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Neg_internal(long a, long _retPar);/*
@@ -615,18 +622,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Vector negation
+     * Vector linear interpolation
+     * https://fgiesen.wordpress.com/2012/08/15/linear-interpolation-past-present-and-future/
      */
-    public static void b2Neg(b2Vec2 a, b2Vec2 _retPar) {
-        b2Neg_internal(a.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Lerp(b2Vec2 a, b2Vec2 b, float t) {
+        return new b2Vec2(b2Lerp_internal(a.getPointer(), b.getPointer(), t, 0), true);
     }
 
     /**
      * Vector linear interpolation
      * https://fgiesen.wordpress.com/2012/08/15/linear-interpolation-past-present-and-future/
      */
-    public static b2Vec2 b2Lerp(b2Vec2 a, b2Vec2 b, float t) {
-        return new b2Vec2(b2Lerp_internal(a.getPointer(), b.getPointer(), t, 0), true);
+    public static void b2Lerp(b2Vec2 a, b2Vec2 b, float t, b2Vec2 _retPar) {
+        b2Lerp_internal(a.getPointer(), b.getPointer(), t, _retPar.getPointer());
     }
 
     public static native long b2Lerp_internal(long a, long b, float t, long _retPar);/*
@@ -639,18 +647,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Vector linear interpolation
-     * https://fgiesen.wordpress.com/2012/08/15/linear-interpolation-past-present-and-future/
+     * Component-wise multiplication
      */
-    public static void b2Lerp(b2Vec2 a, b2Vec2 b, float t, b2Vec2 _retPar) {
-        b2Lerp_internal(a.getPointer(), b.getPointer(), t, _retPar.getPointer());
+    public static b2Vec2 b2Mul(b2Vec2 a, b2Vec2 b) {
+        return new b2Vec2(b2Mul_internal(a.getPointer(), b.getPointer(), 0), true);
     }
 
     /**
      * Component-wise multiplication
      */
-    public static b2Vec2 b2Mul(b2Vec2 a, b2Vec2 b) {
-        return new b2Vec2(b2Mul_internal(a.getPointer(), b.getPointer(), 0), true);
+    public static void b2Mul(b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
+        b2Mul_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Mul_internal(long a, long b, long _retPar);/*
@@ -663,17 +670,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Component-wise multiplication
+     * Multiply a scalar and vector
      */
-    public static void b2Mul(b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
-        b2Mul_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2MulSV(float s, b2Vec2 v) {
+        return new b2Vec2(b2MulSV_internal(s, v.getPointer(), 0), true);
     }
 
     /**
      * Multiply a scalar and vector
      */
-    public static b2Vec2 b2MulSV(float s, b2Vec2 v) {
-        return new b2Vec2(b2MulSV_internal(s, v.getPointer(), 0), true);
+    public static void b2MulSV(float s, b2Vec2 v, b2Vec2 _retPar) {
+        b2MulSV_internal(s, v.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2MulSV_internal(float s, long v, long _retPar);/*
@@ -686,17 +693,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Multiply a scalar and vector
+     * a + s * b
      */
-    public static void b2MulSV(float s, b2Vec2 v, b2Vec2 _retPar) {
-        b2MulSV_internal(s, v.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2MulAdd(b2Vec2 a, float s, b2Vec2 b) {
+        return new b2Vec2(b2MulAdd_internal(a.getPointer(), s, b.getPointer(), 0), true);
     }
 
     /**
      * a + s * b
      */
-    public static b2Vec2 b2MulAdd(b2Vec2 a, float s, b2Vec2 b) {
-        return new b2Vec2(b2MulAdd_internal(a.getPointer(), s, b.getPointer(), 0), true);
+    public static void b2MulAdd(b2Vec2 a, float s, b2Vec2 b, b2Vec2 _retPar) {
+        b2MulAdd_internal(a.getPointer(), s, b.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2MulAdd_internal(long a, float s, long b, long _retPar);/*
@@ -709,17 +716,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * a + s * b
+     * a - s * b
      */
-    public static void b2MulAdd(b2Vec2 a, float s, b2Vec2 b, b2Vec2 _retPar) {
-        b2MulAdd_internal(a.getPointer(), s, b.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2MulSub(b2Vec2 a, float s, b2Vec2 b) {
+        return new b2Vec2(b2MulSub_internal(a.getPointer(), s, b.getPointer(), 0), true);
     }
 
     /**
      * a - s * b
      */
-    public static b2Vec2 b2MulSub(b2Vec2 a, float s, b2Vec2 b) {
-        return new b2Vec2(b2MulSub_internal(a.getPointer(), s, b.getPointer(), 0), true);
+    public static void b2MulSub(b2Vec2 a, float s, b2Vec2 b, b2Vec2 _retPar) {
+        b2MulSub_internal(a.getPointer(), s, b.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2MulSub_internal(long a, float s, long b, long _retPar);/*
@@ -732,17 +739,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * a - s * b
+     * Component-wise absolute vector
      */
-    public static void b2MulSub(b2Vec2 a, float s, b2Vec2 b, b2Vec2 _retPar) {
-        b2MulSub_internal(a.getPointer(), s, b.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Abs(b2Vec2 a) {
+        return new b2Vec2(b2Abs_internal(a.getPointer(), 0), true);
     }
 
     /**
      * Component-wise absolute vector
      */
-    public static b2Vec2 b2Abs(b2Vec2 a) {
-        return new b2Vec2(b2Abs_internal(a.getPointer(), 0), true);
+    public static void b2Abs(b2Vec2 a, b2Vec2 _retPar) {
+        b2Abs_internal(a.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Abs_internal(long a, long _retPar);/*
@@ -755,17 +762,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Component-wise absolute vector
+     * Component-wise minimum vector
      */
-    public static void b2Abs(b2Vec2 a, b2Vec2 _retPar) {
-        b2Abs_internal(a.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Min(b2Vec2 a, b2Vec2 b) {
+        return new b2Vec2(b2Min_internal(a.getPointer(), b.getPointer(), 0), true);
     }
 
     /**
      * Component-wise minimum vector
      */
-    public static b2Vec2 b2Min(b2Vec2 a, b2Vec2 b) {
-        return new b2Vec2(b2Min_internal(a.getPointer(), b.getPointer(), 0), true);
+    public static void b2Min(b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
+        b2Min_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Min_internal(long a, long b, long _retPar);/*
@@ -778,17 +785,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Component-wise minimum vector
+     * Component-wise maximum vector
      */
-    public static void b2Min(b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
-        b2Min_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Max(b2Vec2 a, b2Vec2 b) {
+        return new b2Vec2(b2Max_internal(a.getPointer(), b.getPointer(), 0), true);
     }
 
     /**
      * Component-wise maximum vector
      */
-    public static b2Vec2 b2Max(b2Vec2 a, b2Vec2 b) {
-        return new b2Vec2(b2Max_internal(a.getPointer(), b.getPointer(), 0), true);
+    public static void b2Max(b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
+        b2Max_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Max_internal(long a, long b, long _retPar);/*
@@ -801,17 +808,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Component-wise maximum vector
+     * Component-wise clamp vector v into the range [a, b]
      */
-    public static void b2Max(b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
-        b2Max_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Clamp(b2Vec2 v, b2Vec2 a, b2Vec2 b) {
+        return new b2Vec2(b2Clamp_internal(v.getPointer(), a.getPointer(), b.getPointer(), 0), true);
     }
 
     /**
      * Component-wise clamp vector v into the range [a, b]
      */
-    public static b2Vec2 b2Clamp(b2Vec2 v, b2Vec2 a, b2Vec2 b) {
-        return new b2Vec2(b2Clamp_internal(v.getPointer(), a.getPointer(), b.getPointer(), 0), true);
+    public static void b2Clamp(b2Vec2 v, b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
+        b2Clamp_internal(v.getPointer(), a.getPointer(), b.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Clamp_internal(long v, long a, long b, long _retPar);/*
@@ -822,13 +829,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Component-wise clamp vector v into the range [a, b]
-     */
-    public static void b2Clamp(b2Vec2 v, b2Vec2 a, b2Vec2 b, b2Vec2 _retPar) {
-        b2Clamp_internal(v.getPointer(), a.getPointer(), b.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Get the length of this vector (the norm)
@@ -866,6 +866,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2Normalize_internal(v.getPointer(), 0), true);
     }
 
+    /**
+     * Convert a vector into a unit vector if possible, otherwise returns the zero vector.
+     * todo MSVC is not inlining this function in several places per warning 4710
+     */
+    public static void b2Normalize(b2Vec2 v, b2Vec2 _retPar) {
+        b2Normalize_internal(v.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Normalize_internal(long v, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -874,14 +882,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Convert a vector into a unit vector if possible, otherwise returns the zero vector.
-     * todo MSVC is not inlining this function in several places per warning 4710
-     */
-    public static void b2Normalize(b2Vec2 v, b2Vec2 _retPar) {
-        b2Normalize_internal(v.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Determines if the provided vector is normalized (norm(a) == 1).
@@ -905,6 +905,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2GetLengthAndNormalize_internal(length.getPointer(), v.getPointer(), 0), true);
     }
 
+    /**
+     * Convert a vector into a unit vector if possible, otherwise returns the zero vector. Also
+     * outputs the length.
+     */
+    public static void b2GetLengthAndNormalize(FloatPointer length, b2Vec2 v, b2Vec2 _retPar) {
+        b2GetLengthAndNormalize_internal(length.getPointer(), v.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2GetLengthAndNormalize_internal(long length, long v, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -915,18 +923,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Convert a vector into a unit vector if possible, otherwise returns the zero vector. Also
-     * outputs the length.
+     * Normalize rotation
      */
-    public static void b2GetLengthAndNormalize(FloatPointer length, b2Vec2 v, b2Vec2 _retPar) {
-        b2GetLengthAndNormalize_internal(length.getPointer(), v.getPointer(), _retPar.getPointer());
+    public static b2Rot b2NormalizeRot(b2Rot q) {
+        return new b2Rot(b2NormalizeRot_internal(q.getPointer(), 0), true);
     }
 
     /**
      * Normalize rotation
      */
-    public static b2Rot b2NormalizeRot(b2Rot q) {
-        return new b2Rot(b2NormalizeRot_internal(q.getPointer(), 0), true);
+    public static void b2NormalizeRot(b2Rot q, b2Rot _retPar) {
+        b2NormalizeRot_internal(q.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2NormalizeRot_internal(long q, long _retPar);/*
@@ -939,10 +946,12 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Normalize rotation
+     * Integrate rotation from angular velocity
+     * @param q1 initial rotation
+     * @param deltaAngle the angular displacement in radians
      */
-    public static void b2NormalizeRot(b2Rot q, b2Rot _retPar) {
-        b2NormalizeRot_internal(q.getPointer(), _retPar.getPointer());
+    public static b2Rot b2IntegrateRotation(b2Rot q1, float deltaAngle) {
+        return new b2Rot(b2IntegrateRotation_internal(q1.getPointer(), deltaAngle, 0), true);
     }
 
     /**
@@ -950,8 +959,8 @@ static jclass cxxExceptionClass = NULL;
      * @param q1 initial rotation
      * @param deltaAngle the angular displacement in radians
      */
-    public static b2Rot b2IntegrateRotation(b2Rot q1, float deltaAngle) {
-        return new b2Rot(b2IntegrateRotation_internal(q1.getPointer(), deltaAngle, 0), true);
+    public static void b2IntegrateRotation(b2Rot q1, float deltaAngle, b2Rot _retPar) {
+        b2IntegrateRotation_internal(q1.getPointer(), deltaAngle, _retPar.getPointer());
     }
 
     public static native long b2IntegrateRotation_internal(long q1, float deltaAngle, long _retPar);/*
@@ -962,15 +971,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Integrate rotation from angular velocity
-     * @param q1 initial rotation
-     * @param deltaAngle the angular displacement in radians
-     */
-    public static void b2IntegrateRotation(b2Rot q1, float deltaAngle, b2Rot _retPar) {
-        b2IntegrateRotation_internal(q1.getPointer(), deltaAngle, _retPar.getPointer());
-    }
 
     /**
      * Get the length squared of this vector
@@ -1007,6 +1007,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Rot(b2MakeRot_internal(radians, 0), true);
     }
 
+    /**
+     * Make a rotation using an angle in radians
+     */
+    public static void b2MakeRot(float radians, b2Rot _retPar) {
+        b2MakeRot_internal(radians, _retPar.getPointer());
+    }
+
     public static native long b2MakeRot_internal(float radians, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Rot* _ret = (b2Rot*) (_retPar == 0 ? malloc(sizeof(b2Rot)) : (void*)_retPar);
@@ -1017,17 +1024,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Make a rotation using an angle in radians
+     * Compute the rotation between two unit vectors
      */
-    public static void b2MakeRot(float radians, b2Rot _retPar) {
-        b2MakeRot_internal(radians, _retPar.getPointer());
+    public static b2Rot b2ComputeRotationBetweenUnitVectors(b2Vec2 v1, b2Vec2 v2) {
+        return new b2Rot(b2ComputeRotationBetweenUnitVectors_internal(v1.getPointer(), v2.getPointer(), 0), true);
     }
 
     /**
      * Compute the rotation between two unit vectors
      */
-    public static b2Rot b2ComputeRotationBetweenUnitVectors(b2Vec2 v1, b2Vec2 v2) {
-        return new b2Rot(b2ComputeRotationBetweenUnitVectors_internal(v1.getPointer(), v2.getPointer(), 0), true);
+    public static void b2ComputeRotationBetweenUnitVectors(b2Vec2 v1, b2Vec2 v2, b2Rot _retPar) {
+        b2ComputeRotationBetweenUnitVectors_internal(v1.getPointer(), v2.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2ComputeRotationBetweenUnitVectors_internal(long v1, long v2, long _retPar);/*
@@ -1038,13 +1045,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Compute the rotation between two unit vectors
-     */
-    public static void b2ComputeRotationBetweenUnitVectors(b2Vec2 v1, b2Vec2 v2, b2Rot _retPar) {
-        b2ComputeRotationBetweenUnitVectors_internal(v1.getPointer(), v2.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Is this rotation normalized?
@@ -1069,15 +1069,6 @@ static jclass cxxExceptionClass = NULL;
         return new b2Rot(b2NLerp_internal(q1.getPointer(), q2.getPointer(), t, 0), true);
     }
 
-    public static native long b2NLerp_internal(long q1, long q2, float t, long _retPar);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2Rot* _ret = (b2Rot*) (_retPar == 0 ? malloc(sizeof(b2Rot)) : (void*)_retPar);
-    	*_ret = b2NLerp(*(b2Rot*)q1, *(b2Rot*)q2, (float)t);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
     /**
      *  Normalized linear interpolation
      *  https://fgiesen.wordpress.com/2012/08/15/linear-interpolation-past-present-and-future/
@@ -1086,6 +1077,15 @@ static jclass cxxExceptionClass = NULL;
     public static void b2NLerp(b2Rot q1, b2Rot q2, float t, b2Rot _retPar) {
         b2NLerp_internal(q1.getPointer(), q2.getPointer(), t, _retPar.getPointer());
     }
+
+    public static native long b2NLerp_internal(long q1, long q2, float t, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Rot* _ret = (b2Rot*) (_retPar == 0 ? malloc(sizeof(b2Rot)) : (void*)_retPar);
+    	*_ret = b2NLerp(*(b2Rot*)q1, *(b2Rot*)q2, (float)t);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
 
     /**
      * Compute the angular velocity necessary to rotate between two rotations over a give time
@@ -1125,6 +1125,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2Rot_GetXAxis_internal(q.getPointer(), 0), true);
     }
 
+    /**
+     * Get the x-axis
+     */
+    public static void b2Rot_GetXAxis(b2Rot q, b2Vec2 _retPar) {
+        b2Rot_GetXAxis_internal(q.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Rot_GetXAxis_internal(long q, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -1135,17 +1142,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the x-axis
+     * Get the y-axis
      */
-    public static void b2Rot_GetXAxis(b2Rot q, b2Vec2 _retPar) {
-        b2Rot_GetXAxis_internal(q.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Rot_GetYAxis(b2Rot q) {
+        return new b2Vec2(b2Rot_GetYAxis_internal(q.getPointer(), 0), true);
     }
 
     /**
      * Get the y-axis
      */
-    public static b2Vec2 b2Rot_GetYAxis(b2Rot q) {
-        return new b2Vec2(b2Rot_GetYAxis_internal(q.getPointer(), 0), true);
+    public static void b2Rot_GetYAxis(b2Rot q, b2Vec2 _retPar) {
+        b2Rot_GetYAxis_internal(q.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Rot_GetYAxis_internal(long q, long _retPar);/*
@@ -1158,17 +1165,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the y-axis
+     * Multiply two rotations: q * r
      */
-    public static void b2Rot_GetYAxis(b2Rot q, b2Vec2 _retPar) {
-        b2Rot_GetYAxis_internal(q.getPointer(), _retPar.getPointer());
+    public static b2Rot b2MulRot(b2Rot q, b2Rot r) {
+        return new b2Rot(b2MulRot_internal(q.getPointer(), r.getPointer(), 0), true);
     }
 
     /**
      * Multiply two rotations: q * r
      */
-    public static b2Rot b2MulRot(b2Rot q, b2Rot r) {
-        return new b2Rot(b2MulRot_internal(q.getPointer(), r.getPointer(), 0), true);
+    public static void b2MulRot(b2Rot q, b2Rot r, b2Rot _retPar) {
+        b2MulRot_internal(q.getPointer(), r.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2MulRot_internal(long q, long r, long _retPar);/*
@@ -1181,17 +1188,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Multiply two rotations: q * r
+     * Transpose multiply two rotations: qT * r
      */
-    public static void b2MulRot(b2Rot q, b2Rot r, b2Rot _retPar) {
-        b2MulRot_internal(q.getPointer(), r.getPointer(), _retPar.getPointer());
+    public static b2Rot b2InvMulRot(b2Rot q, b2Rot r) {
+        return new b2Rot(b2InvMulRot_internal(q.getPointer(), r.getPointer(), 0), true);
     }
 
     /**
      * Transpose multiply two rotations: qT * r
      */
-    public static b2Rot b2InvMulRot(b2Rot q, b2Rot r) {
-        return new b2Rot(b2InvMulRot_internal(q.getPointer(), r.getPointer(), 0), true);
+    public static void b2InvMulRot(b2Rot q, b2Rot r, b2Rot _retPar) {
+        b2InvMulRot_internal(q.getPointer(), r.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2InvMulRot_internal(long q, long r, long _retPar);/*
@@ -1202,13 +1209,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Transpose multiply two rotations: qT * r
-     */
-    public static void b2InvMulRot(b2Rot q, b2Rot r, b2Rot _retPar) {
-        b2InvMulRot_internal(q.getPointer(), r.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * relative angle between b and a (rot_b * inv(rot_a))
@@ -1259,6 +1259,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2RotateVector_internal(q.getPointer(), v.getPointer(), 0), true);
     }
 
+    /**
+     * Rotate a vector
+     */
+    public static void b2RotateVector(b2Rot q, b2Vec2 v, b2Vec2 _retPar) {
+        b2RotateVector_internal(q.getPointer(), v.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2RotateVector_internal(long q, long v, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -1269,17 +1276,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Rotate a vector
+     * Inverse rotate a vector
      */
-    public static void b2RotateVector(b2Rot q, b2Vec2 v, b2Vec2 _retPar) {
-        b2RotateVector_internal(q.getPointer(), v.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2InvRotateVector(b2Rot q, b2Vec2 v) {
+        return new b2Vec2(b2InvRotateVector_internal(q.getPointer(), v.getPointer(), 0), true);
     }
 
     /**
      * Inverse rotate a vector
      */
-    public static b2Vec2 b2InvRotateVector(b2Rot q, b2Vec2 v) {
-        return new b2Vec2(b2InvRotateVector_internal(q.getPointer(), v.getPointer(), 0), true);
+    public static void b2InvRotateVector(b2Rot q, b2Vec2 v, b2Vec2 _retPar) {
+        b2InvRotateVector_internal(q.getPointer(), v.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2InvRotateVector_internal(long q, long v, long _retPar);/*
@@ -1292,17 +1299,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Inverse rotate a vector
+     * Transform a point (e.g. local space to world space)
      */
-    public static void b2InvRotateVector(b2Rot q, b2Vec2 v, b2Vec2 _retPar) {
-        b2InvRotateVector_internal(q.getPointer(), v.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2TransformPoint(b2Transform t, b2Vec2 p) {
+        return new b2Vec2(b2TransformPoint_internal(t.getPointer(), p.getPointer(), 0), true);
     }
 
     /**
      * Transform a point (e.g. local space to world space)
      */
-    public static b2Vec2 b2TransformPoint(b2Transform t, b2Vec2 p) {
-        return new b2Vec2(b2TransformPoint_internal(t.getPointer(), p.getPointer(), 0), true);
+    public static void b2TransformPoint(b2Transform t, b2Vec2 p, b2Vec2 _retPar) {
+        b2TransformPoint_internal(t.getPointer(), p.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2TransformPoint_internal(long t, long p, long _retPar);/*
@@ -1315,17 +1322,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Transform a point (e.g. local space to world space)
+     * Inverse transform a point (e.g. world space to local space)
      */
-    public static void b2TransformPoint(b2Transform t, b2Vec2 p, b2Vec2 _retPar) {
-        b2TransformPoint_internal(t.getPointer(), p.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2InvTransformPoint(b2Transform t, b2Vec2 p) {
+        return new b2Vec2(b2InvTransformPoint_internal(t.getPointer(), p.getPointer(), 0), true);
     }
 
     /**
      * Inverse transform a point (e.g. world space to local space)
      */
-    public static b2Vec2 b2InvTransformPoint(b2Transform t, b2Vec2 p) {
-        return new b2Vec2(b2InvTransformPoint_internal(t.getPointer(), p.getPointer(), 0), true);
+    public static void b2InvTransformPoint(b2Transform t, b2Vec2 p, b2Vec2 _retPar) {
+        b2InvTransformPoint_internal(t.getPointer(), p.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2InvTransformPoint_internal(long t, long p, long _retPar);/*
@@ -1338,13 +1345,6 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Inverse transform a point (e.g. world space to local space)
-     */
-    public static void b2InvTransformPoint(b2Transform t, b2Vec2 p, b2Vec2 _retPar) {
-        b2InvTransformPoint_internal(t.getPointer(), p.getPointer(), _retPar.getPointer());
-    }
-
-    /**
      * Multiply two transforms. If the result is applied to a point p local to frame B,
      * the transform would first convert p to a point local to frame A, then into a point
      * in the world frame.
@@ -1354,15 +1354,6 @@ static jclass cxxExceptionClass = NULL;
     public static b2Transform b2MulTransforms(b2Transform A, b2Transform B) {
         return new b2Transform(b2MulTransforms_internal(A.getPointer(), B.getPointer(), 0), true);
     }
-
-    public static native long b2MulTransforms_internal(long A, long B, long _retPar);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2Transform* _ret = (b2Transform*) (_retPar == 0 ? malloc(sizeof(b2Transform)) : (void*)_retPar);
-    	*_ret = b2MulTransforms(*(b2Transform*)A, *(b2Transform*)B);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
 
     /**
      * Multiply two transforms. If the result is applied to a point p local to frame B,
@@ -1375,6 +1366,15 @@ static jclass cxxExceptionClass = NULL;
         b2MulTransforms_internal(A.getPointer(), B.getPointer(), _retPar.getPointer());
     }
 
+    public static native long b2MulTransforms_internal(long A, long B, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Transform* _ret = (b2Transform*) (_retPar == 0 ? malloc(sizeof(b2Transform)) : (void*)_retPar);
+    	*_ret = b2MulTransforms(*(b2Transform*)A, *(b2Transform*)B);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     /**
      * Creates a transform that converts a local point in frame B to a local point in frame A.
      * v2 = A.q' * (B.q * v1 + B.p - A.p)
@@ -1382,6 +1382,15 @@ static jclass cxxExceptionClass = NULL;
      */
     public static b2Transform b2InvMulTransforms(b2Transform A, b2Transform B) {
         return new b2Transform(b2InvMulTransforms_internal(A.getPointer(), B.getPointer(), 0), true);
+    }
+
+    /**
+     * Creates a transform that converts a local point in frame B to a local point in frame A.
+     * v2 = A.q' * (B.q * v1 + B.p - A.p)
+     *    = A.q' * B.q * v1 + A.q' * (B.p - A.p)
+     */
+    public static void b2InvMulTransforms(b2Transform A, b2Transform B, b2Transform _retPar) {
+        b2InvMulTransforms_internal(A.getPointer(), B.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2InvMulTransforms_internal(long A, long B, long _retPar);/*
@@ -1394,19 +1403,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Creates a transform that converts a local point in frame B to a local point in frame A.
-     * v2 = A.q' * (B.q * v1 + B.p - A.p)
-     *    = A.q' * B.q * v1 + A.q' * (B.p - A.p)
+     * Multiply a 2-by-2 matrix times a 2D vector
      */
-    public static void b2InvMulTransforms(b2Transform A, b2Transform B, b2Transform _retPar) {
-        b2InvMulTransforms_internal(A.getPointer(), B.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2MulMV(b2Mat22 A, b2Vec2 v) {
+        return new b2Vec2(b2MulMV_internal(A.getPointer(), v.getPointer(), 0), true);
     }
 
     /**
      * Multiply a 2-by-2 matrix times a 2D vector
      */
-    public static b2Vec2 b2MulMV(b2Mat22 A, b2Vec2 v) {
-        return new b2Vec2(b2MulMV_internal(A.getPointer(), v.getPointer(), 0), true);
+    public static void b2MulMV(b2Mat22 A, b2Vec2 v, b2Vec2 _retPar) {
+        b2MulMV_internal(A.getPointer(), v.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2MulMV_internal(long A, long v, long _retPar);/*
@@ -1419,17 +1426,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Multiply a 2-by-2 matrix times a 2D vector
+     * Get the inverse of a 2-by-2 matrix
      */
-    public static void b2MulMV(b2Mat22 A, b2Vec2 v, b2Vec2 _retPar) {
-        b2MulMV_internal(A.getPointer(), v.getPointer(), _retPar.getPointer());
+    public static b2Mat22 b2GetInverse22(b2Mat22 A) {
+        return new b2Mat22(b2GetInverse22_internal(A.getPointer(), 0), true);
     }
 
     /**
      * Get the inverse of a 2-by-2 matrix
      */
-    public static b2Mat22 b2GetInverse22(b2Mat22 A) {
-        return new b2Mat22(b2GetInverse22_internal(A.getPointer(), 0), true);
+    public static void b2GetInverse22(b2Mat22 A, b2Mat22 _retPar) {
+        b2GetInverse22_internal(A.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2GetInverse22_internal(long A, long _retPar);/*
@@ -1442,18 +1449,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the inverse of a 2-by-2 matrix
+     * Solve A * x = b, where b is a column vector. This is more efficient
+     * than computing the inverse in one-shot cases.
      */
-    public static void b2GetInverse22(b2Mat22 A, b2Mat22 _retPar) {
-        b2GetInverse22_internal(A.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Solve22(b2Mat22 A, b2Vec2 b) {
+        return new b2Vec2(b2Solve22_internal(A.getPointer(), b.getPointer(), 0), true);
     }
 
     /**
      * Solve A * x = b, where b is a column vector. This is more efficient
      * than computing the inverse in one-shot cases.
      */
-    public static b2Vec2 b2Solve22(b2Mat22 A, b2Vec2 b) {
-        return new b2Vec2(b2Solve22_internal(A.getPointer(), b.getPointer(), 0), true);
+    public static void b2Solve22(b2Mat22 A, b2Vec2 b, b2Vec2 _retPar) {
+        b2Solve22_internal(A.getPointer(), b.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Solve22_internal(long A, long b, long _retPar);/*
@@ -1464,14 +1472,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Solve A * x = b, where b is a column vector. This is more efficient
-     * than computing the inverse in one-shot cases.
-     */
-    public static void b2Solve22(b2Mat22 A, b2Vec2 b, b2Vec2 _retPar) {
-        b2Solve22_internal(A.getPointer(), b.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Does a fully contain b
@@ -1494,6 +1494,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2AABB_Center_internal(a.getPointer(), 0), true);
     }
 
+    /**
+     * Get the center of the AABB.
+     */
+    public static void b2AABB_Center(b2AABB a, b2Vec2 _retPar) {
+        b2AABB_Center_internal(a.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2AABB_Center_internal(long a, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -1504,17 +1511,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the center of the AABB.
+     * Get the extents of the AABB (half-widths).
      */
-    public static void b2AABB_Center(b2AABB a, b2Vec2 _retPar) {
-        b2AABB_Center_internal(a.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2AABB_Extents(b2AABB a) {
+        return new b2Vec2(b2AABB_Extents_internal(a.getPointer(), 0), true);
     }
 
     /**
      * Get the extents of the AABB (half-widths).
      */
-    public static b2Vec2 b2AABB_Extents(b2AABB a) {
-        return new b2Vec2(b2AABB_Extents_internal(a.getPointer(), 0), true);
+    public static void b2AABB_Extents(b2AABB a, b2Vec2 _retPar) {
+        b2AABB_Extents_internal(a.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2AABB_Extents_internal(long a, long _retPar);/*
@@ -1527,17 +1534,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the extents of the AABB (half-widths).
+     * Union of two AABBs
      */
-    public static void b2AABB_Extents(b2AABB a, b2Vec2 _retPar) {
-        b2AABB_Extents_internal(a.getPointer(), _retPar.getPointer());
+    public static b2AABB b2AABB_Union(b2AABB a, b2AABB b) {
+        return new b2AABB(b2AABB_Union_internal(a.getPointer(), b.getPointer(), 0), true);
     }
 
     /**
      * Union of two AABBs
      */
-    public static b2AABB b2AABB_Union(b2AABB a, b2AABB b) {
-        return new b2AABB(b2AABB_Union_internal(a.getPointer(), b.getPointer(), 0), true);
+    public static void b2AABB_Union(b2AABB a, b2AABB b, b2AABB _retPar) {
+        b2AABB_Union_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2AABB_Union_internal(long a, long b, long _retPar);/*
@@ -1550,17 +1557,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Union of two AABBs
+     * Compute the bounding box of an array of circles
      */
-    public static void b2AABB_Union(b2AABB a, b2AABB b, b2AABB _retPar) {
-        b2AABB_Union_internal(a.getPointer(), b.getPointer(), _retPar.getPointer());
+    public static b2AABB b2MakeAABB(b2Vec2.b2Vec2Pointer points, int count, float radius) {
+        return new b2AABB(b2MakeAABB_internal(points.getPointer(), count, radius, 0), true);
     }
 
     /**
      * Compute the bounding box of an array of circles
      */
-    public static b2AABB b2MakeAABB(b2Vec2.b2Vec2Pointer points, int count, float radius) {
-        return new b2AABB(b2MakeAABB_internal(points.getPointer(), count, radius, 0), true);
+    public static void b2MakeAABB(b2Vec2.b2Vec2Pointer points, int count, float radius, b2AABB _retPar) {
+        b2MakeAABB_internal(points.getPointer(), count, radius, _retPar.getPointer());
     }
 
     public static native long b2MakeAABB_internal(long points, int count, float radius, long _retPar);/*
@@ -1572,13 +1579,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Compute the bounding box of an array of circles
-     */
-    public static void b2MakeAABB(b2Vec2.b2Vec2Pointer points, int count, float radius, b2AABB _retPar) {
-        b2MakeAABB_internal(points.getPointer(), count, radius, _retPar.getPointer());
-    }
 
     /**
      * Signed separation of a point from a plane
@@ -1726,6 +1726,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2Polygon(b2MakePolygon_internal(hull.getPointer(), radius, 0), true);
     }
 
+    /**
+     * Make a convex polygon from a convex hull. This will assert if the hull is not valid.
+     * @warning Do not manually fill in the hull data, it must come directly from b2ComputeHull
+     */
+    public static void b2MakePolygon(b2Hull.b2HullPointer hull, float radius, b2Polygon _retPar) {
+        b2MakePolygon_internal(hull.getPointer(), radius, _retPar.getPointer());
+    }
+
     public static native long b2MakePolygon_internal(long hull, float radius, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Polygon* _ret = (b2Polygon*) (_retPar == 0 ? malloc(sizeof(b2Polygon)) : (void*)_retPar);
@@ -1736,19 +1744,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Make a convex polygon from a convex hull. This will assert if the hull is not valid.
+     * Make an offset convex polygon from a convex hull. This will assert if the hull is not valid.
      * @warning Do not manually fill in the hull data, it must come directly from b2ComputeHull
      */
-    public static void b2MakePolygon(b2Hull.b2HullPointer hull, float radius, b2Polygon _retPar) {
-        b2MakePolygon_internal(hull.getPointer(), radius, _retPar.getPointer());
+    public static b2Polygon b2MakeOffsetPolygon(b2Hull.b2HullPointer hull, b2Vec2 position, b2Rot rotation) {
+        return new b2Polygon(b2MakeOffsetPolygon_internal(hull.getPointer(), position.getPointer(), rotation.getPointer(), 0), true);
     }
 
     /**
      * Make an offset convex polygon from a convex hull. This will assert if the hull is not valid.
      * @warning Do not manually fill in the hull data, it must come directly from b2ComputeHull
      */
-    public static b2Polygon b2MakeOffsetPolygon(b2Hull.b2HullPointer hull, b2Vec2 position, b2Rot rotation) {
-        return new b2Polygon(b2MakeOffsetPolygon_internal(hull.getPointer(), position.getPointer(), rotation.getPointer(), 0), true);
+    public static void b2MakeOffsetPolygon(b2Hull.b2HullPointer hull, b2Vec2 position, b2Rot rotation, b2Polygon _retPar) {
+        b2MakeOffsetPolygon_internal(hull.getPointer(), position.getPointer(), rotation.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2MakeOffsetPolygon_internal(long hull, long position, long rotation, long _retPar);/*
@@ -1764,16 +1772,16 @@ static jclass cxxExceptionClass = NULL;
      * Make an offset convex polygon from a convex hull. This will assert if the hull is not valid.
      * @warning Do not manually fill in the hull data, it must come directly from b2ComputeHull
      */
-    public static void b2MakeOffsetPolygon(b2Hull.b2HullPointer hull, b2Vec2 position, b2Rot rotation, b2Polygon _retPar) {
-        b2MakeOffsetPolygon_internal(hull.getPointer(), position.getPointer(), rotation.getPointer(), _retPar.getPointer());
+    public static b2Polygon b2MakeOffsetRoundedPolygon(b2Hull.b2HullPointer hull, b2Vec2 position, b2Rot rotation, float radius) {
+        return new b2Polygon(b2MakeOffsetRoundedPolygon_internal(hull.getPointer(), position.getPointer(), rotation.getPointer(), radius, 0), true);
     }
 
     /**
      * Make an offset convex polygon from a convex hull. This will assert if the hull is not valid.
      * @warning Do not manually fill in the hull data, it must come directly from b2ComputeHull
      */
-    public static b2Polygon b2MakeOffsetRoundedPolygon(b2Hull.b2HullPointer hull, b2Vec2 position, b2Rot rotation, float radius) {
-        return new b2Polygon(b2MakeOffsetRoundedPolygon_internal(hull.getPointer(), position.getPointer(), rotation.getPointer(), radius, 0), true);
+    public static void b2MakeOffsetRoundedPolygon(b2Hull.b2HullPointer hull, b2Vec2 position, b2Rot rotation, float radius, b2Polygon _retPar) {
+        b2MakeOffsetRoundedPolygon_internal(hull.getPointer(), position.getPointer(), rotation.getPointer(), radius, _retPar.getPointer());
     }
 
     public static native long b2MakeOffsetRoundedPolygon_internal(long hull, long position, long rotation, float radius, long _retPar);/*
@@ -1786,19 +1794,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Make an offset convex polygon from a convex hull. This will assert if the hull is not valid.
-     * @warning Do not manually fill in the hull data, it must come directly from b2ComputeHull
+     * Make a square polygon, bypassing the need for a convex hull.
+     * @param halfWidth the half-width
      */
-    public static void b2MakeOffsetRoundedPolygon(b2Hull.b2HullPointer hull, b2Vec2 position, b2Rot rotation, float radius, b2Polygon _retPar) {
-        b2MakeOffsetRoundedPolygon_internal(hull.getPointer(), position.getPointer(), rotation.getPointer(), radius, _retPar.getPointer());
+    public static b2Polygon b2MakeSquare(float halfWidth) {
+        return new b2Polygon(b2MakeSquare_internal(halfWidth, 0), true);
     }
 
     /**
      * Make a square polygon, bypassing the need for a convex hull.
      * @param halfWidth the half-width
      */
-    public static b2Polygon b2MakeSquare(float halfWidth) {
-        return new b2Polygon(b2MakeSquare_internal(halfWidth, 0), true);
+    public static void b2MakeSquare(float halfWidth, b2Polygon _retPar) {
+        b2MakeSquare_internal(halfWidth, _retPar.getPointer());
     }
 
     public static native long b2MakeSquare_internal(float halfWidth, long _retPar);/*
@@ -1811,11 +1819,12 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Make a square polygon, bypassing the need for a convex hull.
-     * @param halfWidth the half-width
+     * Make a box (rectangle) polygon, bypassing the need for a convex hull.
+     * @param halfWidth the half-width (x-axis)
+     * @param halfHeight the half-height (y-axis)
      */
-    public static void b2MakeSquare(float halfWidth, b2Polygon _retPar) {
-        b2MakeSquare_internal(halfWidth, _retPar.getPointer());
+    public static b2Polygon b2MakeBox(float halfWidth, float halfHeight) {
+        return new b2Polygon(b2MakeBox_internal(halfWidth, halfHeight, 0), true);
     }
 
     /**
@@ -1823,8 +1832,8 @@ static jclass cxxExceptionClass = NULL;
      * @param halfWidth the half-width (x-axis)
      * @param halfHeight the half-height (y-axis)
      */
-    public static b2Polygon b2MakeBox(float halfWidth, float halfHeight) {
-        return new b2Polygon(b2MakeBox_internal(halfWidth, halfHeight, 0), true);
+    public static void b2MakeBox(float halfWidth, float halfHeight, b2Polygon _retPar) {
+        b2MakeBox_internal(halfWidth, halfHeight, _retPar.getPointer());
     }
 
     public static native long b2MakeBox_internal(float halfWidth, float halfHeight, long _retPar);/*
@@ -1837,12 +1846,13 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Make a box (rectangle) polygon, bypassing the need for a convex hull.
+     * Make a rounded box, bypassing the need for a convex hull.
      * @param halfWidth the half-width (x-axis)
      * @param halfHeight the half-height (y-axis)
+     * @param radius the radius of the rounded extension
      */
-    public static void b2MakeBox(float halfWidth, float halfHeight, b2Polygon _retPar) {
-        b2MakeBox_internal(halfWidth, halfHeight, _retPar.getPointer());
+    public static b2Polygon b2MakeRoundedBox(float halfWidth, float halfHeight, float radius) {
+        return new b2Polygon(b2MakeRoundedBox_internal(halfWidth, halfHeight, radius, 0), true);
     }
 
     /**
@@ -1851,8 +1861,8 @@ static jclass cxxExceptionClass = NULL;
      * @param halfHeight the half-height (y-axis)
      * @param radius the radius of the rounded extension
      */
-    public static b2Polygon b2MakeRoundedBox(float halfWidth, float halfHeight, float radius) {
-        return new b2Polygon(b2MakeRoundedBox_internal(halfWidth, halfHeight, radius, 0), true);
+    public static void b2MakeRoundedBox(float halfWidth, float halfHeight, float radius, b2Polygon _retPar) {
+        b2MakeRoundedBox_internal(halfWidth, halfHeight, radius, _retPar.getPointer());
     }
 
     public static native long b2MakeRoundedBox_internal(float halfWidth, float halfHeight, float radius, long _retPar);/*
@@ -1865,16 +1875,6 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Make a rounded box, bypassing the need for a convex hull.
-     * @param halfWidth the half-width (x-axis)
-     * @param halfHeight the half-height (y-axis)
-     * @param radius the radius of the rounded extension
-     */
-    public static void b2MakeRoundedBox(float halfWidth, float halfHeight, float radius, b2Polygon _retPar) {
-        b2MakeRoundedBox_internal(halfWidth, halfHeight, radius, _retPar.getPointer());
-    }
-
-    /**
      * Make an offset box, bypassing the need for a convex hull.
      * @param halfWidth the half-width (x-axis)
      * @param halfHeight the half-height (y-axis)
@@ -1884,15 +1884,6 @@ static jclass cxxExceptionClass = NULL;
     public static b2Polygon b2MakeOffsetBox(float halfWidth, float halfHeight, b2Vec2 center, b2Rot rotation) {
         return new b2Polygon(b2MakeOffsetBox_internal(halfWidth, halfHeight, center.getPointer(), rotation.getPointer(), 0), true);
     }
-
-    public static native long b2MakeOffsetBox_internal(float halfWidth, float halfHeight, long center, long rotation, long _retPar);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2Polygon* _ret = (b2Polygon*) (_retPar == 0 ? malloc(sizeof(b2Polygon)) : (void*)_retPar);
-    	*_ret = b2MakeOffsetBox((float)halfWidth, (float)halfHeight, *(b2Vec2*)center, *(b2Rot*)rotation);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
 
     /**
      * Make an offset box, bypassing the need for a convex hull.
@@ -1904,6 +1895,15 @@ static jclass cxxExceptionClass = NULL;
     public static void b2MakeOffsetBox(float halfWidth, float halfHeight, b2Vec2 center, b2Rot rotation, b2Polygon _retPar) {
         b2MakeOffsetBox_internal(halfWidth, halfHeight, center.getPointer(), rotation.getPointer(), _retPar.getPointer());
     }
+
+    public static native long b2MakeOffsetBox_internal(float halfWidth, float halfHeight, long center, long rotation, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Polygon* _ret = (b2Polygon*) (_retPar == 0 ? malloc(sizeof(b2Polygon)) : (void*)_retPar);
+    	*_ret = b2MakeOffsetBox((float)halfWidth, (float)halfHeight, *(b2Vec2*)center, *(b2Rot*)rotation);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
 
     /**
      * Make an offset rounded box, bypassing the need for a convex hull.
@@ -1917,15 +1917,6 @@ static jclass cxxExceptionClass = NULL;
         return new b2Polygon(b2MakeOffsetRoundedBox_internal(halfWidth, halfHeight, center.getPointer(), rotation.getPointer(), radius, 0), true);
     }
 
-    public static native long b2MakeOffsetRoundedBox_internal(float halfWidth, float halfHeight, long center, long rotation, float radius, long _retPar);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2Polygon* _ret = (b2Polygon*) (_retPar == 0 ? malloc(sizeof(b2Polygon)) : (void*)_retPar);
-    	*_ret = b2MakeOffsetRoundedBox((float)halfWidth, (float)halfHeight, *(b2Vec2*)center, *(b2Rot*)rotation, (float)radius);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
     /**
      * Make an offset rounded box, bypassing the need for a convex hull.
      * @param halfWidth the half-width (x-axis)
@@ -1938,11 +1929,27 @@ static jclass cxxExceptionClass = NULL;
         b2MakeOffsetRoundedBox_internal(halfWidth, halfHeight, center.getPointer(), rotation.getPointer(), radius, _retPar.getPointer());
     }
 
+    public static native long b2MakeOffsetRoundedBox_internal(float halfWidth, float halfHeight, long center, long rotation, float radius, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Polygon* _ret = (b2Polygon*) (_retPar == 0 ? malloc(sizeof(b2Polygon)) : (void*)_retPar);
+    	*_ret = b2MakeOffsetRoundedBox((float)halfWidth, (float)halfHeight, *(b2Vec2*)center, *(b2Rot*)rotation, (float)radius);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     /**
      * Transform a polygon. This is useful for transferring a shape from one body to another.
      */
     public static b2Polygon b2TransformPolygon(b2Transform transform, b2Polygon.b2PolygonPointer polygon) {
         return new b2Polygon(b2TransformPolygon_internal(transform.getPointer(), polygon.getPointer(), 0), true);
+    }
+
+    /**
+     * Transform a polygon. This is useful for transferring a shape from one body to another.
+     */
+    public static void b2TransformPolygon(b2Transform transform, b2Polygon.b2PolygonPointer polygon, b2Polygon _retPar) {
+        b2TransformPolygon_internal(transform.getPointer(), polygon.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2TransformPolygon_internal(long transform, long polygon, long _retPar);/*
@@ -1955,17 +1962,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Transform a polygon. This is useful for transferring a shape from one body to another.
+     * Compute mass properties of a circle
      */
-    public static void b2TransformPolygon(b2Transform transform, b2Polygon.b2PolygonPointer polygon, b2Polygon _retPar) {
-        b2TransformPolygon_internal(transform.getPointer(), polygon.getPointer(), _retPar.getPointer());
+    public static b2MassData b2ComputeCircleMass(b2Circle.b2CirclePointer shape, float density) {
+        return new b2MassData(b2ComputeCircleMass_internal(shape.getPointer(), density, 0), true);
     }
 
     /**
      * Compute mass properties of a circle
      */
-    public static b2MassData b2ComputeCircleMass(b2Circle.b2CirclePointer shape, float density) {
-        return new b2MassData(b2ComputeCircleMass_internal(shape.getPointer(), density, 0), true);
+    public static void b2ComputeCircleMass(b2Circle.b2CirclePointer shape, float density, b2MassData _retPar) {
+        b2ComputeCircleMass_internal(shape.getPointer(), density, _retPar.getPointer());
     }
 
     public static native long b2ComputeCircleMass_internal(long shape, float density, long _retPar);/*
@@ -1978,17 +1985,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute mass properties of a circle
+     * Compute mass properties of a capsule
      */
-    public static void b2ComputeCircleMass(b2Circle.b2CirclePointer shape, float density, b2MassData _retPar) {
-        b2ComputeCircleMass_internal(shape.getPointer(), density, _retPar.getPointer());
+    public static b2MassData b2ComputeCapsuleMass(b2Capsule.b2CapsulePointer shape, float density) {
+        return new b2MassData(b2ComputeCapsuleMass_internal(shape.getPointer(), density, 0), true);
     }
 
     /**
      * Compute mass properties of a capsule
      */
-    public static b2MassData b2ComputeCapsuleMass(b2Capsule.b2CapsulePointer shape, float density) {
-        return new b2MassData(b2ComputeCapsuleMass_internal(shape.getPointer(), density, 0), true);
+    public static void b2ComputeCapsuleMass(b2Capsule.b2CapsulePointer shape, float density, b2MassData _retPar) {
+        b2ComputeCapsuleMass_internal(shape.getPointer(), density, _retPar.getPointer());
     }
 
     public static native long b2ComputeCapsuleMass_internal(long shape, float density, long _retPar);/*
@@ -2001,17 +2008,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute mass properties of a capsule
+     * Compute mass properties of a polygon
      */
-    public static void b2ComputeCapsuleMass(b2Capsule.b2CapsulePointer shape, float density, b2MassData _retPar) {
-        b2ComputeCapsuleMass_internal(shape.getPointer(), density, _retPar.getPointer());
+    public static b2MassData b2ComputePolygonMass(b2Polygon.b2PolygonPointer shape, float density) {
+        return new b2MassData(b2ComputePolygonMass_internal(shape.getPointer(), density, 0), true);
     }
 
     /**
      * Compute mass properties of a polygon
      */
-    public static b2MassData b2ComputePolygonMass(b2Polygon.b2PolygonPointer shape, float density) {
-        return new b2MassData(b2ComputePolygonMass_internal(shape.getPointer(), density, 0), true);
+    public static void b2ComputePolygonMass(b2Polygon.b2PolygonPointer shape, float density, b2MassData _retPar) {
+        b2ComputePolygonMass_internal(shape.getPointer(), density, _retPar.getPointer());
     }
 
     public static native long b2ComputePolygonMass_internal(long shape, float density, long _retPar);/*
@@ -2024,17 +2031,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute mass properties of a polygon
+     * Compute the bounding box of a transformed circle
      */
-    public static void b2ComputePolygonMass(b2Polygon.b2PolygonPointer shape, float density, b2MassData _retPar) {
-        b2ComputePolygonMass_internal(shape.getPointer(), density, _retPar.getPointer());
+    public static b2AABB b2ComputeCircleAABB(b2Circle.b2CirclePointer shape, b2Transform transform) {
+        return new b2AABB(b2ComputeCircleAABB_internal(shape.getPointer(), transform.getPointer(), 0), true);
     }
 
     /**
      * Compute the bounding box of a transformed circle
      */
-    public static b2AABB b2ComputeCircleAABB(b2Circle.b2CirclePointer shape, b2Transform transform) {
-        return new b2AABB(b2ComputeCircleAABB_internal(shape.getPointer(), transform.getPointer(), 0), true);
+    public static void b2ComputeCircleAABB(b2Circle.b2CirclePointer shape, b2Transform transform, b2AABB _retPar) {
+        b2ComputeCircleAABB_internal(shape.getPointer(), transform.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2ComputeCircleAABB_internal(long shape, long transform, long _retPar);/*
@@ -2047,17 +2054,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the bounding box of a transformed circle
+     * Compute the bounding box of a transformed capsule
      */
-    public static void b2ComputeCircleAABB(b2Circle.b2CirclePointer shape, b2Transform transform, b2AABB _retPar) {
-        b2ComputeCircleAABB_internal(shape.getPointer(), transform.getPointer(), _retPar.getPointer());
+    public static b2AABB b2ComputeCapsuleAABB(b2Capsule.b2CapsulePointer shape, b2Transform transform) {
+        return new b2AABB(b2ComputeCapsuleAABB_internal(shape.getPointer(), transform.getPointer(), 0), true);
     }
 
     /**
      * Compute the bounding box of a transformed capsule
      */
-    public static b2AABB b2ComputeCapsuleAABB(b2Capsule.b2CapsulePointer shape, b2Transform transform) {
-        return new b2AABB(b2ComputeCapsuleAABB_internal(shape.getPointer(), transform.getPointer(), 0), true);
+    public static void b2ComputeCapsuleAABB(b2Capsule.b2CapsulePointer shape, b2Transform transform, b2AABB _retPar) {
+        b2ComputeCapsuleAABB_internal(shape.getPointer(), transform.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2ComputeCapsuleAABB_internal(long shape, long transform, long _retPar);/*
@@ -2070,17 +2077,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the bounding box of a transformed capsule
+     * Compute the bounding box of a transformed polygon
      */
-    public static void b2ComputeCapsuleAABB(b2Capsule.b2CapsulePointer shape, b2Transform transform, b2AABB _retPar) {
-        b2ComputeCapsuleAABB_internal(shape.getPointer(), transform.getPointer(), _retPar.getPointer());
+    public static b2AABB b2ComputePolygonAABB(b2Polygon.b2PolygonPointer shape, b2Transform transform) {
+        return new b2AABB(b2ComputePolygonAABB_internal(shape.getPointer(), transform.getPointer(), 0), true);
     }
 
     /**
      * Compute the bounding box of a transformed polygon
      */
-    public static b2AABB b2ComputePolygonAABB(b2Polygon.b2PolygonPointer shape, b2Transform transform) {
-        return new b2AABB(b2ComputePolygonAABB_internal(shape.getPointer(), transform.getPointer(), 0), true);
+    public static void b2ComputePolygonAABB(b2Polygon.b2PolygonPointer shape, b2Transform transform, b2AABB _retPar) {
+        b2ComputePolygonAABB_internal(shape.getPointer(), transform.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2ComputePolygonAABB_internal(long shape, long transform, long _retPar);/*
@@ -2093,17 +2100,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the bounding box of a transformed polygon
+     * Compute the bounding box of a transformed line segment
      */
-    public static void b2ComputePolygonAABB(b2Polygon.b2PolygonPointer shape, b2Transform transform, b2AABB _retPar) {
-        b2ComputePolygonAABB_internal(shape.getPointer(), transform.getPointer(), _retPar.getPointer());
+    public static b2AABB b2ComputeSegmentAABB(b2Segment.b2SegmentPointer shape, b2Transform transform) {
+        return new b2AABB(b2ComputeSegmentAABB_internal(shape.getPointer(), transform.getPointer(), 0), true);
     }
 
     /**
      * Compute the bounding box of a transformed line segment
      */
-    public static b2AABB b2ComputeSegmentAABB(b2Segment.b2SegmentPointer shape, b2Transform transform) {
-        return new b2AABB(b2ComputeSegmentAABB_internal(shape.getPointer(), transform.getPointer(), 0), true);
+    public static void b2ComputeSegmentAABB(b2Segment.b2SegmentPointer shape, b2Transform transform, b2AABB _retPar) {
+        b2ComputeSegmentAABB_internal(shape.getPointer(), transform.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2ComputeSegmentAABB_internal(long shape, long transform, long _retPar);/*
@@ -2114,13 +2121,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Compute the bounding box of a transformed line segment
-     */
-    public static void b2ComputeSegmentAABB(b2Segment.b2SegmentPointer shape, b2Transform transform, b2AABB _retPar) {
-        b2ComputeSegmentAABB_internal(shape.getPointer(), transform.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Test a point for overlap with a circle in local space
@@ -2171,6 +2171,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2CastOutput(b2RayCastCircle_internal(input.getPointer(), shape.getPointer(), 0), true);
     }
 
+    /**
+     * Ray cast versus circle shape in local space. Initial overlap is treated as a miss.
+     */
+    public static void b2RayCastCircle(b2RayCastInput.b2RayCastInputPointer input, b2Circle.b2CirclePointer shape, b2CastOutput _retPar) {
+        b2RayCastCircle_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2RayCastCircle_internal(long input, long shape, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2CastOutput* _ret = (b2CastOutput*) (_retPar == 0 ? malloc(sizeof(b2CastOutput)) : (void*)_retPar);
@@ -2181,17 +2188,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Ray cast versus circle shape in local space. Initial overlap is treated as a miss.
+     * Ray cast versus capsule shape in local space. Initial overlap is treated as a miss.
      */
-    public static void b2RayCastCircle(b2RayCastInput.b2RayCastInputPointer input, b2Circle.b2CirclePointer shape, b2CastOutput _retPar) {
-        b2RayCastCircle_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
+    public static b2CastOutput b2RayCastCapsule(b2RayCastInput.b2RayCastInputPointer input, b2Capsule.b2CapsulePointer shape) {
+        return new b2CastOutput(b2RayCastCapsule_internal(input.getPointer(), shape.getPointer(), 0), true);
     }
 
     /**
      * Ray cast versus capsule shape in local space. Initial overlap is treated as a miss.
      */
-    public static b2CastOutput b2RayCastCapsule(b2RayCastInput.b2RayCastInputPointer input, b2Capsule.b2CapsulePointer shape) {
-        return new b2CastOutput(b2RayCastCapsule_internal(input.getPointer(), shape.getPointer(), 0), true);
+    public static void b2RayCastCapsule(b2RayCastInput.b2RayCastInputPointer input, b2Capsule.b2CapsulePointer shape, b2CastOutput _retPar) {
+        b2RayCastCapsule_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2RayCastCapsule_internal(long input, long shape, long _retPar);/*
@@ -2204,18 +2211,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Ray cast versus capsule shape in local space. Initial overlap is treated as a miss.
+     * Ray cast versus segment shape in local space. Optionally treat the segment as one-sided with hits from
+     * the left side being treated as a miss.
      */
-    public static void b2RayCastCapsule(b2RayCastInput.b2RayCastInputPointer input, b2Capsule.b2CapsulePointer shape, b2CastOutput _retPar) {
-        b2RayCastCapsule_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
+    public static b2CastOutput b2RayCastSegment(b2RayCastInput.b2RayCastInputPointer input, b2Segment.b2SegmentPointer shape, boolean oneSided) {
+        return new b2CastOutput(b2RayCastSegment_internal(input.getPointer(), shape.getPointer(), oneSided, 0), true);
     }
 
     /**
      * Ray cast versus segment shape in local space. Optionally treat the segment as one-sided with hits from
      * the left side being treated as a miss.
      */
-    public static b2CastOutput b2RayCastSegment(b2RayCastInput.b2RayCastInputPointer input, b2Segment.b2SegmentPointer shape, boolean oneSided) {
-        return new b2CastOutput(b2RayCastSegment_internal(input.getPointer(), shape.getPointer(), oneSided, 0), true);
+    public static void b2RayCastSegment(b2RayCastInput.b2RayCastInputPointer input, b2Segment.b2SegmentPointer shape, boolean oneSided, b2CastOutput _retPar) {
+        b2RayCastSegment_internal(input.getPointer(), shape.getPointer(), oneSided, _retPar.getPointer());
     }
 
     public static native long b2RayCastSegment_internal(long input, long shape, boolean oneSided, long _retPar);/*
@@ -2229,18 +2237,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Ray cast versus segment shape in local space. Optionally treat the segment as one-sided with hits from
-     * the left side being treated as a miss.
+     * Ray cast versus polygon shape in local space. Initial overlap is treated as a miss.
      */
-    public static void b2RayCastSegment(b2RayCastInput.b2RayCastInputPointer input, b2Segment.b2SegmentPointer shape, boolean oneSided, b2CastOutput _retPar) {
-        b2RayCastSegment_internal(input.getPointer(), shape.getPointer(), oneSided, _retPar.getPointer());
+    public static b2CastOutput b2RayCastPolygon(b2RayCastInput.b2RayCastInputPointer input, b2Polygon.b2PolygonPointer shape) {
+        return new b2CastOutput(b2RayCastPolygon_internal(input.getPointer(), shape.getPointer(), 0), true);
     }
 
     /**
      * Ray cast versus polygon shape in local space. Initial overlap is treated as a miss.
      */
-    public static b2CastOutput b2RayCastPolygon(b2RayCastInput.b2RayCastInputPointer input, b2Polygon.b2PolygonPointer shape) {
-        return new b2CastOutput(b2RayCastPolygon_internal(input.getPointer(), shape.getPointer(), 0), true);
+    public static void b2RayCastPolygon(b2RayCastInput.b2RayCastInputPointer input, b2Polygon.b2PolygonPointer shape, b2CastOutput _retPar) {
+        b2RayCastPolygon_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2RayCastPolygon_internal(long input, long shape, long _retPar);/*
@@ -2253,17 +2260,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Ray cast versus polygon shape in local space. Initial overlap is treated as a miss.
+     * Shape cast versus a circle. Initial overlap is treated as a miss.
      */
-    public static void b2RayCastPolygon(b2RayCastInput.b2RayCastInputPointer input, b2Polygon.b2PolygonPointer shape, b2CastOutput _retPar) {
-        b2RayCastPolygon_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
+    public static b2CastOutput b2ShapeCastCircle(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Circle.b2CirclePointer shape) {
+        return new b2CastOutput(b2ShapeCastCircle_internal(input.getPointer(), shape.getPointer(), 0), true);
     }
 
     /**
      * Shape cast versus a circle. Initial overlap is treated as a miss.
      */
-    public static b2CastOutput b2ShapeCastCircle(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Circle.b2CirclePointer shape) {
-        return new b2CastOutput(b2ShapeCastCircle_internal(input.getPointer(), shape.getPointer(), 0), true);
+    public static void b2ShapeCastCircle(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Circle.b2CirclePointer shape, b2CastOutput _retPar) {
+        b2ShapeCastCircle_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2ShapeCastCircle_internal(long input, long shape, long _retPar);/*
@@ -2276,17 +2283,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Shape cast versus a circle. Initial overlap is treated as a miss.
+     * Shape cast versus a capsule. Initial overlap is treated as a miss.
      */
-    public static void b2ShapeCastCircle(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Circle.b2CirclePointer shape, b2CastOutput _retPar) {
-        b2ShapeCastCircle_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
+    public static b2CastOutput b2ShapeCastCapsule(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Capsule.b2CapsulePointer shape) {
+        return new b2CastOutput(b2ShapeCastCapsule_internal(input.getPointer(), shape.getPointer(), 0), true);
     }
 
     /**
      * Shape cast versus a capsule. Initial overlap is treated as a miss.
      */
-    public static b2CastOutput b2ShapeCastCapsule(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Capsule.b2CapsulePointer shape) {
-        return new b2CastOutput(b2ShapeCastCapsule_internal(input.getPointer(), shape.getPointer(), 0), true);
+    public static void b2ShapeCastCapsule(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Capsule.b2CapsulePointer shape, b2CastOutput _retPar) {
+        b2ShapeCastCapsule_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2ShapeCastCapsule_internal(long input, long shape, long _retPar);/*
@@ -2299,17 +2306,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Shape cast versus a capsule. Initial overlap is treated as a miss.
+     * Shape cast versus a line segment. Initial overlap is treated as a miss.
      */
-    public static void b2ShapeCastCapsule(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Capsule.b2CapsulePointer shape, b2CastOutput _retPar) {
-        b2ShapeCastCapsule_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
+    public static b2CastOutput b2ShapeCastSegment(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Segment.b2SegmentPointer shape) {
+        return new b2CastOutput(b2ShapeCastSegment_internal(input.getPointer(), shape.getPointer(), 0), true);
     }
 
     /**
      * Shape cast versus a line segment. Initial overlap is treated as a miss.
      */
-    public static b2CastOutput b2ShapeCastSegment(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Segment.b2SegmentPointer shape) {
-        return new b2CastOutput(b2ShapeCastSegment_internal(input.getPointer(), shape.getPointer(), 0), true);
+    public static void b2ShapeCastSegment(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Segment.b2SegmentPointer shape, b2CastOutput _retPar) {
+        b2ShapeCastSegment_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2ShapeCastSegment_internal(long input, long shape, long _retPar);/*
@@ -2322,17 +2329,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Shape cast versus a line segment. Initial overlap is treated as a miss.
+     * Shape cast versus a convex polygon. Initial overlap is treated as a miss.
      */
-    public static void b2ShapeCastSegment(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Segment.b2SegmentPointer shape, b2CastOutput _retPar) {
-        b2ShapeCastSegment_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
+    public static b2CastOutput b2ShapeCastPolygon(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Polygon.b2PolygonPointer shape) {
+        return new b2CastOutput(b2ShapeCastPolygon_internal(input.getPointer(), shape.getPointer(), 0), true);
     }
 
     /**
      * Shape cast versus a convex polygon. Initial overlap is treated as a miss.
      */
-    public static b2CastOutput b2ShapeCastPolygon(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Polygon.b2PolygonPointer shape) {
-        return new b2CastOutput(b2ShapeCastPolygon_internal(input.getPointer(), shape.getPointer(), 0), true);
+    public static void b2ShapeCastPolygon(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Polygon.b2PolygonPointer shape, b2CastOutput _retPar) {
+        b2ShapeCastPolygon_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2ShapeCastPolygon_internal(long input, long shape, long _retPar);/*
@@ -2343,13 +2350,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Shape cast versus a convex polygon. Initial overlap is treated as a miss.
-     */
-    public static void b2ShapeCastPolygon(b2ShapeCastInput.b2ShapeCastInputPointer input, b2Polygon.b2PolygonPointer shape, b2CastOutput _retPar) {
-        b2ShapeCastPolygon_internal(input.getPointer(), shape.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Compute the convex hull of a set of points. Returns an empty hull if it fails.
@@ -2365,16 +2365,6 @@ static jclass cxxExceptionClass = NULL;
         return new b2Hull(b2ComputeHull_internal(points.getPointer(), count, 0), true);
     }
 
-    public static native long b2ComputeHull_internal(long points, int count, long _retPar);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, int, count, 1, return 0);
-    	b2Hull* _ret = (b2Hull*) (_retPar == 0 ? malloc(sizeof(b2Hull)) : (void*)_retPar);
-    	*_ret = b2ComputeHull((const b2Vec2 *)points, (int)count);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
     /**
      * Compute the convex hull of a set of points. Returns an empty hull if it fails.
      * Some failure cases:
@@ -2388,6 +2378,16 @@ static jclass cxxExceptionClass = NULL;
     public static void b2ComputeHull(b2Vec2.b2Vec2Pointer points, int count, b2Hull _retPar) {
         b2ComputeHull_internal(points.getPointer(), count, _retPar.getPointer());
     }
+
+    public static native long b2ComputeHull_internal(long points, int count, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, int, count, 1, return 0);
+    	b2Hull* _ret = (b2Hull*) (_retPar == 0 ? malloc(sizeof(b2Hull)) : (void*)_retPar);
+    	*_ret = b2ComputeHull((const b2Vec2 *)points, (int)count);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
 
     /**
      * This determines if a hull is valid. Checks for:
@@ -2413,6 +2413,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2SegmentDistanceResult(b2SegmentDistance_internal(p1.getPointer(), q1.getPointer(), p2.getPointer(), q2.getPointer(), 0), true);
     }
 
+    /**
+     * Compute the distance between two line segments, clamping at the end points if needed.
+     */
+    public static void b2SegmentDistance(b2Vec2 p1, b2Vec2 q1, b2Vec2 p2, b2Vec2 q2, b2SegmentDistanceResult _retPar) {
+        b2SegmentDistance_internal(p1.getPointer(), q1.getPointer(), p2.getPointer(), q2.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2SegmentDistance_internal(long p1, long q1, long p2, long q2, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2SegmentDistanceResult* _ret = (b2SegmentDistanceResult*) (_retPar == 0 ? malloc(sizeof(b2SegmentDistanceResult)) : (void*)_retPar);
@@ -2423,10 +2430,12 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the distance between two line segments, clamping at the end points if needed.
+     * Compute the closest points between two shapes represented as point clouds.
+     * b2SimplexCache cache is input/output. On the first call set b2SimplexCache.count to zero.
+     * The underlying GJK algorithm may be debugged by passing in debug simplexes and capacity. You may pass in NULL and 0 for these.
      */
-    public static void b2SegmentDistance(b2Vec2 p1, b2Vec2 q1, b2Vec2 p2, b2Vec2 q2, b2SegmentDistanceResult _retPar) {
-        b2SegmentDistance_internal(p1.getPointer(), q1.getPointer(), p2.getPointer(), q2.getPointer(), _retPar.getPointer());
+    public static b2DistanceOutput b2ShapeDistance(b2DistanceInput.b2DistanceInputPointer input, b2SimplexCache.b2SimplexCachePointer cache, b2Simplex.b2SimplexPointer simplexes, int simplexCapacity) {
+        return new b2DistanceOutput(b2ShapeDistance_internal(input.getPointer(), cache.getPointer(), simplexes.getPointer(), simplexCapacity, 0), true);
     }
 
     /**
@@ -2434,8 +2443,8 @@ static jclass cxxExceptionClass = NULL;
      * b2SimplexCache cache is input/output. On the first call set b2SimplexCache.count to zero.
      * The underlying GJK algorithm may be debugged by passing in debug simplexes and capacity. You may pass in NULL and 0 for these.
      */
-    public static b2DistanceOutput b2ShapeDistance(b2DistanceInput.b2DistanceInputPointer input, b2SimplexCache.b2SimplexCachePointer cache, b2Simplex.b2SimplexPointer simplexes, int simplexCapacity) {
-        return new b2DistanceOutput(b2ShapeDistance_internal(input.getPointer(), cache.getPointer(), simplexes.getPointer(), simplexCapacity, 0), true);
+    public static void b2ShapeDistance(b2DistanceInput.b2DistanceInputPointer input, b2SimplexCache.b2SimplexCachePointer cache, b2Simplex.b2SimplexPointer simplexes, int simplexCapacity, b2DistanceOutput _retPar) {
+        b2ShapeDistance_internal(input.getPointer(), cache.getPointer(), simplexes.getPointer(), simplexCapacity, _retPar.getPointer());
     }
 
     public static native long b2ShapeDistance_internal(long input, long cache, long simplexes, int simplexCapacity, long _retPar);/*
@@ -2449,20 +2458,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the closest points between two shapes represented as point clouds.
-     * b2SimplexCache cache is input/output. On the first call set b2SimplexCache.count to zero.
-     * The underlying GJK algorithm may be debugged by passing in debug simplexes and capacity. You may pass in NULL and 0 for these.
+     * Perform a linear shape cast of shape B moving and shape A fixed. Determines the hit point, normal, and translation fraction.
+     * You may optionally supply an array to hold debug data.
      */
-    public static void b2ShapeDistance(b2DistanceInput.b2DistanceInputPointer input, b2SimplexCache.b2SimplexCachePointer cache, b2Simplex.b2SimplexPointer simplexes, int simplexCapacity, b2DistanceOutput _retPar) {
-        b2ShapeDistance_internal(input.getPointer(), cache.getPointer(), simplexes.getPointer(), simplexCapacity, _retPar.getPointer());
+    public static b2CastOutput b2ShapeCast(b2ShapeCastPairInput.b2ShapeCastPairInputPointer input) {
+        return new b2CastOutput(b2ShapeCast_internal(input.getPointer(), 0), true);
     }
 
     /**
      * Perform a linear shape cast of shape B moving and shape A fixed. Determines the hit point, normal, and translation fraction.
      * You may optionally supply an array to hold debug data.
      */
-    public static b2CastOutput b2ShapeCast(b2ShapeCastPairInput.b2ShapeCastPairInputPointer input) {
-        return new b2CastOutput(b2ShapeCast_internal(input.getPointer(), 0), true);
+    public static void b2ShapeCast(b2ShapeCastPairInput.b2ShapeCastPairInputPointer input, b2CastOutput _retPar) {
+        b2ShapeCast_internal(input.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2ShapeCast_internal(long input, long _retPar);/*
@@ -2475,18 +2483,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Perform a linear shape cast of shape B moving and shape A fixed. Determines the hit point, normal, and translation fraction.
-     * You may optionally supply an array to hold debug data.
+     * Make a proxy for use in overlap, shape cast, and related functions. This is a deep copy of the points.
      */
-    public static void b2ShapeCast(b2ShapeCastPairInput.b2ShapeCastPairInputPointer input, b2CastOutput _retPar) {
-        b2ShapeCast_internal(input.getPointer(), _retPar.getPointer());
+    public static b2ShapeProxy b2MakeProxy(b2Vec2.b2Vec2Pointer points, int count, float radius) {
+        return new b2ShapeProxy(b2MakeProxy_internal(points.getPointer(), count, radius, 0), true);
     }
 
     /**
      * Make a proxy for use in overlap, shape cast, and related functions. This is a deep copy of the points.
      */
-    public static b2ShapeProxy b2MakeProxy(b2Vec2.b2Vec2Pointer points, int count, float radius) {
-        return new b2ShapeProxy(b2MakeProxy_internal(points.getPointer(), count, radius, 0), true);
+    public static void b2MakeProxy(b2Vec2.b2Vec2Pointer points, int count, float radius, b2ShapeProxy _retPar) {
+        b2MakeProxy_internal(points.getPointer(), count, radius, _retPar.getPointer());
     }
 
     public static native long b2MakeProxy_internal(long points, int count, float radius, long _retPar);/*
@@ -2500,17 +2507,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Make a proxy for use in overlap, shape cast, and related functions. This is a deep copy of the points.
+     * Make a proxy with a transform. This is a deep copy of the points.
      */
-    public static void b2MakeProxy(b2Vec2.b2Vec2Pointer points, int count, float radius, b2ShapeProxy _retPar) {
-        b2MakeProxy_internal(points.getPointer(), count, radius, _retPar.getPointer());
+    public static b2ShapeProxy b2MakeOffsetProxy(b2Vec2.b2Vec2Pointer points, int count, float radius, b2Vec2 position, b2Rot rotation) {
+        return new b2ShapeProxy(b2MakeOffsetProxy_internal(points.getPointer(), count, radius, position.getPointer(), rotation.getPointer(), 0), true);
     }
 
     /**
      * Make a proxy with a transform. This is a deep copy of the points.
      */
-    public static b2ShapeProxy b2MakeOffsetProxy(b2Vec2.b2Vec2Pointer points, int count, float radius, b2Vec2 position, b2Rot rotation) {
-        return new b2ShapeProxy(b2MakeOffsetProxy_internal(points.getPointer(), count, radius, position.getPointer(), rotation.getPointer(), 0), true);
+    public static void b2MakeOffsetProxy(b2Vec2.b2Vec2Pointer points, int count, float radius, b2Vec2 position, b2Rot rotation, b2ShapeProxy _retPar) {
+        b2MakeOffsetProxy_internal(points.getPointer(), count, radius, position.getPointer(), rotation.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2MakeOffsetProxy_internal(long points, int count, float radius, long position, long rotation, long _retPar);/*
@@ -2524,17 +2531,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Make a proxy with a transform. This is a deep copy of the points.
+     * Evaluate the transform sweep at a specific time.
      */
-    public static void b2MakeOffsetProxy(b2Vec2.b2Vec2Pointer points, int count, float radius, b2Vec2 position, b2Rot rotation, b2ShapeProxy _retPar) {
-        b2MakeOffsetProxy_internal(points.getPointer(), count, radius, position.getPointer(), rotation.getPointer(), _retPar.getPointer());
+    public static b2Transform b2GetSweepTransform(b2Sweep.b2SweepPointer sweep, float time) {
+        return new b2Transform(b2GetSweepTransform_internal(sweep.getPointer(), time, 0), true);
     }
 
     /**
      * Evaluate the transform sweep at a specific time.
      */
-    public static b2Transform b2GetSweepTransform(b2Sweep.b2SweepPointer sweep, float time) {
-        return new b2Transform(b2GetSweepTransform_internal(sweep.getPointer(), time, 0), true);
+    public static void b2GetSweepTransform(b2Sweep.b2SweepPointer sweep, float time, b2Transform _retPar) {
+        b2GetSweepTransform_internal(sweep.getPointer(), time, _retPar.getPointer());
     }
 
     public static native long b2GetSweepTransform_internal(long sweep, float time, long _retPar);/*
@@ -2547,10 +2554,13 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Evaluate the transform sweep at a specific time.
+     * Compute the upper bound on time before two shapes penetrate. Time is represented as
+     * a fraction between [0,tMax]. This uses a swept separating axis and may miss some intermediate,
+     * non-tunneling collisions. If you change the time interval, you should call this function
+     * again.
      */
-    public static void b2GetSweepTransform(b2Sweep.b2SweepPointer sweep, float time, b2Transform _retPar) {
-        b2GetSweepTransform_internal(sweep.getPointer(), time, _retPar.getPointer());
+    public static b2TOIOutput b2TimeOfImpact(b2TOIInput.b2TOIInputPointer input) {
+        return new b2TOIOutput(b2TimeOfImpact_internal(input.getPointer(), 0), true);
     }
 
     /**
@@ -2559,8 +2569,8 @@ static jclass cxxExceptionClass = NULL;
      * non-tunneling collisions. If you change the time interval, you should call this function
      * again.
      */
-    public static b2TOIOutput b2TimeOfImpact(b2TOIInput.b2TOIInputPointer input) {
-        return new b2TOIOutput(b2TimeOfImpact_internal(input.getPointer(), 0), true);
+    public static void b2TimeOfImpact(b2TOIInput.b2TOIInputPointer input, b2TOIOutput _retPar) {
+        b2TimeOfImpact_internal(input.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2TimeOfImpact_internal(long input, long _retPar);/*
@@ -2573,20 +2583,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the upper bound on time before two shapes penetrate. Time is represented as
-     * a fraction between [0,tMax]. This uses a swept separating axis and may miss some intermediate,
-     * non-tunneling collisions. If you change the time interval, you should call this function
-     * again.
+     * Compute the contact manifold between two circles
      */
-    public static void b2TimeOfImpact(b2TOIInput.b2TOIInputPointer input, b2TOIOutput _retPar) {
-        b2TimeOfImpact_internal(input.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollideCircles(b2Circle.b2CirclePointer circleA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
+        return new b2Manifold(b2CollideCircles_internal(circleA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between two circles
      */
-    public static b2Manifold b2CollideCircles(b2Circle.b2CirclePointer circleA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
-        return new b2Manifold(b2CollideCircles_internal(circleA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), 0), true);
+    public static void b2CollideCircles(b2Circle.b2CirclePointer circleA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB, b2Manifold _retPar) {
+        b2CollideCircles_internal(circleA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollideCircles_internal(long circleA, long xfA, long circleB, long xfB, long _retPar);/*
@@ -2599,17 +2606,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between two circles
+     * Compute the contact manifold between a capsule and circle
      */
-    public static void b2CollideCircles(b2Circle.b2CirclePointer circleA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB, b2Manifold _retPar) {
-        b2CollideCircles_internal(circleA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollideCapsuleAndCircle(b2Capsule.b2CapsulePointer capsuleA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
+        return new b2Manifold(b2CollideCapsuleAndCircle_internal(capsuleA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between a capsule and circle
      */
-    public static b2Manifold b2CollideCapsuleAndCircle(b2Capsule.b2CapsulePointer capsuleA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
-        return new b2Manifold(b2CollideCapsuleAndCircle_internal(capsuleA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), 0), true);
+    public static void b2CollideCapsuleAndCircle(b2Capsule.b2CapsulePointer capsuleA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB, b2Manifold _retPar) {
+        b2CollideCapsuleAndCircle_internal(capsuleA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollideCapsuleAndCircle_internal(long capsuleA, long xfA, long circleB, long xfB, long _retPar);/*
@@ -2622,17 +2629,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between a capsule and circle
+     * Compute the contact manifold between an segment and a circle
      */
-    public static void b2CollideCapsuleAndCircle(b2Capsule.b2CapsulePointer capsuleA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB, b2Manifold _retPar) {
-        b2CollideCapsuleAndCircle_internal(capsuleA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollideSegmentAndCircle(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
+        return new b2Manifold(b2CollideSegmentAndCircle_internal(segmentA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between an segment and a circle
      */
-    public static b2Manifold b2CollideSegmentAndCircle(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
-        return new b2Manifold(b2CollideSegmentAndCircle_internal(segmentA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), 0), true);
+    public static void b2CollideSegmentAndCircle(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB, b2Manifold _retPar) {
+        b2CollideSegmentAndCircle_internal(segmentA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollideSegmentAndCircle_internal(long segmentA, long xfA, long circleB, long xfB, long _retPar);/*
@@ -2645,17 +2652,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between an segment and a circle
+     * Compute the contact manifold between a polygon and a circle
      */
-    public static void b2CollideSegmentAndCircle(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB, b2Manifold _retPar) {
-        b2CollideSegmentAndCircle_internal(segmentA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollidePolygonAndCircle(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
+        return new b2Manifold(b2CollidePolygonAndCircle_internal(polygonA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between a polygon and a circle
      */
-    public static b2Manifold b2CollidePolygonAndCircle(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
-        return new b2Manifold(b2CollidePolygonAndCircle_internal(polygonA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), 0), true);
+    public static void b2CollidePolygonAndCircle(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB, b2Manifold _retPar) {
+        b2CollidePolygonAndCircle_internal(polygonA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollidePolygonAndCircle_internal(long polygonA, long xfA, long circleB, long xfB, long _retPar);/*
@@ -2668,17 +2675,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between a polygon and a circle
+     * Compute the contact manifold between a capsule and circle
      */
-    public static void b2CollidePolygonAndCircle(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB, b2Manifold _retPar) {
-        b2CollidePolygonAndCircle_internal(polygonA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollideCapsules(b2Capsule.b2CapsulePointer capsuleA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB) {
+        return new b2Manifold(b2CollideCapsules_internal(capsuleA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between a capsule and circle
      */
-    public static b2Manifold b2CollideCapsules(b2Capsule.b2CapsulePointer capsuleA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB) {
-        return new b2Manifold(b2CollideCapsules_internal(capsuleA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), 0), true);
+    public static void b2CollideCapsules(b2Capsule.b2CapsulePointer capsuleA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2Manifold _retPar) {
+        b2CollideCapsules_internal(capsuleA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollideCapsules_internal(long capsuleA, long xfA, long capsuleB, long xfB, long _retPar);/*
@@ -2691,17 +2698,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between a capsule and circle
+     * Compute the contact manifold between an segment and a capsule
      */
-    public static void b2CollideCapsules(b2Capsule.b2CapsulePointer capsuleA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2Manifold _retPar) {
-        b2CollideCapsules_internal(capsuleA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollideSegmentAndCapsule(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB) {
+        return new b2Manifold(b2CollideSegmentAndCapsule_internal(segmentA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between an segment and a capsule
      */
-    public static b2Manifold b2CollideSegmentAndCapsule(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB) {
-        return new b2Manifold(b2CollideSegmentAndCapsule_internal(segmentA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), 0), true);
+    public static void b2CollideSegmentAndCapsule(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2Manifold _retPar) {
+        b2CollideSegmentAndCapsule_internal(segmentA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollideSegmentAndCapsule_internal(long segmentA, long xfA, long capsuleB, long xfB, long _retPar);/*
@@ -2714,17 +2721,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between an segment and a capsule
+     * Compute the contact manifold between a polygon and capsule
      */
-    public static void b2CollideSegmentAndCapsule(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2Manifold _retPar) {
-        b2CollideSegmentAndCapsule_internal(segmentA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollidePolygonAndCapsule(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB) {
+        return new b2Manifold(b2CollidePolygonAndCapsule_internal(polygonA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between a polygon and capsule
      */
-    public static b2Manifold b2CollidePolygonAndCapsule(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB) {
-        return new b2Manifold(b2CollidePolygonAndCapsule_internal(polygonA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), 0), true);
+    public static void b2CollidePolygonAndCapsule(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2Manifold _retPar) {
+        b2CollidePolygonAndCapsule_internal(polygonA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollidePolygonAndCapsule_internal(long polygonA, long xfA, long capsuleB, long xfB, long _retPar);/*
@@ -2737,17 +2744,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between a polygon and capsule
+     * Compute the contact manifold between two polygons
      */
-    public static void b2CollidePolygonAndCapsule(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2Manifold _retPar) {
-        b2CollidePolygonAndCapsule_internal(polygonA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollidePolygons(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB) {
+        return new b2Manifold(b2CollidePolygons_internal(polygonA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between two polygons
      */
-    public static b2Manifold b2CollidePolygons(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB) {
-        return new b2Manifold(b2CollidePolygons_internal(polygonA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), 0), true);
+    public static void b2CollidePolygons(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB, b2Manifold _retPar) {
+        b2CollidePolygons_internal(polygonA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollidePolygons_internal(long polygonA, long xfA, long polygonB, long xfB, long _retPar);/*
@@ -2760,17 +2767,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between two polygons
+     * Compute the contact manifold between an segment and a polygon
      */
-    public static void b2CollidePolygons(b2Polygon.b2PolygonPointer polygonA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB, b2Manifold _retPar) {
-        b2CollidePolygons_internal(polygonA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollideSegmentAndPolygon(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB) {
+        return new b2Manifold(b2CollideSegmentAndPolygon_internal(segmentA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between an segment and a polygon
      */
-    public static b2Manifold b2CollideSegmentAndPolygon(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB) {
-        return new b2Manifold(b2CollideSegmentAndPolygon_internal(segmentA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), 0), true);
+    public static void b2CollideSegmentAndPolygon(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB, b2Manifold _retPar) {
+        b2CollideSegmentAndPolygon_internal(segmentA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollideSegmentAndPolygon_internal(long segmentA, long xfA, long polygonB, long xfB, long _retPar);/*
@@ -2783,17 +2790,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between an segment and a polygon
+     * Compute the contact manifold between a chain segment and a circle
      */
-    public static void b2CollideSegmentAndPolygon(b2Segment.b2SegmentPointer segmentA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB, b2Manifold _retPar) {
-        b2CollideSegmentAndPolygon_internal(segmentA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollideChainSegmentAndCircle(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
+        return new b2Manifold(b2CollideChainSegmentAndCircle_internal(segmentA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between a chain segment and a circle
      */
-    public static b2Manifold b2CollideChainSegmentAndCircle(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB) {
-        return new b2Manifold(b2CollideChainSegmentAndCircle_internal(segmentA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), 0), true);
+    public static void b2CollideChainSegmentAndCircle(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB, b2Manifold _retPar) {
+        b2CollideChainSegmentAndCircle_internal(segmentA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollideChainSegmentAndCircle_internal(long segmentA, long xfA, long circleB, long xfB, long _retPar);/*
@@ -2806,17 +2813,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between a chain segment and a circle
+     * Compute the contact manifold between a chain segment and a capsule
      */
-    public static void b2CollideChainSegmentAndCircle(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Circle.b2CirclePointer circleB, b2Transform xfB, b2Manifold _retPar) {
-        b2CollideChainSegmentAndCircle_internal(segmentA.getPointer(), xfA.getPointer(), circleB.getPointer(), xfB.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollideChainSegmentAndCapsule(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2SimplexCache.b2SimplexCachePointer cache) {
+        return new b2Manifold(b2CollideChainSegmentAndCapsule_internal(segmentA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), cache.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between a chain segment and a capsule
      */
-    public static b2Manifold b2CollideChainSegmentAndCapsule(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2SimplexCache.b2SimplexCachePointer cache) {
-        return new b2Manifold(b2CollideChainSegmentAndCapsule_internal(segmentA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), cache.getPointer(), 0), true);
+    public static void b2CollideChainSegmentAndCapsule(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2SimplexCache.b2SimplexCachePointer cache, b2Manifold _retPar) {
+        b2CollideChainSegmentAndCapsule_internal(segmentA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), cache.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollideChainSegmentAndCapsule_internal(long segmentA, long xfA, long capsuleB, long xfB, long cache, long _retPar);/*
@@ -2829,17 +2836,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between a chain segment and a capsule
+     * Compute the contact manifold between a chain segment and a rounded polygon
      */
-    public static void b2CollideChainSegmentAndCapsule(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Capsule.b2CapsulePointer capsuleB, b2Transform xfB, b2SimplexCache.b2SimplexCachePointer cache, b2Manifold _retPar) {
-        b2CollideChainSegmentAndCapsule_internal(segmentA.getPointer(), xfA.getPointer(), capsuleB.getPointer(), xfB.getPointer(), cache.getPointer(), _retPar.getPointer());
+    public static b2Manifold b2CollideChainSegmentAndPolygon(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB, b2SimplexCache.b2SimplexCachePointer cache) {
+        return new b2Manifold(b2CollideChainSegmentAndPolygon_internal(segmentA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), cache.getPointer(), 0), true);
     }
 
     /**
      * Compute the contact manifold between a chain segment and a rounded polygon
      */
-    public static b2Manifold b2CollideChainSegmentAndPolygon(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB, b2SimplexCache.b2SimplexCachePointer cache) {
-        return new b2Manifold(b2CollideChainSegmentAndPolygon_internal(segmentA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), cache.getPointer(), 0), true);
+    public static void b2CollideChainSegmentAndPolygon(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB, b2SimplexCache.b2SimplexCachePointer cache, b2Manifold _retPar) {
+        b2CollideChainSegmentAndPolygon_internal(segmentA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), cache.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CollideChainSegmentAndPolygon_internal(long segmentA, long xfA, long polygonB, long xfB, long cache, long _retPar);/*
@@ -2852,17 +2859,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Compute the contact manifold between a chain segment and a rounded polygon
+     * Constructing the tree initializes the node pool.
      */
-    public static void b2CollideChainSegmentAndPolygon(b2ChainSegment.b2ChainSegmentPointer segmentA, b2Transform xfA, b2Polygon.b2PolygonPointer polygonB, b2Transform xfB, b2SimplexCache.b2SimplexCachePointer cache, b2Manifold _retPar) {
-        b2CollideChainSegmentAndPolygon_internal(segmentA.getPointer(), xfA.getPointer(), polygonB.getPointer(), xfB.getPointer(), cache.getPointer(), _retPar.getPointer());
+    public static b2DynamicTree b2DynamicTree_Create() {
+        return new b2DynamicTree(b2DynamicTree_Create_internal(0), true);
     }
 
     /**
      * Constructing the tree initializes the node pool.
      */
-    public static b2DynamicTree b2DynamicTree_Create() {
-        return new b2DynamicTree(b2DynamicTree_Create_internal(0), true);
+    public static void b2DynamicTree_Create(b2DynamicTree _retPar) {
+        b2DynamicTree_Create_internal(_retPar.getPointer());
     }
 
     public static native long b2DynamicTree_Create_internal(long _retPar);/*
@@ -2873,13 +2880,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Constructing the tree initializes the node pool.
-     */
-    public static void b2DynamicTree_Create(b2DynamicTree _retPar) {
-        b2DynamicTree_Create_internal(_retPar.getPointer());
-    }
 
     /**
      * Destroy the tree, freeing the node pool.
@@ -2990,6 +2990,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2TreeStats(b2DynamicTree_Query_internal(tree.getPointer(), aabb.getPointer(), maskBits, callback.getPointer(), context.getPointer(), 0), true);
     }
 
+    /**
+     *  Query an AABB for overlapping proxies. The callback class is called for each proxy that overlaps the supplied AABB.
+     * 	@return performance data
+     */
+    public static void b2DynamicTree_Query(b2DynamicTree.b2DynamicTreePointer tree, b2AABB aabb, long maskBits, ClosureObject<b2TreeQueryCallbackFcn> callback, VoidPointer context, b2TreeStats _retPar) {
+        b2DynamicTree_Query_internal(tree.getPointer(), aabb.getPointer(), maskBits, callback.getPointer(), context.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2DynamicTree_Query_internal(long tree, long aabb, long maskBits, long callback, long context, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, uint64_t, maskBits, 2, return 0);
@@ -2999,14 +3007,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     *  Query an AABB for overlapping proxies. The callback class is called for each proxy that overlaps the supplied AABB.
-     * 	@return performance data
-     */
-    public static void b2DynamicTree_Query(b2DynamicTree.b2DynamicTreePointer tree, b2AABB aabb, long maskBits, ClosureObject<b2TreeQueryCallbackFcn> callback, VoidPointer context, b2TreeStats _retPar) {
-        b2DynamicTree_Query_internal(tree.getPointer(), aabb.getPointer(), maskBits, callback.getPointer(), context.getPointer(), _retPar.getPointer());
-    }
 
     /**
      *  Ray cast against the proxies in the tree. This relies on the callback
@@ -3027,16 +3027,6 @@ static jclass cxxExceptionClass = NULL;
         return new b2TreeStats(b2DynamicTree_RayCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getPointer(), context.getPointer(), 0), true);
     }
 
-    public static native long b2DynamicTree_RayCast_internal(long tree, long input, long maskBits, long callback, long context, long _retPar);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	CHECK_AND_THROW_C_TYPE(env, uint64_t, maskBits, 2, return 0);
-    	b2TreeStats* _ret = (b2TreeStats*) (_retPar == 0 ? malloc(sizeof(b2TreeStats)) : (void*)_retPar);
-    	*_ret = b2DynamicTree_RayCast((const b2DynamicTree *)tree, (const b2RayCastInput *)input, (uint64_t)maskBits, (b2TreeRayCastCallbackFcn *)callback, (void *)context);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
     /**
      *  Ray cast against the proxies in the tree. This relies on the callback
      *  to perform a exact ray cast in the case were the proxy contains a shape.
@@ -3056,28 +3046,11 @@ static jclass cxxExceptionClass = NULL;
         b2DynamicTree_RayCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getPointer(), context.getPointer(), _retPar.getPointer());
     }
 
-    /**
-     *  Ray cast against the proxies in the tree. This relies on the callback
-     *  to perform a exact ray cast in the case were the proxy contains a shape.
-     *  The callback also performs the any collision filtering. This has performance
-     *  roughly equal to k * log(n), where k is the number of collisions and n is the
-     *  number of proxies in the tree.
-     *  @param tree the dynamic tree to ray cast
-     *  @param input the ray cast input data. The ray extends from p1 to p1 + maxFraction * (p2 - p1).
-     *  @param maskBits filter bits: `bool accept = (maskBits & node->categoryBits) != 0;`
-     *  @param callback a callback class that is called for each proxy that is hit by the shape
-     *  @param context user context that is passed to the callback
-     * 	@return performance data
-     */
-    public static b2TreeStats b2DynamicTree_ShapeCast(b2DynamicTree.b2DynamicTreePointer tree, b2ShapeCastInput.b2ShapeCastInputPointer input, long maskBits, ClosureObject<b2TreeShapeCastCallbackFcn> callback, VoidPointer context) {
-        return new b2TreeStats(b2DynamicTree_ShapeCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getPointer(), context.getPointer(), 0), true);
-    }
-
-    public static native long b2DynamicTree_ShapeCast_internal(long tree, long input, long maskBits, long callback, long context, long _retPar);/*
+    public static native long b2DynamicTree_RayCast_internal(long tree, long input, long maskBits, long callback, long context, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, uint64_t, maskBits, 2, return 0);
     	b2TreeStats* _ret = (b2TreeStats*) (_retPar == 0 ? malloc(sizeof(b2TreeStats)) : (void*)_retPar);
-    	*_ret = b2DynamicTree_ShapeCast((const b2DynamicTree *)tree, (const b2ShapeCastInput *)input, (uint64_t)maskBits, (b2TreeShapeCastCallbackFcn *)callback, (void *)context);
+    	*_ret = b2DynamicTree_RayCast((const b2DynamicTree *)tree, (const b2RayCastInput *)input, (uint64_t)maskBits, (b2TreeRayCastCallbackFcn *)callback, (void *)context);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -3096,9 +3069,36 @@ static jclass cxxExceptionClass = NULL;
      *  @param context user context that is passed to the callback
      * 	@return performance data
      */
+    public static b2TreeStats b2DynamicTree_ShapeCast(b2DynamicTree.b2DynamicTreePointer tree, b2ShapeCastInput.b2ShapeCastInputPointer input, long maskBits, ClosureObject<b2TreeShapeCastCallbackFcn> callback, VoidPointer context) {
+        return new b2TreeStats(b2DynamicTree_ShapeCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getPointer(), context.getPointer(), 0), true);
+    }
+
+    /**
+     *  Ray cast against the proxies in the tree. This relies on the callback
+     *  to perform a exact ray cast in the case were the proxy contains a shape.
+     *  The callback also performs the any collision filtering. This has performance
+     *  roughly equal to k * log(n), where k is the number of collisions and n is the
+     *  number of proxies in the tree.
+     *  @param tree the dynamic tree to ray cast
+     *  @param input the ray cast input data. The ray extends from p1 to p1 + maxFraction * (p2 - p1).
+     *  @param maskBits filter bits: `bool accept = (maskBits & node->categoryBits) != 0;`
+     *  @param callback a callback class that is called for each proxy that is hit by the shape
+     *  @param context user context that is passed to the callback
+     * 	@return performance data
+     */
     public static void b2DynamicTree_ShapeCast(b2DynamicTree.b2DynamicTreePointer tree, b2ShapeCastInput.b2ShapeCastInputPointer input, long maskBits, ClosureObject<b2TreeShapeCastCallbackFcn> callback, VoidPointer context, b2TreeStats _retPar) {
         b2DynamicTree_ShapeCast_internal(tree.getPointer(), input.getPointer(), maskBits, callback.getPointer(), context.getPointer(), _retPar.getPointer());
     }
+
+    public static native long b2DynamicTree_ShapeCast_internal(long tree, long input, long maskBits, long callback, long context, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, uint64_t, maskBits, 2, return 0);
+    	b2TreeStats* _ret = (b2TreeStats*) (_retPar == 0 ? malloc(sizeof(b2TreeStats)) : (void*)_retPar);
+    	*_ret = b2DynamicTree_ShapeCast((const b2DynamicTree *)tree, (const b2ShapeCastInput *)input, (uint64_t)maskBits, (b2TreeShapeCastCallbackFcn *)callback, (void *)context);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
 
     /**
      * Get the height of the binary tree.
@@ -3135,6 +3135,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2AABB(b2DynamicTree_GetRootBounds_internal(tree.getPointer(), 0), true);
     }
 
+    /**
+     * Get the bounding box that contains the entire tree
+     */
+    public static void b2DynamicTree_GetRootBounds(b2DynamicTree.b2DynamicTreePointer tree, b2AABB _retPar) {
+        b2DynamicTree_GetRootBounds_internal(tree.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2DynamicTree_GetRootBounds_internal(long tree, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2AABB* _ret = (b2AABB*) (_retPar == 0 ? malloc(sizeof(b2AABB)) : (void*)_retPar);
@@ -3143,13 +3150,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the bounding box that contains the entire tree
-     */
-    public static void b2DynamicTree_GetRootBounds(b2DynamicTree.b2DynamicTreePointer tree, b2AABB _retPar) {
-        b2DynamicTree_GetRootBounds_internal(tree.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Get the number of proxies created
@@ -3216,6 +3216,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2AABB(b2DynamicTree_GetAABB_internal(tree.getPointer(), proxyId, 0), true);
     }
 
+    /**
+     * Get the AABB of a proxy
+     */
+    public static void b2DynamicTree_GetAABB(b2DynamicTree.b2DynamicTreePointer tree, int proxyId, b2AABB _retPar) {
+        b2DynamicTree_GetAABB_internal(tree.getPointer(), proxyId, _retPar.getPointer());
+    }
+
     public static native long b2DynamicTree_GetAABB_internal(long tree, int proxyId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, int, proxyId, 1, return 0);
@@ -3225,13 +3232,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the AABB of a proxy
-     */
-    public static void b2DynamicTree_GetAABB(b2DynamicTree.b2DynamicTreePointer tree, int proxyId, b2AABB _retPar) {
-        b2DynamicTree_GetAABB_internal(tree.getPointer(), proxyId, _retPar.getPointer());
-    }
 
     /**
      * Validate this tree. For testing.
@@ -3269,6 +3269,16 @@ static jclass cxxExceptionClass = NULL;
         return new b2PlaneSolverResult(b2SolvePlanes_internal(position.getPointer(), planes.getPointer(), count, 0), true);
     }
 
+    /**
+     * Solves the position of a mover that satisfies the given collision planes.
+     * @param position this must be the position used to generate the collision planes
+     * @param planes the collision planes
+     * @param count the number of collision planes
+     */
+    public static void b2SolvePlanes(b2Vec2 position, b2CollisionPlane.b2CollisionPlanePointer planes, int count, b2PlaneSolverResult _retPar) {
+        b2SolvePlanes_internal(position.getPointer(), planes.getPointer(), count, _retPar.getPointer());
+    }
+
     public static native long b2SolvePlanes_internal(long position, long planes, int count, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, int, count, 2, return 0);
@@ -3280,21 +3290,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Solves the position of a mover that satisfies the given collision planes.
-     * @param position this must be the position used to generate the collision planes
-     * @param planes the collision planes
-     * @param count the number of collision planes
+     * Clips the velocity against the given collision planes. Planes with zero push or clipVelocity
+     * set to false are skipped.
      */
-    public static void b2SolvePlanes(b2Vec2 position, b2CollisionPlane.b2CollisionPlanePointer planes, int count, b2PlaneSolverResult _retPar) {
-        b2SolvePlanes_internal(position.getPointer(), planes.getPointer(), count, _retPar.getPointer());
+    public static b2Vec2 b2ClipVector(b2Vec2 vector, b2CollisionPlane.b2CollisionPlanePointer planes, int count) {
+        return new b2Vec2(b2ClipVector_internal(vector.getPointer(), planes.getPointer(), count, 0), true);
     }
 
     /**
      * Clips the velocity against the given collision planes. Planes with zero push or clipVelocity
      * set to false are skipped.
      */
-    public static b2Vec2 b2ClipVector(b2Vec2 vector, b2CollisionPlane.b2CollisionPlanePointer planes, int count) {
-        return new b2Vec2(b2ClipVector_internal(vector.getPointer(), planes.getPointer(), count, 0), true);
+    public static void b2ClipVector(b2Vec2 vector, b2CollisionPlane.b2CollisionPlanePointer planes, int count, b2Vec2 _retPar) {
+        b2ClipVector_internal(vector.getPointer(), planes.getPointer(), count, _retPar.getPointer());
     }
 
     public static native long b2ClipVector_internal(long vector, long planes, int count, long _retPar);/*
@@ -3306,14 +3314,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Clips the velocity against the given collision planes. Planes with zero push or clipVelocity
-     * set to false are skipped.
-     */
-    public static void b2ClipVector(b2Vec2 vector, b2CollisionPlane.b2CollisionPlanePointer planes, int count, b2Vec2 _retPar) {
-        b2ClipVector_internal(vector.getPointer(), planes.getPointer(), count, _retPar.getPointer());
-    }
 
     /**
      * Store a body id into a uint64_t.
@@ -3336,6 +3336,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2BodyId(b2LoadBodyId_internal(x, 0), true);
     }
 
+    /**
+     * Load a uint64_t into a body id.
+     */
+    public static void b2LoadBodyId(long x, b2BodyId _retPar) {
+        b2LoadBodyId_internal(x, _retPar.getPointer());
+    }
+
     public static native long b2LoadBodyId_internal(long x, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, uint64_t, x, 0, return 0);
@@ -3345,13 +3352,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Load a uint64_t into a body id.
-     */
-    public static void b2LoadBodyId(long x, b2BodyId _retPar) {
-        b2LoadBodyId_internal(x, _retPar.getPointer());
-    }
 
     /**
      * Store a shape id into a uint64_t.
@@ -3374,6 +3374,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2ShapeId(b2LoadShapeId_internal(x, 0), true);
     }
 
+    /**
+     * Load a uint64_t into a shape id.
+     */
+    public static void b2LoadShapeId(long x, b2ShapeId _retPar) {
+        b2LoadShapeId_internal(x, _retPar.getPointer());
+    }
+
     public static native long b2LoadShapeId_internal(long x, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, uint64_t, x, 0, return 0);
@@ -3383,13 +3390,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Load a uint64_t into a shape id.
-     */
-    public static void b2LoadShapeId(long x, b2ShapeId _retPar) {
-        b2LoadShapeId_internal(x, _retPar.getPointer());
-    }
 
     /**
      * Store a chain id into a uint64_t.
@@ -3412,6 +3412,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2ChainId(b2LoadChainId_internal(x, 0), true);
     }
 
+    /**
+     * Load a uint64_t into a chain id.
+     */
+    public static void b2LoadChainId(long x, b2ChainId _retPar) {
+        b2LoadChainId_internal(x, _retPar.getPointer());
+    }
+
     public static native long b2LoadChainId_internal(long x, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, uint64_t, x, 0, return 0);
@@ -3421,13 +3428,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Load a uint64_t into a chain id.
-     */
-    public static void b2LoadChainId(long x, b2ChainId _retPar) {
-        b2LoadChainId_internal(x, _retPar.getPointer());
-    }
 
     /**
      * Store a joint id into a uint64_t.
@@ -3450,6 +3450,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2JointId(b2LoadJointId_internal(x, 0), true);
     }
 
+    /**
+     * Load a uint64_t into a joint id.
+     */
+    public static void b2LoadJointId(long x, b2JointId _retPar) {
+        b2LoadJointId_internal(x, _retPar.getPointer());
+    }
+
     public static native long b2LoadJointId_internal(long x, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, uint64_t, x, 0, return 0);
@@ -3461,18 +3468,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Load a uint64_t into a joint id.
+     * Use this to initialize your world definition
+     * @ingroup world
      */
-    public static void b2LoadJointId(long x, b2JointId _retPar) {
-        b2LoadJointId_internal(x, _retPar.getPointer());
+    public static b2WorldDef b2DefaultWorldDef() {
+        return new b2WorldDef(b2DefaultWorldDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your world definition
      * @ingroup world
      */
-    public static b2WorldDef b2DefaultWorldDef() {
-        return new b2WorldDef(b2DefaultWorldDef_internal(0), true);
+    public static void b2DefaultWorldDef(b2WorldDef _retPar) {
+        b2DefaultWorldDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultWorldDef_internal(long _retPar);/*
@@ -3485,19 +3493,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your world definition
-     * @ingroup world
+     * Use this to initialize your body definition
+     * @ingroup body
      */
-    public static void b2DefaultWorldDef(b2WorldDef _retPar) {
-        b2DefaultWorldDef_internal(_retPar.getPointer());
+    public static b2BodyDef b2DefaultBodyDef() {
+        return new b2BodyDef(b2DefaultBodyDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your body definition
      * @ingroup body
      */
-    public static b2BodyDef b2DefaultBodyDef() {
-        return new b2BodyDef(b2DefaultBodyDef_internal(0), true);
+    public static void b2DefaultBodyDef(b2BodyDef _retPar) {
+        b2DefaultBodyDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultBodyDef_internal(long _retPar);/*
@@ -3510,19 +3518,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your body definition
-     * @ingroup body
+     * Use this to initialize your filter
+     * @ingroup shape
      */
-    public static void b2DefaultBodyDef(b2BodyDef _retPar) {
-        b2DefaultBodyDef_internal(_retPar.getPointer());
+    public static b2Filter b2DefaultFilter() {
+        return new b2Filter(b2DefaultFilter_internal(0), true);
     }
 
     /**
      * Use this to initialize your filter
      * @ingroup shape
      */
-    public static b2Filter b2DefaultFilter() {
-        return new b2Filter(b2DefaultFilter_internal(0), true);
+    public static void b2DefaultFilter(b2Filter _retPar) {
+        b2DefaultFilter_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultFilter_internal(long _retPar);/*
@@ -3535,19 +3543,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your filter
+     * Use this to initialize your query filter
      * @ingroup shape
      */
-    public static void b2DefaultFilter(b2Filter _retPar) {
-        b2DefaultFilter_internal(_retPar.getPointer());
+    public static b2QueryFilter b2DefaultQueryFilter() {
+        return new b2QueryFilter(b2DefaultQueryFilter_internal(0), true);
     }
 
     /**
      * Use this to initialize your query filter
      * @ingroup shape
      */
-    public static b2QueryFilter b2DefaultQueryFilter() {
-        return new b2QueryFilter(b2DefaultQueryFilter_internal(0), true);
+    public static void b2DefaultQueryFilter(b2QueryFilter _retPar) {
+        b2DefaultQueryFilter_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultQueryFilter_internal(long _retPar);/*
@@ -3560,19 +3568,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your query filter
+     * Use this to initialize your surface material
      * @ingroup shape
      */
-    public static void b2DefaultQueryFilter(b2QueryFilter _retPar) {
-        b2DefaultQueryFilter_internal(_retPar.getPointer());
+    public static b2SurfaceMaterial b2DefaultSurfaceMaterial() {
+        return new b2SurfaceMaterial(b2DefaultSurfaceMaterial_internal(0), true);
     }
 
     /**
      * Use this to initialize your surface material
      * @ingroup shape
      */
-    public static b2SurfaceMaterial b2DefaultSurfaceMaterial() {
-        return new b2SurfaceMaterial(b2DefaultSurfaceMaterial_internal(0), true);
+    public static void b2DefaultSurfaceMaterial(b2SurfaceMaterial _retPar) {
+        b2DefaultSurfaceMaterial_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultSurfaceMaterial_internal(long _retPar);/*
@@ -3585,19 +3593,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your surface material
+     * Use this to initialize your shape definition
      * @ingroup shape
      */
-    public static void b2DefaultSurfaceMaterial(b2SurfaceMaterial _retPar) {
-        b2DefaultSurfaceMaterial_internal(_retPar.getPointer());
+    public static b2ShapeDef b2DefaultShapeDef() {
+        return new b2ShapeDef(b2DefaultShapeDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your shape definition
      * @ingroup shape
      */
-    public static b2ShapeDef b2DefaultShapeDef() {
-        return new b2ShapeDef(b2DefaultShapeDef_internal(0), true);
+    public static void b2DefaultShapeDef(b2ShapeDef _retPar) {
+        b2DefaultShapeDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultShapeDef_internal(long _retPar);/*
@@ -3610,19 +3618,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your shape definition
+     * Use this to initialize your chain definition
      * @ingroup shape
      */
-    public static void b2DefaultShapeDef(b2ShapeDef _retPar) {
-        b2DefaultShapeDef_internal(_retPar.getPointer());
+    public static b2ChainDef b2DefaultChainDef() {
+        return new b2ChainDef(b2DefaultChainDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your chain definition
      * @ingroup shape
      */
-    public static b2ChainDef b2DefaultChainDef() {
-        return new b2ChainDef(b2DefaultChainDef_internal(0), true);
+    public static void b2DefaultChainDef(b2ChainDef _retPar) {
+        b2DefaultChainDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultChainDef_internal(long _retPar);/*
@@ -3635,19 +3643,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your chain definition
-     * @ingroup shape
+     * Use this to initialize your joint definition
+     * @ingroup distance_joint
      */
-    public static void b2DefaultChainDef(b2ChainDef _retPar) {
-        b2DefaultChainDef_internal(_retPar.getPointer());
+    public static b2DistanceJointDef b2DefaultDistanceJointDef() {
+        return new b2DistanceJointDef(b2DefaultDistanceJointDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your joint definition
      * @ingroup distance_joint
      */
-    public static b2DistanceJointDef b2DefaultDistanceJointDef() {
-        return new b2DistanceJointDef(b2DefaultDistanceJointDef_internal(0), true);
+    public static void b2DefaultDistanceJointDef(b2DistanceJointDef _retPar) {
+        b2DefaultDistanceJointDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultDistanceJointDef_internal(long _retPar);/*
@@ -3661,18 +3669,18 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Use this to initialize your joint definition
-     * @ingroup distance_joint
+     * @ingroup motor_joint
      */
-    public static void b2DefaultDistanceJointDef(b2DistanceJointDef _retPar) {
-        b2DefaultDistanceJointDef_internal(_retPar.getPointer());
+    public static b2MotorJointDef b2DefaultMotorJointDef() {
+        return new b2MotorJointDef(b2DefaultMotorJointDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your joint definition
      * @ingroup motor_joint
      */
-    public static b2MotorJointDef b2DefaultMotorJointDef() {
-        return new b2MotorJointDef(b2DefaultMotorJointDef_internal(0), true);
+    public static void b2DefaultMotorJointDef(b2MotorJointDef _retPar) {
+        b2DefaultMotorJointDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultMotorJointDef_internal(long _retPar);/*
@@ -3686,18 +3694,18 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Use this to initialize your joint definition
-     * @ingroup motor_joint
+     * @ingroup mouse_joint
      */
-    public static void b2DefaultMotorJointDef(b2MotorJointDef _retPar) {
-        b2DefaultMotorJointDef_internal(_retPar.getPointer());
+    public static b2MouseJointDef b2DefaultMouseJointDef() {
+        return new b2MouseJointDef(b2DefaultMouseJointDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your joint definition
      * @ingroup mouse_joint
      */
-    public static b2MouseJointDef b2DefaultMouseJointDef() {
-        return new b2MouseJointDef(b2DefaultMouseJointDef_internal(0), true);
+    public static void b2DefaultMouseJointDef(b2MouseJointDef _retPar) {
+        b2DefaultMouseJointDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultMouseJointDef_internal(long _retPar);/*
@@ -3711,18 +3719,18 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Use this to initialize your joint definition
-     * @ingroup mouse_joint
+     * @ingroup filter_joint
      */
-    public static void b2DefaultMouseJointDef(b2MouseJointDef _retPar) {
-        b2DefaultMouseJointDef_internal(_retPar.getPointer());
+    public static b2FilterJointDef b2DefaultFilterJointDef() {
+        return new b2FilterJointDef(b2DefaultFilterJointDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your joint definition
      * @ingroup filter_joint
      */
-    public static b2FilterJointDef b2DefaultFilterJointDef() {
-        return new b2FilterJointDef(b2DefaultFilterJointDef_internal(0), true);
+    public static void b2DefaultFilterJointDef(b2FilterJointDef _retPar) {
+        b2DefaultFilterJointDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultFilterJointDef_internal(long _retPar);/*
@@ -3736,18 +3744,18 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Use this to initialize your joint definition
-     * @ingroup filter_joint
+     * @ingroupd prismatic_joint
      */
-    public static void b2DefaultFilterJointDef(b2FilterJointDef _retPar) {
-        b2DefaultFilterJointDef_internal(_retPar.getPointer());
+    public static b2PrismaticJointDef b2DefaultPrismaticJointDef() {
+        return new b2PrismaticJointDef(b2DefaultPrismaticJointDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your joint definition
      * @ingroupd prismatic_joint
      */
-    public static b2PrismaticJointDef b2DefaultPrismaticJointDef() {
-        return new b2PrismaticJointDef(b2DefaultPrismaticJointDef_internal(0), true);
+    public static void b2DefaultPrismaticJointDef(b2PrismaticJointDef _retPar) {
+        b2DefaultPrismaticJointDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultPrismaticJointDef_internal(long _retPar);/*
@@ -3760,19 +3768,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your joint definition
-     * @ingroupd prismatic_joint
+     * Use this to initialize your joint definition.
+     * @ingroup revolute_joint
      */
-    public static void b2DefaultPrismaticJointDef(b2PrismaticJointDef _retPar) {
-        b2DefaultPrismaticJointDef_internal(_retPar.getPointer());
+    public static b2RevoluteJointDef b2DefaultRevoluteJointDef() {
+        return new b2RevoluteJointDef(b2DefaultRevoluteJointDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your joint definition.
      * @ingroup revolute_joint
      */
-    public static b2RevoluteJointDef b2DefaultRevoluteJointDef() {
-        return new b2RevoluteJointDef(b2DefaultRevoluteJointDef_internal(0), true);
+    public static void b2DefaultRevoluteJointDef(b2RevoluteJointDef _retPar) {
+        b2DefaultRevoluteJointDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultRevoluteJointDef_internal(long _retPar);/*
@@ -3785,19 +3793,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your joint definition.
-     * @ingroup revolute_joint
+     * Use this to initialize your joint definition
+     * @ingroup weld_joint
      */
-    public static void b2DefaultRevoluteJointDef(b2RevoluteJointDef _retPar) {
-        b2DefaultRevoluteJointDef_internal(_retPar.getPointer());
+    public static b2WeldJointDef b2DefaultWeldJointDef() {
+        return new b2WeldJointDef(b2DefaultWeldJointDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your joint definition
      * @ingroup weld_joint
      */
-    public static b2WeldJointDef b2DefaultWeldJointDef() {
-        return new b2WeldJointDef(b2DefaultWeldJointDef_internal(0), true);
+    public static void b2DefaultWeldJointDef(b2WeldJointDef _retPar) {
+        b2DefaultWeldJointDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultWeldJointDef_internal(long _retPar);/*
@@ -3811,18 +3819,18 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Use this to initialize your joint definition
-     * @ingroup weld_joint
+     * @ingroup wheel_joint
      */
-    public static void b2DefaultWeldJointDef(b2WeldJointDef _retPar) {
-        b2DefaultWeldJointDef_internal(_retPar.getPointer());
+    public static b2WheelJointDef b2DefaultWheelJointDef() {
+        return new b2WheelJointDef(b2DefaultWheelJointDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your joint definition
      * @ingroup wheel_joint
      */
-    public static b2WheelJointDef b2DefaultWheelJointDef() {
-        return new b2WheelJointDef(b2DefaultWheelJointDef_internal(0), true);
+    public static void b2DefaultWheelJointDef(b2WheelJointDef _retPar) {
+        b2DefaultWheelJointDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultWheelJointDef_internal(long _retPar);/*
@@ -3835,19 +3843,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your joint definition
-     * @ingroup wheel_joint
+     * Use this to initialize your explosion definition
+     * @ingroup world
      */
-    public static void b2DefaultWheelJointDef(b2WheelJointDef _retPar) {
-        b2DefaultWheelJointDef_internal(_retPar.getPointer());
+    public static b2ExplosionDef b2DefaultExplosionDef() {
+        return new b2ExplosionDef(b2DefaultExplosionDef_internal(0), true);
     }
 
     /**
      * Use this to initialize your explosion definition
      * @ingroup world
      */
-    public static b2ExplosionDef b2DefaultExplosionDef() {
-        return new b2ExplosionDef(b2DefaultExplosionDef_internal(0), true);
+    public static void b2DefaultExplosionDef(b2ExplosionDef _retPar) {
+        b2DefaultExplosionDef_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultExplosionDef_internal(long _retPar);/*
@@ -3860,19 +3868,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your explosion definition
-     * @ingroup world
+     * Use this to initialize your drawing interface. This allows you to implement a sub-set
+     * of the drawing functions.
      */
-    public static void b2DefaultExplosionDef(b2ExplosionDef _retPar) {
-        b2DefaultExplosionDef_internal(_retPar.getPointer());
+    public static b2DebugDraw b2DefaultDebugDraw() {
+        return new b2DebugDraw(b2DefaultDebugDraw_internal(0), true);
     }
 
     /**
      * Use this to initialize your drawing interface. This allows you to implement a sub-set
      * of the drawing functions.
      */
-    public static b2DebugDraw b2DefaultDebugDraw() {
-        return new b2DebugDraw(b2DefaultDebugDraw_internal(0), true);
+    public static void b2DefaultDebugDraw(b2DebugDraw _retPar) {
+        b2DefaultDebugDraw_internal(_retPar.getPointer());
     }
 
     public static native long b2DefaultDebugDraw_internal(long _retPar);/*
@@ -3885,11 +3893,12 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Use this to initialize your drawing interface. This allows you to implement a sub-set
-     * of the drawing functions.
+     * Create a world for rigid body simulation. A world contains bodies, shapes, and constraints. You make create
+     * up to 128 worlds. Each world is completely independent and may be simulated in parallel.
+     * @return the world id.
      */
-    public static void b2DefaultDebugDraw(b2DebugDraw _retPar) {
-        b2DefaultDebugDraw_internal(_retPar.getPointer());
+    public static b2WorldId b2CreateWorld(b2WorldDef.b2WorldDefPointer def) {
+        return new b2WorldId(b2CreateWorld_internal(def.getPointer(), 0), true);
     }
 
     /**
@@ -3897,8 +3906,8 @@ static jclass cxxExceptionClass = NULL;
      * up to 128 worlds. Each world is completely independent and may be simulated in parallel.
      * @return the world id.
      */
-    public static b2WorldId b2CreateWorld(b2WorldDef.b2WorldDefPointer def) {
-        return new b2WorldId(b2CreateWorld_internal(def.getPointer(), 0), true);
+    public static void b2CreateWorld(b2WorldDef.b2WorldDefPointer def, b2WorldId _retPar) {
+        b2CreateWorld_internal(def.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CreateWorld_internal(long def, long _retPar);/*
@@ -3909,15 +3918,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Create a world for rigid body simulation. A world contains bodies, shapes, and constraints. You make create
-     * up to 128 worlds. Each world is completely independent and may be simulated in parallel.
-     * @return the world id.
-     */
-    public static void b2CreateWorld(b2WorldDef.b2WorldDefPointer def, b2WorldId _retPar) {
-        b2CreateWorld_internal(def.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Destroy a world
@@ -3983,6 +3983,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2BodyEvents(b2World_GetBodyEvents_internal(worldId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the body events for the current time step. The event data is transient. Do not store a reference to this data.
+     */
+    public static void b2World_GetBodyEvents(b2WorldId worldId, b2BodyEvents _retPar) {
+        b2World_GetBodyEvents_internal(worldId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2World_GetBodyEvents_internal(long worldId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2BodyEvents* _ret = (b2BodyEvents*) (_retPar == 0 ? malloc(sizeof(b2BodyEvents)) : (void*)_retPar);
@@ -3993,17 +4000,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the body events for the current time step. The event data is transient. Do not store a reference to this data.
+     * Get sensor events for the current time step. The event data is transient. Do not store a reference to this data.
      */
-    public static void b2World_GetBodyEvents(b2WorldId worldId, b2BodyEvents _retPar) {
-        b2World_GetBodyEvents_internal(worldId.getPointer(), _retPar.getPointer());
+    public static b2SensorEvents b2World_GetSensorEvents(b2WorldId worldId) {
+        return new b2SensorEvents(b2World_GetSensorEvents_internal(worldId.getPointer(), 0), true);
     }
 
     /**
      * Get sensor events for the current time step. The event data is transient. Do not store a reference to this data.
      */
-    public static b2SensorEvents b2World_GetSensorEvents(b2WorldId worldId) {
-        return new b2SensorEvents(b2World_GetSensorEvents_internal(worldId.getPointer(), 0), true);
+    public static void b2World_GetSensorEvents(b2WorldId worldId, b2SensorEvents _retPar) {
+        b2World_GetSensorEvents_internal(worldId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2World_GetSensorEvents_internal(long worldId, long _retPar);/*
@@ -4016,17 +4023,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get sensor events for the current time step. The event data is transient. Do not store a reference to this data.
+     * Get contact events for this current time step. The event data is transient. Do not store a reference to this data.
      */
-    public static void b2World_GetSensorEvents(b2WorldId worldId, b2SensorEvents _retPar) {
-        b2World_GetSensorEvents_internal(worldId.getPointer(), _retPar.getPointer());
+    public static b2ContactEvents b2World_GetContactEvents(b2WorldId worldId) {
+        return new b2ContactEvents(b2World_GetContactEvents_internal(worldId.getPointer(), 0), true);
     }
 
     /**
      * Get contact events for this current time step. The event data is transient. Do not store a reference to this data.
      */
-    public static b2ContactEvents b2World_GetContactEvents(b2WorldId worldId) {
-        return new b2ContactEvents(b2World_GetContactEvents_internal(worldId.getPointer(), 0), true);
+    public static void b2World_GetContactEvents(b2WorldId worldId, b2ContactEvents _retPar) {
+        b2World_GetContactEvents_internal(worldId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2World_GetContactEvents_internal(long worldId, long _retPar);/*
@@ -4039,17 +4046,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get contact events for this current time step. The event data is transient. Do not store a reference to this data.
+     * Overlap test for all shapes that *potentially* overlap the provided AABB
      */
-    public static void b2World_GetContactEvents(b2WorldId worldId, b2ContactEvents _retPar) {
-        b2World_GetContactEvents_internal(worldId.getPointer(), _retPar.getPointer());
+    public static b2TreeStats b2World_OverlapAABB(b2WorldId worldId, b2AABB aabb, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_OverlapAABB_internal(worldId.getPointer(), aabb.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), 0), true);
     }
 
     /**
      * Overlap test for all shapes that *potentially* overlap the provided AABB
      */
-    public static b2TreeStats b2World_OverlapAABB(b2WorldId worldId, b2AABB aabb, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_OverlapAABB_internal(worldId.getPointer(), aabb.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), 0), true);
+    public static void b2World_OverlapAABB(b2WorldId worldId, b2AABB aabb, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context, b2TreeStats _retPar) {
+        b2World_OverlapAABB_internal(worldId.getPointer(), aabb.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2World_OverlapAABB_internal(long worldId, long aabb, long filter, long fcn, long context, long _retPar);/*
@@ -4062,17 +4069,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Overlap test for all shapes that *potentially* overlap the provided AABB
+     * Overlap test for all shapes that overlap the provided shape proxy.
      */
-    public static void b2World_OverlapAABB(b2WorldId worldId, b2AABB aabb, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context, b2TreeStats _retPar) {
-        b2World_OverlapAABB_internal(worldId.getPointer(), aabb.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), _retPar.getPointer());
+    public static b2TreeStats b2World_OverlapShape(b2WorldId worldId, b2ShapeProxy.b2ShapeProxyPointer proxy, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_OverlapShape_internal(worldId.getPointer(), proxy.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), 0), true);
     }
 
     /**
      * Overlap test for all shapes that overlap the provided shape proxy.
      */
-    public static b2TreeStats b2World_OverlapShape(b2WorldId worldId, b2ShapeProxy.b2ShapeProxyPointer proxy, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_OverlapShape_internal(worldId.getPointer(), proxy.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), 0), true);
+    public static void b2World_OverlapShape(b2WorldId worldId, b2ShapeProxy.b2ShapeProxyPointer proxy, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context, b2TreeStats _retPar) {
+        b2World_OverlapShape_internal(worldId.getPointer(), proxy.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2World_OverlapShape_internal(long worldId, long proxy, long filter, long fcn, long context, long _retPar);/*
@@ -4083,13 +4090,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Overlap test for all shapes that overlap the provided shape proxy.
-     */
-    public static void b2World_OverlapShape(b2WorldId worldId, b2ShapeProxy.b2ShapeProxyPointer proxy, b2QueryFilter filter, ClosureObject<b2OverlapResultFcn> fcn, VoidPointer context, b2TreeStats _retPar) {
-        b2World_OverlapShape_internal(worldId.getPointer(), proxy.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), _retPar.getPointer());
-    }
 
     /**
      *  Cast a ray into the world to collect shapes in the path of the ray.
@@ -4108,15 +4108,6 @@ static jclass cxxExceptionClass = NULL;
         return new b2TreeStats(b2World_CastRay_internal(worldId.getPointer(), origin.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), 0), true);
     }
 
-    public static native long b2World_CastRay_internal(long worldId, long origin, long translation, long filter, long fcn, long context, long _retPar);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2TreeStats* _ret = (b2TreeStats*) (_retPar == 0 ? malloc(sizeof(b2TreeStats)) : (void*)_retPar);
-    	*_ret = b2World_CastRay(*(b2WorldId*)worldId, *(b2Vec2*)origin, *(b2Vec2*)translation, *(b2QueryFilter*)filter, (b2CastResultFcn *)fcn, (void *)context);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
     /**
      *  Cast a ray into the world to collect shapes in the path of the ray.
      *  Your callback function controls whether you get the closest point, any point, or n-points.
@@ -4134,12 +4125,29 @@ static jclass cxxExceptionClass = NULL;
         b2World_CastRay_internal(worldId.getPointer(), origin.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), _retPar.getPointer());
     }
 
+    public static native long b2World_CastRay_internal(long worldId, long origin, long translation, long filter, long fcn, long context, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2TreeStats* _ret = (b2TreeStats*) (_retPar == 0 ? malloc(sizeof(b2TreeStats)) : (void*)_retPar);
+    	*_ret = b2World_CastRay(*(b2WorldId*)worldId, *(b2Vec2*)origin, *(b2Vec2*)translation, *(b2QueryFilter*)filter, (b2CastResultFcn *)fcn, (void *)context);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
     /**
      * Cast a ray into the world to collect the closest hit. This is a convenience function.
      * This is less general than b2World_CastRay() and does not allow for custom filtering.
      */
     public static b2RayResult b2World_CastRayClosest(b2WorldId worldId, b2Vec2 origin, b2Vec2 translation, b2QueryFilter filter) {
         return new b2RayResult(b2World_CastRayClosest_internal(worldId.getPointer(), origin.getPointer(), translation.getPointer(), filter.getPointer(), 0), true);
+    }
+
+    /**
+     * Cast a ray into the world to collect the closest hit. This is a convenience function.
+     * This is less general than b2World_CastRay() and does not allow for custom filtering.
+     */
+    public static void b2World_CastRayClosest(b2WorldId worldId, b2Vec2 origin, b2Vec2 translation, b2QueryFilter filter, b2RayResult _retPar) {
+        b2World_CastRayClosest_internal(worldId.getPointer(), origin.getPointer(), translation.getPointer(), filter.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2World_CastRayClosest_internal(long worldId, long origin, long translation, long filter, long _retPar);/*
@@ -4152,19 +4160,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Cast a ray into the world to collect the closest hit. This is a convenience function.
-     * This is less general than b2World_CastRay() and does not allow for custom filtering.
+     *  Cast a shape through the world. Similar to a cast ray except that a shape is cast instead of a point.
+     * 	@see Box2d#b2World_CastRay
      */
-    public static void b2World_CastRayClosest(b2WorldId worldId, b2Vec2 origin, b2Vec2 translation, b2QueryFilter filter, b2RayResult _retPar) {
-        b2World_CastRayClosest_internal(worldId.getPointer(), origin.getPointer(), translation.getPointer(), filter.getPointer(), _retPar.getPointer());
+    public static b2TreeStats b2World_CastShape(b2WorldId worldId, b2ShapeProxy.b2ShapeProxyPointer proxy, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
+        return new b2TreeStats(b2World_CastShape_internal(worldId.getPointer(), proxy.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), 0), true);
     }
 
     /**
      *  Cast a shape through the world. Similar to a cast ray except that a shape is cast instead of a point.
      * 	@see Box2d#b2World_CastRay
      */
-    public static b2TreeStats b2World_CastShape(b2WorldId worldId, b2ShapeProxy.b2ShapeProxyPointer proxy, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context) {
-        return new b2TreeStats(b2World_CastShape_internal(worldId.getPointer(), proxy.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), 0), true);
+    public static void b2World_CastShape(b2WorldId worldId, b2ShapeProxy.b2ShapeProxyPointer proxy, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context, b2TreeStats _retPar) {
+        b2World_CastShape_internal(worldId.getPointer(), proxy.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2World_CastShape_internal(long worldId, long proxy, long translation, long filter, long fcn, long context, long _retPar);/*
@@ -4175,14 +4183,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     *  Cast a shape through the world. Similar to a cast ray except that a shape is cast instead of a point.
-     * 	@see Box2d#b2World_CastRay
-     */
-    public static void b2World_CastShape(b2WorldId worldId, b2ShapeProxy.b2ShapeProxyPointer proxy, b2Vec2 translation, b2QueryFilter filter, ClosureObject<b2CastResultFcn> fcn, VoidPointer context, b2TreeStats _retPar) {
-        b2World_CastShape_internal(worldId.getPointer(), proxy.getPointer(), translation.getPointer(), filter.getPointer(), fcn.getPointer(), context.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Cast a capsule mover through the world. This is a special shape cast that handles sliding along other shapes while reducing
@@ -4380,6 +4380,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2World_GetGravity_internal(worldId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the gravity vector
+     */
+    public static void b2World_GetGravity(b2WorldId worldId, b2Vec2 _retPar) {
+        b2World_GetGravity_internal(worldId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2World_GetGravity_internal(long worldId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -4388,13 +4395,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the gravity vector
-     */
-    public static void b2World_GetGravity(b2WorldId worldId, b2Vec2 _retPar) {
-        b2World_GetGravity_internal(worldId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Apply a radial explosion
@@ -4523,6 +4523,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Profile(b2World_GetProfile_internal(worldId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the current world performance profile
+     */
+    public static void b2World_GetProfile(b2WorldId worldId, b2Profile _retPar) {
+        b2World_GetProfile_internal(worldId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2World_GetProfile_internal(long worldId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Profile* _ret = (b2Profile*) (_retPar == 0 ? malloc(sizeof(b2Profile)) : (void*)_retPar);
@@ -4533,17 +4540,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the current world performance profile
+     * Get world counters and sizes
      */
-    public static void b2World_GetProfile(b2WorldId worldId, b2Profile _retPar) {
-        b2World_GetProfile_internal(worldId.getPointer(), _retPar.getPointer());
+    public static b2Counters b2World_GetCounters(b2WorldId worldId) {
+        return new b2Counters(b2World_GetCounters_internal(worldId.getPointer(), 0), true);
     }
 
     /**
      * Get world counters and sizes
      */
-    public static b2Counters b2World_GetCounters(b2WorldId worldId) {
-        return new b2Counters(b2World_GetCounters_internal(worldId.getPointer(), 0), true);
+    public static void b2World_GetCounters(b2WorldId worldId, b2Counters _retPar) {
+        b2World_GetCounters_internal(worldId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2World_GetCounters_internal(long worldId, long _retPar);/*
@@ -4554,13 +4561,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get world counters and sizes
-     */
-    public static void b2World_GetCounters(b2WorldId worldId, b2Counters _retPar) {
-        b2World_GetCounters_internal(worldId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Set the user data pointer.
@@ -4580,6 +4580,13 @@ static jclass cxxExceptionClass = NULL;
      */
     public static VoidPointer b2World_GetUserData(b2WorldId worldId) {
         return new VoidPointer(b2World_GetUserData_internal(worldId.getPointer()), false);
+    }
+
+    /**
+     * Get the user data pointer.
+     */
+    public static void b2World_GetUserData(b2WorldId worldId, VoidPointer _retPar) {
+        _retPar.setPointer(b2World_GetUserData_internal(worldId.getPointer()));
     }
 
     public static native long b2World_GetUserData_internal(long worldId);/*
@@ -4668,15 +4675,6 @@ static jclass cxxExceptionClass = NULL;
         return new b2BodyId(b2CreateBody_internal(worldId.getPointer(), def.getPointer(), 0), true);
     }
 
-    public static native long b2CreateBody_internal(long worldId, long def, long _retPar);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2BodyId* _ret = (b2BodyId*) (_retPar == 0 ? malloc(sizeof(b2BodyId)) : (void*)_retPar);
-    	*_ret = b2CreateBody(*(b2WorldId*)worldId, (const b2BodyDef *)def);
-    	return (jlong)_ret;
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
     /**
      * Create a rigid body given a definition. No reference to the definition is retained. So you can create the definition
      * on the stack and pass it as a pointer.
@@ -4689,6 +4687,15 @@ static jclass cxxExceptionClass = NULL;
     public static void b2CreateBody(b2WorldId worldId, b2BodyDef.b2BodyDefPointer def, b2BodyId _retPar) {
         b2CreateBody_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
     }
+
+    public static native long b2CreateBody_internal(long worldId, long def, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2BodyId* _ret = (b2BodyId*) (_retPar == 0 ? malloc(sizeof(b2BodyId)) : (void*)_retPar);
+    	*_ret = b2CreateBody(*(b2WorldId*)worldId, (const b2BodyDef *)def);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
 
     /**
      * Destroy a rigid body given an id. This destroys all shapes and joints attached to the body.
@@ -4766,6 +4773,13 @@ static jclass cxxExceptionClass = NULL;
         return new BytePointer(b2Body_GetName_internal(bodyId.getPointer()), false);
     }
 
+    /**
+     * Get the body name. May be null.
+     */
+    public static void b2Body_GetName(b2BodyId bodyId, BytePointer _retPar) {
+        _retPar.setPointer(b2Body_GetName_internal(bodyId.getPointer()));
+    }
+
     public static native long b2Body_GetName_internal(long bodyId);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	return (jlong)b2Body_GetName(*(b2BodyId*)bodyId);
@@ -4793,6 +4807,13 @@ static jclass cxxExceptionClass = NULL;
         return new VoidPointer(b2Body_GetUserData_internal(bodyId.getPointer()), false);
     }
 
+    /**
+     * Get the user data stored in a body
+     */
+    public static void b2Body_GetUserData(b2BodyId bodyId, VoidPointer _retPar) {
+        _retPar.setPointer(b2Body_GetUserData_internal(bodyId.getPointer()));
+    }
+
     public static native long b2Body_GetUserData_internal(long bodyId);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	return (jlong)b2Body_GetUserData(*(b2BodyId*)bodyId);
@@ -4807,6 +4828,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2Body_GetPosition_internal(bodyId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the world position of a body. This is the location of the body origin.
+     */
+    public static void b2Body_GetPosition(b2BodyId bodyId, b2Vec2 _retPar) {
+        b2Body_GetPosition_internal(bodyId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Body_GetPosition_internal(long bodyId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -4817,17 +4845,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the world position of a body. This is the location of the body origin.
+     * Get the world rotation of a body as a cosine/sine pair (complex number)
      */
-    public static void b2Body_GetPosition(b2BodyId bodyId, b2Vec2 _retPar) {
-        b2Body_GetPosition_internal(bodyId.getPointer(), _retPar.getPointer());
+    public static b2Rot b2Body_GetRotation(b2BodyId bodyId) {
+        return new b2Rot(b2Body_GetRotation_internal(bodyId.getPointer(), 0), true);
     }
 
     /**
      * Get the world rotation of a body as a cosine/sine pair (complex number)
      */
-    public static b2Rot b2Body_GetRotation(b2BodyId bodyId) {
-        return new b2Rot(b2Body_GetRotation_internal(bodyId.getPointer(), 0), true);
+    public static void b2Body_GetRotation(b2BodyId bodyId, b2Rot _retPar) {
+        b2Body_GetRotation_internal(bodyId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Body_GetRotation_internal(long bodyId, long _retPar);/*
@@ -4840,17 +4868,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the world rotation of a body as a cosine/sine pair (complex number)
+     * Get the world transform of a body.
      */
-    public static void b2Body_GetRotation(b2BodyId bodyId, b2Rot _retPar) {
-        b2Body_GetRotation_internal(bodyId.getPointer(), _retPar.getPointer());
+    public static b2Transform b2Body_GetTransform(b2BodyId bodyId) {
+        return new b2Transform(b2Body_GetTransform_internal(bodyId.getPointer(), 0), true);
     }
 
     /**
      * Get the world transform of a body.
      */
-    public static b2Transform b2Body_GetTransform(b2BodyId bodyId) {
-        return new b2Transform(b2Body_GetTransform_internal(bodyId.getPointer(), 0), true);
+    public static void b2Body_GetTransform(b2BodyId bodyId, b2Transform _retPar) {
+        b2Body_GetTransform_internal(bodyId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Body_GetTransform_internal(long bodyId, long _retPar);/*
@@ -4861,13 +4889,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the world transform of a body.
-     */
-    public static void b2Body_GetTransform(b2BodyId bodyId, b2Transform _retPar) {
-        b2Body_GetTransform_internal(bodyId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Set the world transform of a body. This acts as a teleport and is fairly expensive.
@@ -4891,6 +4912,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2Body_GetLocalPoint_internal(bodyId.getPointer(), worldPoint.getPointer(), 0), true);
     }
 
+    /**
+     * Get a local point on a body given a world point
+     */
+    public static void b2Body_GetLocalPoint(b2BodyId bodyId, b2Vec2 worldPoint, b2Vec2 _retPar) {
+        b2Body_GetLocalPoint_internal(bodyId.getPointer(), worldPoint.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Body_GetLocalPoint_internal(long bodyId, long worldPoint, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -4901,17 +4929,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get a local point on a body given a world point
+     * Get a world point on a body given a local point
      */
-    public static void b2Body_GetLocalPoint(b2BodyId bodyId, b2Vec2 worldPoint, b2Vec2 _retPar) {
-        b2Body_GetLocalPoint_internal(bodyId.getPointer(), worldPoint.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Body_GetWorldPoint(b2BodyId bodyId, b2Vec2 localPoint) {
+        return new b2Vec2(b2Body_GetWorldPoint_internal(bodyId.getPointer(), localPoint.getPointer(), 0), true);
     }
 
     /**
      * Get a world point on a body given a local point
      */
-    public static b2Vec2 b2Body_GetWorldPoint(b2BodyId bodyId, b2Vec2 localPoint) {
-        return new b2Vec2(b2Body_GetWorldPoint_internal(bodyId.getPointer(), localPoint.getPointer(), 0), true);
+    public static void b2Body_GetWorldPoint(b2BodyId bodyId, b2Vec2 localPoint, b2Vec2 _retPar) {
+        b2Body_GetWorldPoint_internal(bodyId.getPointer(), localPoint.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Body_GetWorldPoint_internal(long bodyId, long localPoint, long _retPar);/*
@@ -4924,17 +4952,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get a world point on a body given a local point
+     * Get a local vector on a body given a world vector
      */
-    public static void b2Body_GetWorldPoint(b2BodyId bodyId, b2Vec2 localPoint, b2Vec2 _retPar) {
-        b2Body_GetWorldPoint_internal(bodyId.getPointer(), localPoint.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Body_GetLocalVector(b2BodyId bodyId, b2Vec2 worldVector) {
+        return new b2Vec2(b2Body_GetLocalVector_internal(bodyId.getPointer(), worldVector.getPointer(), 0), true);
     }
 
     /**
      * Get a local vector on a body given a world vector
      */
-    public static b2Vec2 b2Body_GetLocalVector(b2BodyId bodyId, b2Vec2 worldVector) {
-        return new b2Vec2(b2Body_GetLocalVector_internal(bodyId.getPointer(), worldVector.getPointer(), 0), true);
+    public static void b2Body_GetLocalVector(b2BodyId bodyId, b2Vec2 worldVector, b2Vec2 _retPar) {
+        b2Body_GetLocalVector_internal(bodyId.getPointer(), worldVector.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Body_GetLocalVector_internal(long bodyId, long worldVector, long _retPar);/*
@@ -4947,17 +4975,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get a local vector on a body given a world vector
+     * Get a world vector on a body given a local vector
      */
-    public static void b2Body_GetLocalVector(b2BodyId bodyId, b2Vec2 worldVector, b2Vec2 _retPar) {
-        b2Body_GetLocalVector_internal(bodyId.getPointer(), worldVector.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Body_GetWorldVector(b2BodyId bodyId, b2Vec2 localVector) {
+        return new b2Vec2(b2Body_GetWorldVector_internal(bodyId.getPointer(), localVector.getPointer(), 0), true);
     }
 
     /**
      * Get a world vector on a body given a local vector
      */
-    public static b2Vec2 b2Body_GetWorldVector(b2BodyId bodyId, b2Vec2 localVector) {
-        return new b2Vec2(b2Body_GetWorldVector_internal(bodyId.getPointer(), localVector.getPointer(), 0), true);
+    public static void b2Body_GetWorldVector(b2BodyId bodyId, b2Vec2 localVector, b2Vec2 _retPar) {
+        b2Body_GetWorldVector_internal(bodyId.getPointer(), localVector.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Body_GetWorldVector_internal(long bodyId, long localVector, long _retPar);/*
@@ -4970,17 +4998,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get a world vector on a body given a local vector
+     * Get the linear velocity of a body's center of mass. Usually in meters per second.
      */
-    public static void b2Body_GetWorldVector(b2BodyId bodyId, b2Vec2 localVector, b2Vec2 _retPar) {
-        b2Body_GetWorldVector_internal(bodyId.getPointer(), localVector.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Body_GetLinearVelocity(b2BodyId bodyId) {
+        return new b2Vec2(b2Body_GetLinearVelocity_internal(bodyId.getPointer(), 0), true);
     }
 
     /**
      * Get the linear velocity of a body's center of mass. Usually in meters per second.
      */
-    public static b2Vec2 b2Body_GetLinearVelocity(b2BodyId bodyId) {
-        return new b2Vec2(b2Body_GetLinearVelocity_internal(bodyId.getPointer(), 0), true);
+    public static void b2Body_GetLinearVelocity(b2BodyId bodyId, b2Vec2 _retPar) {
+        b2Body_GetLinearVelocity_internal(bodyId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Body_GetLinearVelocity_internal(long bodyId, long _retPar);/*
@@ -4991,13 +5019,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the linear velocity of a body's center of mass. Usually in meters per second.
-     */
-    public static void b2Body_GetLinearVelocity(b2BodyId bodyId, b2Vec2 _retPar) {
-        b2Body_GetLinearVelocity_internal(bodyId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Get the angular velocity of a body in radians per second
@@ -5061,6 +5082,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2Body_GetLocalPointVelocity_internal(bodyId.getPointer(), localPoint.getPointer(), 0), true);
     }
 
+    /**
+     * Get the linear velocity of a local point attached to a body. Usually in meters per second.
+     */
+    public static void b2Body_GetLocalPointVelocity(b2BodyId bodyId, b2Vec2 localPoint, b2Vec2 _retPar) {
+        b2Body_GetLocalPointVelocity_internal(bodyId.getPointer(), localPoint.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Body_GetLocalPointVelocity_internal(long bodyId, long localPoint, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -5071,17 +5099,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the linear velocity of a local point attached to a body. Usually in meters per second.
+     * Get the linear velocity of a world point attached to a body. Usually in meters per second.
      */
-    public static void b2Body_GetLocalPointVelocity(b2BodyId bodyId, b2Vec2 localPoint, b2Vec2 _retPar) {
-        b2Body_GetLocalPointVelocity_internal(bodyId.getPointer(), localPoint.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Body_GetWorldPointVelocity(b2BodyId bodyId, b2Vec2 worldPoint) {
+        return new b2Vec2(b2Body_GetWorldPointVelocity_internal(bodyId.getPointer(), worldPoint.getPointer(), 0), true);
     }
 
     /**
      * Get the linear velocity of a world point attached to a body. Usually in meters per second.
      */
-    public static b2Vec2 b2Body_GetWorldPointVelocity(b2BodyId bodyId, b2Vec2 worldPoint) {
-        return new b2Vec2(b2Body_GetWorldPointVelocity_internal(bodyId.getPointer(), worldPoint.getPointer(), 0), true);
+    public static void b2Body_GetWorldPointVelocity(b2BodyId bodyId, b2Vec2 worldPoint, b2Vec2 _retPar) {
+        b2Body_GetWorldPointVelocity_internal(bodyId.getPointer(), worldPoint.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Body_GetWorldPointVelocity_internal(long bodyId, long worldPoint, long _retPar);/*
@@ -5092,13 +5120,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the linear velocity of a world point attached to a body. Usually in meters per second.
-     */
-    public static void b2Body_GetWorldPointVelocity(b2BodyId bodyId, b2Vec2 worldPoint, b2Vec2 _retPar) {
-        b2Body_GetWorldPointVelocity_internal(bodyId.getPointer(), worldPoint.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Apply a force at a world point. If the force is not applied at the center of mass,
@@ -5254,6 +5275,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2Body_GetLocalCenterOfMass_internal(bodyId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the center of mass position of the body in local space
+     */
+    public static void b2Body_GetLocalCenterOfMass(b2BodyId bodyId, b2Vec2 _retPar) {
+        b2Body_GetLocalCenterOfMass_internal(bodyId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Body_GetLocalCenterOfMass_internal(long bodyId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -5264,17 +5292,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the center of mass position of the body in local space
+     * Get the center of mass position of the body in world space
      */
-    public static void b2Body_GetLocalCenterOfMass(b2BodyId bodyId, b2Vec2 _retPar) {
-        b2Body_GetLocalCenterOfMass_internal(bodyId.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Body_GetWorldCenterOfMass(b2BodyId bodyId) {
+        return new b2Vec2(b2Body_GetWorldCenterOfMass_internal(bodyId.getPointer(), 0), true);
     }
 
     /**
      * Get the center of mass position of the body in world space
      */
-    public static b2Vec2 b2Body_GetWorldCenterOfMass(b2BodyId bodyId) {
-        return new b2Vec2(b2Body_GetWorldCenterOfMass_internal(bodyId.getPointer(), 0), true);
+    public static void b2Body_GetWorldCenterOfMass(b2BodyId bodyId, b2Vec2 _retPar) {
+        b2Body_GetWorldCenterOfMass_internal(bodyId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Body_GetWorldCenterOfMass_internal(long bodyId, long _retPar);/*
@@ -5285,13 +5313,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the center of mass position of the body in world space
-     */
-    public static void b2Body_GetWorldCenterOfMass(b2BodyId bodyId, b2Vec2 _retPar) {
-        b2Body_GetWorldCenterOfMass_internal(bodyId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Override the body's mass properties. Normally this is computed automatically using the
@@ -5315,6 +5336,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2MassData(b2Body_GetMassData_internal(bodyId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the mass data for a body
+     */
+    public static void b2Body_GetMassData(b2BodyId bodyId, b2MassData _retPar) {
+        b2Body_GetMassData_internal(bodyId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Body_GetMassData_internal(long bodyId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2MassData* _ret = (b2MassData*) (_retPar == 0 ? malloc(sizeof(b2MassData)) : (void*)_retPar);
@@ -5323,13 +5351,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the mass data for a body
-     */
-    public static void b2Body_GetMassData(b2BodyId bodyId, b2MassData _retPar) {
-        b2Body_GetMassData_internal(bodyId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * This update the mass properties to the sum of the mass properties of the shapes.
@@ -5651,6 +5672,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2WorldId(b2Body_GetWorld_internal(bodyId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the world that owns this body
+     */
+    public static void b2Body_GetWorld(b2BodyId bodyId, b2WorldId _retPar) {
+        b2Body_GetWorld_internal(bodyId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Body_GetWorld_internal(long bodyId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2WorldId* _ret = (b2WorldId*) (_retPar == 0 ? malloc(sizeof(b2WorldId)) : (void*)_retPar);
@@ -5659,13 +5687,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the world that owns this body
-     */
-    public static void b2Body_GetWorld(b2BodyId bodyId, b2WorldId _retPar) {
-        b2Body_GetWorld_internal(bodyId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Get the number of shapes on this body
@@ -5767,6 +5788,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2AABB(b2Body_ComputeAABB_internal(bodyId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the current world AABB that contains all the attached shapes. Note that this may not encompass the body origin.
+     * If there are no shapes attached then the returned AABB is empty and centered on the body origin.
+     */
+    public static void b2Body_ComputeAABB(b2BodyId bodyId, b2AABB _retPar) {
+        b2Body_ComputeAABB_internal(bodyId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Body_ComputeAABB_internal(long bodyId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2AABB* _ret = (b2AABB*) (_retPar == 0 ? malloc(sizeof(b2AABB)) : (void*)_retPar);
@@ -5777,11 +5806,12 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the current world AABB that contains all the attached shapes. Note that this may not encompass the body origin.
-     * If there are no shapes attached then the returned AABB is empty and centered on the body origin.
+     * Create a circle shape and attach it to a body. The shape definition and geometry are fully cloned.
+     * Contacts are not created until the next time step.
+     * @return the shape id for accessing the shape
      */
-    public static void b2Body_ComputeAABB(b2BodyId bodyId, b2AABB _retPar) {
-        b2Body_ComputeAABB_internal(bodyId.getPointer(), _retPar.getPointer());
+    public static b2ShapeId b2CreateCircleShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Circle.b2CirclePointer circle) {
+        return new b2ShapeId(b2CreateCircleShape_internal(bodyId.getPointer(), def.getPointer(), circle.getPointer(), 0), true);
     }
 
     /**
@@ -5789,8 +5819,8 @@ static jclass cxxExceptionClass = NULL;
      * Contacts are not created until the next time step.
      * @return the shape id for accessing the shape
      */
-    public static b2ShapeId b2CreateCircleShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Circle.b2CirclePointer circle) {
-        return new b2ShapeId(b2CreateCircleShape_internal(bodyId.getPointer(), def.getPointer(), circle.getPointer(), 0), true);
+    public static void b2CreateCircleShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Circle.b2CirclePointer circle, b2ShapeId _retPar) {
+        b2CreateCircleShape_internal(bodyId.getPointer(), def.getPointer(), circle.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CreateCircleShape_internal(long bodyId, long def, long circle, long _retPar);/*
@@ -5803,12 +5833,12 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Create a circle shape and attach it to a body. The shape definition and geometry are fully cloned.
+     * Create a line segment shape and attach it to a body. The shape definition and geometry are fully cloned.
      * Contacts are not created until the next time step.
      * @return the shape id for accessing the shape
      */
-    public static void b2CreateCircleShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Circle.b2CirclePointer circle, b2ShapeId _retPar) {
-        b2CreateCircleShape_internal(bodyId.getPointer(), def.getPointer(), circle.getPointer(), _retPar.getPointer());
+    public static b2ShapeId b2CreateSegmentShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Segment.b2SegmentPointer segment) {
+        return new b2ShapeId(b2CreateSegmentShape_internal(bodyId.getPointer(), def.getPointer(), segment.getPointer(), 0), true);
     }
 
     /**
@@ -5816,8 +5846,8 @@ static jclass cxxExceptionClass = NULL;
      * Contacts are not created until the next time step.
      * @return the shape id for accessing the shape
      */
-    public static b2ShapeId b2CreateSegmentShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Segment.b2SegmentPointer segment) {
-        return new b2ShapeId(b2CreateSegmentShape_internal(bodyId.getPointer(), def.getPointer(), segment.getPointer(), 0), true);
+    public static void b2CreateSegmentShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Segment.b2SegmentPointer segment, b2ShapeId _retPar) {
+        b2CreateSegmentShape_internal(bodyId.getPointer(), def.getPointer(), segment.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CreateSegmentShape_internal(long bodyId, long def, long segment, long _retPar);/*
@@ -5830,12 +5860,12 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Create a line segment shape and attach it to a body. The shape definition and geometry are fully cloned.
+     * Create a capsule shape and attach it to a body. The shape definition and geometry are fully cloned.
      * Contacts are not created until the next time step.
      * @return the shape id for accessing the shape
      */
-    public static void b2CreateSegmentShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Segment.b2SegmentPointer segment, b2ShapeId _retPar) {
-        b2CreateSegmentShape_internal(bodyId.getPointer(), def.getPointer(), segment.getPointer(), _retPar.getPointer());
+    public static b2ShapeId b2CreateCapsuleShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Capsule.b2CapsulePointer capsule) {
+        return new b2ShapeId(b2CreateCapsuleShape_internal(bodyId.getPointer(), def.getPointer(), capsule.getPointer(), 0), true);
     }
 
     /**
@@ -5843,8 +5873,8 @@ static jclass cxxExceptionClass = NULL;
      * Contacts are not created until the next time step.
      * @return the shape id for accessing the shape
      */
-    public static b2ShapeId b2CreateCapsuleShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Capsule.b2CapsulePointer capsule) {
-        return new b2ShapeId(b2CreateCapsuleShape_internal(bodyId.getPointer(), def.getPointer(), capsule.getPointer(), 0), true);
+    public static void b2CreateCapsuleShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Capsule.b2CapsulePointer capsule, b2ShapeId _retPar) {
+        b2CreateCapsuleShape_internal(bodyId.getPointer(), def.getPointer(), capsule.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CreateCapsuleShape_internal(long bodyId, long def, long capsule, long _retPar);/*
@@ -5857,12 +5887,12 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Create a capsule shape and attach it to a body. The shape definition and geometry are fully cloned.
+     * Create a polygon shape and attach it to a body. The shape definition and geometry are fully cloned.
      * Contacts are not created until the next time step.
      * @return the shape id for accessing the shape
      */
-    public static void b2CreateCapsuleShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Capsule.b2CapsulePointer capsule, b2ShapeId _retPar) {
-        b2CreateCapsuleShape_internal(bodyId.getPointer(), def.getPointer(), capsule.getPointer(), _retPar.getPointer());
+    public static b2ShapeId b2CreatePolygonShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Polygon.b2PolygonPointer polygon) {
+        return new b2ShapeId(b2CreatePolygonShape_internal(bodyId.getPointer(), def.getPointer(), polygon.getPointer(), 0), true);
     }
 
     /**
@@ -5870,8 +5900,8 @@ static jclass cxxExceptionClass = NULL;
      * Contacts are not created until the next time step.
      * @return the shape id for accessing the shape
      */
-    public static b2ShapeId b2CreatePolygonShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Polygon.b2PolygonPointer polygon) {
-        return new b2ShapeId(b2CreatePolygonShape_internal(bodyId.getPointer(), def.getPointer(), polygon.getPointer(), 0), true);
+    public static void b2CreatePolygonShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Polygon.b2PolygonPointer polygon, b2ShapeId _retPar) {
+        b2CreatePolygonShape_internal(bodyId.getPointer(), def.getPointer(), polygon.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CreatePolygonShape_internal(long bodyId, long def, long polygon, long _retPar);/*
@@ -5882,15 +5912,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Create a polygon shape and attach it to a body. The shape definition and geometry are fully cloned.
-     * Contacts are not created until the next time step.
-     * @return the shape id for accessing the shape
-     */
-    public static void b2CreatePolygonShape(b2BodyId bodyId, b2ShapeDef.b2ShapeDefPointer def, b2Polygon.b2PolygonPointer polygon, b2ShapeId _retPar) {
-        b2CreatePolygonShape_internal(bodyId.getPointer(), def.getPointer(), polygon.getPointer(), _retPar.getPointer());
-    }
 
     /**
      *  Destroy a shape. You may defer the body mass update which can improve performance if several shapes on a
@@ -5943,6 +5964,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2BodyId(b2Shape_GetBody_internal(shapeId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the id of the body that a shape is attached to
+     */
+    public static void b2Shape_GetBody(b2ShapeId shapeId, b2BodyId _retPar) {
+        b2Shape_GetBody_internal(shapeId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Shape_GetBody_internal(long shapeId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2BodyId* _ret = (b2BodyId*) (_retPar == 0 ? malloc(sizeof(b2BodyId)) : (void*)_retPar);
@@ -5953,17 +5981,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the id of the body that a shape is attached to
+     * Get the world that owns this shape
      */
-    public static void b2Shape_GetBody(b2ShapeId shapeId, b2BodyId _retPar) {
-        b2Shape_GetBody_internal(shapeId.getPointer(), _retPar.getPointer());
+    public static b2WorldId b2Shape_GetWorld(b2ShapeId shapeId) {
+        return new b2WorldId(b2Shape_GetWorld_internal(shapeId.getPointer(), 0), true);
     }
 
     /**
      * Get the world that owns this shape
      */
-    public static b2WorldId b2Shape_GetWorld(b2ShapeId shapeId) {
-        return new b2WorldId(b2Shape_GetWorld_internal(shapeId.getPointer(), 0), true);
+    public static void b2Shape_GetWorld(b2ShapeId shapeId, b2WorldId _retPar) {
+        b2Shape_GetWorld_internal(shapeId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Shape_GetWorld_internal(long shapeId, long _retPar);/*
@@ -5974,13 +6002,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the world that owns this shape
-     */
-    public static void b2Shape_GetWorld(b2ShapeId shapeId, b2WorldId _retPar) {
-        b2Shape_GetWorld_internal(shapeId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Returns true if the shape is a sensor. It is not possible to change a shape
@@ -6017,6 +6038,14 @@ static jclass cxxExceptionClass = NULL;
      */
     public static VoidPointer b2Shape_GetUserData(b2ShapeId shapeId) {
         return new VoidPointer(b2Shape_GetUserData_internal(shapeId.getPointer()), false);
+    }
+
+    /**
+     * Get the user data for a shape. This is useful when you get a shape id
+     * from an event or query.
+     */
+    public static void b2Shape_GetUserData(b2ShapeId shapeId, VoidPointer _retPar) {
+        _retPar.setPointer(b2Shape_GetUserData_internal(shapeId.getPointer()));
     }
 
     public static native long b2Shape_GetUserData_internal(long shapeId);/*
@@ -6148,6 +6177,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Filter(b2Shape_GetFilter_internal(shapeId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the shape filter
+     */
+    public static void b2Shape_GetFilter(b2ShapeId shapeId, b2Filter _retPar) {
+        b2Shape_GetFilter_internal(shapeId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Shape_GetFilter_internal(long shapeId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Filter* _ret = (b2Filter*) (_retPar == 0 ? malloc(sizeof(b2Filter)) : (void*)_retPar);
@@ -6156,13 +6192,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the shape filter
-     */
-    public static void b2Shape_GetFilter(b2ShapeId shapeId, b2Filter _retPar) {
-        b2Shape_GetFilter_internal(shapeId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Set the current filter. This is almost as expensive as recreating the shape. This may cause
@@ -6319,6 +6348,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2CastOutput(b2Shape_RayCast_internal(shapeId.getPointer(), input.getPointer(), 0), true);
     }
 
+    /**
+     * Ray cast a shape directly
+     */
+    public static void b2Shape_RayCast(b2ShapeId shapeId, b2RayCastInput.b2RayCastInputPointer input, b2CastOutput _retPar) {
+        b2Shape_RayCast_internal(shapeId.getPointer(), input.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Shape_RayCast_internal(long shapeId, long input, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2CastOutput* _ret = (b2CastOutput*) (_retPar == 0 ? malloc(sizeof(b2CastOutput)) : (void*)_retPar);
@@ -6329,17 +6365,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Ray cast a shape directly
+     * Get a copy of the shape's circle. Asserts the type is correct.
      */
-    public static void b2Shape_RayCast(b2ShapeId shapeId, b2RayCastInput.b2RayCastInputPointer input, b2CastOutput _retPar) {
-        b2Shape_RayCast_internal(shapeId.getPointer(), input.getPointer(), _retPar.getPointer());
+    public static b2Circle b2Shape_GetCircle(b2ShapeId shapeId) {
+        return new b2Circle(b2Shape_GetCircle_internal(shapeId.getPointer(), 0), true);
     }
 
     /**
      * Get a copy of the shape's circle. Asserts the type is correct.
      */
-    public static b2Circle b2Shape_GetCircle(b2ShapeId shapeId) {
-        return new b2Circle(b2Shape_GetCircle_internal(shapeId.getPointer(), 0), true);
+    public static void b2Shape_GetCircle(b2ShapeId shapeId, b2Circle _retPar) {
+        b2Shape_GetCircle_internal(shapeId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Shape_GetCircle_internal(long shapeId, long _retPar);/*
@@ -6352,17 +6388,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get a copy of the shape's circle. Asserts the type is correct.
+     * Get a copy of the shape's line segment. Asserts the type is correct.
      */
-    public static void b2Shape_GetCircle(b2ShapeId shapeId, b2Circle _retPar) {
-        b2Shape_GetCircle_internal(shapeId.getPointer(), _retPar.getPointer());
+    public static b2Segment b2Shape_GetSegment(b2ShapeId shapeId) {
+        return new b2Segment(b2Shape_GetSegment_internal(shapeId.getPointer(), 0), true);
     }
 
     /**
      * Get a copy of the shape's line segment. Asserts the type is correct.
      */
-    public static b2Segment b2Shape_GetSegment(b2ShapeId shapeId) {
-        return new b2Segment(b2Shape_GetSegment_internal(shapeId.getPointer(), 0), true);
+    public static void b2Shape_GetSegment(b2ShapeId shapeId, b2Segment _retPar) {
+        b2Shape_GetSegment_internal(shapeId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Shape_GetSegment_internal(long shapeId, long _retPar);/*
@@ -6375,18 +6411,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get a copy of the shape's line segment. Asserts the type is correct.
+     * Get a copy of the shape's chain segment. These come from chain shapes.
+     * Asserts the type is correct.
      */
-    public static void b2Shape_GetSegment(b2ShapeId shapeId, b2Segment _retPar) {
-        b2Shape_GetSegment_internal(shapeId.getPointer(), _retPar.getPointer());
+    public static b2ChainSegment b2Shape_GetChainSegment(b2ShapeId shapeId) {
+        return new b2ChainSegment(b2Shape_GetChainSegment_internal(shapeId.getPointer(), 0), true);
     }
 
     /**
      * Get a copy of the shape's chain segment. These come from chain shapes.
      * Asserts the type is correct.
      */
-    public static b2ChainSegment b2Shape_GetChainSegment(b2ShapeId shapeId) {
-        return new b2ChainSegment(b2Shape_GetChainSegment_internal(shapeId.getPointer(), 0), true);
+    public static void b2Shape_GetChainSegment(b2ShapeId shapeId, b2ChainSegment _retPar) {
+        b2Shape_GetChainSegment_internal(shapeId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Shape_GetChainSegment_internal(long shapeId, long _retPar);/*
@@ -6399,18 +6436,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get a copy of the shape's chain segment. These come from chain shapes.
-     * Asserts the type is correct.
+     * Get a copy of the shape's capsule. Asserts the type is correct.
      */
-    public static void b2Shape_GetChainSegment(b2ShapeId shapeId, b2ChainSegment _retPar) {
-        b2Shape_GetChainSegment_internal(shapeId.getPointer(), _retPar.getPointer());
+    public static b2Capsule b2Shape_GetCapsule(b2ShapeId shapeId) {
+        return new b2Capsule(b2Shape_GetCapsule_internal(shapeId.getPointer(), 0), true);
     }
 
     /**
      * Get a copy of the shape's capsule. Asserts the type is correct.
      */
-    public static b2Capsule b2Shape_GetCapsule(b2ShapeId shapeId) {
-        return new b2Capsule(b2Shape_GetCapsule_internal(shapeId.getPointer(), 0), true);
+    public static void b2Shape_GetCapsule(b2ShapeId shapeId, b2Capsule _retPar) {
+        b2Shape_GetCapsule_internal(shapeId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Shape_GetCapsule_internal(long shapeId, long _retPar);/*
@@ -6423,17 +6459,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get a copy of the shape's capsule. Asserts the type is correct.
+     * Get a copy of the shape's convex polygon. Asserts the type is correct.
      */
-    public static void b2Shape_GetCapsule(b2ShapeId shapeId, b2Capsule _retPar) {
-        b2Shape_GetCapsule_internal(shapeId.getPointer(), _retPar.getPointer());
+    public static b2Polygon b2Shape_GetPolygon(b2ShapeId shapeId) {
+        return new b2Polygon(b2Shape_GetPolygon_internal(shapeId.getPointer(), 0), true);
     }
 
     /**
      * Get a copy of the shape's convex polygon. Asserts the type is correct.
      */
-    public static b2Polygon b2Shape_GetPolygon(b2ShapeId shapeId) {
-        return new b2Polygon(b2Shape_GetPolygon_internal(shapeId.getPointer(), 0), true);
+    public static void b2Shape_GetPolygon(b2ShapeId shapeId, b2Polygon _retPar) {
+        b2Shape_GetPolygon_internal(shapeId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Shape_GetPolygon_internal(long shapeId, long _retPar);/*
@@ -6444,13 +6480,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get a copy of the shape's convex polygon. Asserts the type is correct.
-     */
-    public static void b2Shape_GetPolygon(b2ShapeId shapeId, b2Polygon _retPar) {
-        b2Shape_GetPolygon_internal(shapeId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Allows you to change a shape to be a circle or update the current circle.
@@ -6518,6 +6547,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2ChainId(b2Shape_GetParentChain_internal(shapeId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the parent chain id if the shape type is a chain segment, otherwise
+     * returns b2_nullChainId.
+     */
+    public static void b2Shape_GetParentChain(b2ShapeId shapeId, b2ChainId _retPar) {
+        b2Shape_GetParentChain_internal(shapeId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Shape_GetParentChain_internal(long shapeId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2ChainId* _ret = (b2ChainId*) (_retPar == 0 ? malloc(sizeof(b2ChainId)) : (void*)_retPar);
@@ -6526,14 +6563,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the parent chain id if the shape type is a chain segment, otherwise
-     * returns b2_nullChainId.
-     */
-    public static void b2Shape_GetParentChain(b2ShapeId shapeId, b2ChainId _retPar) {
-        b2Shape_GetParentChain_internal(shapeId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Get the maximum capacity required for retrieving all the touching contacts on a shape
@@ -6612,6 +6641,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2AABB(b2Shape_GetAABB_internal(shapeId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the current world AABB
+     */
+    public static void b2Shape_GetAABB(b2ShapeId shapeId, b2AABB _retPar) {
+        b2Shape_GetAABB_internal(shapeId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Shape_GetAABB_internal(long shapeId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2AABB* _ret = (b2AABB*) (_retPar == 0 ? malloc(sizeof(b2AABB)) : (void*)_retPar);
@@ -6622,17 +6658,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the current world AABB
+     * Get the mass data for a shape
      */
-    public static void b2Shape_GetAABB(b2ShapeId shapeId, b2AABB _retPar) {
-        b2Shape_GetAABB_internal(shapeId.getPointer(), _retPar.getPointer());
+    public static b2MassData b2Shape_GetMassData(b2ShapeId shapeId) {
+        return new b2MassData(b2Shape_GetMassData_internal(shapeId.getPointer(), 0), true);
     }
 
     /**
      * Get the mass data for a shape
      */
-    public static b2MassData b2Shape_GetMassData(b2ShapeId shapeId) {
-        return new b2MassData(b2Shape_GetMassData_internal(shapeId.getPointer(), 0), true);
+    public static void b2Shape_GetMassData(b2ShapeId shapeId, b2MassData _retPar) {
+        b2Shape_GetMassData_internal(shapeId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Shape_GetMassData_internal(long shapeId, long _retPar);/*
@@ -6645,18 +6681,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the mass data for a shape
+     * Get the closest point on a shape to a target point. Target and result are in world space.
+     * todo need sample
      */
-    public static void b2Shape_GetMassData(b2ShapeId shapeId, b2MassData _retPar) {
-        b2Shape_GetMassData_internal(shapeId.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Shape_GetClosestPoint(b2ShapeId shapeId, b2Vec2 target) {
+        return new b2Vec2(b2Shape_GetClosestPoint_internal(shapeId.getPointer(), target.getPointer(), 0), true);
     }
 
     /**
      * Get the closest point on a shape to a target point. Target and result are in world space.
      * todo need sample
      */
-    public static b2Vec2 b2Shape_GetClosestPoint(b2ShapeId shapeId, b2Vec2 target) {
-        return new b2Vec2(b2Shape_GetClosestPoint_internal(shapeId.getPointer(), target.getPointer(), 0), true);
+    public static void b2Shape_GetClosestPoint(b2ShapeId shapeId, b2Vec2 target, b2Vec2 _retPar) {
+        b2Shape_GetClosestPoint_internal(shapeId.getPointer(), target.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Shape_GetClosestPoint_internal(long shapeId, long target, long _retPar);/*
@@ -6669,19 +6706,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the closest point on a shape to a target point. Target and result are in world space.
-     * todo need sample
+     * Create a chain shape
+     * @see b2ChainDef for details
      */
-    public static void b2Shape_GetClosestPoint(b2ShapeId shapeId, b2Vec2 target, b2Vec2 _retPar) {
-        b2Shape_GetClosestPoint_internal(shapeId.getPointer(), target.getPointer(), _retPar.getPointer());
+    public static b2ChainId b2CreateChain(b2BodyId bodyId, b2ChainDef.b2ChainDefPointer def) {
+        return new b2ChainId(b2CreateChain_internal(bodyId.getPointer(), def.getPointer(), 0), true);
     }
 
     /**
      * Create a chain shape
      * @see b2ChainDef for details
      */
-    public static b2ChainId b2CreateChain(b2BodyId bodyId, b2ChainDef.b2ChainDefPointer def) {
-        return new b2ChainId(b2CreateChain_internal(bodyId.getPointer(), def.getPointer(), 0), true);
+    public static void b2CreateChain(b2BodyId bodyId, b2ChainDef.b2ChainDefPointer def, b2ChainId _retPar) {
+        b2CreateChain_internal(bodyId.getPointer(), def.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CreateChain_internal(long bodyId, long def, long _retPar);/*
@@ -6692,14 +6729,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Create a chain shape
-     * @see b2ChainDef for details
-     */
-    public static void b2CreateChain(b2BodyId bodyId, b2ChainDef.b2ChainDefPointer def, b2ChainId _retPar) {
-        b2CreateChain_internal(bodyId.getPointer(), def.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Destroy a chain shape
@@ -6721,6 +6750,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2WorldId(b2Chain_GetWorld_internal(chainId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the world that owns this chain shape
+     */
+    public static void b2Chain_GetWorld(b2ChainId chainId, b2WorldId _retPar) {
+        b2Chain_GetWorld_internal(chainId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Chain_GetWorld_internal(long chainId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2WorldId* _ret = (b2WorldId*) (_retPar == 0 ? malloc(sizeof(b2WorldId)) : (void*)_retPar);
@@ -6729,13 +6765,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the world that owns this chain shape
-     */
-    public static void b2Chain_GetWorld(b2ChainId chainId, b2WorldId _retPar) {
-        b2Chain_GetWorld_internal(chainId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Get the number of segments on this chain
@@ -6914,6 +6943,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2BodyId(b2Joint_GetBodyA_internal(jointId.getPointer(), 0), true);
     }
 
+    /**
+     * Get body A id on a joint
+     */
+    public static void b2Joint_GetBodyA(b2JointId jointId, b2BodyId _retPar) {
+        b2Joint_GetBodyA_internal(jointId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Joint_GetBodyA_internal(long jointId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2BodyId* _ret = (b2BodyId*) (_retPar == 0 ? malloc(sizeof(b2BodyId)) : (void*)_retPar);
@@ -6924,17 +6960,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get body A id on a joint
+     * Get body B id on a joint
      */
-    public static void b2Joint_GetBodyA(b2JointId jointId, b2BodyId _retPar) {
-        b2Joint_GetBodyA_internal(jointId.getPointer(), _retPar.getPointer());
+    public static b2BodyId b2Joint_GetBodyB(b2JointId jointId) {
+        return new b2BodyId(b2Joint_GetBodyB_internal(jointId.getPointer(), 0), true);
     }
 
     /**
      * Get body B id on a joint
      */
-    public static b2BodyId b2Joint_GetBodyB(b2JointId jointId) {
-        return new b2BodyId(b2Joint_GetBodyB_internal(jointId.getPointer(), 0), true);
+    public static void b2Joint_GetBodyB(b2JointId jointId, b2BodyId _retPar) {
+        b2Joint_GetBodyB_internal(jointId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Joint_GetBodyB_internal(long jointId, long _retPar);/*
@@ -6947,17 +6983,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get body B id on a joint
+     * Get the world that owns this joint
      */
-    public static void b2Joint_GetBodyB(b2JointId jointId, b2BodyId _retPar) {
-        b2Joint_GetBodyB_internal(jointId.getPointer(), _retPar.getPointer());
+    public static b2WorldId b2Joint_GetWorld(b2JointId jointId) {
+        return new b2WorldId(b2Joint_GetWorld_internal(jointId.getPointer(), 0), true);
     }
 
     /**
      * Get the world that owns this joint
      */
-    public static b2WorldId b2Joint_GetWorld(b2JointId jointId) {
-        return new b2WorldId(b2Joint_GetWorld_internal(jointId.getPointer(), 0), true);
+    public static void b2Joint_GetWorld(b2JointId jointId, b2WorldId _retPar) {
+        b2Joint_GetWorld_internal(jointId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Joint_GetWorld_internal(long jointId, long _retPar);/*
@@ -6970,17 +7006,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the world that owns this joint
+     * Get the local anchor on bodyA
      */
-    public static void b2Joint_GetWorld(b2JointId jointId, b2WorldId _retPar) {
-        b2Joint_GetWorld_internal(jointId.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Joint_GetLocalAnchorA(b2JointId jointId) {
+        return new b2Vec2(b2Joint_GetLocalAnchorA_internal(jointId.getPointer(), 0), true);
     }
 
     /**
      * Get the local anchor on bodyA
      */
-    public static b2Vec2 b2Joint_GetLocalAnchorA(b2JointId jointId) {
-        return new b2Vec2(b2Joint_GetLocalAnchorA_internal(jointId.getPointer(), 0), true);
+    public static void b2Joint_GetLocalAnchorA(b2JointId jointId, b2Vec2 _retPar) {
+        b2Joint_GetLocalAnchorA_internal(jointId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Joint_GetLocalAnchorA_internal(long jointId, long _retPar);/*
@@ -6993,17 +7029,17 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Get the local anchor on bodyA
+     * Get the local anchor on bodyB
      */
-    public static void b2Joint_GetLocalAnchorA(b2JointId jointId, b2Vec2 _retPar) {
-        b2Joint_GetLocalAnchorA_internal(jointId.getPointer(), _retPar.getPointer());
+    public static b2Vec2 b2Joint_GetLocalAnchorB(b2JointId jointId) {
+        return new b2Vec2(b2Joint_GetLocalAnchorB_internal(jointId.getPointer(), 0), true);
     }
 
     /**
      * Get the local anchor on bodyB
      */
-    public static b2Vec2 b2Joint_GetLocalAnchorB(b2JointId jointId) {
-        return new b2Vec2(b2Joint_GetLocalAnchorB_internal(jointId.getPointer(), 0), true);
+    public static void b2Joint_GetLocalAnchorB(b2JointId jointId, b2Vec2 _retPar) {
+        b2Joint_GetLocalAnchorB_internal(jointId.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2Joint_GetLocalAnchorB_internal(long jointId, long _retPar);/*
@@ -7014,13 +7050,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the local anchor on bodyB
-     */
-    public static void b2Joint_GetLocalAnchorB(b2JointId jointId, b2Vec2 _retPar) {
-        b2Joint_GetLocalAnchorB_internal(jointId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Toggle collision between connected bodies
@@ -7070,6 +7099,13 @@ static jclass cxxExceptionClass = NULL;
         return new VoidPointer(b2Joint_GetUserData_internal(jointId.getPointer()), false);
     }
 
+    /**
+     * Get the user data on a joint
+     */
+    public static void b2Joint_GetUserData(b2JointId jointId, VoidPointer _retPar) {
+        _retPar.setPointer(b2Joint_GetUserData_internal(jointId.getPointer()));
+    }
+
     public static native long b2Joint_GetUserData_internal(long jointId);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	return (jlong)b2Joint_GetUserData(*(b2JointId*)jointId);
@@ -7097,6 +7133,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2Joint_GetConstraintForce_internal(jointId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the current constraint force for this joint. Usually in Newtons.
+     */
+    public static void b2Joint_GetConstraintForce(b2JointId jointId, b2Vec2 _retPar) {
+        b2Joint_GetConstraintForce_internal(jointId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2Joint_GetConstraintForce_internal(long jointId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -7105,13 +7148,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the current constraint force for this joint. Usually in Newtons.
-     */
-    public static void b2Joint_GetConstraintForce(b2JointId jointId, b2Vec2 _retPar) {
-        b2Joint_GetConstraintForce_internal(jointId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Get the current constraint torque for this joint. Usually in Newton * meters.
@@ -7135,6 +7171,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2JointId(b2CreateDistanceJoint_internal(worldId.getPointer(), def.getPointer(), 0), true);
     }
 
+    /**
+     * Create a distance joint
+     * @see b2DistanceJointDef for details
+     */
+    public static void b2CreateDistanceJoint(b2WorldId worldId, b2DistanceJointDef.b2DistanceJointDefPointer def, b2JointId _retPar) {
+        b2CreateDistanceJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2CreateDistanceJoint_internal(long worldId, long def, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2JointId* _ret = (b2JointId*) (_retPar == 0 ? malloc(sizeof(b2JointId)) : (void*)_retPar);
@@ -7143,14 +7187,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Create a distance joint
-     * @see b2DistanceJointDef for details
-     */
-    public static void b2CreateDistanceJoint(b2WorldId worldId, b2DistanceJointDef.b2DistanceJointDefPointer def, b2JointId _retPar) {
-        b2CreateDistanceJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Set the rest length of a distance joint
@@ -7451,6 +7487,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2JointId(b2CreateMotorJoint_internal(worldId.getPointer(), def.getPointer(), 0), true);
     }
 
+    /**
+     * Create a motor joint
+     * @see b2MotorJointDef for details
+     */
+    public static void b2CreateMotorJoint(b2WorldId worldId, b2MotorJointDef.b2MotorJointDefPointer def, b2JointId _retPar) {
+        b2CreateMotorJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2CreateMotorJoint_internal(long worldId, long def, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2JointId* _ret = (b2JointId*) (_retPar == 0 ? malloc(sizeof(b2JointId)) : (void*)_retPar);
@@ -7459,14 +7503,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Create a motor joint
-     * @see b2MotorJointDef for details
-     */
-    public static void b2CreateMotorJoint(b2WorldId worldId, b2MotorJointDef.b2MotorJointDefPointer def, b2JointId _retPar) {
-        b2CreateMotorJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Set the motor joint linear offset target
@@ -7488,6 +7524,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2MotorJoint_GetLinearOffset_internal(jointId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the motor joint linear offset target
+     */
+    public static void b2MotorJoint_GetLinearOffset(b2JointId jointId, b2Vec2 _retPar) {
+        b2MotorJoint_GetLinearOffset_internal(jointId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2MotorJoint_GetLinearOffset_internal(long jointId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -7496,13 +7539,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the motor joint linear offset target
-     */
-    public static void b2MotorJoint_GetLinearOffset(b2JointId jointId, b2Vec2 _retPar) {
-        b2MotorJoint_GetLinearOffset_internal(jointId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Set the motor joint angular offset target in radians
@@ -7620,6 +7656,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2JointId(b2CreateMouseJoint_internal(worldId.getPointer(), def.getPointer(), 0), true);
     }
 
+    /**
+     * Create a mouse joint
+     * @see b2MouseJointDef for details
+     */
+    public static void b2CreateMouseJoint(b2WorldId worldId, b2MouseJointDef.b2MouseJointDefPointer def, b2JointId _retPar) {
+        b2CreateMouseJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2CreateMouseJoint_internal(long worldId, long def, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2JointId* _ret = (b2JointId*) (_retPar == 0 ? malloc(sizeof(b2JointId)) : (void*)_retPar);
@@ -7628,14 +7672,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Create a mouse joint
-     * @see b2MouseJointDef for details
-     */
-    public static void b2CreateMouseJoint(b2WorldId worldId, b2MouseJointDef.b2MouseJointDefPointer def, b2JointId _retPar) {
-        b2CreateMouseJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Set the mouse joint target
@@ -7657,6 +7693,13 @@ static jclass cxxExceptionClass = NULL;
         return new b2Vec2(b2MouseJoint_GetTarget_internal(jointId.getPointer(), 0), true);
     }
 
+    /**
+     * Get the mouse joint target
+     */
+    public static void b2MouseJoint_GetTarget(b2JointId jointId, b2Vec2 _retPar) {
+        b2MouseJoint_GetTarget_internal(jointId.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2MouseJoint_GetTarget_internal(long jointId, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
@@ -7665,13 +7708,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Get the mouse joint target
-     */
-    public static void b2MouseJoint_GetTarget(b2JointId jointId, b2Vec2 _retPar) {
-        b2MouseJoint_GetTarget_internal(jointId.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Set the mouse joint spring stiffness in Hertz
@@ -7762,6 +7798,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2JointId(b2CreateFilterJoint_internal(worldId.getPointer(), def.getPointer(), 0), true);
     }
 
+    /**
+     * Create a filter joint.
+     * @see b2FilterJointDef for details
+     */
+    public static void b2CreateFilterJoint(b2WorldId worldId, b2FilterJointDef.b2FilterJointDefPointer def, b2JointId _retPar) {
+        b2CreateFilterJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2CreateFilterJoint_internal(long worldId, long def, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2JointId* _ret = (b2JointId*) (_retPar == 0 ? malloc(sizeof(b2JointId)) : (void*)_retPar);
@@ -7772,19 +7816,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Create a filter joint.
-     * @see b2FilterJointDef for details
+     * Create a prismatic (slider) joint.
+     * @see b2PrismaticJointDef for details
      */
-    public static void b2CreateFilterJoint(b2WorldId worldId, b2FilterJointDef.b2FilterJointDefPointer def, b2JointId _retPar) {
-        b2CreateFilterJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
+    public static b2JointId b2CreatePrismaticJoint(b2WorldId worldId, b2PrismaticJointDef.b2PrismaticJointDefPointer def) {
+        return new b2JointId(b2CreatePrismaticJoint_internal(worldId.getPointer(), def.getPointer(), 0), true);
     }
 
     /**
      * Create a prismatic (slider) joint.
      * @see b2PrismaticJointDef for details
      */
-    public static b2JointId b2CreatePrismaticJoint(b2WorldId worldId, b2PrismaticJointDef.b2PrismaticJointDefPointer def) {
-        return new b2JointId(b2CreatePrismaticJoint_internal(worldId.getPointer(), def.getPointer(), 0), true);
+    public static void b2CreatePrismaticJoint(b2WorldId worldId, b2PrismaticJointDef.b2PrismaticJointDefPointer def, b2JointId _retPar) {
+        b2CreatePrismaticJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
     }
 
     public static native long b2CreatePrismaticJoint_internal(long worldId, long def, long _retPar);/*
@@ -7795,14 +7839,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Create a prismatic (slider) joint.
-     * @see b2PrismaticJointDef for details
-     */
-    public static void b2CreatePrismaticJoint(b2WorldId worldId, b2PrismaticJointDef.b2PrismaticJointDefPointer def, b2JointId _retPar) {
-        b2CreatePrismaticJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Enable/disable the joint spring.
@@ -8089,6 +8125,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2JointId(b2CreateRevoluteJoint_internal(worldId.getPointer(), def.getPointer(), 0), true);
     }
 
+    /**
+     * Create a revolute joint
+     * @see b2RevoluteJointDef for details
+     */
+    public static void b2CreateRevoluteJoint(b2WorldId worldId, b2RevoluteJointDef.b2RevoluteJointDefPointer def, b2JointId _retPar) {
+        b2CreateRevoluteJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2CreateRevoluteJoint_internal(long worldId, long def, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2JointId* _ret = (b2JointId*) (_retPar == 0 ? malloc(sizeof(b2JointId)) : (void*)_retPar);
@@ -8097,14 +8141,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Create a revolute joint
-     * @see b2RevoluteJointDef for details
-     */
-    public static void b2CreateRevoluteJoint(b2WorldId worldId, b2RevoluteJointDef.b2RevoluteJointDefPointer def, b2JointId _retPar) {
-        b2CreateRevoluteJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Enable/disable the revolute joint spring
@@ -8377,6 +8413,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2JointId(b2CreateWeldJoint_internal(worldId.getPointer(), def.getPointer(), 0), true);
     }
 
+    /**
+     * Create a weld joint
+     * @see b2WeldJointDef for details
+     */
+    public static void b2CreateWeldJoint(b2WorldId worldId, b2WeldJointDef.b2WeldJointDefPointer def, b2JointId _retPar) {
+        b2CreateWeldJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2CreateWeldJoint_internal(long worldId, long def, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2JointId* _ret = (b2JointId*) (_retPar == 0 ? malloc(sizeof(b2JointId)) : (void*)_retPar);
@@ -8385,14 +8429,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Create a weld joint
-     * @see b2WeldJointDef for details
-     */
-    public static void b2CreateWeldJoint(b2WorldId worldId, b2WeldJointDef.b2WeldJointDefPointer def, b2JointId _retPar) {
-        b2CreateWeldJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Get the weld joint reference angle in radians
@@ -8537,6 +8573,14 @@ static jclass cxxExceptionClass = NULL;
         return new b2JointId(b2CreateWheelJoint_internal(worldId.getPointer(), def.getPointer(), 0), true);
     }
 
+    /**
+     * Create a wheel joint
+     * @see b2WheelJointDef for details
+     */
+    public static void b2CreateWheelJoint(b2WorldId worldId, b2WheelJointDef.b2WheelJointDefPointer def, b2JointId _retPar) {
+        b2CreateWheelJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
+    }
+
     public static native long b2CreateWheelJoint_internal(long worldId, long def, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2JointId* _ret = (b2JointId*) (_retPar == 0 ? malloc(sizeof(b2JointId)) : (void*)_retPar);
@@ -8545,14 +8589,6 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
-
-    /**
-     * Create a wheel joint
-     * @see b2WheelJointDef for details
-     */
-    public static void b2CreateWheelJoint(b2WorldId worldId, b2WheelJointDef.b2WheelJointDefPointer def, b2JointId _retPar) {
-        b2CreateWheelJoint_internal(worldId.getPointer(), def.getPointer(), _retPar.getPointer());
-    }
 
     /**
      * Enable/disable the wheel joint spring

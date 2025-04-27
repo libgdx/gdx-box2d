@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -44,6 +45,10 @@ public final class b2AABB extends Struct {
 
     public b2AABB.b2AABBPointer asPointer() {
         return new b2AABB.b2AABBPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2AABB.b2AABBPointer ptr) {
+        ptr.setPointer(this);
     }
 
     public b2Vec2 lowerBound() {
@@ -87,6 +92,10 @@ public final class b2AABB extends Struct {
     }
 
     public static final class b2AABBPointer extends StackElementPointer<b2AABB> {
+
+        public b2AABBPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2AABBPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

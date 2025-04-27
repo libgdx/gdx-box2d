@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -45,6 +46,10 @@ public final class b2Capsule extends Struct {
 
     public b2Capsule.b2CapsulePointer asPointer() {
         return new b2Capsule.b2CapsulePointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2Capsule.b2CapsulePointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -132,6 +137,10 @@ public final class b2Capsule extends Struct {
     }
 
     public static final class b2CapsulePointer extends StackElementPointer<b2Capsule> {
+
+        public b2CapsulePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2CapsulePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

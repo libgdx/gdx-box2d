@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Plane;
 
@@ -45,6 +46,10 @@ public final class b2CollisionPlane extends Struct {
 
     public b2CollisionPlane.b2CollisionPlanePointer asPointer() {
         return new b2CollisionPlane.b2CollisionPlanePointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2CollisionPlane.b2CollisionPlanePointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -127,6 +132,10 @@ public final class b2CollisionPlane extends Struct {
     }
 
     public static final class b2CollisionPlanePointer extends StackElementPointer<b2CollisionPlane> {
+
+        public b2CollisionPlanePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2CollisionPlanePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -44,6 +45,10 @@ public final class b2Mat22 extends Struct {
 
     public b2Mat22.b2Mat22Pointer asPointer() {
         return new b2Mat22.b2Mat22Pointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2Mat22.b2Mat22Pointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -117,6 +122,10 @@ public final class b2Mat22 extends Struct {
     }
 
     public static final class b2Mat22Pointer extends StackElementPointer<b2Mat22> {
+
+        public b2Mat22Pointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2Mat22Pointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyMoveEvent;
 
@@ -48,6 +49,10 @@ public final class b2BodyEvents extends Struct {
         return new b2BodyEvents.b2BodyEventsPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2BodyEvents.b2BodyEventsPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * Array of move events
      */
@@ -66,17 +71,21 @@ public final class b2BodyEvents extends Struct {
      * Number of move events
      */
     public int moveCount() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 4 : 8);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 8 : 4);
     }
 
     /**
      * Number of move events
      */
     public void moveCount(int moveCount) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 4 : 8, moveCount);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 8 : 4, moveCount);
     }
 
     public static final class b2BodyEventsPointer extends StackElementPointer<b2BodyEvents> {
+
+        public b2BodyEventsPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2BodyEventsPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

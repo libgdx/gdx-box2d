@@ -4,10 +4,10 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * Revolute joint definition
@@ -57,6 +57,10 @@ public final class b2RevoluteJointDef extends Struct {
 
     public b2RevoluteJointDef.b2RevoluteJointDefPointer asPointer() {
         return new b2RevoluteJointDef.b2RevoluteJointDefPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2RevoluteJointDef.b2RevoluteJointDefPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -387,17 +391,21 @@ public final class b2RevoluteJointDef extends Struct {
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 84 : 88);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 88 : 84);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 84 : 88, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 88 : 84, internalValue);
     }
 
     public static final class b2RevoluteJointDefPointer extends StackElementPointer<b2RevoluteJointDef> {
+
+        public b2RevoluteJointDefPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2RevoluteJointDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

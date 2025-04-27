@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -44,6 +45,10 @@ public final class b2Profile extends Struct {
 
     public b2Profile.b2ProfilePointer asPointer() {
         return new b2Profile.b2ProfilePointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2Profile.b2ProfilePointer ptr) {
+        ptr.setPointer(this);
     }
 
     public float step() {
@@ -223,6 +228,10 @@ public final class b2Profile extends Struct {
     }
 
     public static final class b2ProfilePointer extends StackElementPointer<b2Profile> {
+
+        public b2ProfilePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2ProfilePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

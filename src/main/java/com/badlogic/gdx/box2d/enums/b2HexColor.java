@@ -3,6 +3,7 @@ package com.badlogic.gdx.box2d.enums;
 import com.badlogic.gdx.jnigen.runtime.pointer.EnumPointer;
 import com.badlogic.gdx.jnigen.runtime.c.CEnum;
 import com.badlogic.gdx.jnigen.runtime.CHandler;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * These colors are used for debug draw and mostly match the named SVG colors.
@@ -466,6 +467,10 @@ public enum b2HexColor implements CEnum {
     }
 
     public static final class b2HexColorPointer extends EnumPointer<b2HexColor> {
+
+        public b2HexColorPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2HexColorPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

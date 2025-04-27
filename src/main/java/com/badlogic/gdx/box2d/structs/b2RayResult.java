@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
@@ -46,6 +47,10 @@ public final class b2RayResult extends Struct {
 
     public b2RayResult.b2RayResultPointer asPointer() {
         return new b2RayResult.b2RayResultPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2RayResult.b2RayResultPointer ptr) {
+        ptr.setPointer(this);
     }
 
     public b2ShapeId shapeId() {
@@ -141,6 +146,10 @@ public final class b2RayResult extends Struct {
     }
 
     public static final class b2RayResultPointer extends StackElementPointer<b2RayResult> {
+
+        public b2RayResultPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2RayResultPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

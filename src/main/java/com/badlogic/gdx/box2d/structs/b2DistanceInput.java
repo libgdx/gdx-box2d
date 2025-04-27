@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeProxy;
 import com.badlogic.gdx.box2d.structs.b2Transform;
@@ -45,6 +46,10 @@ public final class b2DistanceInput extends Struct {
 
     public b2DistanceInput.b2DistanceInputPointer asPointer() {
         return new b2DistanceInput.b2DistanceInputPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2DistanceInput.b2DistanceInputPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -202,6 +207,10 @@ public final class b2DistanceInput extends Struct {
     }
 
     public static final class b2DistanceInputPointer extends StackElementPointer<b2DistanceInput> {
+
+        public b2DistanceInputPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2DistanceInputPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

@@ -4,10 +4,10 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * A motor joint is used to control the relative motion between two bodies
@@ -49,6 +49,10 @@ public final class b2MotorJointDef extends Struct {
 
     public b2MotorJointDef.b2MotorJointDefPointer asPointer() {
         return new b2MotorJointDef.b2MotorJointDefPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2MotorJointDef.b2MotorJointDefPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -230,31 +234,35 @@ public final class b2MotorJointDef extends Struct {
      * User data pointer
      */
     public VoidPointer userData() {
-        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 44 : 48), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 48 : 44), false);
     }
 
     /**
      * User data pointer
      */
     public void userData(VoidPointer userData) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 44 : 48, userData.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 48 : 44, userData.getPointer());
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 48 : 56);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 56 : 48);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 48 : 56, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 56 : 48, internalValue);
     }
 
     public static final class b2MotorJointDefPointer extends StackElementPointer<b2MotorJointDef> {
+
+        public b2MotorJointDefPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2MotorJointDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

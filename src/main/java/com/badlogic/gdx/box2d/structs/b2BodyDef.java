@@ -4,12 +4,12 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.enums.b2BodyType;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2Rot;
 import com.badlogic.gdx.jnigen.runtime.pointer.integer.BytePointer;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * A body definition holds all the data needed to construct a rigid body.
@@ -52,6 +52,10 @@ public final class b2BodyDef extends Struct {
 
     public b2BodyDef.b2BodyDefPointer asPointer() {
         return new b2BodyDef.b2BodyDefPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2BodyDef.b2BodyDefPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -285,56 +289,56 @@ public final class b2BodyDef extends Struct {
      * Use this to store application specific body data.
      */
     public VoidPointer userData() {
-        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 52 : 56), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 56 : 52), false);
     }
 
     /**
      * Use this to store application specific body data.
      */
     public void userData(VoidPointer userData) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 52 : 56, userData.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 56 : 52, userData.getPointer());
     }
 
     /**
      * Set this flag to false if this body should never fall asleep.
      */
     public boolean enableSleep() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 56 : 64);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 64 : 56);
     }
 
     /**
      * Set this flag to false if this body should never fall asleep.
      */
     public void enableSleep(boolean enableSleep) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 56 : 64, enableSleep);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 64 : 56, enableSleep);
     }
 
     /**
      * Is this body initially awake or sleeping?
      */
     public boolean isAwake() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 57 : 65);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 65 : 57);
     }
 
     /**
      * Is this body initially awake or sleeping?
      */
     public void isAwake(boolean isAwake) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 57 : 65, isAwake);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 65 : 57, isAwake);
     }
 
     /**
      * Should this body be prevented from rotating? Useful for characters.
      */
     public boolean fixedRotation() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 58 : 66);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 66 : 58);
     }
 
     /**
      * Should this body be prevented from rotating? Useful for characters.
      */
     public void fixedRotation(boolean fixedRotation) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 58 : 66, fixedRotation);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 66 : 58, fixedRotation);
     }
 
     /**
@@ -344,7 +348,7 @@ public final class b2BodyDef extends Struct {
      * 	 continuous collision. They may interfere with joint constraints.
      */
     public boolean isBullet() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 59 : 67);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 67 : 59);
     }
 
     /**
@@ -354,21 +358,21 @@ public final class b2BodyDef extends Struct {
      * 	 continuous collision. They may interfere with joint constraints.
      */
     public void isBullet(boolean isBullet) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 59 : 67, isBullet);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 67 : 59, isBullet);
     }
 
     /**
      * Used to disable a body. A disabled body does not move or collide.
      */
     public boolean isEnabled() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 60 : 68);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 68 : 60);
     }
 
     /**
      * Used to disable a body. A disabled body does not move or collide.
      */
     public void isEnabled(boolean isEnabled) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 60 : 68, isEnabled);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 68 : 60, isEnabled);
     }
 
     /**
@@ -376,7 +380,7 @@ public final class b2BodyDef extends Struct {
      * 	 for circular objects, like wheels.
      */
     public boolean allowFastRotation() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 61 : 69);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 69 : 61);
     }
 
     /**
@@ -384,24 +388,28 @@ public final class b2BodyDef extends Struct {
      * 	 for circular objects, like wheels.
      */
     public void allowFastRotation(boolean allowFastRotation) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 61 : 69, allowFastRotation);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 69 : 61, allowFastRotation);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 64 : 72);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 72 : 64);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 64 : 72, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 72 : 64, internalValue);
     }
 
     public static final class b2BodyDefPointer extends StackElementPointer<b2BodyDef> {
+
+        public b2BodyDefPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2BodyDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

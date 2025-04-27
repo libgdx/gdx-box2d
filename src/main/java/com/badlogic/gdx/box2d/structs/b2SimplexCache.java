@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.pointer.integer.UBytePointer;
 
@@ -47,6 +48,10 @@ public final class b2SimplexCache extends Struct {
 
     public b2SimplexCache.b2SimplexCachePointer asPointer() {
         return new b2SimplexCache.b2SimplexCachePointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2SimplexCache.b2SimplexCachePointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -134,6 +139,10 @@ public final class b2SimplexCache extends Struct {
     }
 
     public static final class b2SimplexCachePointer extends StackElementPointer<b2SimplexCache> {
+
+        public b2SimplexCachePointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2SimplexCachePointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

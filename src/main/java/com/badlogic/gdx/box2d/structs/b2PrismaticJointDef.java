@@ -4,10 +4,10 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * Prismatic joint definition
@@ -52,6 +52,10 @@ public final class b2PrismaticJointDef extends Struct {
 
     public b2PrismaticJointDef.b2PrismaticJointDefPointer asPointer() {
         return new b2PrismaticJointDef.b2PrismaticJointDefPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2PrismaticJointDef.b2PrismaticJointDefPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -387,31 +391,35 @@ public final class b2PrismaticJointDef extends Struct {
      * User data pointer
      */
     public VoidPointer userData() {
-        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 84 : 88), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 88 : 84), false);
     }
 
     /**
      * User data pointer
      */
     public void userData(VoidPointer userData) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 84 : 88, userData.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 88 : 84, userData.getPointer());
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 88 : 96);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 96 : 88);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 88 : 96, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 96 : 88, internalValue);
     }
 
     public static final class b2PrismaticJointDefPointer extends StackElementPointer<b2PrismaticJointDef> {
+
+        public b2PrismaticJointDefPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2PrismaticJointDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

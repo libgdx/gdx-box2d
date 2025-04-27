@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 import com.badlogic.gdx.box2d.structs.b2Manifold;
@@ -47,6 +48,10 @@ public final class b2ContactData extends Struct {
 
     public b2ContactData.b2ContactDataPointer asPointer() {
         return new b2ContactData.b2ContactDataPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2ContactData.b2ContactDataPointer ptr) {
+        ptr.setPointer(this);
     }
 
     public b2ShapeId shapeIdA() {
@@ -110,6 +115,10 @@ public final class b2ContactData extends Struct {
     }
 
     public static final class b2ContactDataPointer extends StackElementPointer<b2ContactData> {
+
+        public b2ContactDataPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2ContactDataPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

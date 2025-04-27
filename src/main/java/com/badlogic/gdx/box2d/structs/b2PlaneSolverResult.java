@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -44,6 +45,10 @@ public final class b2PlaneSolverResult extends Struct {
 
     public b2PlaneSolverResult.b2PlaneSolverResultPointer asPointer() {
         return new b2PlaneSolverResult.b2PlaneSolverResultPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2PlaneSolverResult.b2PlaneSolverResultPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -96,6 +101,10 @@ public final class b2PlaneSolverResult extends Struct {
     }
 
     public static final class b2PlaneSolverResultPointer extends StackElementPointer<b2PlaneSolverResult> {
+
+        public b2PlaneSolverResultPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2PlaneSolverResultPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

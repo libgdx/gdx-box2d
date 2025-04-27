@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -44,6 +45,10 @@ public final class b2SimplexVertex extends Struct {
 
     public b2SimplexVertex.b2SimplexVertexPointer asPointer() {
         return new b2SimplexVertex.b2SimplexVertexPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2SimplexVertex.b2SimplexVertexPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -194,6 +199,10 @@ public final class b2SimplexVertex extends Struct {
     }
 
     public static final class b2SimplexVertexPointer extends StackElementPointer<b2SimplexVertex> {
+
+        public b2SimplexVertexPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2SimplexVertexPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

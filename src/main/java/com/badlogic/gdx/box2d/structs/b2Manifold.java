@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 import com.badlogic.gdx.box2d.structs.b2ManifoldPoint;
@@ -46,6 +47,10 @@ public final class b2Manifold extends Struct {
 
     public b2Manifold.b2ManifoldPointer asPointer() {
         return new b2Manifold.b2ManifoldPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2Manifold.b2ManifoldPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -147,6 +152,10 @@ public final class b2Manifold extends Struct {
     }
 
     public static final class b2ManifoldPointer extends StackElementPointer<b2Manifold> {
+
+        public b2ManifoldPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2ManifoldPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

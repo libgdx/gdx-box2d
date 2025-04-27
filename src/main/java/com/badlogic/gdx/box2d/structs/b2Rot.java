@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -46,6 +47,10 @@ public final class b2Rot extends Struct {
         return new b2Rot.b2RotPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2Rot.b2RotPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * cosine and sine
      */
@@ -75,6 +80,10 @@ public final class b2Rot extends Struct {
     }
 
     public static final class b2RotPointer extends StackElementPointer<b2Rot> {
+
+        public b2RotPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2RotPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

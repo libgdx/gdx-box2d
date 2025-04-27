@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -45,6 +46,10 @@ public final class b2TreeStats extends Struct {
         return new b2TreeStats.b2TreeStatsPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2TreeStats.b2TreeStatsPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * Number of internal nodes visited during the query
      */
@@ -74,6 +79,10 @@ public final class b2TreeStats extends Struct {
     }
 
     public static final class b2TreeStatsPointer extends StackElementPointer<b2TreeStats> {
+
+        public b2TreeStatsPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2TreeStatsPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

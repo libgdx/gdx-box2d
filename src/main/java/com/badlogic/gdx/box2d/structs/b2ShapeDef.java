@@ -4,8 +4,8 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
-import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
+import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2SurfaceMaterial;
 import com.badlogic.gdx.box2d.structs.b2Filter;
 
@@ -52,6 +52,10 @@ public final class b2ShapeDef extends Struct {
         return new b2ShapeDef.b2ShapeDefPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2ShapeDef.b2ShapeDefPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * Use this to store application specific shape data.
      */
@@ -70,35 +74,35 @@ public final class b2ShapeDef extends Struct {
      * The surface material for this shape.
      */
     public b2SurfaceMaterial material() {
-        return new b2SurfaceMaterial(getPointer() + (CHandler.IS_32_BIT ? 4 : 8), false);
+        return new b2SurfaceMaterial(getPointer() + (CHandler.IS_64_BIT ? 8 : 4), false);
     }
 
     /**
      * The surface material for this shape.
      */
     public void material(b2SurfaceMaterial toSetPtr) {
-        toSetPtr.setPointer(getPointer() + (CHandler.IS_32_BIT ? 4 : 8), 24, this);
+        toSetPtr.setPointer(getPointer() + (CHandler.IS_64_BIT ? 8 : 4), 24, this);
     }
 
     /**
      * The surface material for this shape.
      */
     public b2SurfaceMaterial getMaterial() {
-        return new b2SurfaceMaterial(getBufPtr().duplicate(CHandler.IS_32_BIT ? 4 : 8, 24), true);
+        return new b2SurfaceMaterial(getBufPtr().duplicate(CHandler.IS_64_BIT ? 8 : 4, 24), true);
     }
 
     /**
      * The surface material for this shape.
      */
     public void getMaterial(b2SurfaceMaterial toCopyTo) {
-        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), CHandler.IS_32_BIT ? 4 : 8, 24);
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), CHandler.IS_64_BIT ? 8 : 4, 24);
     }
 
     /**
      * The surface material for this shape.
      */
     public void setMaterial(b2SurfaceMaterial toCopyFrom) {
-        getBufPtr().copyFrom(CHandler.IS_32_BIT ? 4 : 8, toCopyFrom.getBufPtr(), 0, 24);
+        getBufPtr().copyFrom(CHandler.IS_64_BIT ? 8 : 4, toCopyFrom.getBufPtr(), 0, 24);
     }
 
     /**
@@ -107,7 +111,7 @@ public final class b2ShapeDef extends Struct {
      * 	 other considerations, such as being hollow. For example a wood barrel may be hollow or full of water.
      */
     public float density() {
-        return getBufPtr().getFloat(CHandler.IS_32_BIT ? 28 : 32);
+        return getBufPtr().getFloat(CHandler.IS_64_BIT ? 32 : 28);
     }
 
     /**
@@ -116,42 +120,42 @@ public final class b2ShapeDef extends Struct {
      * 	 other considerations, such as being hollow. For example a wood barrel may be hollow or full of water.
      */
     public void density(float density) {
-        getBufPtr().setFloat(CHandler.IS_32_BIT ? 28 : 32, density);
+        getBufPtr().setFloat(CHandler.IS_64_BIT ? 32 : 28, density);
     }
 
     /**
      * Collision filtering data.
      */
     public b2Filter filter() {
-        return new b2Filter(getPointer() + (CHandler.IS_32_BIT ? 32 : 40), false);
+        return new b2Filter(getPointer() + (CHandler.IS_64_BIT ? 40 : 32), false);
     }
 
     /**
      * Collision filtering data.
      */
     public void filter(b2Filter toSetPtr) {
-        toSetPtr.setPointer(getPointer() + (CHandler.IS_32_BIT ? 32 : 40), 24, this);
+        toSetPtr.setPointer(getPointer() + (CHandler.IS_64_BIT ? 40 : 32), CHandler.IS_COMPILED_ANDROID_X86 ? 20 : 24, this);
     }
 
     /**
      * Collision filtering data.
      */
     public b2Filter getFilter() {
-        return new b2Filter(getBufPtr().duplicate(CHandler.IS_32_BIT ? 32 : 40, 24), true);
+        return new b2Filter(getBufPtr().duplicate(CHandler.IS_64_BIT ? 40 : 32, CHandler.IS_COMPILED_ANDROID_X86 ? 20 : 24), true);
     }
 
     /**
      * Collision filtering data.
      */
     public void getFilter(b2Filter toCopyTo) {
-        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), CHandler.IS_32_BIT ? 32 : 40, 24);
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), CHandler.IS_64_BIT ? 40 : 32, CHandler.IS_COMPILED_ANDROID_X86 ? 20 : 24);
     }
 
     /**
      * Collision filtering data.
      */
     public void setFilter(b2Filter toCopyFrom) {
-        getBufPtr().copyFrom(CHandler.IS_32_BIT ? 32 : 40, toCopyFrom.getBufPtr(), 0, 24);
+        getBufPtr().copyFrom(CHandler.IS_64_BIT ? 40 : 32, toCopyFrom.getBufPtr(), 0, CHandler.IS_COMPILED_ANDROID_X86 ? 20 : 24);
     }
 
     /**
@@ -162,7 +166,7 @@ public final class b2ShapeDef extends Struct {
      * 	 @see enableSensorEvents
      */
     public boolean isSensor() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 56 : 64);
+        return getBufPtr().getBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 52 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 64 : 56);
     }
 
     /**
@@ -173,49 +177,49 @@ public final class b2ShapeDef extends Struct {
      * 	 @see enableSensorEvents
      */
     public void isSensor(boolean isSensor) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 56 : 64, isSensor);
+        getBufPtr().setBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 52 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 64 : 56, isSensor);
     }
 
     /**
      * Enable sensor events for this shape. This applies to sensors and non-sensors. False by default, even for sensors.
      */
     public boolean enableSensorEvents() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 57 : 65);
+        return getBufPtr().getBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 53 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 65 : 57);
     }
 
     /**
      * Enable sensor events for this shape. This applies to sensors and non-sensors. False by default, even for sensors.
      */
     public void enableSensorEvents(boolean enableSensorEvents) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 57 : 65, enableSensorEvents);
+        getBufPtr().setBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 53 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 65 : 57, enableSensorEvents);
     }
 
     /**
      * Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors. False by default.
      */
     public boolean enableContactEvents() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 58 : 66);
+        return getBufPtr().getBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 54 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 66 : 58);
     }
 
     /**
      * Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors. False by default.
      */
     public void enableContactEvents(boolean enableContactEvents) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 58 : 66, enableContactEvents);
+        getBufPtr().setBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 54 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 66 : 58, enableContactEvents);
     }
 
     /**
      * Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors. False by default.
      */
     public boolean enableHitEvents() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 59 : 67);
+        return getBufPtr().getBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 55 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 67 : 59);
     }
 
     /**
      * Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors. False by default.
      */
     public void enableHitEvents(boolean enableHitEvents) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 59 : 67, enableHitEvents);
+        getBufPtr().setBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 55 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 67 : 59, enableHitEvents);
     }
 
     /**
@@ -223,7 +227,7 @@ public final class b2ShapeDef extends Struct {
      * 	 and must be carefully handled due to threading. Ignored for sensors.
      */
     public boolean enablePreSolveEvents() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 60 : 68);
+        return getBufPtr().getBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 56 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 68 : 60);
     }
 
     /**
@@ -231,7 +235,7 @@ public final class b2ShapeDef extends Struct {
      * 	 and must be carefully handled due to threading. Ignored for sensors.
      */
     public void enablePreSolveEvents(boolean enablePreSolveEvents) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 60 : 68, enablePreSolveEvents);
+        getBufPtr().setBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 56 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 68 : 60, enablePreSolveEvents);
     }
 
     /**
@@ -240,7 +244,7 @@ public final class b2ShapeDef extends Struct {
      * 	 This is flag is ignored for dynamic and kinematic shapes which always invoke contact creation.
      */
     public boolean invokeContactCreation() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 61 : 69);
+        return getBufPtr().getBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 57 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 69 : 61);
     }
 
     /**
@@ -249,38 +253,42 @@ public final class b2ShapeDef extends Struct {
      * 	 This is flag is ignored for dynamic and kinematic shapes which always invoke contact creation.
      */
     public void invokeContactCreation(boolean invokeContactCreation) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 61 : 69, invokeContactCreation);
+        getBufPtr().setBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 57 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 69 : 61, invokeContactCreation);
     }
 
     /**
      * Should the body update the mass properties when this shape is created. Default is true.
      */
     public boolean updateBodyMass() {
-        return getBufPtr().getBoolean(CHandler.IS_32_BIT ? 62 : 70);
+        return getBufPtr().getBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 58 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 70 : 62);
     }
 
     /**
      * Should the body update the mass properties when this shape is created. Default is true.
      */
     public void updateBodyMass(boolean updateBodyMass) {
-        getBufPtr().setBoolean(CHandler.IS_32_BIT ? 62 : 70, updateBodyMass);
+        getBufPtr().setBoolean((CHandler.IS_COMPILED_ANDROID_X86) ? 58 : ((CHandler.IS_64_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_64_BIT && CHandler.IS_COMPILED_UNIX)) ? 70 : 62, updateBodyMass);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 64 : 72);
+        return getBufPtr().getInt((CHandler.IS_COMPILED_ANDROID_X86) ? 60 : ((CHandler.IS_32_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_32_BIT && CHandler.IS_COMPILED_UNIX && !CHandler.IS_COMPILED_ANDROID_X86)) ? 64 : 72);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 64 : 72, internalValue);
+        getBufPtr().setInt((CHandler.IS_COMPILED_ANDROID_X86) ? 60 : ((CHandler.IS_32_BIT && CHandler.IS_COMPILED_WIN) || (CHandler.IS_32_BIT && CHandler.IS_COMPILED_UNIX && !CHandler.IS_COMPILED_ANDROID_X86)) ? 64 : 72, internalValue);
     }
 
     public static final class b2ShapeDefPointer extends StackElementPointer<b2ShapeDef> {
+
+        public b2ShapeDefPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2ShapeDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

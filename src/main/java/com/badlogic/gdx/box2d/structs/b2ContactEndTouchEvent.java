@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 
@@ -47,6 +48,10 @@ public final class b2ContactEndTouchEvent extends Struct {
 
     public b2ContactEndTouchEvent.b2ContactEndTouchEventPointer asPointer() {
         return new b2ContactEndTouchEvent.b2ContactEndTouchEventPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2ContactEndTouchEvent.b2ContactEndTouchEventPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -140,6 +145,10 @@ public final class b2ContactEndTouchEvent extends Struct {
     }
 
     public static final class b2ContactEndTouchEventPointer extends StackElementPointer<b2ContactEndTouchEvent> {
+
+        public b2ContactEndTouchEventPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2ContactEndTouchEventPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

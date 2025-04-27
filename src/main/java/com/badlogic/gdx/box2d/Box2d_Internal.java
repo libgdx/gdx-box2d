@@ -261,11 +261,11 @@ public final class Box2d_Internal {
             }
 
             default void invoke(BufferPtr buf) {
-                DrawPolygonFcn_call(new b2Vec2.b2Vec2Pointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
+                DrawPolygonFcn_call(new b2Vec2.b2Vec2Pointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_64_BIT ? 8 : 4), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 12 : 8)), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 12), false));
             }
 
             default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-                DrawPolygonFcn_call(manager.getPointing(b2Vec2.b2Vec2Pointer.class, buf.getNativePointer(0)), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16)));
+                DrawPolygonFcn_call(manager.getPointing(b2Vec2.b2Vec2Pointer.class, buf.getNativePointer(0)), buf.getInt(CHandler.IS_64_BIT ? 8 : 4), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 12 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 12)));
             }
 
             public static CClosureObject<DrawPolygonFcn> DrawPolygonFcn_downcall(long fnPtr) {
@@ -273,9 +273,9 @@ public final class Box2d_Internal {
                 return new CClosureObject<>((vertices, vertexCount, color, context) -> {
                     BufferPtr bufPtr = encoder.lockOrDuplicate();
                     bufPtr.setNativePointer(0, vertices.getPointer());
-                    bufPtr.setInt(CHandler.IS_32_BIT ? 4 : 8, vertexCount);
-                    bufPtr.setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
+                    bufPtr.setInt(CHandler.IS_64_BIT ? 8 : 4, vertexCount);
+                    bufPtr.setUInt(CHandler.IS_64_BIT ? 12 : 8, color.getIndex());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 16 : 12, context.getPointer());
                     encoder.invoke(bufPtr);
                 }, fnPtr, encoder);
             }
@@ -292,11 +292,11 @@ public final class Box2d_Internal {
             }
 
             default void invoke(BufferPtr buf) {
-                DrawSolidPolygonFcn_call(new b2Transform(buf.getNativePointer(0), true), new b2Vec2.b2Vec2Pointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), buf.getInt(CHandler.IS_32_BIT ? 8 : 16), buf.getFloat(CHandler.IS_32_BIT ? 12 : 20), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 16 : 24)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 20 : 28), false));
+                DrawSolidPolygonFcn_call(new b2Transform(buf.getNativePointer(0), true), new b2Vec2.b2Vec2Pointer(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), false), buf.getInt(CHandler.IS_64_BIT ? 16 : 8), buf.getFloat(CHandler.IS_64_BIT ? 20 : 12), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 24 : 16)), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 28 : 20), false));
             }
 
             default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-                DrawSolidPolygonFcn_call(manager.getPointing(b2Transform.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.b2Vec2Pointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), buf.getInt(CHandler.IS_32_BIT ? 8 : 16), buf.getFloat(CHandler.IS_32_BIT ? 12 : 20), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 16 : 24)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 20 : 28)));
+                DrawSolidPolygonFcn_call(manager.getPointing(b2Transform.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.b2Vec2Pointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)), buf.getInt(CHandler.IS_64_BIT ? 16 : 8), buf.getFloat(CHandler.IS_64_BIT ? 20 : 12), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 24 : 16)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 28 : 20)));
             }
 
             public static CClosureObject<DrawSolidPolygonFcn> DrawSolidPolygonFcn_downcall(long fnPtr) {
@@ -304,11 +304,11 @@ public final class Box2d_Internal {
                 return new CClosureObject<>((transform, vertices, vertexCount, radius, color, context) -> {
                     BufferPtr bufPtr = encoder.lockOrDuplicate();
                     bufPtr.setNativePointer(0, transform.getPointer());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, vertices.getPointer());
-                    bufPtr.setInt(CHandler.IS_32_BIT ? 8 : 16, vertexCount);
-                    bufPtr.setFloat(CHandler.IS_32_BIT ? 12 : 20, radius);
-                    bufPtr.setUInt(CHandler.IS_32_BIT ? 16 : 24, color.getIndex());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 20 : 28, context.getPointer());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, vertices.getPointer());
+                    bufPtr.setInt(CHandler.IS_64_BIT ? 16 : 8, vertexCount);
+                    bufPtr.setFloat(CHandler.IS_64_BIT ? 20 : 12, radius);
+                    bufPtr.setUInt(CHandler.IS_64_BIT ? 24 : 16, color.getIndex());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 28 : 20, context.getPointer());
                     encoder.invoke(bufPtr);
                 }, fnPtr, encoder);
             }
@@ -325,11 +325,11 @@ public final class Box2d_Internal {
             }
 
             default void invoke(BufferPtr buf) {
-                DrawCircleFcn_call(new b2Vec2(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
+                DrawCircleFcn_call(new b2Vec2(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_64_BIT ? 8 : 4), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 12 : 8)), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 12), false));
             }
 
             default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-                DrawCircleFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16)));
+                DrawCircleFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), buf.getFloat(CHandler.IS_64_BIT ? 8 : 4), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 12 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 12)));
             }
 
             public static CClosureObject<DrawCircleFcn> DrawCircleFcn_downcall(long fnPtr) {
@@ -337,9 +337,9 @@ public final class Box2d_Internal {
                 return new CClosureObject<>((center, radius, color, context) -> {
                     BufferPtr bufPtr = encoder.lockOrDuplicate();
                     bufPtr.setNativePointer(0, center.getPointer());
-                    bufPtr.setFloat(CHandler.IS_32_BIT ? 4 : 8, radius);
-                    bufPtr.setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
+                    bufPtr.setFloat(CHandler.IS_64_BIT ? 8 : 4, radius);
+                    bufPtr.setUInt(CHandler.IS_64_BIT ? 12 : 8, color.getIndex());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 16 : 12, context.getPointer());
                     encoder.invoke(bufPtr);
                 }, fnPtr, encoder);
             }
@@ -356,11 +356,11 @@ public final class Box2d_Internal {
             }
 
             default void invoke(BufferPtr buf) {
-                DrawSolidCircleFcn_call(new b2Transform(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
+                DrawSolidCircleFcn_call(new b2Transform(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_64_BIT ? 8 : 4), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 12 : 8)), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 12), false));
             }
 
             default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-                DrawSolidCircleFcn_call(manager.getPointing(b2Transform.class, buf.getNativePointer(0)), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16)));
+                DrawSolidCircleFcn_call(manager.getPointing(b2Transform.class, buf.getNativePointer(0)), buf.getFloat(CHandler.IS_64_BIT ? 8 : 4), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 12 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 12)));
             }
 
             public static CClosureObject<DrawSolidCircleFcn> DrawSolidCircleFcn_downcall(long fnPtr) {
@@ -368,9 +368,9 @@ public final class Box2d_Internal {
                 return new CClosureObject<>((transform, radius, color, context) -> {
                     BufferPtr bufPtr = encoder.lockOrDuplicate();
                     bufPtr.setNativePointer(0, transform.getPointer());
-                    bufPtr.setFloat(CHandler.IS_32_BIT ? 4 : 8, radius);
-                    bufPtr.setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
+                    bufPtr.setFloat(CHandler.IS_64_BIT ? 8 : 4, radius);
+                    bufPtr.setUInt(CHandler.IS_64_BIT ? 12 : 8, color.getIndex());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 16 : 12, context.getPointer());
                     encoder.invoke(bufPtr);
                 }, fnPtr, encoder);
             }
@@ -387,11 +387,11 @@ public final class Box2d_Internal {
             }
 
             default void invoke(BufferPtr buf) {
-                DrawSolidCapsuleFcn_call(new b2Vec2(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), buf.getFloat(CHandler.IS_32_BIT ? 8 : 16), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 12 : 20)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 24), false));
+                DrawSolidCapsuleFcn_call(new b2Vec2(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), true), buf.getFloat(CHandler.IS_64_BIT ? 16 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 20 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 24 : 16), false));
             }
 
             default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-                DrawSolidCapsuleFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), buf.getFloat(CHandler.IS_32_BIT ? 8 : 16), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 12 : 20)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 24)));
+                DrawSolidCapsuleFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)), buf.getFloat(CHandler.IS_64_BIT ? 16 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 20 : 12)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 24 : 16)));
             }
 
             public static CClosureObject<DrawSolidCapsuleFcn> DrawSolidCapsuleFcn_downcall(long fnPtr) {
@@ -399,10 +399,10 @@ public final class Box2d_Internal {
                 return new CClosureObject<>((p1, p2, radius, color, context) -> {
                     BufferPtr bufPtr = encoder.lockOrDuplicate();
                     bufPtr.setNativePointer(0, p1.getPointer());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, p2.getPointer());
-                    bufPtr.setFloat(CHandler.IS_32_BIT ? 8 : 16, radius);
-                    bufPtr.setUInt(CHandler.IS_32_BIT ? 12 : 20, color.getIndex());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 16 : 24, context.getPointer());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, p2.getPointer());
+                    bufPtr.setFloat(CHandler.IS_64_BIT ? 16 : 8, radius);
+                    bufPtr.setUInt(CHandler.IS_64_BIT ? 20 : 12, color.getIndex());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 24 : 16, context.getPointer());
                     encoder.invoke(bufPtr);
                 }, fnPtr, encoder);
             }
@@ -419,11 +419,11 @@ public final class Box2d_Internal {
             }
 
             default void invoke(BufferPtr buf) {
-                DrawSegmentFcn_call(new b2Vec2(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 16)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 20), false));
+                DrawSegmentFcn_call(new b2Vec2(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), true), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 16 : 8)), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 20 : 12), false));
             }
 
             default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-                DrawSegmentFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 16)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 20)));
+                DrawSegmentFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 16 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 20 : 12)));
             }
 
             public static CClosureObject<DrawSegmentFcn> DrawSegmentFcn_downcall(long fnPtr) {
@@ -431,9 +431,9 @@ public final class Box2d_Internal {
                 return new CClosureObject<>((p1, p2, color, context) -> {
                     BufferPtr bufPtr = encoder.lockOrDuplicate();
                     bufPtr.setNativePointer(0, p1.getPointer());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, p2.getPointer());
-                    bufPtr.setUInt(CHandler.IS_32_BIT ? 8 : 16, color.getIndex());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 12 : 20, context.getPointer());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, p2.getPointer());
+                    bufPtr.setUInt(CHandler.IS_64_BIT ? 16 : 8, color.getIndex());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 20 : 12, context.getPointer());
                     encoder.invoke(bufPtr);
                 }, fnPtr, encoder);
             }
@@ -450,11 +450,11 @@ public final class Box2d_Internal {
             }
 
             default void invoke(BufferPtr buf) {
-                DrawTransformFcn_call(new b2Transform(buf.getNativePointer(0), true), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false));
+                DrawTransformFcn_call(new b2Transform(buf.getNativePointer(0), true), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), false));
             }
 
             default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-                DrawTransformFcn_call(manager.getPointing(b2Transform.class, buf.getNativePointer(0)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)));
+                DrawTransformFcn_call(manager.getPointing(b2Transform.class, buf.getNativePointer(0)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)));
             }
 
             public static CClosureObject<DrawTransformFcn> DrawTransformFcn_downcall(long fnPtr) {
@@ -462,7 +462,7 @@ public final class Box2d_Internal {
                 return new CClosureObject<>((transform, context) -> {
                     BufferPtr bufPtr = encoder.lockOrDuplicate();
                     bufPtr.setNativePointer(0, transform.getPointer());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, context.getPointer());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, context.getPointer());
                     encoder.invoke(bufPtr);
                 }, fnPtr, encoder);
             }
@@ -479,11 +479,11 @@ public final class Box2d_Internal {
             }
 
             default void invoke(BufferPtr buf) {
-                DrawPointFcn_call(new b2Vec2(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false));
+                DrawPointFcn_call(new b2Vec2(buf.getNativePointer(0), true), buf.getFloat(CHandler.IS_64_BIT ? 8 : 4), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 12 : 8)), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 12), false));
             }
 
             default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-                DrawPointFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), buf.getFloat(CHandler.IS_32_BIT ? 4 : 8), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 12)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16)));
+                DrawPointFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), buf.getFloat(CHandler.IS_64_BIT ? 8 : 4), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 12 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 12)));
             }
 
             public static CClosureObject<DrawPointFcn> DrawPointFcn_downcall(long fnPtr) {
@@ -491,9 +491,9 @@ public final class Box2d_Internal {
                 return new CClosureObject<>((p, size, color, context) -> {
                     BufferPtr bufPtr = encoder.lockOrDuplicate();
                     bufPtr.setNativePointer(0, p.getPointer());
-                    bufPtr.setFloat(CHandler.IS_32_BIT ? 4 : 8, size);
-                    bufPtr.setUInt(CHandler.IS_32_BIT ? 8 : 12, color.getIndex());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 12 : 16, context.getPointer());
+                    bufPtr.setFloat(CHandler.IS_64_BIT ? 8 : 4, size);
+                    bufPtr.setUInt(CHandler.IS_64_BIT ? 12 : 8, color.getIndex());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 16 : 12, context.getPointer());
                     encoder.invoke(bufPtr);
                 }, fnPtr, encoder);
             }
@@ -510,11 +510,11 @@ public final class Box2d_Internal {
             }
 
             default void invoke(BufferPtr buf) {
-                DrawStringFcn_call(new b2Vec2(buf.getNativePointer(0), true), new BytePointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 16)), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 20), false));
+                DrawStringFcn_call(new b2Vec2(buf.getNativePointer(0), true), new BytePointer(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), false), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 16 : 8)), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 20 : 12), false));
             }
 
             default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-                DrawStringFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), manager.getPointing(BytePointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_32_BIT ? 8 : 16)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 20)));
+                DrawStringFcn_call(manager.getPointing(b2Vec2.class, buf.getNativePointer(0)), manager.getPointing(BytePointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)), b2HexColor.getByIndex((int) buf.getUInt(CHandler.IS_64_BIT ? 16 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 20 : 12)));
             }
 
             public static CClosureObject<DrawStringFcn> DrawStringFcn_downcall(long fnPtr) {
@@ -522,9 +522,9 @@ public final class Box2d_Internal {
                 return new CClosureObject<>((p, s, color, context) -> {
                     BufferPtr bufPtr = encoder.lockOrDuplicate();
                     bufPtr.setNativePointer(0, p.getPointer());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, s.getPointer());
-                    bufPtr.setUInt(CHandler.IS_32_BIT ? 8 : 16, color.getIndex());
-                    bufPtr.setNativePointer(CHandler.IS_32_BIT ? 12 : 20, context.getPointer());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, s.getPointer());
+                    bufPtr.setUInt(CHandler.IS_64_BIT ? 16 : 8, color.getIndex());
+                    bufPtr.setNativePointer(CHandler.IS_64_BIT ? 20 : 12, context.getPointer());
                     encoder.invoke(bufPtr);
                 }, fnPtr, encoder);
             }
@@ -554,11 +554,11 @@ public final class Box2d_Internal {
         }
 
         default void invoke(BufferPtr buf) {
-            buf.setBoolean(0, b2OverlapResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false)));
+            buf.setBoolean(0, b2OverlapResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), false)));
         }
 
         default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-            buf.setBoolean(0, b2OverlapResultFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8))));
+            buf.setBoolean(0, b2OverlapResultFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4))));
         }
 
         public static CClosureObject<b2OverlapResultFcn> b2OverlapResultFcn_downcall(long fnPtr) {
@@ -566,9 +566,9 @@ public final class Box2d_Internal {
             return new CClosureObject<>((shapeId, context) -> {
                 BufferPtr bufPtr = encoder.lockOrDuplicate();
                 bufPtr.setNativePointer(0, shapeId.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, context.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, context.getPointer());
                 encoder.invoke(bufPtr);
-                boolean _retPar = bufPtr.getBoolean(CHandler.IS_32_BIT ? 8 : 16);
+                boolean _retPar = bufPtr.getBoolean(CHandler.IS_64_BIT ? 16 : 8);
                 encoder.finish(bufPtr);
                 return _retPar;
             }, fnPtr, encoder);
@@ -601,7 +601,7 @@ public final class Box2d_Internal {
                 bufPtr.setLong(4, userData);
                 bufPtr.setNativePointer(12, context.getPointer());
                 encoder.invoke(bufPtr);
-                boolean _retPar = bufPtr.getBoolean(CHandler.IS_32_BIT ? 16 : 20);
+                boolean _retPar = bufPtr.getBoolean(CHandler.IS_64_BIT ? 20 : 16);
                 encoder.finish(bufPtr);
                 return _retPar;
             }, fnPtr, encoder);
@@ -650,11 +650,11 @@ public final class Box2d_Internal {
         }
 
         default void invoke(BufferPtr buf) {
-            buf.setNativePointer(0, b2EnqueueTaskCallback_call(CHandler.getClosureObject(buf.getNativePointer(0), b2TaskCallback_Internal::b2TaskCallback_downcall), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getInt(CHandler.IS_32_BIT ? 8 : 12), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 24), false)).getPointer());
+            buf.setNativePointer(0, b2EnqueueTaskCallback_call(CHandler.getClosureObject(buf.getNativePointer(0), b2TaskCallback_Internal::b2TaskCallback_downcall), buf.getInt(CHandler.IS_64_BIT ? 8 : 4), buf.getInt(CHandler.IS_64_BIT ? 12 : 8), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 12), false), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 24 : 16), false)).getPointer());
         }
 
         default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-            buf.setNativePointer(0, b2EnqueueTaskCallback_call(CHandler.getClosureObject(buf.getNativePointer(0), b2TaskCallback_Internal::b2TaskCallback_downcall), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getInt(CHandler.IS_32_BIT ? 8 : 12), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 16)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 24))).getPointer());
+            buf.setNativePointer(0, b2EnqueueTaskCallback_call(CHandler.getClosureObject(buf.getNativePointer(0), b2TaskCallback_Internal::b2TaskCallback_downcall), buf.getInt(CHandler.IS_64_BIT ? 8 : 4), buf.getInt(CHandler.IS_64_BIT ? 12 : 8), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 12)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 24 : 16))).getPointer());
         }
 
         public static CClosureObject<b2EnqueueTaskCallback> b2EnqueueTaskCallback_downcall(long fnPtr) {
@@ -662,12 +662,12 @@ public final class Box2d_Internal {
             return new CClosureObject<>((task, itemCount, minRange, taskContext, userContext) -> {
                 BufferPtr bufPtr = encoder.lockOrDuplicate();
                 bufPtr.setNativePointer(0, task.getPointer());
-                bufPtr.setInt(CHandler.IS_32_BIT ? 4 : 8, itemCount);
-                bufPtr.setInt(CHandler.IS_32_BIT ? 8 : 12, minRange);
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 12 : 16, taskContext.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 16 : 24, userContext.getPointer());
+                bufPtr.setInt(CHandler.IS_64_BIT ? 8 : 4, itemCount);
+                bufPtr.setInt(CHandler.IS_64_BIT ? 12 : 8, minRange);
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 16 : 12, taskContext.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 24 : 16, userContext.getPointer());
                 encoder.invoke(bufPtr);
-                VoidPointer _retPar = new VoidPointer(bufPtr.getNativePointer(CHandler.IS_32_BIT ? 20 : 32), false);
+                VoidPointer _retPar = new VoidPointer(bufPtr.getNativePointer(CHandler.IS_64_BIT ? 32 : 20), false);
                 encoder.finish(bufPtr);
                 return _retPar;
             }, fnPtr, encoder);
@@ -753,11 +753,11 @@ public final class Box2d_Internal {
         }
 
         default void invoke(BufferPtr buf) {
-            buf.setFloat(0, b2CastResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), new b2Vec2(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), true), buf.getFloat(CHandler.IS_32_BIT ? 12 : 24), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 28), false)));
+            buf.setFloat(0, b2CastResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2Vec2(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), true), new b2Vec2(buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 8), true), buf.getFloat(CHandler.IS_64_BIT ? 24 : 12), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 28 : 16), false)));
         }
 
         default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-            buf.setFloat(0, b2CastResultFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16)), buf.getFloat(CHandler.IS_32_BIT ? 12 : 24), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 28))));
+            buf.setFloat(0, b2CastResultFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)), manager.getPointing(b2Vec2.class, buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 8)), buf.getFloat(CHandler.IS_64_BIT ? 24 : 12), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 28 : 16))));
         }
 
         public static CClosureObject<b2CastResultFcn> b2CastResultFcn_downcall(long fnPtr) {
@@ -765,12 +765,12 @@ public final class Box2d_Internal {
             return new CClosureObject<>((shapeId, point, normal, fraction, context) -> {
                 BufferPtr bufPtr = encoder.lockOrDuplicate();
                 bufPtr.setNativePointer(0, shapeId.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, point.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 8 : 16, normal.getPointer());
-                bufPtr.setFloat(CHandler.IS_32_BIT ? 12 : 24, fraction);
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 16 : 28, context.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, point.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 16 : 8, normal.getPointer());
+                bufPtr.setFloat(CHandler.IS_64_BIT ? 24 : 12, fraction);
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 28 : 16, context.getPointer());
                 encoder.invoke(bufPtr);
-                float _retPar = bufPtr.getFloat(CHandler.IS_32_BIT ? 20 : 36);
+                float _retPar = bufPtr.getFloat(CHandler.IS_64_BIT ? 36 : 20);
                 encoder.finish(bufPtr);
                 return _retPar;
             }, fnPtr, encoder);
@@ -788,11 +788,11 @@ public final class Box2d_Internal {
         }
 
         default void invoke(BufferPtr buf) {
-            buf.setFloat(0, b2TreeShapeCastCallbackFcn_call(new b2ShapeCastInput.b2ShapeCastInputPointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getLong(CHandler.IS_32_BIT ? 8 : 12), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 20), false)));
+            buf.setFloat(0, b2TreeShapeCastCallbackFcn_call(new b2ShapeCastInput.b2ShapeCastInputPointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_64_BIT ? 8 : 4), buf.getLong(CHandler.IS_64_BIT ? 12 : 8), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 20 : 16), false)));
         }
 
         default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-            buf.setFloat(0, b2TreeShapeCastCallbackFcn_call(manager.getPointing(b2ShapeCastInput.b2ShapeCastInputPointer.class, buf.getNativePointer(0)), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getLong(CHandler.IS_32_BIT ? 8 : 12), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 20))));
+            buf.setFloat(0, b2TreeShapeCastCallbackFcn_call(manager.getPointing(b2ShapeCastInput.b2ShapeCastInputPointer.class, buf.getNativePointer(0)), buf.getInt(CHandler.IS_64_BIT ? 8 : 4), buf.getLong(CHandler.IS_64_BIT ? 12 : 8), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 20 : 16))));
         }
 
         public static CClosureObject<b2TreeShapeCastCallbackFcn> b2TreeShapeCastCallbackFcn_downcall(long fnPtr) {
@@ -800,11 +800,11 @@ public final class Box2d_Internal {
             return new CClosureObject<>((input, proxyId, userData, context) -> {
                 BufferPtr bufPtr = encoder.lockOrDuplicate();
                 bufPtr.setNativePointer(0, input.getPointer());
-                bufPtr.setInt(CHandler.IS_32_BIT ? 4 : 8, proxyId);
-                bufPtr.setLong(CHandler.IS_32_BIT ? 8 : 12, userData);
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 16 : 20, context.getPointer());
+                bufPtr.setInt(CHandler.IS_64_BIT ? 8 : 4, proxyId);
+                bufPtr.setLong(CHandler.IS_64_BIT ? 12 : 8, userData);
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 20 : 16, context.getPointer());
                 encoder.invoke(bufPtr);
-                float _retPar = bufPtr.getFloat(CHandler.IS_32_BIT ? 20 : 28);
+                float _retPar = bufPtr.getFloat(CHandler.IS_64_BIT ? 28 : 20);
                 encoder.finish(bufPtr);
                 return _retPar;
             }, fnPtr, encoder);
@@ -822,11 +822,11 @@ public final class Box2d_Internal {
         }
 
         default void invoke(BufferPtr buf) {
-            buf.setBoolean(0, b2PreSolveFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2ShapeId(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), new b2Manifold.b2ManifoldPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 24), false)));
+            buf.setBoolean(0, b2PreSolveFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2ShapeId(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), true), new b2Manifold.b2ManifoldPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 8), false), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 24 : 12), false)));
         }
 
         default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-            buf.setBoolean(0, b2PreSolveFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2ShapeId.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), manager.getPointing(b2Manifold.b2ManifoldPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 12 : 24))));
+            buf.setBoolean(0, b2PreSolveFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2ShapeId.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)), manager.getPointing(b2Manifold.b2ManifoldPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 24 : 12))));
         }
 
         public static CClosureObject<b2PreSolveFcn> b2PreSolveFcn_downcall(long fnPtr) {
@@ -834,11 +834,11 @@ public final class Box2d_Internal {
             return new CClosureObject<>((shapeIdA, shapeIdB, manifold, context) -> {
                 BufferPtr bufPtr = encoder.lockOrDuplicate();
                 bufPtr.setNativePointer(0, shapeIdA.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, shapeIdB.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 8 : 16, manifold.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 12 : 24, context.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, shapeIdB.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 16 : 8, manifold.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 24 : 12, context.getPointer());
                 encoder.invoke(bufPtr);
-                boolean _retPar = bufPtr.getBoolean(CHandler.IS_32_BIT ? 16 : 32);
+                boolean _retPar = bufPtr.getBoolean(CHandler.IS_64_BIT ? 32 : 16);
                 encoder.finish(bufPtr);
                 return _retPar;
             }, fnPtr, encoder);
@@ -888,11 +888,11 @@ public final class Box2d_Internal {
         }
 
         default void invoke(BufferPtr buf) {
-            buf.setInt(0, b2AssertFcn_call(new BytePointer(buf.getNativePointer(0), false), new BytePointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), buf.getInt(CHandler.IS_32_BIT ? 8 : 16)));
+            buf.setInt(0, b2AssertFcn_call(new BytePointer(buf.getNativePointer(0), false), new BytePointer(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), false), buf.getInt(CHandler.IS_64_BIT ? 16 : 8)));
         }
 
         default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-            buf.setInt(0, b2AssertFcn_call(manager.getPointing(BytePointer.class, buf.getNativePointer(0)), manager.getPointing(BytePointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), buf.getInt(CHandler.IS_32_BIT ? 8 : 16)));
+            buf.setInt(0, b2AssertFcn_call(manager.getPointing(BytePointer.class, buf.getNativePointer(0)), manager.getPointing(BytePointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)), buf.getInt(CHandler.IS_64_BIT ? 16 : 8)));
         }
 
         public static CClosureObject<b2AssertFcn> b2AssertFcn_downcall(long fnPtr) {
@@ -900,10 +900,10 @@ public final class Box2d_Internal {
             return new CClosureObject<>((condition, fileName, lineNumber) -> {
                 BufferPtr bufPtr = encoder.lockOrDuplicate();
                 bufPtr.setNativePointer(0, condition.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, fileName.getPointer());
-                bufPtr.setInt(CHandler.IS_32_BIT ? 8 : 16, lineNumber);
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, fileName.getPointer());
+                bufPtr.setInt(CHandler.IS_64_BIT ? 16 : 8, lineNumber);
                 encoder.invoke(bufPtr);
-                int _retPar = bufPtr.getInt(CHandler.IS_32_BIT ? 12 : 20);
+                int _retPar = bufPtr.getInt(CHandler.IS_64_BIT ? 20 : 12);
                 encoder.finish(bufPtr);
                 return _retPar;
             }, fnPtr, encoder);
@@ -921,11 +921,11 @@ public final class Box2d_Internal {
         }
 
         default void invoke(BufferPtr buf) {
-            buf.setBoolean(0, b2CustomFilterFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2ShapeId(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), true), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), false)));
+            buf.setBoolean(0, b2CustomFilterFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2ShapeId(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), true), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 8), false)));
         }
 
         default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-            buf.setBoolean(0, b2CustomFilterFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2ShapeId.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16))));
+            buf.setBoolean(0, b2CustomFilterFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2ShapeId.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 8))));
         }
 
         public static CClosureObject<b2CustomFilterFcn> b2CustomFilterFcn_downcall(long fnPtr) {
@@ -933,10 +933,10 @@ public final class Box2d_Internal {
             return new CClosureObject<>((shapeIdA, shapeIdB, context) -> {
                 BufferPtr bufPtr = encoder.lockOrDuplicate();
                 bufPtr.setNativePointer(0, shapeIdA.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, shapeIdB.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 8 : 16, context.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, shapeIdB.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 16 : 8, context.getPointer());
                 encoder.invoke(bufPtr);
-                boolean _retPar = bufPtr.getBoolean(CHandler.IS_32_BIT ? 12 : 24);
+                boolean _retPar = bufPtr.getBoolean(CHandler.IS_64_BIT ? 24 : 12);
                 encoder.finish(bufPtr);
                 return _retPar;
             }, fnPtr, encoder);
@@ -954,11 +954,11 @@ public final class Box2d_Internal {
         }
 
         default void invoke(BufferPtr buf) {
-            buf.setBoolean(0, b2PlaneResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2PlaneResult.b2PlaneResultPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16), false)));
+            buf.setBoolean(0, b2PlaneResultFcn_call(new b2ShapeId(buf.getNativePointer(0), true), new b2PlaneResult.b2PlaneResultPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), false), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 8), false)));
         }
 
         default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-            buf.setBoolean(0, b2PlaneResultFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2PlaneResult.b2PlaneResultPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 8 : 16))));
+            buf.setBoolean(0, b2PlaneResultFcn_call(manager.getPointing(b2ShapeId.class, buf.getNativePointer(0)), manager.getPointing(b2PlaneResult.b2PlaneResultPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 16 : 8))));
         }
 
         public static CClosureObject<b2PlaneResultFcn> b2PlaneResultFcn_downcall(long fnPtr) {
@@ -966,10 +966,10 @@ public final class Box2d_Internal {
             return new CClosureObject<>((shapeId, plane, context) -> {
                 BufferPtr bufPtr = encoder.lockOrDuplicate();
                 bufPtr.setNativePointer(0, shapeId.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, plane.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 8 : 16, context.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, plane.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 16 : 8, context.getPointer());
                 encoder.invoke(bufPtr);
-                boolean _retPar = bufPtr.getBoolean(CHandler.IS_32_BIT ? 12 : 24);
+                boolean _retPar = bufPtr.getBoolean(CHandler.IS_64_BIT ? 24 : 12);
                 encoder.finish(bufPtr);
                 return _retPar;
             }, fnPtr, encoder);
@@ -987,11 +987,11 @@ public final class Box2d_Internal {
         }
 
         default void invoke(BufferPtr buf) {
-            buf.setFloat(0, b2TreeRayCastCallbackFcn_call(new b2RayCastInput.b2RayCastInputPointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getLong(CHandler.IS_32_BIT ? 8 : 12), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 20), false)));
+            buf.setFloat(0, b2TreeRayCastCallbackFcn_call(new b2RayCastInput.b2RayCastInputPointer(buf.getNativePointer(0), false), buf.getInt(CHandler.IS_64_BIT ? 8 : 4), buf.getLong(CHandler.IS_64_BIT ? 12 : 8), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 20 : 16), false)));
         }
 
         default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-            buf.setFloat(0, b2TreeRayCastCallbackFcn_call(manager.getPointing(b2RayCastInput.b2RayCastInputPointer.class, buf.getNativePointer(0)), buf.getInt(CHandler.IS_32_BIT ? 4 : 8), buf.getLong(CHandler.IS_32_BIT ? 8 : 12), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 16 : 20))));
+            buf.setFloat(0, b2TreeRayCastCallbackFcn_call(manager.getPointing(b2RayCastInput.b2RayCastInputPointer.class, buf.getNativePointer(0)), buf.getInt(CHandler.IS_64_BIT ? 8 : 4), buf.getLong(CHandler.IS_64_BIT ? 12 : 8), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 20 : 16))));
         }
 
         public static CClosureObject<b2TreeRayCastCallbackFcn> b2TreeRayCastCallbackFcn_downcall(long fnPtr) {
@@ -999,11 +999,11 @@ public final class Box2d_Internal {
             return new CClosureObject<>((input, proxyId, userData, context) -> {
                 BufferPtr bufPtr = encoder.lockOrDuplicate();
                 bufPtr.setNativePointer(0, input.getPointer());
-                bufPtr.setInt(CHandler.IS_32_BIT ? 4 : 8, proxyId);
-                bufPtr.setLong(CHandler.IS_32_BIT ? 8 : 12, userData);
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 16 : 20, context.getPointer());
+                bufPtr.setInt(CHandler.IS_64_BIT ? 8 : 4, proxyId);
+                bufPtr.setLong(CHandler.IS_64_BIT ? 12 : 8, userData);
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 20 : 16, context.getPointer());
                 encoder.invoke(bufPtr);
-                float _retPar = bufPtr.getFloat(CHandler.IS_32_BIT ? 20 : 28);
+                float _retPar = bufPtr.getFloat(CHandler.IS_64_BIT ? 28 : 20);
                 encoder.finish(bufPtr);
                 return _retPar;
             }, fnPtr, encoder);
@@ -1049,11 +1049,11 @@ public final class Box2d_Internal {
         }
 
         default void invoke(BufferPtr buf) {
-            b2FinishTaskCallback_call(new VoidPointer(buf.getNativePointer(0), false), new VoidPointer(buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false));
+            b2FinishTaskCallback_call(new VoidPointer(buf.getNativePointer(0), false), new VoidPointer(buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4), false));
         }
 
         default void invokePooled(BufferPtr buf, PointingPoolManager manager) {
-            b2FinishTaskCallback_call(manager.getPointing(VoidPointer.class, buf.getNativePointer(0)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_32_BIT ? 4 : 8)));
+            b2FinishTaskCallback_call(manager.getPointing(VoidPointer.class, buf.getNativePointer(0)), manager.getPointing(VoidPointer.class, buf.getNativePointer(CHandler.IS_64_BIT ? 8 : 4)));
         }
 
         public static CClosureObject<b2FinishTaskCallback> b2FinishTaskCallback_downcall(long fnPtr) {
@@ -1061,7 +1061,7 @@ public final class Box2d_Internal {
             return new CClosureObject<>((userTask, userContext) -> {
                 BufferPtr bufPtr = encoder.lockOrDuplicate();
                 bufPtr.setNativePointer(0, userTask.getPointer());
-                bufPtr.setNativePointer(CHandler.IS_32_BIT ? 4 : 8, userContext.getPointer());
+                bufPtr.setNativePointer(CHandler.IS_64_BIT ? 8 : 4, userContext.getPointer());
                 encoder.invoke(bufPtr);
             }, fnPtr, encoder);
         }

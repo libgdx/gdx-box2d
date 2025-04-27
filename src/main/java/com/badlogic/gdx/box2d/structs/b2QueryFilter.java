@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -48,6 +49,10 @@ public final class b2QueryFilter extends Struct {
         return new b2QueryFilter.b2QueryFilterPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2QueryFilter.b2QueryFilterPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * The collision category bits of this query. Normally you would just set one bit.
      */
@@ -79,6 +84,10 @@ public final class b2QueryFilter extends Struct {
     }
 
     public static final class b2QueryFilterPointer extends StackElementPointer<b2QueryFilter> {
+
+        public b2QueryFilterPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2QueryFilterPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

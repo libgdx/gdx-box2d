@@ -4,10 +4,10 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * Distance joint definition
@@ -52,6 +52,10 @@ public final class b2DistanceJointDef extends Struct {
 
     public b2DistanceJointDef.b2DistanceJointDefPointer asPointer() {
         return new b2DistanceJointDef.b2DistanceJointDefPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2DistanceJointDef.b2DistanceJointDefPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -354,31 +358,35 @@ public final class b2DistanceJointDef extends Struct {
      * User data pointer
      */
     public VoidPointer userData() {
-        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 76 : 80), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 80 : 76), false);
     }
 
     /**
      * User data pointer
      */
     public void userData(VoidPointer userData) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 76 : 80, userData.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 80 : 76, userData.getPointer());
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 80 : 88);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 88 : 80);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 80 : 88, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 88 : 80, internalValue);
     }
 
     public static final class b2DistanceJointDefPointer extends StackElementPointer<b2DistanceJointDef> {
+
+        public b2DistanceJointDefPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2DistanceJointDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

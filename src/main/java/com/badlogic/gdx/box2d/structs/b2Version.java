@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 
 /**
@@ -44,6 +45,10 @@ public final class b2Version extends Struct {
 
     public b2Version.b2VersionPointer asPointer() {
         return new b2Version.b2VersionPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2Version.b2VersionPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -89,6 +94,10 @@ public final class b2Version extends Struct {
     }
 
     public static final class b2VersionPointer extends StackElementPointer<b2Version> {
+
+        public b2VersionPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2VersionPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

@@ -189,10 +189,6 @@ jnigen {
     addMac(x64, x86)
 
     addAndroid {
-        // TODO: TEMP fix for compiling for x86, fix later
-        cFlags += arrayOf("-malign-double")
-        cppFlags += arrayOf("-malign-double")
-
         libraries = arrayOf()
         androidApplicationMk += arrayOf("APP_PLATFORM := android-21",
             "APP_STRIP_MODE := none",

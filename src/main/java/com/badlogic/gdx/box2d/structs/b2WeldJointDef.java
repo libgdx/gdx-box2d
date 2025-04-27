@@ -4,10 +4,10 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * Weld joint definition
@@ -51,6 +51,10 @@ public final class b2WeldJointDef extends Struct {
 
     public b2WeldJointDef.b2WeldJointDefPointer asPointer() {
         return new b2WeldJointDef.b2WeldJointDefPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2WeldJointDef.b2WeldJointDefPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -297,17 +301,21 @@ public final class b2WeldJointDef extends Struct {
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 60 : 64);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 64 : 60);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 60 : 64, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 64 : 60, internalValue);
     }
 
     public static final class b2WeldJointDefPointer extends StackElementPointer<b2WeldJointDef> {
+
+        public b2WeldJointDefPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2WeldJointDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

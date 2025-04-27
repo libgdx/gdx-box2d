@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
@@ -45,6 +46,10 @@ public final class b2Hull extends Struct {
 
     public b2Hull.b2HullPointer asPointer() {
         return new b2Hull.b2HullPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2Hull.b2HullPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -97,6 +102,10 @@ public final class b2Hull extends Struct {
     }
 
     public static final class b2HullPointer extends StackElementPointer<b2Hull> {
+
+        public b2HullPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2HullPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

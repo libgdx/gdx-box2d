@@ -4,6 +4,7 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2SensorBeginTouchEvent;
 import com.badlogic.gdx.box2d.structs.b2SensorEndTouchEvent;
@@ -49,6 +50,10 @@ public final class b2SensorEvents extends Struct {
         return new b2SensorEvents.b2SensorEventsPointer(getPointer(), false, 1, this);
     }
 
+    public void asPointer(b2SensorEvents.b2SensorEventsPointer ptr) {
+        ptr.setPointer(this);
+    }
+
     /**
      * Array of sensor begin touch events
      */
@@ -67,45 +72,49 @@ public final class b2SensorEvents extends Struct {
      * Array of sensor end touch events
      */
     public b2SensorEndTouchEvent.b2SensorEndTouchEventPointer endEvents() {
-        return new b2SensorEndTouchEvent.b2SensorEndTouchEventPointer(getBufPtr().getNativePointer(CHandler.IS_32_BIT ? 4 : 8), false);
+        return new b2SensorEndTouchEvent.b2SensorEndTouchEventPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 8 : 4), false);
     }
 
     /**
      * Array of sensor end touch events
      */
     public void endEvents(b2SensorEndTouchEvent.b2SensorEndTouchEventPointer endEvents) {
-        getBufPtr().setNativePointer(CHandler.IS_32_BIT ? 4 : 8, endEvents.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 8 : 4, endEvents.getPointer());
     }
 
     /**
      * The number of begin touch events
      */
     public int beginCount() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 8 : 16);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 16 : 8);
     }
 
     /**
      * The number of begin touch events
      */
     public void beginCount(int beginCount) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 8 : 16, beginCount);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 16 : 8, beginCount);
     }
 
     /**
      * The number of end touch events
      */
     public int endCount() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 12 : 20);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 20 : 12);
     }
 
     /**
      * The number of end touch events
      */
     public void endCount(int endCount) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 12 : 20, endCount);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 20 : 12, endCount);
     }
 
     public static final class b2SensorEventsPointer extends StackElementPointer<b2SensorEvents> {
+
+        public b2SensorEventsPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2SensorEventsPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);

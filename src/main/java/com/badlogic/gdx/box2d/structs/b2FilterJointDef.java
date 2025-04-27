@@ -4,9 +4,9 @@ import com.badlogic.gdx.jnigen.runtime.CHandler;
 import com.badlogic.gdx.jnigen.runtime.pointer.Struct;
 import com.badlogic.gdx.jnigen.runtime.pointer.StackElementPointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
+import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
-import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 
 /**
  * A filter joint is used to disable collision between two specific bodies.
@@ -47,6 +47,10 @@ public final class b2FilterJointDef extends Struct {
 
     public b2FilterJointDef.b2FilterJointDefPointer asPointer() {
         return new b2FilterJointDef.b2FilterJointDefPointer(getPointer(), false, 1, this);
+    }
+
+    public void asPointer(b2FilterJointDef.b2FilterJointDefPointer ptr) {
+        ptr.setPointer(this);
     }
 
     /**
@@ -137,17 +141,21 @@ public final class b2FilterJointDef extends Struct {
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_32_BIT ? 20 : 24);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 24 : 20);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_32_BIT ? 20 : 24, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 24 : 20, internalValue);
     }
 
     public static final class b2FilterJointDefPointer extends StackElementPointer<b2FilterJointDef> {
+
+        public b2FilterJointDefPointer(VoidPointer pointer) {
+            super(pointer);
+        }
 
         public b2FilterJointDefPointer(long pointer, boolean freeOnGC) {
             super(pointer, freeOnGC);
