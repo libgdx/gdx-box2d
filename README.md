@@ -1,6 +1,6 @@
 ## gdx-box2d
 
-This project contains java bindings for the v3.1 release of [Box2D](https://github.com/erincatto/box2d).  
+This project contains java bindings for the v3.1.0 release of [Box2D](https://github.com/erincatto/box2d).  
 The project is build from commit [0f2b0246f39594e93fcc8dde0fe0bb1b20b403f9](https://github.com/erincatto/box2d/tree/0f2b0246f39594e93fcc8dde0fe0bb1b20b403f9).
 
 > [!CAUTION]
@@ -8,7 +8,7 @@ The project is build from commit [0f2b0246f39594e93fcc8dde0fe0bb1b20b403f9](http
 
 ## Installation
 
-The current version is: 0.1-SNAPSHOT
+The current version is: 3.1.0-0
 
 gdx-box2d provides the following artifacts:
 - `com.badlogicgames.gdx:gdx-box2d:$version`
