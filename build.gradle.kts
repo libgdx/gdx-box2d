@@ -5,7 +5,7 @@ import kotlin.io.path.createTempDirectory
 
 plugins {
     id("java-library")
-    id("com.badlogicgames.jnigen.jnigen-gradle") version "3.0.1-SNAPSHOT"
+    id("com.badlogicgames.jnigen.jnigen-gradle") version "3.1.0"
 }
 
 val isReleaseBuild: Boolean
