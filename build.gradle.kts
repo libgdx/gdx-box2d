@@ -251,18 +251,7 @@ allprojects {
 
     configure<PublishingExtension> {
         publications {
-            register("mavenJava", MavenPublication::class) {
-                from(components["java"])
-
-                versionMapping {
-                    usage("java-api") {
-                        fromResolutionOf("runtimeClasspath")
-                    }
-                    usage("java-runtime") {
-                        fromResolutionResult()
-                    }
-                }
-
+            withType(MavenPublication::class) {
                 pom {
                     name = property("POM_NAME") as String
                     description = property("POM_DESCRIPTION") as String
@@ -285,6 +274,18 @@ allprojects {
                         connection = property("POM_SCM_CONNECTION") as String
                         developerConnection = property("POM_SCM_DEV_CONNECTION") as String
                         url = property("POM_SCM_URL") as String
+                    }
+                }
+            }
+            register("mavenJava", MavenPublication::class) {
+                from(components["java"])
+
+                versionMapping {
+                    usage("java-api") {
+                        fromResolutionOf("runtimeClasspath")
+                    }
+                    usage("java-runtime") {
+                        fromResolutionResult()
                     }
                 }
             }
