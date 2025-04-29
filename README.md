@@ -3,12 +3,9 @@
 This project contains java bindings for the v3.1.0 release of [Box2D](https://github.com/erincatto/box2d).  
 The project is build from commit [0f2b0246f39594e93fcc8dde0fe0bb1b20b403f9](https://github.com/erincatto/box2d/tree/0f2b0246f39594e93fcc8dde0fe0bb1b20b403f9).
 
-> [!CAUTION]
-> The API is considered incubating and may change at any point.
-
 ## Installation
 
-The current version is: 3.1.0-0
+The current version is: `3.1.0-0`
 
 gdx-box2d provides the following artifacts:
 - `com.badlogicgames.gdx:gdx-box2d:$version`
@@ -35,6 +32,10 @@ Structs and Pointer are part of the java GC cycle. If a struct/pointer gets allo
 All pointer types provide constructors to make them not freed by GC. You need to free those manually.  
 Closures always need to be freed manually.  
 If a box2d method returns a pointer, it will not be registered for GC.  
+
+> [!NOTE]
+> For more information on the bindings see the [documentation](https://github.com/libgdx/gdx-jnigen/blob/master/RUNTIME.MD#the-runtime).
+
 
 ## Java 8
 The project needs java 8 language features to build. However, it doesn't use any java 8 APIs and is therefor still safe to use with mobiVM.
