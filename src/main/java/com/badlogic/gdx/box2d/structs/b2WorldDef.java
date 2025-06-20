@@ -176,101 +176,73 @@ public final class b2WorldDef extends Struct {
     }
 
     /**
-     * Joint stiffness. Cycles per second.
-     */
-    public float jointHertz() {
-        return getBufPtr().getFloat(28);
-    }
-
-    /**
-     * Joint stiffness. Cycles per second.
-     */
-    public void jointHertz(float jointHertz) {
-        getBufPtr().setFloat(28, jointHertz);
-    }
-
-    /**
-     * Joint bounciness. Non-dimensional.
-     */
-    public float jointDampingRatio() {
-        return getBufPtr().getFloat(32);
-    }
-
-    /**
-     * Joint bounciness. Non-dimensional.
-     */
-    public void jointDampingRatio(float jointDampingRatio) {
-        getBufPtr().setFloat(32, jointDampingRatio);
-    }
-
-    /**
      * Maximum linear speed. Usually meters per second.
      */
     public float maximumLinearSpeed() {
-        return getBufPtr().getFloat(36);
+        return getBufPtr().getFloat(28);
     }
 
     /**
      * Maximum linear speed. Usually meters per second.
      */
     public void maximumLinearSpeed(float maximumLinearSpeed) {
-        getBufPtr().setFloat(36, maximumLinearSpeed);
+        getBufPtr().setFloat(28, maximumLinearSpeed);
     }
 
     /**
      * Optional mixing callback for friction. The default uses sqrt(frictionA * frictionB).
      */
     public ClosureObject<b2FrictionCallback> frictionCallback() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(40), b2FrictionCallback_Internal::b2FrictionCallback_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(32), b2FrictionCallback_Internal::b2FrictionCallback_downcall);
     }
 
     /**
      * Optional mixing callback for friction. The default uses sqrt(frictionA * frictionB).
      */
     public void frictionCallback(ClosureObject<b2FrictionCallback> frictionCallback) {
-        getBufPtr().setNativePointer(40, frictionCallback.getPointer());
+        getBufPtr().setNativePointer(32, frictionCallback.getPointer());
     }
 
     /**
      * Optional mixing callback for restitution. The default uses max(restitutionA, restitutionB).
      */
     public ClosureObject<b2RestitutionCallback> restitutionCallback() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 48 : 44), b2RestitutionCallback_Internal::b2RestitutionCallback_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 40 : 36), b2RestitutionCallback_Internal::b2RestitutionCallback_downcall);
     }
 
     /**
      * Optional mixing callback for restitution. The default uses max(restitutionA, restitutionB).
      */
     public void restitutionCallback(ClosureObject<b2RestitutionCallback> restitutionCallback) {
-        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 48 : 44, restitutionCallback.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 40 : 36, restitutionCallback.getPointer());
     }
 
     /**
      * Can bodies go to sleep to improve performance
      */
     public boolean enableSleep() {
-        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 56 : 48);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 48 : 40);
     }
 
     /**
      * Can bodies go to sleep to improve performance
      */
     public void enableSleep(boolean enableSleep) {
-        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 56 : 48, enableSleep);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 48 : 40, enableSleep);
     }
 
     /**
      * Enable continuous collision
      */
     public boolean enableContinuous() {
-        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 57 : 49);
+        return getBufPtr().getBoolean(CHandler.IS_64_BIT ? 49 : 41);
     }
 
     /**
      * Enable continuous collision
      */
     public void enableContinuous(boolean enableContinuous) {
-        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 57 : 49, enableContinuous);
+        getBufPtr().setBoolean(CHandler.IS_64_BIT ? 49 : 41, enableContinuous);
     }
 
     /**
@@ -283,7 +255,7 @@ public final class b2WorldDef extends Struct {
      * 	 task callbacks (enqueueTask and finishTask).
      */
     public int workerCount() {
-        return getBufPtr().getInt(CHandler.IS_64_BIT ? 60 : 52);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 52 : 44);
     }
 
     /**
@@ -296,77 +268,77 @@ public final class b2WorldDef extends Struct {
      * 	 task callbacks (enqueueTask and finishTask).
      */
     public void workerCount(int workerCount) {
-        getBufPtr().setInt(CHandler.IS_64_BIT ? 60 : 52, workerCount);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 52 : 44, workerCount);
     }
 
     /**
      * Function to spawn tasks
      */
     public ClosureObject<b2EnqueueTaskCallback> enqueueTask() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 64 : 56), b2EnqueueTaskCallback_Internal::b2EnqueueTaskCallback_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 56 : 48), b2EnqueueTaskCallback_Internal::b2EnqueueTaskCallback_downcall);
     }
 
     /**
      * Function to spawn tasks
      */
     public void enqueueTask(ClosureObject<b2EnqueueTaskCallback> enqueueTask) {
-        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 64 : 56, enqueueTask.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 56 : 48, enqueueTask.getPointer());
     }
 
     /**
      * Function to finish a task
      */
     public ClosureObject<b2FinishTaskCallback> finishTask() {
-        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 72 : 60), b2FinishTaskCallback_Internal::b2FinishTaskCallback_downcall);
+        return CHandler.getClosureObject(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 64 : 52), b2FinishTaskCallback_Internal::b2FinishTaskCallback_downcall);
     }
 
     /**
      * Function to finish a task
      */
     public void finishTask(ClosureObject<b2FinishTaskCallback> finishTask) {
-        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 72 : 60, finishTask.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 64 : 52, finishTask.getPointer());
     }
 
     /**
      * User context that is provided to enqueueTask and finishTask
      */
     public VoidPointer userTaskContext() {
-        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 80 : 64), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 72 : 56), false);
     }
 
     /**
      * User context that is provided to enqueueTask and finishTask
      */
     public void userTaskContext(VoidPointer userTaskContext) {
-        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 80 : 64, userTaskContext.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 72 : 56, userTaskContext.getPointer());
     }
 
     /**
      * User data
      */
     public VoidPointer userData() {
-        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 88 : 68), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 80 : 60), false);
     }
 
     /**
      * User data
      */
     public void userData(VoidPointer userData) {
-        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 88 : 68, userData.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 80 : 60, userData.getPointer());
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_64_BIT ? 96 : 72);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 88 : 64);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_64_BIT ? 96 : 72, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 88 : 64, internalValue);
     }
 
     public static final class b2WorldDefPointer extends StackElementPointer<b2WorldDef> {

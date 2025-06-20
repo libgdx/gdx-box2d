@@ -122,35 +122,35 @@ public final class b2DistanceOutput extends Struct {
     }
 
     /**
-     * Normal vector that points from A to B
+     * Normal vector that points from A to B. Invalid if distance is zero.
      */
     public b2Vec2 normal() {
         return new b2Vec2(getPointer() + (16), false);
     }
 
     /**
-     * Normal vector that points from A to B
+     * Normal vector that points from A to B. Invalid if distance is zero.
      */
     public void normal(b2Vec2 toSetPtr) {
         toSetPtr.setPointer(getPointer() + (16), 8, this);
     }
 
     /**
-     * Normal vector that points from A to B
+     * Normal vector that points from A to B. Invalid if distance is zero.
      */
     public b2Vec2 getNormal() {
         return new b2Vec2(getBufPtr().duplicate(16, 8), true);
     }
 
     /**
-     * Normal vector that points from A to B
+     * Normal vector that points from A to B. Invalid if distance is zero.
      */
     public void getNormal(b2Vec2 toCopyTo) {
         toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 8);
     }
 
     /**
-     * Normal vector that points from A to B
+     * Normal vector that points from A to B. Invalid if distance is zero.
      */
     public void setNormal(b2Vec2 toCopyFrom) {
         getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 8);

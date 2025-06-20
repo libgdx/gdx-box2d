@@ -8,14 +8,14 @@ import com.badlogic.gdx.box2d.structs.b2Version;
 import com.badlogic.gdx.jnigen.runtime.pointer.integer.BytePointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.integer.UInt64Pointer;
 import com.badlogic.gdx.jnigen.runtime.pointer.integer.UBytePointer;
-import com.badlogic.gdx.box2d.structs.b2CosSin;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
-import com.badlogic.gdx.jnigen.runtime.pointer.FloatPointer;
 import com.badlogic.gdx.box2d.structs.b2Rot;
-import com.badlogic.gdx.box2d.structs.b2Transform;
-import com.badlogic.gdx.box2d.structs.b2Mat22;
 import com.badlogic.gdx.box2d.structs.b2AABB;
 import com.badlogic.gdx.box2d.structs.b2Plane;
+import com.badlogic.gdx.box2d.structs.b2CosSin;
+import com.badlogic.gdx.jnigen.runtime.pointer.FloatPointer;
+import com.badlogic.gdx.box2d.structs.b2Transform;
+import com.badlogic.gdx.box2d.structs.b2Mat22;
 import com.badlogic.gdx.box2d.structs.b2RayCastInput;
 import com.badlogic.gdx.box2d.structs.b2Polygon;
 import com.badlogic.gdx.box2d.structs.b2Hull;
@@ -42,6 +42,7 @@ import com.badlogic.gdx.box2d.structs.b2TreeStats;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.structs.b2PlaneSolverResult;
 import com.badlogic.gdx.box2d.structs.b2CollisionPlane;
+import com.badlogic.gdx.box2d.structs.b2WorldId;
 import com.badlogic.gdx.box2d.structs.b2BodyId;
 import com.badlogic.gdx.box2d.structs.b2ShapeId;
 import com.badlogic.gdx.box2d.structs.b2ChainId;
@@ -63,7 +64,6 @@ import com.badlogic.gdx.box2d.structs.b2WeldJointDef;
 import com.badlogic.gdx.box2d.structs.b2WheelJointDef;
 import com.badlogic.gdx.box2d.structs.b2ExplosionDef;
 import com.badlogic.gdx.box2d.structs.b2DebugDraw;
-import com.badlogic.gdx.box2d.structs.b2WorldId;
 import com.badlogic.gdx.box2d.structs.b2BodyEvents;
 import com.badlogic.gdx.box2d.structs.b2SensorEvents;
 import com.badlogic.gdx.box2d.structs.b2ContactEvents;
@@ -266,6 +266,76 @@ static jclass cxxExceptionClass = NULL;
     	CHECK_AND_THROW_C_TYPE(env, int, count, 2, return 0);
     	CHECK_AND_THROW_C_TYPE(env, uint32_t, hash, 0, return 0);
     	return (jlong)b2Hash((uint32_t)hash, (const uint8_t *)data, (int)count);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Is this a valid number? Not NaN or infinity.
+     */
+    public static boolean b2IsValidFloat(float a) {
+        return b2IsValidFloat_internal(a);
+    }
+
+    public static native boolean b2IsValidFloat_internal(float a);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jboolean)b2IsValidFloat((float)a);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Is this a valid vector? Not NaN or infinity.
+     */
+    public static boolean b2IsValidVec2(b2Vec2 v) {
+        return b2IsValidVec2_internal(v.getPointer());
+    }
+
+    public static native boolean b2IsValidVec2_internal(long v);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jboolean)b2IsValidVec2(*(b2Vec2*)v);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Is this a valid rotation? Not NaN or infinity. Is normalized.
+     */
+    public static boolean b2IsValidRotation(b2Rot q) {
+        return b2IsValidRotation_internal(q.getPointer());
+    }
+
+    public static native boolean b2IsValidRotation_internal(long q);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jboolean)b2IsValidRotation(*(b2Rot*)q);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Is this a valid bounding box? Not Nan or infinity. Upper bound greater than or equal to lower bound.
+     */
+    public static boolean b2IsValidAABB(b2AABB aabb) {
+        return b2IsValidAABB_internal(aabb.getPointer());
+    }
+
+    public static native boolean b2IsValidAABB_internal(long aabb);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jboolean)b2IsValidAABB(*(b2AABB*)aabb);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Is this a valid plane? Normal is a unit vector. Not Nan or infinity.
+     */
+    public static boolean b2IsValidPlane(b2Plane a) {
+        return b2IsValidPlane_internal(a.getPointer());
+    }
+
+    public static native boolean b2IsValidPlane_internal(long a);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jboolean)b2IsValidPlane(*(b2Plane*)a);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -1225,7 +1295,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Convert an angle in the range [-2*pi, 2*pi] into the range [-pi, pi]
+     * Convert any angle into the range [-pi, pi]
      */
     public static float b2UnwindAngle(float radians) {
         return b2UnwindAngle_internal(radians);
@@ -1234,20 +1304,6 @@ static jclass cxxExceptionClass = NULL;
     public static native float b2UnwindAngle_internal(float radians);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	return (jfloat)b2UnwindAngle((float)radians);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    /**
-     * Convert any into the range [-pi, pi] (slow)
-     */
-    public static float b2UnwindLargeAngle(float radians) {
-        return b2UnwindLargeAngle_internal(radians);
-    }
-
-    public static native float b2UnwindLargeAngle_internal(float radians);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2UnwindLargeAngle((float)radians);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -1557,6 +1613,20 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
+     * Do a and b overlap
+     */
+    public static boolean b2AABB_Overlaps(b2AABB a, b2AABB b) {
+        return b2AABB_Overlaps_internal(a.getPointer(), b.getPointer());
+    }
+
+    public static native boolean b2AABB_Overlaps_internal(long a, long b);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jboolean)b2AABB_Overlaps(*(b2AABB*)a, *(b2AABB*)b);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
      * Compute the bounding box of an array of circles
      */
     public static b2AABB b2MakeAABB(b2Vec2.b2Vec2Pointer points, int count, float radius) {
@@ -1595,71 +1665,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Is this a valid number? Not NaN or infinity.
+     * One-dimensional mass-spring-damper simulation. Returns the new velocity given the position and time step.
+     * You can then compute the new position using:
+     * position += timeStep * newVelocity
+     * This drives towards a zero position. By using implicit integration we get a stable solution
+     * that doesn't require transcendental functions.
      */
-    public static boolean b2IsValidFloat(float a) {
-        return b2IsValidFloat_internal(a);
+    public static float b2SpringDamper(float hertz, float dampingRatio, float position, float velocity, float timeStep) {
+        return b2SpringDamper_internal(hertz, dampingRatio, position, velocity, timeStep);
     }
 
-    public static native boolean b2IsValidFloat_internal(float a);/*
+    public static native float b2SpringDamper_internal(float hertz, float dampingRatio, float position, float velocity, float timeStep);/*
     	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2IsValidFloat((float)a);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    /**
-     * Is this a valid vector? Not NaN or infinity.
-     */
-    public static boolean b2IsValidVec2(b2Vec2 v) {
-        return b2IsValidVec2_internal(v.getPointer());
-    }
-
-    public static native boolean b2IsValidVec2_internal(long v);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2IsValidVec2(*(b2Vec2*)v);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    /**
-     * Is this a valid rotation? Not NaN or infinity. Is normalized.
-     */
-    public static boolean b2IsValidRotation(b2Rot q) {
-        return b2IsValidRotation_internal(q.getPointer());
-    }
-
-    public static native boolean b2IsValidRotation_internal(long q);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2IsValidRotation(*(b2Rot*)q);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    /**
-     * Is this a valid bounding box? Not Nan or infinity. Upper bound greater than or equal to lower bound.
-     */
-    public static boolean b2IsValidAABB(b2AABB aabb) {
-        return b2IsValidAABB_internal(aabb.getPointer());
-    }
-
-    public static native boolean b2IsValidAABB_internal(long aabb);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2IsValidAABB(*(b2AABB*)aabb);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    /**
-     * Is this a valid plane? Normal is a unit vector. Not Nan or infinity.
-     */
-    public static boolean b2IsValidPlane(b2Plane a) {
-        return b2IsValidPlane_internal(a.getPointer());
-    }
-
-    public static native boolean b2IsValidPlane_internal(long a);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jboolean)b2IsValidPlane(*(b2Plane*)a);
+    	return (jfloat)b2SpringDamper((float)hertz, (float)dampingRatio, (float)position, (float)velocity, (float)timeStep);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
     */
@@ -2459,7 +2477,7 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Perform a linear shape cast of shape B moving and shape A fixed. Determines the hit point, normal, and translation fraction.
-     * You may optionally supply an array to hold debug data.
+     * Initially touching shapes are treated as a miss.
      */
     public static b2CastOutput b2ShapeCast(b2ShapeCastPairInput.b2ShapeCastPairInputPointer input) {
         return new b2CastOutput(b2ShapeCast_internal(input.getPointer(), 0), true);
@@ -2467,7 +2485,7 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Perform a linear shape cast of shape B moving and shape A fixed. Determines the hit point, normal, and translation fraction.
-     * You may optionally supply an array to hold debug data.
+     * Initially touching shapes are treated as a miss.
      */
     public static void b2ShapeCast(b2ShapeCastPairInput.b2ShapeCastPairInputPointer input, b2CastOutput _retPar) {
         b2ShapeCast_internal(input.getPointer(), _retPar.getPointer());
@@ -3261,29 +3279,29 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Solves the position of a mover that satisfies the given collision planes.
-     * @param position this must be the position used to generate the collision planes
+     * @param targetDelta the desired movement from the position used to generate the collision planes
      * @param planes the collision planes
      * @param count the number of collision planes
      */
-    public static b2PlaneSolverResult b2SolvePlanes(b2Vec2 position, b2CollisionPlane.b2CollisionPlanePointer planes, int count) {
-        return new b2PlaneSolverResult(b2SolvePlanes_internal(position.getPointer(), planes.getPointer(), count, 0), true);
+    public static b2PlaneSolverResult b2SolvePlanes(b2Vec2 targetDelta, b2CollisionPlane.b2CollisionPlanePointer planes, int count) {
+        return new b2PlaneSolverResult(b2SolvePlanes_internal(targetDelta.getPointer(), planes.getPointer(), count, 0), true);
     }
 
     /**
      * Solves the position of a mover that satisfies the given collision planes.
-     * @param position this must be the position used to generate the collision planes
+     * @param targetDelta the desired movement from the position used to generate the collision planes
      * @param planes the collision planes
      * @param count the number of collision planes
      */
-    public static void b2SolvePlanes(b2Vec2 position, b2CollisionPlane.b2CollisionPlanePointer planes, int count, b2PlaneSolverResult _retPar) {
-        b2SolvePlanes_internal(position.getPointer(), planes.getPointer(), count, _retPar.getPointer());
+    public static void b2SolvePlanes(b2Vec2 targetDelta, b2CollisionPlane.b2CollisionPlanePointer planes, int count, b2PlaneSolverResult _retPar) {
+        b2SolvePlanes_internal(targetDelta.getPointer(), planes.getPointer(), count, _retPar.getPointer());
     }
 
-    public static native long b2SolvePlanes_internal(long position, long planes, int count, long _retPar);/*
+    public static native long b2SolvePlanes_internal(long targetDelta, long planes, int count, long _retPar);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	CHECK_AND_THROW_C_TYPE(env, int, count, 2, return 0);
     	b2PlaneSolverResult* _ret = (b2PlaneSolverResult*) (_retPar == 0 ? malloc(sizeof(b2PlaneSolverResult)) : (void*)_retPar);
-    	*_ret = b2SolvePlanes(*(b2Vec2*)position, (b2CollisionPlane *)planes, (int)count);
+    	*_ret = b2SolvePlanes(*(b2Vec2*)targetDelta, (b2CollisionPlane *)planes, (int)count);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -3310,6 +3328,44 @@ static jclass cxxExceptionClass = NULL;
     	CHECK_AND_THROW_C_TYPE(env, int, count, 2, return 0);
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
     	*_ret = b2ClipVector(*(b2Vec2*)vector, (const b2CollisionPlane *)planes, (int)count);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Store a world id into a uint32_t.
+     */
+    public static long b2StoreWorldId(b2WorldId id) {
+        return b2StoreWorldId_internal(id.getPointer());
+    }
+
+    public static native long b2StoreWorldId_internal(long id);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jlong)b2StoreWorldId(*(b2WorldId*)id);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Load a uint32_t into a world id.
+     */
+    public static b2WorldId b2LoadWorldId(long x) {
+        return new b2WorldId(b2LoadWorldId_internal(x, 0), true);
+    }
+
+    /**
+     * Load a uint32_t into a world id.
+     */
+    public static void b2LoadWorldId(long x, b2WorldId _retPar) {
+        b2LoadWorldId_internal(x, _retPar.getPointer());
+    }
+
+    public static native long b2LoadWorldId_internal(long x, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	CHECK_AND_THROW_C_TYPE(env, uint32_t, x, 0, return 0);
+    	b2WorldId* _ret = (b2WorldId*) (_retPar == 0 ? malloc(sizeof(b2WorldId)) : (void*)_retPar);
+    	*_ret = b2LoadWorldId((uint32_t)x);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -4094,7 +4150,6 @@ static jclass cxxExceptionClass = NULL;
     /**
      *  Cast a ray into the world to collect shapes in the path of the ray.
      *  Your callback function controls whether you get the closest point, any point, or n-points.
-     *  The ray-cast ignores shapes that contain the starting point.
      *  @note The callback function may receive shapes in any order
      *  @param worldId The world to cast the ray against
      *  @param origin The start point of the ray
@@ -4111,7 +4166,6 @@ static jclass cxxExceptionClass = NULL;
     /**
      *  Cast a ray into the world to collect shapes in the path of the ray.
      *  Your callback function controls whether you get the closest point, any point, or n-points.
-     *  The ray-cast ignores shapes that contain the starting point.
      *  @note The callback function may receive shapes in any order
      *  @param worldId The world to cast the ray against
      *  @param origin The start point of the ray
@@ -4135,7 +4189,7 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Cast a ray into the world to collect the closest hit. This is a convenience function.
+     * Cast a ray into the world to collect the closest hit. This is a convenience function. Ignores initial overlap.
      * This is less general than b2World_CastRay() and does not allow for custom filtering.
      */
     public static b2RayResult b2World_CastRayClosest(b2WorldId worldId, b2Vec2 origin, b2Vec2 translation, b2QueryFilter filter) {
@@ -4143,7 +4197,7 @@ static jclass cxxExceptionClass = NULL;
     }
 
     /**
-     * Cast a ray into the world to collect the closest hit. This is a convenience function.
+     * Cast a ray into the world to collect the closest hit. This is a convenience function. Ignores initial overlap.
      * This is less general than b2World_CastRay() and does not allow for custom filtering.
      */
     public static void b2World_CastRayClosest(b2WorldId worldId, b2Vec2 origin, b2Vec2 translation, b2QueryFilter filter, b2RayResult _retPar) {
@@ -4426,23 +4480,6 @@ static jclass cxxExceptionClass = NULL;
     public static native void b2World_SetContactTuning_internal(long worldId, float hertz, float dampingRatio, float pushSpeed);/*
     	HANDLE_JAVA_EXCEPTION_START()
     	b2World_SetContactTuning(*(b2WorldId*)worldId, (float)hertz, (float)dampingRatio, (float)pushSpeed);
-    	HANDLE_JAVA_EXCEPTION_END()
-    */
-
-    /**
-     * Adjust joint tuning parameters
-     * @param worldId The world id
-     * @param hertz The contact stiffness (cycles per second)
-     * @param dampingRatio The contact bounciness with 1 being critical damping (non-dimensional)
-     * @note Advanced feature
-     */
-    public static void b2World_SetJointTuning(b2WorldId worldId, float hertz, float dampingRatio) {
-        b2World_SetJointTuning_internal(worldId.getPointer(), hertz, dampingRatio);
-    }
-
-    public static native void b2World_SetJointTuning_internal(long worldId, float hertz, float dampingRatio);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2World_SetJointTuning(*(b2WorldId*)worldId, (float)hertz, (float)dampingRatio);
     	HANDLE_JAVA_EXCEPTION_END()
     */
 
@@ -5063,6 +5100,7 @@ static jclass cxxExceptionClass = NULL;
     /**
      * Set the velocity to reach the given transform after a given time step.
      * The result will be close but maybe not exact. This is meant for kinematic bodies.
+     * The target is not applied if the velocity would be below the sleep threshold.
      * This will automatically wake the body if asleep.
      */
     public static void b2Body_SetTargetTransform(b2BodyId bodyId, b2Transform target, float timeStep) {
@@ -6171,6 +6209,42 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
+     * Set the shape surface material
+     */
+    public static void b2Shape_SetSurfaceMaterial(b2ShapeId shapeId, b2SurfaceMaterial surfaceMaterial) {
+        b2Shape_SetSurfaceMaterial_internal(shapeId.getPointer(), surfaceMaterial.getPointer());
+    }
+
+    public static native void b2Shape_SetSurfaceMaterial_internal(long shapeId, long surfaceMaterial);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Shape_SetSurfaceMaterial(*(b2ShapeId*)shapeId, *(b2SurfaceMaterial*)surfaceMaterial);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    /**
+     * Get the shape surface material
+     */
+    public static b2SurfaceMaterial b2Shape_GetSurfaceMaterial(b2ShapeId shapeId) {
+        return new b2SurfaceMaterial(b2Shape_GetSurfaceMaterial_internal(shapeId.getPointer(), 0), true);
+    }
+
+    /**
+     * Get the shape surface material
+     */
+    public static void b2Shape_GetSurfaceMaterial(b2ShapeId shapeId, b2SurfaceMaterial _retPar) {
+        b2Shape_GetSurfaceMaterial_internal(shapeId.getPointer(), _retPar.getPointer());
+    }
+
+    public static native long b2Shape_GetSurfaceMaterial_internal(long shapeId, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2SurfaceMaterial* _ret = (b2SurfaceMaterial*) (_retPar == 0 ? malloc(sizeof(b2SurfaceMaterial)) : (void*)_retPar);
+    	*_ret = b2Shape_GetSurfaceMaterial(*(b2ShapeId*)shapeId);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
      * Get the shape filter
      */
     public static b2Filter b2Shape_GetFilter(b2ShapeId shapeId) {
@@ -7006,6 +7080,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
+     * Set the local anchor on bodyA
+     */
+    public static void b2Joint_SetLocalAnchorA(b2JointId jointId, b2Vec2 localAnchor) {
+        b2Joint_SetLocalAnchorA_internal(jointId.getPointer(), localAnchor.getPointer());
+    }
+
+    public static native void b2Joint_SetLocalAnchorA_internal(long jointId, long localAnchor);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Joint_SetLocalAnchorA(*(b2JointId*)jointId, *(b2Vec2*)localAnchor);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    /**
      * Get the local anchor on bodyA
      */
     public static b2Vec2 b2Joint_GetLocalAnchorA(b2JointId jointId) {
@@ -7029,6 +7116,19 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
+     * Set the local anchor on bodyB
+     */
+    public static void b2Joint_SetLocalAnchorB(b2JointId jointId, b2Vec2 localAnchor) {
+        b2Joint_SetLocalAnchorB_internal(jointId.getPointer(), localAnchor.getPointer());
+    }
+
+    public static native void b2Joint_SetLocalAnchorB_internal(long jointId, long localAnchor);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Joint_SetLocalAnchorB(*(b2JointId*)jointId, *(b2Vec2*)localAnchor);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    /**
      * Get the local anchor on bodyB
      */
     public static b2Vec2 b2Joint_GetLocalAnchorB(b2JointId jointId) {
@@ -7046,6 +7146,69 @@ static jclass cxxExceptionClass = NULL;
     	HANDLE_JAVA_EXCEPTION_START()
     	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
     	*_ret = b2Joint_GetLocalAnchorB(*(b2JointId*)jointId);
+    	return (jlong)_ret;
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Get the joint reference angle in radians (revolute, prismatic, and weld)
+     */
+    public static float b2Joint_GetReferenceAngle(b2JointId jointId) {
+        return b2Joint_GetReferenceAngle_internal(jointId.getPointer());
+    }
+
+    public static native float b2Joint_GetReferenceAngle_internal(long jointId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2Joint_GetReferenceAngle(*(b2JointId*)jointId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Set the joint reference angle in radians, must be in [-pi,pi]. (revolute, prismatic, and weld)
+     */
+    public static void b2Joint_SetReferenceAngle(b2JointId jointId, float angleInRadians) {
+        b2Joint_SetReferenceAngle_internal(jointId.getPointer(), angleInRadians);
+    }
+
+    public static native void b2Joint_SetReferenceAngle_internal(long jointId, float angleInRadians);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Joint_SetReferenceAngle(*(b2JointId*)jointId, (float)angleInRadians);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    /**
+     * Set the local axis on bodyA (prismatic and wheel)
+     */
+    public static void b2Joint_SetLocalAxisA(b2JointId jointId, b2Vec2 localAxis) {
+        b2Joint_SetLocalAxisA_internal(jointId.getPointer(), localAxis.getPointer());
+    }
+
+    public static native void b2Joint_SetLocalAxisA_internal(long jointId, long localAxis);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Joint_SetLocalAxisA(*(b2JointId*)jointId, *(b2Vec2*)localAxis);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    /**
+     * Get the local axis on bodyA (prismatic and wheel)
+     */
+    public static b2Vec2 b2Joint_GetLocalAxisA(b2JointId jointId) {
+        return new b2Vec2(b2Joint_GetLocalAxisA_internal(jointId.getPointer(), 0), true);
+    }
+
+    /**
+     * Get the local axis on bodyA (prismatic and wheel)
+     */
+    public static void b2Joint_GetLocalAxisA(b2JointId jointId, b2Vec2 _retPar) {
+        b2Joint_GetLocalAxisA_internal(jointId.getPointer(), _retPar.getPointer());
+    }
+
+    public static native long b2Joint_GetLocalAxisA_internal(long jointId, long _retPar);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Vec2* _ret = (b2Vec2*) (_retPar == 0 ? malloc(sizeof(b2Vec2)) : (void*)_retPar);
+    	*_ret = b2Joint_GetLocalAxisA(*(b2JointId*)jointId);
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
@@ -7161,6 +7324,63 @@ static jclass cxxExceptionClass = NULL;
     	return (jfloat)b2Joint_GetConstraintTorque(*(b2JointId*)jointId);
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
+    */
+
+    /**
+     * Get the current linear separation error for this joint. Does not consider admissible movement. Usually in meters.
+     */
+    public static float b2Joint_GetLinearSeparation(b2JointId jointId) {
+        return b2Joint_GetLinearSeparation_internal(jointId.getPointer());
+    }
+
+    public static native float b2Joint_GetLinearSeparation_internal(long jointId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2Joint_GetLinearSeparation(*(b2JointId*)jointId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Get the current angular separation error for this joint. Does not consider admissible movement. Usually in meters.
+     */
+    public static float b2Joint_GetAngularSeparation(b2JointId jointId) {
+        return b2Joint_GetAngularSeparation_internal(jointId.getPointer());
+    }
+
+    public static native float b2Joint_GetAngularSeparation_internal(long jointId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2Joint_GetAngularSeparation(*(b2JointId*)jointId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
+     * Get the joint constraint tuning. Advanced feature.
+     */
+    public static void b2Joint_GetConstraintTuning(b2JointId jointId, FloatPointer hertz, FloatPointer dampingRatio) {
+        b2Joint_GetConstraintTuning_internal(jointId.getPointer(), hertz.getPointer(), dampingRatio.getPointer());
+    }
+
+    public static native void b2Joint_GetConstraintTuning_internal(long jointId, long hertz, long dampingRatio);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Joint_GetConstraintTuning(*(b2JointId*)jointId, (float *)hertz, (float *)dampingRatio);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    /**
+     * Set the joint constraint tuning. Advanced feature.
+     * @param jointId the joint
+     * @param hertz the stiffness in Hertz (cycles per second)
+     * @param dampingRatio the non-dimensional damping ratio (one for critical damping)
+     */
+    public static void b2Joint_SetConstraintTuning(b2JointId jointId, float hertz, float dampingRatio) {
+        b2Joint_SetConstraintTuning_internal(jointId.getPointer(), hertz, dampingRatio);
+    }
+
+    public static native void b2Joint_SetConstraintTuning_internal(long jointId, float hertz, float dampingRatio);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2Joint_SetConstraintTuning(*(b2JointId*)jointId, (float)hertz, (float)dampingRatio);
+    	HANDLE_JAVA_EXCEPTION_END()
     */
 
     /**
@@ -7541,7 +7761,8 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
-     * Set the motor joint angular offset target in radians
+     * Set the motor joint angular offset target in radians. This angle will be unwound
+     * so the motor will drive along the shortest arc.
      */
     public static void b2MotorJoint_SetAngularOffset(b2JointId jointId, float angularOffset) {
         b2MotorJoint_SetAngularOffset_internal(jointId.getPointer(), angularOffset);
@@ -7925,6 +8146,33 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
+     * Set the prismatic joint spring target angle, usually in meters
+     */
+    public static void b2PrismaticJoint_SetTargetTranslation(b2JointId jointId, float translation) {
+        b2PrismaticJoint_SetTargetTranslation_internal(jointId.getPointer(), translation);
+    }
+
+    public static native void b2PrismaticJoint_SetTargetTranslation_internal(long jointId, float translation);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2PrismaticJoint_SetTargetTranslation(*(b2JointId*)jointId, (float)translation);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    /**
+     * Get the prismatic joint spring target translation, usually in meters
+     */
+    public static float b2PrismaticJoint_GetTargetTranslation(b2JointId jointId) {
+        return b2PrismaticJoint_GetTargetTranslation_internal(jointId.getPointer());
+    }
+
+    public static native float b2PrismaticJoint_GetTargetTranslation_internal(long jointId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2PrismaticJoint_GetTargetTranslation(*(b2JointId*)jointId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
      * Enable/disable a prismatic joint limit
      */
     public static void b2PrismaticJoint_EnableLimit(b2JointId jointId, boolean enableLimit) {
@@ -8225,6 +8473,33 @@ static jclass cxxExceptionClass = NULL;
     */
 
     /**
+     * Set the revolute joint spring target angle, radians
+     */
+    public static void b2RevoluteJoint_SetTargetAngle(b2JointId jointId, float angle) {
+        b2RevoluteJoint_SetTargetAngle_internal(jointId.getPointer(), angle);
+    }
+
+    public static native void b2RevoluteJoint_SetTargetAngle_internal(long jointId, float angle);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	b2RevoluteJoint_SetTargetAngle(*(b2JointId*)jointId, (float)angle);
+    	HANDLE_JAVA_EXCEPTION_END()
+    */
+
+    /**
+     * Get the revolute joint spring target angle, radians
+     */
+    public static float b2RevoluteJoint_GetTargetAngle(b2JointId jointId) {
+        return b2RevoluteJoint_GetTargetAngle_internal(jointId.getPointer());
+    }
+
+    public static native float b2RevoluteJoint_GetTargetAngle_internal(long jointId);/*
+    	HANDLE_JAVA_EXCEPTION_START()
+    	return (jfloat)b2RevoluteJoint_GetTargetAngle(*(b2JointId*)jointId);
+    	HANDLE_JAVA_EXCEPTION_END()
+    	return 0;
+    */
+
+    /**
      * Get the revolute joint current angle in radians relative to the reference angle
      * @see b2RevoluteJointDef::referenceAngle
      */
@@ -8297,7 +8572,7 @@ static jclass cxxExceptionClass = NULL;
 
     /**
      * Set the revolute joint limits in radians. It is expected that lower <= upper
-     * and that -0.95 * B2_PI <= lower && upper <= -0.95 * B2_PI.
+     * and that -0.99 * B2_PI <= lower && upper <= -0.99 * B2_PI.
      */
     public static void b2RevoluteJoint_SetLimits(b2JointId jointId, float lower, float upper) {
         b2RevoluteJoint_SetLimits_internal(jointId.getPointer(), lower, upper);
@@ -8428,33 +8703,6 @@ static jclass cxxExceptionClass = NULL;
     	return (jlong)_ret;
     	HANDLE_JAVA_EXCEPTION_END()
     	return 0;
-    */
-
-    /**
-     * Get the weld joint reference angle in radians
-     */
-    public static float b2WeldJoint_GetReferenceAngle(b2JointId jointId) {
-        return b2WeldJoint_GetReferenceAngle_internal(jointId.getPointer());
-    }
-
-    public static native float b2WeldJoint_GetReferenceAngle_internal(long jointId);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	return (jfloat)b2WeldJoint_GetReferenceAngle(*(b2JointId*)jointId);
-    	HANDLE_JAVA_EXCEPTION_END()
-    	return 0;
-    */
-
-    /**
-     * Set the weld joint reference angle in radians, must be in [-pi,pi].
-     */
-    public static void b2WeldJoint_SetReferenceAngle(b2JointId jointId, float angleInRadians) {
-        b2WeldJoint_SetReferenceAngle_internal(jointId.getPointer(), angleInRadians);
-    }
-
-    public static native void b2WeldJoint_SetReferenceAngle_internal(long jointId, float angleInRadians);/*
-    	HANDLE_JAVA_EXCEPTION_START()
-    	b2WeldJoint_SetReferenceAngle(*(b2JointId*)jointId, (float)angleInRadians);
-    	HANDLE_JAVA_EXCEPTION_END()
     */
 
     /**
@@ -8914,17 +9162,18 @@ static jclass cxxExceptionClass = NULL;
     public interface b2CastResultFcn extends Closure, b2CastResultFcn_Internal {
 
         /**
-         * Prototype callback for ray casts.
+         * Prototype callback for ray and shape casts.
          * Called for each shape found in the query. You control how the ray cast
          * proceeds by returning a float:
          * return -1: ignore this shape and continue
          * return 0: terminate the ray cast
          * return fraction: clip the ray to this point
          * return 1: don't clip the ray and continue
+         * A cast with initial overlap will return a zero fraction and a zero normal.
          * @param shapeId the shape hit by the ray
          * @param point the point of initial intersection
-         * @param normal the normal vector at the point of intersection
-         * @param fraction the fraction along the ray at the point of intersection
+         * @param normal the normal vector at the point of intersection, zero for a shape cast with initial overlap
+         * @param fraction the fraction along the ray at the point of intersection, zero for a shape cast with initial overlap
          * @param context the user context
          * @return -1 to filter, 0 to terminate, fraction to clip the ray for closest hit, 1 to continue
          * @see Box2d#b2World_CastRay

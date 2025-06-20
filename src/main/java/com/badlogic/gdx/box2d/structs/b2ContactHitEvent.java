@@ -11,6 +11,7 @@ import com.badlogic.gdx.box2d.structs.b2Vec2;
 
 /**
  * A hit touch event is generated when two shapes collide with a speed faster than the hit speed threshold.
+ * This may be reported for speculative contacts that have a confirmed impulse.
  */
 public final class b2ContactHitEvent extends Struct {
 
@@ -123,35 +124,45 @@ public final class b2ContactHitEvent extends Struct {
     }
 
     /**
-     * Point where the shapes hit
+     *  Point where the shapes hit at the beginning of the time step.
+     * 	 This is a mid-point between the two surfaces. It could be at speculative
+     * 	 point where the two shapes were not touching at the beginning of the time step.
      */
     public b2Vec2 point() {
         return new b2Vec2(getPointer() + (16), false);
     }
 
     /**
-     * Point where the shapes hit
+     *  Point where the shapes hit at the beginning of the time step.
+     * 	 This is a mid-point between the two surfaces. It could be at speculative
+     * 	 point where the two shapes were not touching at the beginning of the time step.
      */
     public void point(b2Vec2 toSetPtr) {
         toSetPtr.setPointer(getPointer() + (16), 8, this);
     }
 
     /**
-     * Point where the shapes hit
+     *  Point where the shapes hit at the beginning of the time step.
+     * 	 This is a mid-point between the two surfaces. It could be at speculative
+     * 	 point where the two shapes were not touching at the beginning of the time step.
      */
     public b2Vec2 getPoint() {
         return new b2Vec2(getBufPtr().duplicate(16, 8), true);
     }
 
     /**
-     * Point where the shapes hit
+     *  Point where the shapes hit at the beginning of the time step.
+     * 	 This is a mid-point between the two surfaces. It could be at speculative
+     * 	 point where the two shapes were not touching at the beginning of the time step.
      */
     public void getPoint(b2Vec2 toCopyTo) {
         toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 16, 8);
     }
 
     /**
-     * Point where the shapes hit
+     *  Point where the shapes hit at the beginning of the time step.
+     * 	 This is a mid-point between the two surfaces. It could be at speculative
+     * 	 point where the two shapes were not touching at the beginning of the time step.
      */
     public void setPoint(b2Vec2 toCopyFrom) {
         getBufPtr().copyFrom(16, toCopyFrom.getBufPtr(), 0, 8);

@@ -11,6 +11,7 @@ import com.badlogic.gdx.box2d.structs.b2Vec2;
 
 /**
  * Result from b2World_RayCastClosest
+ * If there is initial overlap the fraction and normal will be zero while the point is an arbitrary point in the overlap region.
  * @ingroup world
  */
 public final class b2RayResult extends Struct {

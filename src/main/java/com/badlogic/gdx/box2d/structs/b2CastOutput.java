@@ -9,7 +9,7 @@ import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Vec2;
 
 /**
- * Low level ray cast or shape-cast output data
+ * Low level ray cast or shape-cast output data. Returns a zero fraction and normal in the case of initial overlap.
  */
 public final class b2CastOutput extends Struct {
 

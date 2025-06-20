@@ -220,185 +220,201 @@ public final class b2RevoluteJointDef extends Struct {
     }
 
     /**
+     *  The target angle for the joint in radians. The spring-damper will drive
+     * 	 to this angle.
+     */
+    public float targetAngle() {
+        return getBufPtr().getFloat(36);
+    }
+
+    /**
+     *  The target angle for the joint in radians. The spring-damper will drive
+     * 	 to this angle.
+     */
+    public void targetAngle(float targetAngle) {
+        getBufPtr().setFloat(36, targetAngle);
+    }
+
+    /**
      * Enable a rotational spring on the revolute hinge axis
      */
     public boolean enableSpring() {
-        return getBufPtr().getBoolean(36);
+        return getBufPtr().getBoolean(40);
     }
 
     /**
      * Enable a rotational spring on the revolute hinge axis
      */
     public void enableSpring(boolean enableSpring) {
-        getBufPtr().setBoolean(36, enableSpring);
+        getBufPtr().setBoolean(40, enableSpring);
     }
 
     /**
      * The spring stiffness Hertz, cycles per second
      */
     public float hertz() {
-        return getBufPtr().getFloat(40);
+        return getBufPtr().getFloat(44);
     }
 
     /**
      * The spring stiffness Hertz, cycles per second
      */
     public void hertz(float hertz) {
-        getBufPtr().setFloat(40, hertz);
+        getBufPtr().setFloat(44, hertz);
     }
 
     /**
      * The spring damping ratio, non-dimensional
      */
     public float dampingRatio() {
-        return getBufPtr().getFloat(44);
+        return getBufPtr().getFloat(48);
     }
 
     /**
      * The spring damping ratio, non-dimensional
      */
     public void dampingRatio(float dampingRatio) {
-        getBufPtr().setFloat(44, dampingRatio);
+        getBufPtr().setFloat(48, dampingRatio);
     }
 
     /**
      * A flag to enable joint limits
      */
     public boolean enableLimit() {
-        return getBufPtr().getBoolean(48);
+        return getBufPtr().getBoolean(52);
     }
 
     /**
      * A flag to enable joint limits
      */
     public void enableLimit(boolean enableLimit) {
-        getBufPtr().setBoolean(48, enableLimit);
+        getBufPtr().setBoolean(52, enableLimit);
     }
 
     /**
-     * The lower angle for the joint limit in radians. Minimum of -0.95*pi radians.
+     * The lower angle for the joint limit in radians. Minimum of -0.99*pi radians.
      */
     public float lowerAngle() {
-        return getBufPtr().getFloat(52);
-    }
-
-    /**
-     * The lower angle for the joint limit in radians. Minimum of -0.95*pi radians.
-     */
-    public void lowerAngle(float lowerAngle) {
-        getBufPtr().setFloat(52, lowerAngle);
-    }
-
-    /**
-     * The upper angle for the joint limit in radians. Maximum of 0.95*pi radians.
-     */
-    public float upperAngle() {
         return getBufPtr().getFloat(56);
     }
 
     /**
-     * The upper angle for the joint limit in radians. Maximum of 0.95*pi radians.
+     * The lower angle for the joint limit in radians. Minimum of -0.99*pi radians.
+     */
+    public void lowerAngle(float lowerAngle) {
+        getBufPtr().setFloat(56, lowerAngle);
+    }
+
+    /**
+     * The upper angle for the joint limit in radians. Maximum of 0.99*pi radians.
+     */
+    public float upperAngle() {
+        return getBufPtr().getFloat(60);
+    }
+
+    /**
+     * The upper angle for the joint limit in radians. Maximum of 0.99*pi radians.
      */
     public void upperAngle(float upperAngle) {
-        getBufPtr().setFloat(56, upperAngle);
+        getBufPtr().setFloat(60, upperAngle);
     }
 
     /**
      * A flag to enable the joint motor
      */
     public boolean enableMotor() {
-        return getBufPtr().getBoolean(60);
+        return getBufPtr().getBoolean(64);
     }
 
     /**
      * A flag to enable the joint motor
      */
     public void enableMotor(boolean enableMotor) {
-        getBufPtr().setBoolean(60, enableMotor);
+        getBufPtr().setBoolean(64, enableMotor);
     }
 
     /**
      * The maximum motor torque, typically in newton-meters
      */
     public float maxMotorTorque() {
-        return getBufPtr().getFloat(64);
+        return getBufPtr().getFloat(68);
     }
 
     /**
      * The maximum motor torque, typically in newton-meters
      */
     public void maxMotorTorque(float maxMotorTorque) {
-        getBufPtr().setFloat(64, maxMotorTorque);
+        getBufPtr().setFloat(68, maxMotorTorque);
     }
 
     /**
      * The desired motor speed in radians per second
      */
     public float motorSpeed() {
-        return getBufPtr().getFloat(68);
+        return getBufPtr().getFloat(72);
     }
 
     /**
      * The desired motor speed in radians per second
      */
     public void motorSpeed(float motorSpeed) {
-        getBufPtr().setFloat(68, motorSpeed);
+        getBufPtr().setFloat(72, motorSpeed);
     }
 
     /**
      * Scale the debug draw
      */
     public float drawSize() {
-        return getBufPtr().getFloat(72);
+        return getBufPtr().getFloat(76);
     }
 
     /**
      * Scale the debug draw
      */
     public void drawSize(float drawSize) {
-        getBufPtr().setFloat(72, drawSize);
+        getBufPtr().setFloat(76, drawSize);
     }
 
     /**
      * Set this flag to true if the attached bodies should collide
      */
     public boolean collideConnected() {
-        return getBufPtr().getBoolean(76);
+        return getBufPtr().getBoolean(80);
     }
 
     /**
      * Set this flag to true if the attached bodies should collide
      */
     public void collideConnected(boolean collideConnected) {
-        getBufPtr().setBoolean(76, collideConnected);
+        getBufPtr().setBoolean(80, collideConnected);
     }
 
     /**
      * User data pointer
      */
     public VoidPointer userData() {
-        return new VoidPointer(getBufPtr().getNativePointer(80), false);
+        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 88 : 84), false);
     }
 
     /**
      * User data pointer
      */
     public void userData(VoidPointer userData) {
-        getBufPtr().setNativePointer(80, userData.getPointer());
+        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 88 : 84, userData.getPointer());
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_64_BIT ? 88 : 84);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 96 : 88);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_64_BIT ? 88 : 84, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 96 : 88, internalValue);
     }
 
     public static final class b2RevoluteJointDefPointer extends StackElementPointer<b2RevoluteJointDef> {

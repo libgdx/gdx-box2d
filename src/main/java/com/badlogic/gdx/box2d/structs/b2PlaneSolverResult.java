@@ -52,37 +52,37 @@ public final class b2PlaneSolverResult extends Struct {
     }
 
     /**
-     * The final position of the mover
+     * The translation of the mover
      */
-    public b2Vec2 position() {
+    public b2Vec2 translation() {
         return new b2Vec2(getPointer(), false);
     }
 
     /**
-     * The final position of the mover
+     * The translation of the mover
      */
-    public void position(b2Vec2 toSetPtr) {
+    public void translation(b2Vec2 toSetPtr) {
         toSetPtr.setPointer(getPointer(), 8, this);
     }
 
     /**
-     * The final position of the mover
+     * The translation of the mover
      */
-    public b2Vec2 getPosition() {
+    public b2Vec2 getTranslation() {
         return new b2Vec2(getBufPtr().duplicate(0, 8), true);
     }
 
     /**
-     * The final position of the mover
+     * The translation of the mover
      */
-    public void getPosition(b2Vec2 toCopyTo) {
+    public void getTranslation(b2Vec2 toCopyTo) {
         toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 0, 8);
     }
 
     /**
-     * The final position of the mover
+     * The translation of the mover
      */
-    public void setPosition(b2Vec2 toCopyFrom) {
+    public void setTranslation(b2Vec2 toCopyFrom) {
         getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 8);
     }
 

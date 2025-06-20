@@ -248,171 +248,187 @@ public final class b2PrismaticJointDef extends Struct {
     }
 
     /**
+     *  The target translation for the joint in meters. The spring-damper will drive
+     * 	 to this translation.
+     */
+    public float targetTranslation() {
+        return getBufPtr().getFloat(44);
+    }
+
+    /**
+     *  The target translation for the joint in meters. The spring-damper will drive
+     * 	 to this translation.
+     */
+    public void targetTranslation(float targetTranslation) {
+        getBufPtr().setFloat(44, targetTranslation);
+    }
+
+    /**
      * Enable a linear spring along the prismatic joint axis
      */
     public boolean enableSpring() {
-        return getBufPtr().getBoolean(44);
+        return getBufPtr().getBoolean(48);
     }
 
     /**
      * Enable a linear spring along the prismatic joint axis
      */
     public void enableSpring(boolean enableSpring) {
-        getBufPtr().setBoolean(44, enableSpring);
+        getBufPtr().setBoolean(48, enableSpring);
     }
 
     /**
      * The spring stiffness Hertz, cycles per second
      */
     public float hertz() {
-        return getBufPtr().getFloat(48);
+        return getBufPtr().getFloat(52);
     }
 
     /**
      * The spring stiffness Hertz, cycles per second
      */
     public void hertz(float hertz) {
-        getBufPtr().setFloat(48, hertz);
+        getBufPtr().setFloat(52, hertz);
     }
 
     /**
      * The spring damping ratio, non-dimensional
      */
     public float dampingRatio() {
-        return getBufPtr().getFloat(52);
+        return getBufPtr().getFloat(56);
     }
 
     /**
      * The spring damping ratio, non-dimensional
      */
     public void dampingRatio(float dampingRatio) {
-        getBufPtr().setFloat(52, dampingRatio);
+        getBufPtr().setFloat(56, dampingRatio);
     }
 
     /**
      * Enable/disable the joint limit
      */
     public boolean enableLimit() {
-        return getBufPtr().getBoolean(56);
+        return getBufPtr().getBoolean(60);
     }
 
     /**
      * Enable/disable the joint limit
      */
     public void enableLimit(boolean enableLimit) {
-        getBufPtr().setBoolean(56, enableLimit);
+        getBufPtr().setBoolean(60, enableLimit);
     }
 
     /**
      * The lower translation limit
      */
     public float lowerTranslation() {
-        return getBufPtr().getFloat(60);
+        return getBufPtr().getFloat(64);
     }
 
     /**
      * The lower translation limit
      */
     public void lowerTranslation(float lowerTranslation) {
-        getBufPtr().setFloat(60, lowerTranslation);
+        getBufPtr().setFloat(64, lowerTranslation);
     }
 
     /**
      * The upper translation limit
      */
     public float upperTranslation() {
-        return getBufPtr().getFloat(64);
+        return getBufPtr().getFloat(68);
     }
 
     /**
      * The upper translation limit
      */
     public void upperTranslation(float upperTranslation) {
-        getBufPtr().setFloat(64, upperTranslation);
+        getBufPtr().setFloat(68, upperTranslation);
     }
 
     /**
      * Enable/disable the joint motor
      */
     public boolean enableMotor() {
-        return getBufPtr().getBoolean(68);
+        return getBufPtr().getBoolean(72);
     }
 
     /**
      * Enable/disable the joint motor
      */
     public void enableMotor(boolean enableMotor) {
-        getBufPtr().setBoolean(68, enableMotor);
+        getBufPtr().setBoolean(72, enableMotor);
     }
 
     /**
      * The maximum motor force, typically in newtons
      */
     public float maxMotorForce() {
-        return getBufPtr().getFloat(72);
+        return getBufPtr().getFloat(76);
     }
 
     /**
      * The maximum motor force, typically in newtons
      */
     public void maxMotorForce(float maxMotorForce) {
-        getBufPtr().setFloat(72, maxMotorForce);
+        getBufPtr().setFloat(76, maxMotorForce);
     }
 
     /**
      * The desired motor speed, typically in meters per second
      */
     public float motorSpeed() {
-        return getBufPtr().getFloat(76);
+        return getBufPtr().getFloat(80);
     }
 
     /**
      * The desired motor speed, typically in meters per second
      */
     public void motorSpeed(float motorSpeed) {
-        getBufPtr().setFloat(76, motorSpeed);
+        getBufPtr().setFloat(80, motorSpeed);
     }
 
     /**
      * Set this flag to true if the attached bodies should collide
      */
     public boolean collideConnected() {
-        return getBufPtr().getBoolean(80);
+        return getBufPtr().getBoolean(84);
     }
 
     /**
      * Set this flag to true if the attached bodies should collide
      */
     public void collideConnected(boolean collideConnected) {
-        getBufPtr().setBoolean(80, collideConnected);
+        getBufPtr().setBoolean(84, collideConnected);
     }
 
     /**
      * User data pointer
      */
     public VoidPointer userData() {
-        return new VoidPointer(getBufPtr().getNativePointer(CHandler.IS_64_BIT ? 88 : 84), false);
+        return new VoidPointer(getBufPtr().getNativePointer(88), false);
     }
 
     /**
      * User data pointer
      */
     public void userData(VoidPointer userData) {
-        getBufPtr().setNativePointer(CHandler.IS_64_BIT ? 88 : 84, userData.getPointer());
+        getBufPtr().setNativePointer(88, userData.getPointer());
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public int internalValue() {
-        return getBufPtr().getInt(CHandler.IS_64_BIT ? 96 : 88);
+        return getBufPtr().getInt(CHandler.IS_64_BIT ? 96 : 92);
     }
 
     /**
      * Used internally to detect a valid definition. DO NOT SET.
      */
     public void internalValue(int internalValue) {
-        getBufPtr().setInt(CHandler.IS_64_BIT ? 96 : 88, internalValue);
+        getBufPtr().setInt(CHandler.IS_64_BIT ? 96 : 92, internalValue);
     }
 
     public static final class b2PrismaticJointDefPointer extends StackElementPointer<b2PrismaticJointDef> {

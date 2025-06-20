@@ -7,6 +7,7 @@ import com.badlogic.gdx.jnigen.runtime.pointer.Pointing;
 import com.badlogic.gdx.jnigen.runtime.pointer.VoidPointer;
 import com.badlogic.gdx.box2d.FFITypes;
 import com.badlogic.gdx.box2d.structs.b2Plane;
+import com.badlogic.gdx.box2d.structs.b2Vec2;
 
 /**
  * These are the collision planes returned from b2World_CollideMover
@@ -86,18 +87,38 @@ public final class b2PlaneResult extends Struct {
         getBufPtr().copyFrom(0, toCopyFrom.getBufPtr(), 0, 12);
     }
 
+    public b2Vec2 point() {
+        return new b2Vec2(getPointer() + (12), false);
+    }
+
+    public void point(b2Vec2 toSetPtr) {
+        toSetPtr.setPointer(getPointer() + (12), 8, this);
+    }
+
+    public b2Vec2 getPoint() {
+        return new b2Vec2(getBufPtr().duplicate(12, 8), true);
+    }
+
+    public void getPoint(b2Vec2 toCopyTo) {
+        toCopyTo.getBufPtr().copyFrom(0, getBufPtr(), 12, 8);
+    }
+
+    public void setPoint(b2Vec2 toCopyFrom) {
+        getBufPtr().copyFrom(12, toCopyFrom.getBufPtr(), 0, 8);
+    }
+
     /**
      * Did the collision register a hit? If not this plane should be ignored.
      */
     public boolean hit() {
-        return getBufPtr().getBoolean(12);
+        return getBufPtr().getBoolean(20);
     }
 
     /**
      * Did the collision register a hit? If not this plane should be ignored.
      */
     public void hit(boolean hit) {
-        getBufPtr().setBoolean(12, hit);
+        getBufPtr().setBoolean(20, hit);
     }
 
     public static final class b2PlaneResultPointer extends StackElementPointer<b2PlaneResult> {
