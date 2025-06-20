@@ -12,10 +12,10 @@ val isReleaseBuild: Boolean
     get() = project.hasProperty("RELEASE")
 
 val releaseRepositoryUrl: String
-    get() = project.findProperty("RELEASE_REPOSITORY_URL")?.toString() ?: "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+    get() = project.findProperty("RELEASE_REPOSITORY_URL")?.toString() ?: "https://ossrh-staging-api.central.sonatype.com/service/local/"
 
 val snapshotRepositoryUrl: String
-    get() = project.findProperty("SNAPSHOT_REPOSITORY_URL")?.toString() ?: "https://oss.sonatype.org/content/repositories/snapshots/"
+    get() = project.findProperty("SNAPSHOT_REPOSITORY_URL")?.toString() ?: "https://central.sonatype.com/repository/maven-snapshots/"
 
 val repositoryUsername: String
     get() = project.findProperty("MAVEN_USERNAME")?.toString() ?: ""
