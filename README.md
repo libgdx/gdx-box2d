@@ -36,6 +36,54 @@ If a box2d method returns a pointer, it will not be registered for GC.
 > [!NOTE]
 > For more information on the bindings see the [documentation](https://github.com/libgdx/gdx-jnigen/blob/master/RUNTIME.MD#the-runtime).
 
+### Working with VoidPointer context or user data
+Box2d supports passing a `void*` context to callbacks or attaching user data to a type.  
+In java interop, we usually want this to be a java object. In a thread-safe manner, this can be achieved like this:
+```java
+public class Box2DIDFactory<T> {
+
+    private long id = 0;
+    private LongMap<T> map = new LongMap<>();
+
+    public VoidPointer putData(T obj) {
+        synchronized (this) {
+            id += 1;
+            map.put(id, obj);
+            return new VoidPointer(id, false);
+        }
+    }
+
+    public void putData(T obj, VoidPointer pointer) {
+        synchronized (this) {
+            id += 1;
+            map.put(id, obj);
+            pointer.setPointer(id);
+        }
+    }
+
+    public long putDataRaw(T obj) {
+        synchronized (this) {
+            id += 1;
+            map.put(id, obj);
+            return id;
+        }
+    }
+
+    public T obtainData(VoidPointer pointer) {
+        synchronized (this) {
+            return map.get(pointer.getPointer());
+        }
+    }
+
+    public T obtainDataRaw(long pointer) {
+        synchronized (this) {
+            return map.get(pointer);
+        }
+    }
+}
+```
+
+This is a very barebones example. It assumes you would want a factory per type. It is also designed thread-safe, which is not necessary.  
 
 ## Java 8
 The project needs java 8 language features to build. However, it doesn't use any java 8 APIs and is therefor still safe to use with mobiVM.
